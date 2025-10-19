@@ -1,8 +1,8 @@
 import { ArrowRight, Play } from "lucide-react";
 
-const imgManTalking = "https://placehold.co/600x400";
-const imgImagePhotoroom21 = "https://placehold.co/150x300";
-const imgImagePhotoroom31 = "https://placehold.co/130x300";
+const imgManTalking = "https://picsum.photos/600/400";
+const imgImagePhotoroom21 = "https://picsum.photos/150/300";
+const imgImagePhotoroom31 = "https://picsum.photos/130/300";
 
 export default function StandOut() {
   return (
