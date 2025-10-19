@@ -98,14 +98,11 @@ const CycleSection: NextPage = () => {
             {/* Access Pay Card */}
             <div className="absolute right-[46.72%] bottom-[88px] left-[2.61%] w-[50.67%] h-[139px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[12px] rounded-lg bg-[rgba(255,255,255,0.95)] border border-gray-200 overflow-hidden">
               <div className="absolute top-[calc(50%_-_23.7px)] left-[20.8px] rounded-[12px] w-[48px] h-[48px] overflow-hidden flex items-center justify-center">
-                <div className="w-full h-full bg-gray-200 rounded-full flex items-center justify-center">
-                  <Image
-                    src="/icon-placeholder.svg" // Replace with your icon path
-                    alt=""
-                    width={24}
-                    height={24}
-                    className="object-contain"
-                  />
+                <div className="w-full h-full bg-gradient-to-br from-pink-100 to-pink-200 rounded-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-pink-600">
+                    <rect width="20" height="14" x="2" y="5" rx="2"/>
+                    <line x1="2" x2="22" y1="10" y2="10"/>
+                  </svg>
                 </div>
               </div>
               <div className="absolute top-[27px] left-[85px] leading-[28px] uppercase flex items-center w-[176px] h-[15px] text-[#1d44c3] font-bold">
