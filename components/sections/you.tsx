@@ -16,13 +16,13 @@ const You: NextPage = () => {
   return (
     <div className="bg-white py-16 md:py-24 px-4 sm:px-6 lg:px-8 overflow-visible relative min-h-[800px]">
       {/* Mobile Layout */}
-      <div className="md:hidden flex flex-col items-center gap-8">
-        <div className="relative w-[300px] h-[300px]">
+      <div className="md:hidden flex flex-col items-center gap-6 sm:gap-8">
+        <div className="relative w-[250px] sm:w-[300px] h-[250px] sm:h-[300px]">
           <div className="absolute inset-0 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-gray-100">
-            <h2 className="text-2xl font-bold text-[#1d44c3]">FinWage Cycle</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#1d44c3] px-4 text-center">FinWage Cycle</h2>
           </div>
         </div>
-        <div className="space-y-6 w-full max-w-md">
+        <div className="space-y-4 sm:space-y-6 w-full max-w-md px-4 sm:px-0">
           <Card
             title="Work"
             description="Put in the hours and do what you do best. Your earnings accumulate with every shift."

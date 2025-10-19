@@ -19,6 +19,11 @@ export const metadata: Metadata = {
   authors: [{ name: "FinWage" }],
   creator: "FinWage",
   publisher: "FinWage",
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
   formatDetection: {
     email: false,
     address: false,

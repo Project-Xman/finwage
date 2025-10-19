@@ -120,7 +120,7 @@ function ContentContainer() {
 
 export default function Cta() {
   return (
-    <div className="bg-white w-full min-h-screen flex items-center justify-center py-8 md:py-16" data-name="CTA">
+    <div className="bg-white w-full py-8 md:py-16 lg:py-24 flex items-center justify-center" data-name="CTA">
       <div className="w-full max-w-7xl">
         <ContentContainer />
       </div>

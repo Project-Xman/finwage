@@ -108,56 +108,43 @@ export default function Hero() {
       data-name="Hero Section"
     >
       {/* Mobile Layout */}
-      <div className="md:hidden flex flex-col items-center px-4 py-12 gap-8">
+      <div className="md:hidden flex flex-col items-center px-4 py-8 sm:py-12 gap-6 sm:gap-8">
         {/* Circular Image Container - Scaled Down */}
-        <div className="relative w-full max-w-[500px] aspect-square">
+        <div className="relative w-full max-w-[400px] sm:max-w-[500px] aspect-square">
           {/* Scale down the ImageContainer for mobile */}
-          <div className="scale-[0.5] origin-center absolute inset-0 flex items-center justify-center">
+          <div className="scale-[0.35] sm:scale-[0.5] origin-center absolute inset-0 flex items-center justify-center">
             <HeroImageContainer className="relative bg-white h-[945.191px] overflow-clip w-[1019.915px]" />
           </div>
         </div>
 
         {/* Text Content */}
-        <div className="flex flex-col gap-6 items-center text-center max-w-[400px]">
-          <h1 className="text-[#1d44c3] text-[48px] leading-[1.15] tracking-[-2.4px]">
+        <div className="flex flex-col gap-4 sm:gap-6 items-center text-center max-w-[340px] sm:max-w-[400px]">
+          <h1 className="text-[#1d44c3] text-[36px] sm:text-[48px] leading-[1.15] tracking-[-1.8px] sm:tracking-[-2.4px]">
             Your Money,
             <br />
             Your Control.
           </h1>
-          <p className="text-gray-800 text-[16px] leading-[1.68]">
+          <p className="text-gray-800 text-[14px] sm:text-[16px] leading-[1.68]">
             Work Today, Get Paid Today! A financial wellness benefit that helps
             employees access their earned wages while saving employers time and
             money
           </p>
           <DemoButton />
         </div>
-
-        {/* Decorative pink circle - simplified for mobile */}
-        {/* Note: The PDF doesn't show this on mobile, so it might be desktop only. */}
-        {/* If needed on mobile, uncomment the following div */}
-        {/* <div className="absolute right-[-50px] top-[50px] w-[150px] h-[150px] opacity-50">
-          <Image
-            alt=""
-            className="block size-full"
-            src="/assets/decorative-pink-circle.png" // Placeholder: Replace with your actual asset
-            width={150}
-            height={150}
-          />
-        </div> */}
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden md:block relative h-[945px]">
+      <div className="hidden md:block relative h-[800px] lg:h-[945px]">
         {/* Main Image Container */}
-        <HeroImageContainer className="absolute bg-white h-[1021.191px] left-[-131px] overflow-clip top-[-177px] w-[1046.915px]" />
+        <HeroImageContainer className="absolute bg-white h-[1021.191px] left-[-131px] lg:left-[-131px] overflow-clip top-[-177px] w-[1046.915px] scale-75 lg:scale-100 origin-top-left" />
 
         {/* Text Content and Button */}
-        <div className="absolute left-[912px] top-[97px] w-[583px]">
-          <div className="flex flex-col font-bold leading-[96px] text-[#1d44c3] text-[93px] tracking-[-2.4px] mb-[43px]">
+        <div className="absolute left-[600px] lg:left-[912px] top-[97px] w-[400px] lg:w-[583px]">
+          <div className="flex flex-col font-bold leading-[64px] lg:leading-[96px] text-[#1d44c3] text-[62px] lg:text-[93px] tracking-[-2.4px] mb-[30px] lg:mb-[43px]">
             <p className="mb-0">Your Money,</p>
             <p className="mb-0">Your Control.</p>
           </div>
-          <div className="flex flex-col font-normal leading-[29.25px] text-[17.4px] text-gray-800 mb-[43px]">
+          <div className="flex flex-col font-normal leading-[24px] lg:leading-[29.25px] text-[14px] lg:text-[17.4px] text-gray-800 mb-[30px] lg:mb-[43px]">
             <p className="mb-0">
               Work Today, Get Paid Today! A financial wellness
             </p>
@@ -170,13 +157,13 @@ export default function Hero() {
         </div>
 
         {/* Pink Arc Overlay (Right side) */}
-        <div className="absolute right-0 bottom-[100px] w-[170px] h-[300px]">
+        <div className="absolute right-0 bottom-[100px] w-[120px] lg:w-[170px] h-[200px] lg:h-[300px]">
           <Image
             fill
-            src="/assets/pink-arc.png" // Placeholder: Replace with your actual asset
+            src="/assets/pink-arc.png"
             alt=""
             className="object-contain"
-            sizes="100px"
+            sizes="170px"
           />
         </div>
       </div>

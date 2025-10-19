@@ -87,11 +87,24 @@ function ParagraphBackgroundBorderShadowOverlayBlur() {
 
 function Frame9() {
   return (
-    <div className="relative w-full md:w-[584px] h-[500px] flex-shrink-0">
-      <Person />
-      <BackgroundBorderShadowOverlayBlur />
-      <Person1 />
-      <ParagraphBackgroundBorderShadowOverlayBlur />
+    <div className="relative w-full md:w-[584px] min-h-[400px] md:h-[500px] flex-shrink-0">
+      {/* Mobile: Stack images vertically */}
+      <div className="md:hidden flex flex-col gap-4 items-center">
+        <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden">
+          <img alt="" className="w-full h-full object-cover" src="/assets/worker-1.png" />
+        </div>
+        <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden">
+          <img alt="" className="w-full h-full object-cover" src="/assets/worker-2.png" />
+        </div>
+      </div>
+
+      {/* Desktop: Positioned layout */}
+      <div className="hidden md:block relative w-full h-[500px]">
+        <Person />
+        <BackgroundBorderShadowOverlayBlur />
+        <Person1 />
+        <ParagraphBackgroundBorderShadowOverlayBlur />
+      </div>
     </div>
   );
 }

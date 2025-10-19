@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const CycleSection: NextPage = () => {
   return (
-    <div className="relative w-full h-[734px] bg-white flex-shrink-0 text-left text-2xl text-white font-afacad">
+    <div className="hidden lg:block relative w-full h-[734px] bg-white flex-shrink-0 text-left text-2xl text-white font-afacad">
       {/* Main Container */}
       <div className="absolute top-[-184px] left-[-162px] w-[1815px] flex items-center gap-16">
         
