@@ -159,7 +159,32 @@
   * {
     @apply border-border outline-ring/50;
   }
+  
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+  }
+  
+  /* Performance optimizations */
+  img, video, canvas, svg {
+    will-change: auto;
+  }
+  
+  /* Smooth transitions */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Fix for scroll performance */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 }
