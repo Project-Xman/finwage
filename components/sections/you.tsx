@@ -7,10 +7,10 @@ import Image from "next/image";
 // const imgEarn = "/assets/earn.png";
 // const imgAccessPay = "/assets/access-pay.png";
 // const imgPeaceOfMind = "/assets/peace-of-mind.png";
-const imgWork = "https://placehold.co/300x300"; // or import from figma:asset if needed
-const imgEarn = "https://placehold.co/300x300";
-const imgAccessPay = "https://placehold.co/300x300";
-const imgPeaceOfMind = "https://placehold.co/300x300";
+const imgWork = "https://picsum.photos/300/300";
+const imgEarn = "https://picsum.photos/301/300";
+const imgAccessPay = "https://picsum.photos/302/300";
+const imgPeaceOfMind = "https://picsum.photos/303/300";
 
 const You: NextPage = () => {
   return (
