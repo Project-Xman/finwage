@@ -86,9 +86,15 @@ export default function PlatformSection() {
         <Image fill alt="Pink Arc" className="object-contain" src="/assets/pink-arc-big.png" />
       </div>
 
-      {/* Blue Arc */}
-      <div className="absolute bottom-10 md:bottom-20 left-0">
-        <Image alt="Blue Arc" width={100} height={70} className="object-contain md:w-[150px] md:h-[100px]" src="/assets/blue-arc.png" />
+      {/* Blue Arc - Fixed positioning */}
+      <div className="absolute bottom-0 left-0 w-[120px] h-[80px] md:w-[170px] md:h-[120px] z-10">
+        <Image 
+          fill
+          alt="Blue Arc" 
+          className="object-contain" 
+          src="/assets/blue-arc.png" 
+          sizes="170px"
+        />
       </div>
 
       {/* Content Container */}
