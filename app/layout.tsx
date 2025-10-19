@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import CookieConsent from "@/components/cookie-consent";
 import './globals.css';
@@ -8,6 +8,12 @@ const poppins = Poppins({
   weight: ["400", "700"],
   variable: "--font-poppins",
 }); 
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   title: {
@@ -19,11 +25,6 @@ export const metadata: Metadata = {
   authors: [{ name: "FinWage" }],
   creator: "FinWage",
   publisher: "FinWage",
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-  },
   formatDetection: {
     email: false,
     address: false,
