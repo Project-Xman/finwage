@@ -1,20 +1,19 @@
 "use client";
 
-import { BellIcon, ForwardIcon, PlayIcon } from "lucide-react";
+import { BellIcon, ForwardIcon } from "lucide-react";
 import Image from "next/image";
-
 
 function HeroImageContainer({ className }: { className?: string }) {
   return (
     <div className={`${className} relative`} data-name="Hero Image Container">
       {/* Circular Container for the Hero Image */}
-      <div 
+      <div
         className="absolute rounded-full overflow-hidden"
-        style={{ 
-          width: '1000px', 
-          height: '1000px',
-          left: '6px',
-          top: '2px'
+        style={{
+          width: "1000px",
+          height: "1000px",
+          left: "6px",
+          top: "2px",
         }}
       >
         {/* Image fills the circular container using object-cover */}
@@ -22,7 +21,7 @@ function HeroImageContainer({ className }: { className?: string }) {
           fill
           alt="Corporate workers brainstorming together"
           className="object-cover pointer-events-none"
-          style={{ objectPosition: 'center' }}
+          style={{ objectPosition: "center" }}
           src="/assets/hero-image.jpg"
         />
         {/* Blue Overlay - Covers the circular image area */}
@@ -30,13 +29,13 @@ function HeroImageContainer({ className }: { className?: string }) {
       </div>
 
       {/* White Arc Overlay */}
-      <div 
+      <div
         className="absolute"
         style={{
-          left: '100px',
-          top: '-126px',
-          width: '900px',
-          height: '900px'
+          left: "100px",
+          top: "-126px",
+          width: "900px",
+          height: "900px",
         }}
       >
         <Image
@@ -49,13 +48,13 @@ function HeroImageContainer({ className }: { className?: string }) {
       </div>
 
       {/* Play Icon Button */}
-      <div 
+      <div
         className="absolute cursor-pointer flex items-center justify-center"
         style={{
-          left: '400px',
-          top: '450px',
-          width: '160px',
-          height: '160px'
+          left: "400px",
+          top: "450px",
+          width: "160px",
+          height: "160px",
         }}
       >
         <Image
@@ -68,11 +67,11 @@ function HeroImageContainer({ className }: { className?: string }) {
       </div>
 
       {/* FinWage Notification Card */}
-      <div 
+      <div
         className="absolute bg-white rounded-[24px] p-4 shadow-lg border border-gray-200 max-w-[300px] flex items-start gap-3"
         style={{
-          bottom: '63.19px',
-          right: '10px'
+          bottom: "63.19px",
+          right: "10px",
         }}
       >
         {/* Bell Icon in Red Square */}
@@ -81,7 +80,9 @@ function HeroImageContainer({ className }: { className?: string }) {
         </div>
         {/* Text Content */}
         <div className="flex flex-col">
-          <span className="text-[#1d44c3] text-[11.8px] font-semibold uppercase">FINWAGE</span>
+          <span className="text-[#1d44c3] text-[11.8px] font-semibold uppercase">
+            FINWAGE
+          </span>
           <span className="text-gray-800 text-[13.7px]">
             Your FinWage balance went up!
           </span>
@@ -90,7 +91,6 @@ function HeroImageContainer({ className }: { className?: string }) {
     </div>
   );
 }
-
 
 // Function for the Arrow Icon inside the button
 function ArrowIcon() {

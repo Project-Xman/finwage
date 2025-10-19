@@ -17,11 +17,11 @@ export default function StandOut() {
                 Attract, Retain, and Inspire Your Workforce
               </h1>
               <p className="text-base md:text-lg text-gray-800 leading-7">
-                FinWage empowers employers to lead their industry by redefining how
-                employees access and manage their pay.
+                FinWage empowers employers to lead their industry by redefining
+                how employees access and manage their pay.
               </p>
             </div>
-            
+
             <a
               href="#"
               className="text-[#f64162] font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-base"
@@ -39,10 +39,10 @@ export default function StandOut() {
               alt="Team collaboration"
               className="absolute inset-0 w-full h-full object-cover"
             />
-            
+
             {/* Border */}
             <div className="absolute inset-0 border-4 border-white rounded-3xl pointer-events-none shadow-2xl" />
-            
+
             {/* Play Button Overlay */}
             <div className="absolute inset-0 flex items-center justify-center">
               <button className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white/50 backdrop-blur-md shadow-2xl flex items-center justify-center hover:bg-white/60 transition-all group-hover:scale-110">
@@ -62,7 +62,7 @@ export default function StandOut() {
             />
           </div>
         </div>
-        
+
         <div className="hidden md:block absolute left-1/2 -bottom-1/5  translate-x-[50px]">
           <div className="relative">
             <img

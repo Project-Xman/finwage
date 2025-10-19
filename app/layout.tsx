@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import CookieConsent from "@/components/cookie-consent";
-import './globals.css';
+import "./globals.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-poppins",
-}); 
+});
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
@@ -18,10 +18,19 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     default: "FinWage - Earned Wage Access for Financial Wellness",
-    template: "%s | FinWage"
+    template: "%s | FinWage",
   },
-  description: "Work Today, Get Paid Today! FinWage provides earned wage access to help employees access their wages instantly while saving employers time and money.",
-  keywords: ["earned wage access", "financial wellness", "payroll", "employee benefits", "instant pay", "wage advance", "fintech"],
+  description:
+    "Work Today, Get Paid Today! FinWage provides earned wage access to help employees access their wages instantly while saving employers time and money.",
+  keywords: [
+    "earned wage access",
+    "financial wellness",
+    "payroll",
+    "employee benefits",
+    "instant pay",
+    "wage advance",
+    "fintech",
+  ],
   authors: [{ name: "FinWage" }],
   creator: "FinWage",
   publisher: "FinWage",
@@ -30,32 +39,34 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://finwage.com'),
+  metadataBase: new URL("https://finwage.com"),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   openGraph: {
     title: "FinWage - Earned Wage Access for Financial Wellness",
-    description: "Work Today, Get Paid Today! FinWage provides earned wage access to help employees access their wages instantly.",
-    url: 'https://finwage.com',
-    siteName: 'FinWage',
-    locale: 'en_US',
-    type: 'website',
+    description:
+      "Work Today, Get Paid Today! FinWage provides earned wage access to help employees access their wages instantly.",
+    url: "https://finwage.com",
+    siteName: "FinWage",
+    locale: "en_US",
+    type: "website",
     images: [
       {
-        url: '/opengraph-image.png',
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: 'FinWage - Earned Wage Access',
+        alt: "FinWage - Earned Wage Access",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: "FinWage - Earned Wage Access for Financial Wellness",
-    description: "Work Today, Get Paid Today! Access your earned wages instantly.",
-    images: ['/opengraph-image.png'],
-    creator: '@finwage',
+    description:
+      "Work Today, Get Paid Today! Access your earned wages instantly.",
+    images: ["/opengraph-image.png"],
+    creator: "@finwage",
   },
   robots: {
     index: true,
@@ -63,14 +74,14 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
+    google: "your-google-verification-code",
+    yandex: "your-yandex-verification-code",
   },
 };
 
@@ -81,9 +92,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.variable} antialiased`}
-      >
+      <body className={`${poppins.variable} antialiased`}>
         {children}
         <CookieConsent />
       </body>

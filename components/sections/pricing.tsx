@@ -1,5 +1,3 @@
-import { Check } from "lucide-react";
-
 const pricingPlans = [
   {
     title: "Free",
@@ -67,14 +65,16 @@ export default function Pricing() {
           {pricingPlans.map((plan, index) => (
             <div
               key={index}
-              className={`relative w-full max-w-sm mx-auto rounded-[20px] bg-white px-10 ${plan.isPopular ? 'py-16 pt-14' : 'py-12'} shadow-lg border-2 ${plan.isPopular ? 'border-[#f64162] scale-105' : 'border-gray-100'} hover:border-[#1d44c3] transition-all`}
+              className={`relative w-full max-w-sm mx-auto rounded-[20px] bg-white px-10 ${plan.isPopular ? "py-16 pt-14" : "py-12"} shadow-lg border-2 ${plan.isPopular ? "border-[#f64162] scale-105" : "border-gray-100"} hover:border-[#1d44c3] transition-all`}
             >
               {/* Popular Label */}
               {plan.isPopular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                   <div className="relative">
                     <div className="bg-gradient-to-r from-[#f64162] to-[#ff6b88] px-6 py-2 rounded-full shadow-lg">
-                      <span className="text-white text-sm font-bold uppercase tracking-wider">Popular</span>
+                      <span className="text-white text-sm font-bold uppercase tracking-wider">
+                        Popular
+                      </span>
                     </div>
                     <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-[#f64162]"></div>
                   </div>
@@ -116,10 +116,10 @@ export default function Pricing() {
                     >
                       {/* Icon */}
                       <div className="h-8 w-8 flex-shrink-0">
-                        <img 
-                          src="/assets/tick-3d.png" 
-                          alt="Feature tick" 
-                          className={`w-8 h-8 ${!feature.enabled ? 'grayscale opacity-40' : ''}`}
+                        <img
+                          src="/assets/tick-3d.png"
+                          alt="Feature tick"
+                          className={`w-8 h-8 ${!feature.enabled ? "grayscale opacity-40" : ""}`}
                         />
                       </div>
 

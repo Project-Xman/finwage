@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
+import { AlertTriangle, Home, RefreshCw } from "lucide-react";
+import { useEffect } from "react";
 
-export default function Error({
+export default function ErrorPage({
   error,
   reset,
 }: {
@@ -12,7 +12,7 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error('Application Error:', error);
+    console.error("Application Error:", error);
   }, [error]);
 
   return (
@@ -27,13 +27,14 @@ export default function Error({
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
           Oops! Something went wrong
         </h1>
-        
+
         <p className="text-gray-600 mb-6">
-          We encountered an unexpected error. Don't worry, our team has been notified and we're working on it.
+          We encountered an unexpected error. Don't worry, our team has been
+          notified and we're working on it.
         </p>
 
         {/* Error Details (Development Only) */}
-        {process.env.NODE_ENV === 'development' && (
+        {process.env.NODE_ENV === "development" && (
           <div className="bg-gray-100 rounded-lg p-4 mb-6 text-left">
             <p className="text-sm text-gray-700 font-mono break-all">
               {error.message}
@@ -49,13 +50,14 @@ export default function Error({
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
           <button
+            type="button"
             onClick={reset}
             className="flex-1 bg-[#1d44c3] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#0d2463] transition-all inline-flex items-center justify-center gap-2"
           >
             <RefreshCw className="w-5 h-5" />
             Try Again
           </button>
-          
+
           <a
             href="/"
             className="flex-1 bg-gray-100 text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition-all inline-flex items-center justify-center gap-2"
@@ -67,8 +69,11 @@ export default function Error({
 
         {/* Support Link */}
         <p className="text-sm text-gray-500 mt-6">
-          Need help?{' '}
-          <a href="/contact" className="text-[#1d44c3] hover:underline font-semibold">
+          Need help?{" "}
+          <a
+            href="/contact"
+            className="text-[#1d44c3] hover:underline font-semibold"
+          >
             Contact Support
           </a>
         </p>

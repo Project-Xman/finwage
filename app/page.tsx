@@ -16,27 +16,26 @@ import PlatformSection from "@/components/sections/platform";
 import You from "@/components/sections/you";
 import CycleSection from "@/components/sections/cycle";
 
-
 export default function Home() {
-	return (
-		<main className="min-h-screen">
-			<Header />
-			<Hero />
-			<PlatformSection />
-			<You />
-			<CycleSection />
-			<Partners />
-			<Employees />
-			<Testimonials />
-			<Features />
-			<StandOut />
-			<Integrations />
-			<Pricing />
-			<Globe />
-			<Implementation />
-			<Blogs />
-			<Cta />
-			<Footer />
-		</main>
-	);
+  return (
+    <main className="min-h-screen">
+      <Header />
+      <Hero />
+      <PlatformSection />
+      <You />
+      <CycleSection />
+      <Partners />
+      <Employees />
+      <Testimonials />
+      <Features />
+      <StandOut />
+      <Integrations />
+      <Pricing />
+      <Globe />
+      <Implementation />
+      <Blogs />
+      <Cta />
+      <Footer />
+    </main>
+  );
 }

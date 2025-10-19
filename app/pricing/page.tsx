@@ -13,14 +13,14 @@ export default function PricingPage() {
         "Email support",
         "Payroll integration",
         "Employee mobile app",
-        "Automatic repayment"
+        "Automatic repayment",
       ],
       notIncluded: [
         "Dedicated account manager",
         "Custom reporting",
-        "API access"
+        "API access",
       ],
-      recommended: false
+      recommended: false,
     },
     {
       name: "Professional",
@@ -35,13 +35,10 @@ export default function PricingPage() {
         "Custom reporting",
         "Savings goal features",
         "Financial wellness tools",
-        "Multi-location support"
+        "Multi-location support",
       ],
-      notIncluded: [
-        "API access",
-        "White-label options"
-      ],
-      recommended: true
+      notIncluded: ["API access", "White-label options"],
+      recommended: true,
     },
     {
       name: "Enterprise",
@@ -57,11 +54,11 @@ export default function PricingPage() {
         "SLA guarantees",
         "Custom onboarding",
         "Quarterly business reviews",
-        "Advanced security features"
+        "Advanced security features",
       ],
       notIncluded: [],
-      recommended: false
-    }
+      recommended: false,
+    },
   ];
 
   return (
@@ -87,9 +84,9 @@ export default function PricingPage() {
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-3 gap-8">
             {plans.map((plan, index) => (
-              <div 
-                key={index} 
-                className={`bg-white rounded-2xl p-8 ${plan.recommended ? 'ring-4 ring-[#1d44c3] relative' : 'shadow-lg'}`}
+              <div
+                key={index}
+                className={`bg-white rounded-2xl p-8 ${plan.recommended ? "ring-4 ring-[#1d44c3] relative" : "shadow-lg"}`}
               >
                 {plan.recommended && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -98,19 +95,27 @@ export default function PricingPage() {
                     </div>
                   </div>
                 )}
-                
+
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-                  <div className="text-4xl font-bold text-[#1d44c3] mb-2">{plan.price}</div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    {plan.name}
+                  </h3>
+                  <div className="text-4xl font-bold text-[#1d44c3] mb-2">
+                    {plan.price}
+                  </div>
                   <p className="text-gray-600 mb-2">{plan.description}</p>
-                  <p className="text-sm font-semibold text-gray-700">{plan.employees}</p>
+                  <p className="text-sm font-semibold text-gray-700">
+                    {plan.employees}
+                  </p>
                 </div>
 
-                <button className={`w-full py-4 rounded-full font-semibold mb-8 transition-all ${
-                  plan.recommended 
-                    ? 'bg-[#1d44c3] text-white hover:bg-[#0d2463]' 
-                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                }`}>
+                <button
+                  className={`w-full py-4 rounded-full font-semibold mb-8 transition-all ${
+                    plan.recommended
+                      ? "bg-[#1d44c3] text-white hover:bg-[#0d2463]"
+                      : "bg-gray-100 text-gray-900 hover:bg-gray-200"
+                  }`}
+                >
                   Get Started
                 </button>
 
@@ -122,7 +127,10 @@ export default function PricingPage() {
                     </div>
                   ))}
                   {plan.notIncluded.map((feature, idx) => (
-                    <div key={idx} className="flex items-start gap-3 opacity-50">
+                    <div
+                      key={idx}
+                      className="flex items-start gap-3 opacity-50"
+                    >
                       <X className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
                       <span className="text-gray-500">{feature}</span>
                     </div>
@@ -134,7 +142,8 @@ export default function PricingPage() {
 
           <div className="mt-12 text-center">
             <p className="text-gray-600 mb-4">
-              Need a custom solution? We can build a plan that fits your exact needs.
+              Need a custom solution? We can build a plan that fits your exact
+              needs.
             </p>
             <button className="text-[#1d44c3] font-semibold hover:underline">
               Contact Sales for Custom Pricing →
@@ -154,8 +163,9 @@ export default function PricingPage() {
               Always Free for Employees
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-              Your employees never pay a penny. No fees, no interest, no hidden charges. 
-              FinWage is a benefit you provide, paid for by your organization.
+              Your employees never pay a penny. No fees, no interest, no hidden
+              charges. FinWage is a benefit you provide, paid for by your
+              organization.
             </p>
             <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
               <div className="bg-white rounded-xl p-6 shadow-lg">
@@ -185,23 +195,25 @@ export default function PricingPage() {
             {[
               {
                 q: "How is pricing calculated?",
-                a: "Pricing is based on your number of active employees and the features you need. Contact us for a custom quote tailored to your organization."
+                a: "Pricing is based on your number of active employees and the features you need. Contact us for a custom quote tailored to your organization.",
               },
               {
                 q: "Is there a setup fee?",
-                a: "No setup fees. We include full onboarding and integration support in all our plans."
+                a: "No setup fees. We include full onboarding and integration support in all our plans.",
               },
               {
                 q: "Can I change plans later?",
-                a: "Yes! You can upgrade or adjust your plan at any time as your needs change."
+                a: "Yes! You can upgrade or adjust your plan at any time as your needs change.",
               },
               {
                 q: "What payment methods do you accept?",
-                a: "We accept all major credit cards, ACH transfers, and can set up invoicing for enterprise customers."
-              }
+                a: "We accept all major credit cards, ACH transfers, and can set up invoicing for enterprise customers.",
+              },
             ].map((faq, index) => (
               <div key={index} className="bg-white rounded-xl p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">{faq.q}</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">
+                  {faq.q}
+                </h3>
                 <p className="text-gray-600">{faq.a}</p>
               </div>
             ))}
@@ -216,7 +228,8 @@ export default function PricingPage() {
             Ready to Get Started?
           </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Schedule a demo to see FinWage in action and get a custom quote for your organization
+            Schedule a demo to see FinWage in action and get a custom quote for
+            your organization
           </p>
           <button className="bg-white text-[#1d44c3] px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all shadow-lg">
             Schedule Your Demo

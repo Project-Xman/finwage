@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Placeholder images
-const imgFinWageChosenAsWorkdaysTrustedPartnerForOnDemandPayInnovation = "https://picsum.photos/600/400";
-const imgCorporateWorkersBrainstormingTogether1 = "https://picsum.photos/128/80";
-const imgCoupleDeskHoldingSmartphoneCreditCard2 = "https://picsum.photos/129/80";
+const imgFinWageChosenAsWorkdaysTrustedPartnerForOnDemandPayInnovation =
+  "https://picsum.photos/600/400";
+const imgCorporateWorkersBrainstormingTogether1 =
+  "https://picsum.photos/128/80";
+const imgCoupleDeskHoldingSmartphoneCreditCard2 =
+  "https://picsum.photos/129/80";
 const imgHealthyLifestyleSustainedHome1 = "https://picsum.photos/130/80";
 const imgCloseUpCompanyTeamWorking1 = "https://picsum.photos/131/80";
 
@@ -22,7 +25,8 @@ const blogPosts = [
   },
   {
     type: "BLOG",
-    title: "Empower Your Workforce With Real-Time Digital Access Through FinWage Tips",
+    title:
+      "Empower Your Workforce With Real-Time Digital Access Through FinWage Tips",
     image: imgHealthyLifestyleSustainedHome1,
   },
   {
@@ -37,7 +41,15 @@ const blogPosts = [
   },
 ];
 
-function BlogCard({ type, title, image }: { type: string; title: string; image: string }) {
+function BlogCard({
+  type,
+  title,
+  image,
+}: {
+  type: string;
+  title: string;
+  image: string;
+}) {
   return (
     <div className="rounded-lg hover:shadow-md transition-shadow">
       <div className="flex gap-3 h-[104px] items-center">
@@ -78,7 +90,9 @@ function FeaturedPost() {
       <div className="space-y-6">
         <div className="rounded-xl overflow-hidden shadow-lg">
           <Image
-            src={imgFinWageChosenAsWorkdaysTrustedPartnerForOnDemandPayInnovation}
+            src={
+              imgFinWageChosenAsWorkdaysTrustedPartnerForOnDemandPayInnovation
+            }
             alt="FinWage Chosen as Workday's Trusted Partner for On-Demand Pay Innovation"
             width={600}
             height={400}
@@ -89,12 +103,13 @@ function FeaturedPost() {
 
         <div className="space-y-4">
           <h3 className="text-2xl md:text-3xl font-bold text-[#1d44c3] leading-8">
-            FinWage Chosen as Workday's Trusted Partner for On-Demand Pay Innovation
+            FinWage Chosen as Workday's Trusted Partner for On-Demand Pay
+            Innovation
           </h3>
           <p className="text-gray-800 leading-6">
-            Together, the companies are delivering a more integrated experience for joint
-            customers—empowering employees to access their earned wages whenever
-            they need them most.
+            Together, the companies are delivering a more integrated experience
+            for joint customers—empowering employees to access their earned
+            wages whenever they need them most.
           </p>
           <a
             href="#"
@@ -113,7 +128,9 @@ function LatestPosts() {
   return (
     <div className="space-y-6">
       <div className="border-b border-gray-200 pb-4">
-        <h2 className="text-2xl md:text-3xl font-semibold text-[#1d44c3]">Latest</h2>
+        <h2 className="text-2xl md:text-3xl font-semibold text-[#1d44c3]">
+          Latest
+        </h2>
       </div>
 
       <div className="space-y-6">
@@ -140,8 +157,9 @@ export default function Blogs() {
             Actionable Insights, Anytime, Anywhere.
           </h1>
           <p className="text-gray-800 leading-6 max-w-2xl">
-            Discover the latest insights, initiatives, and innovations from FinWage as we
-            shape the future of on-demand pay and modern payroll solutions.
+            Discover the latest insights, initiatives, and innovations from
+            FinWage as we shape the future of on-demand pay and modern payroll
+            solutions.
           </p>
         </div>
 

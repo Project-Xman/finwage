@@ -10,14 +10,23 @@ export default function Loading() {
             <span className="text-[#1d44c3] font-bold text-2xl">F</span>
           </div>
         </div>
-        
+
         {/* Loading Text */}
         <div className="space-y-2">
           <h2 className="text-white text-xl font-semibold">Loading FinWage</h2>
           <div className="flex gap-2 justify-center">
-            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+            <div
+              className="w-2 h-2 bg-white rounded-full animate-bounce"
+              style={{ animationDelay: "0ms" }}
+            ></div>
+            <div
+              className="w-2 h-2 bg-white rounded-full animate-bounce"
+              style={{ animationDelay: "150ms" }}
+            ></div>
+            <div
+              className="w-2 h-2 bg-white rounded-full animate-bounce"
+              style={{ animationDelay: "300ms" }}
+            ></div>
           </div>
         </div>
       </div>

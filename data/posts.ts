@@ -19,7 +19,8 @@ export const posts: Post[] = [
   {
     slug: "real-cost-living-paycheck-to-paycheck",
     title: "The Real Cost of Living Paycheck to Paycheck",
-    excerpt: "How earned wage access is helping millions of workers break free from the payday cycle and build long-term financial security.",
+    excerpt:
+      "How earned wage access is helping millions of workers break free from the payday cycle and build long-term financial security.",
     content: `
       <p>Living paycheck to paycheck has become the norm for millions of American workers, but the true cost extends far beyond just financial strain. It impacts mental health, productivity, and overall quality of life.</p>
       
@@ -42,14 +43,15 @@ export const posts: Post[] = [
     author: {
       name: "Sarah Johnson",
       role: "Financial Wellness Expert",
-      avatar: "/assets/author-1.jpg"
+      avatar: "/assets/author-1.jpg",
     },
-    tags: ["Financial Wellness", "Earned Wage Access", "Employee Benefits"]
+    tags: ["Financial Wellness", "Earned Wage Access", "Employee Benefits"],
   },
   {
     slug: "why-top-companies-offering-wage-access",
     title: "Why Top Companies Are Offering Wage Access",
-    excerpt: "The ROI of financial wellness benefits and how they're transforming employee retention strategies.",
+    excerpt:
+      "The ROI of financial wellness benefits and how they're transforming employee retention strategies.",
     content: `
       <p>Forward-thinking companies are recognizing that financial wellness benefits aren't just nice-to-haves—they're essential tools for attracting and retaining top talent in today's competitive job market.</p>
       
@@ -78,14 +80,15 @@ export const posts: Post[] = [
     author: {
       name: "Michael Chen",
       role: "HR Strategy Consultant",
-      avatar: "/assets/author-2.jpg"
+      avatar: "/assets/author-2.jpg",
     },
-    tags: ["Employer Benefits", "ROI", "Employee Retention"]
+    tags: ["Employer Benefits", "ROI", "Employee Retention"],
   },
   {
     slug: "future-of-payroll-on-demand-wages",
     title: "The Future of Payroll: On-Demand Wages",
-    excerpt: "Exploring how technology is revolutionizing when and how employees get paid.",
+    excerpt:
+      "Exploring how technology is revolutionizing when and how employees get paid.",
     content: `
       <p>The traditional bi-weekly or monthly payroll cycle is a relic of the past. Technology is enabling a fundamental shift in how and when employees access their earned wages.</p>
       
@@ -108,14 +111,15 @@ export const posts: Post[] = [
     author: {
       name: "David Martinez",
       role: "Fintech Analyst",
-      avatar: "/assets/author-3.jpg"
+      avatar: "/assets/author-3.jpg",
     },
-    tags: ["Industry Trends", "Technology", "Future of Work"]
+    tags: ["Industry Trends", "Technology", "Future of Work"],
   },
   {
     slug: "financial-stress-impacts-productivity",
     title: "5 Ways Financial Stress Impacts Employee Productivity",
-    excerpt: "Understanding the hidden costs of financial stress in the workplace and what employers can do about it.",
+    excerpt:
+      "Understanding the hidden costs of financial stress in the workplace and what employers can do about it.",
     content: `
       <p>Financial stress doesn't stay at home—it follows employees to work, impacting performance, engagement, and overall workplace culture.</p>
       
@@ -144,14 +148,15 @@ export const posts: Post[] = [
     author: {
       name: "Emily Rodriguez",
       role: "Workplace Psychologist",
-      avatar: "/assets/author-4.jpg"
+      avatar: "/assets/author-4.jpg",
     },
-    tags: ["Productivity", "Financial Wellness", "Mental Health"]
+    tags: ["Productivity", "Financial Wellness", "Mental Health"],
   },
   {
     slug: "choosing-right-wage-access-provider",
     title: "How to Choose the Right Wage Access Provider",
-    excerpt: "A comprehensive guide for employers evaluating earned wage access solutions.",
+    excerpt:
+      "A comprehensive guide for employers evaluating earned wage access solutions.",
     content: `
       <p>Not all earned wage access providers are created equal. Here's what employers need to consider when selecting a partner.</p>
       
@@ -180,14 +185,15 @@ export const posts: Post[] = [
     author: {
       name: "James Wilson",
       role: "Benefits Consultant",
-      avatar: "/assets/author-5.jpg"
+      avatar: "/assets/author-5.jpg",
     },
-    tags: ["Employer Guide", "Selection Criteria", "Best Practices"]
+    tags: ["Employer Guide", "Selection Criteria", "Best Practices"],
   },
   {
     slug: "earned-wage-access-regulation-landscape",
     title: "Understanding the Earned Wage Access Regulation Landscape",
-    excerpt: "A comprehensive overview of current and emerging regulations affecting earned wage access programs.",
+    excerpt:
+      "A comprehensive overview of current and emerging regulations affecting earned wage access programs.",
     content: `
       <p>As earned wage access grows in popularity, regulators are establishing frameworks to protect consumers while enabling innovation.</p>
       
@@ -210,10 +216,10 @@ export const posts: Post[] = [
     author: {
       name: "Patricia Lee",
       role: "Compliance Attorney",
-      avatar: "/assets/author-6.jpg"
+      avatar: "/assets/author-6.jpg",
     },
-    tags: ["Compliance", "Regulations", "Legal"]
-  }
+    tags: ["Compliance", "Regulations", "Legal"],
+  },
 ];
 
 export function getPostBySlug(slug: string): Post | undefined {
@@ -221,18 +227,26 @@ export function getPostBySlug(slug: string): Post | undefined {
 }
 
 export function getAllPosts(): Post[] {
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return posts.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
 }
 
 export function getPostsByCategory(category: string): Post[] {
   return posts.filter((post) => post.category === category);
 }
 
-export function getRelatedPosts(currentSlug: string, limit: number = 3): Post[] {
+export function getRelatedPosts(
+  currentSlug: string,
+  limit: number = 3,
+): Post[] {
   const currentPost = getPostBySlug(currentSlug);
   if (!currentPost) return [];
-  
+
   return posts
-    .filter((post) => post.slug !== currentSlug && post.category === currentPost.category)
+    .filter(
+      (post) =>
+        post.slug !== currentSlug && post.category === currentPost.category,
+    )
     .slice(0, limit);
 }

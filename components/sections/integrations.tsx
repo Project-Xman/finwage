@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import React, { forwardRef, useRef } from "react"
+import React, { forwardRef, useRef } from "react";
 
-import { cn } from "@/lib/utils"
-import { AnimatedBeam } from "@/components/ui/animated-beam"
+import { cn } from "@/lib/utils";
+import { AnimatedBeam } from "@/components/ui/animated-beam";
 
 const Circle = forwardRef<
   HTMLDivElement,
@@ -14,25 +14,25 @@ const Circle = forwardRef<
       ref={ref}
       className={cn(
         "z-10 flex size-12 items-center justify-center rounded-full border-2 bg-white p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
-        className
+        className,
       )}
     >
       {children}
     </div>
-  )
-})
+  );
+});
 
-Circle.displayName = "Circle"
+Circle.displayName = "Circle";
 
 export function IntegrationDemo() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const div1Ref = useRef<HTMLDivElement>(null)
-  const div2Ref = useRef<HTMLDivElement>(null)
-  const div3Ref = useRef<HTMLDivElement>(null)
-  const div4Ref = useRef<HTMLDivElement>(null)
-  const div5Ref = useRef<HTMLDivElement>(null)
-  const div6Ref = useRef<HTMLDivElement>(null)
-  const div7Ref = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const div1Ref = useRef<HTMLDivElement>(null);
+  const div2Ref = useRef<HTMLDivElement>(null);
+  const div3Ref = useRef<HTMLDivElement>(null);
+  const div4Ref = useRef<HTMLDivElement>(null);
+  const div5Ref = useRef<HTMLDivElement>(null);
+  const div6Ref = useRef<HTMLDivElement>(null);
+  const div7Ref = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -117,7 +117,7 @@ export function IntegrationDemo() {
         pathWidth={3}
       />
     </div>
-  )
+  );
 }
 
 export default function Integrations() {
@@ -129,14 +129,15 @@ export default function Integrations() {
             Seamless Integrations
           </h2>
           <p className="text-base md:text-lg text-gray-800 leading-7 max-w-2xl mx-auto">
-            Connect FinWage with your existing tools and platforms for a unified payroll experience.
+            Connect FinWage with your existing tools and platforms for a unified
+            payroll experience.
           </p>
         </div>
-        
+
         <IntegrationDemo />
       </div>
     </section>
-  )
+  );
 }
 
 const Icons = {
@@ -324,4 +325,4 @@ const Icons = {
       />
     </svg>
   ),
-}
+};

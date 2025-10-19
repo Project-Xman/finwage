@@ -1,8 +1,15 @@
 function Person() {
   return (
-    <div className="absolute h-[335.41px] right-[214px] rounded-[24px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] top-[125px] w-[224px]" data-name="Person">
+    <div
+      className="absolute h-[335.41px] right-[214px] rounded-[24px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] top-[125px] w-[224px]"
+      data-name="Person"
+    >
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[24px]">
-        <img alt="" className="w-full h-full object-cover" src="/assets/worker-1.png" />
+        <img
+          alt=""
+          className="w-full h-full object-cover"
+          src="/assets/worker-1.png"
+        />
       </div>
     </div>
   );
@@ -10,16 +17,28 @@ function Person() {
 
 function Background() {
   return (
-    <div className="absolute bg-gray-200 h-[8px] left-[16.8px] overflow-clip right-[16.8px] rounded-[9999px] top-[64.8px]" data-name="Background">
-      <div className="absolute bg-gradient-to-r from-[#3b82f6] h-[8px] left-0 right-[35.01%] rounded-[9999px] to-[#4f46e5] top-0" data-name="Gradient" />
+    <div
+      className="absolute bg-gray-200 h-[8px] left-[16.8px] overflow-clip right-[16.8px] rounded-[9999px] top-[64.8px]"
+      data-name="Background"
+    >
+      <div
+        className="absolute bg-gradient-to-r from-[#3b82f6] h-[8px] left-0 right-[35.01%] rounded-[9999px] to-[#4f46e5] top-0"
+        data-name="Gradient"
+      />
     </div>
   );
 }
 
 function BackgroundBorder() {
   return (
-    <div className="absolute h-[109.6px] left-[25.6px] right-[25.6px] rounded-[12px] top-[97.6px]" data-name="Background+Border">
-      <div aria-hidden="true" className="absolute border border-blue-100 border-solid inset-0 pointer-events-none rounded-[12px]" />
+    <div
+      className="absolute h-[109.6px] left-[25.6px] right-[25.6px] rounded-[12px] top-[97.6px]"
+      data-name="Background+Border"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute border border-blue-100 border-solid inset-0 pointer-events-none rounded-[12px]"
+      />
       <div className="absolute flex flex-col font-semibold h-[16px] justify-center leading-[0] left-[16.8px] not-italic text-[11.6px] text-gray-800 top-[24.8px] translate-y-[-50%] w-[71.69px]">
         <p className="leading-[16px]">Rainy day jar</p>
       </div>
@@ -39,7 +58,10 @@ function BackgroundBorder() {
 
 function BackgroundBorderShadowOverlayBlur() {
   return (
-    <div className="absolute backdrop-blur-[6px] backdrop-filter bg-[rgba(255,255,255,0.95)] h-[232.8px] right-0 rounded-[16px] top-[267.2px] w-[288px]" data-name="Background+Border+Shadow+OverlayBlur">
+    <div
+      className="absolute backdrop-blur-[6px] backdrop-filter bg-[rgba(255,255,255,0.95)] h-[232.8px] right-0 rounded-[16px] top-[267.2px] w-[288px]"
+      data-name="Background+Border+Shadow+OverlayBlur"
+    >
       <div className="h-[232.8px] overflow-clip relative rounded-[inherit] w-[288px]">
         <div className="absolute flex flex-col font-bold h-[20px] justify-center leading-[0] left-[25.6px] not-italic text-[#1d44c3] text-[13.3px] top-[35.6px] translate-y-[-50%] w-[160px]">
           <p className="leading-[20px]">Set a savings goal</p>
@@ -50,16 +72,26 @@ function BackgroundBorderShadowOverlayBlur() {
         </div>
         <BackgroundBorder />
       </div>
-      <div aria-hidden="true" className="absolute border border-gray-100 border-solid inset-0 pointer-events-none rounded-[16px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]" />
+      <div
+        aria-hidden="true"
+        className="absolute border border-gray-100 border-solid inset-0 pointer-events-none rounded-[16px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]"
+      />
     </div>
   );
 }
 
 function Person1() {
   return (
-    <div className="absolute h-[321.49px] right-[392px] rounded-[24px] shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)] top-0 w-[192px]" data-name="Person">
+    <div
+      className="absolute h-[321.49px] right-[392px] rounded-[24px] shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)] top-0 w-[192px]"
+      data-name="Person"
+    >
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[24px]">
-        <img alt="" className="w-full h-full object-cover" src="/assets/worker-2.png" />
+        <img
+          alt=""
+          className="w-full h-full object-cover"
+          src="/assets/worker-2.png"
+        />
       </div>
     </div>
   );
@@ -67,7 +99,10 @@ function Person1() {
 
 function ParagraphBackgroundBorderShadowOverlayBlur() {
   return (
-    <div className="absolute backdrop-blur-[6px] backdrop-filter bg-[rgba(255,255,255,0.95)] h-[163.2px] right-[40px] rounded-[16px] top-[80px] w-[256px]" data-name="Paragraph+Background+Border+Shadow+OverlayBlur">
+    <div
+      className="absolute backdrop-blur-[6px] backdrop-filter bg-[rgba(255,255,255,0.95)] h-[163.2px] right-[40px] rounded-[16px] top-[80px] w-[256px]"
+      data-name="Paragraph+Background+Border+Shadow+OverlayBlur"
+    >
       <div className="h-[163.2px] leading-[0] not-italic overflow-clip relative rounded-[inherit] w-[256px]">
         <div className="absolute flex flex-col font-medium h-[20px] justify-center left-[21.6px] text-[13.6px] text-gray-600 top-[31.6px] translate-y-[-50%] w-[59.14px]">
           <p className="leading-[20px]">You have</p>
@@ -80,7 +115,10 @@ function ParagraphBackgroundBorderShadowOverlayBlur() {
           <p className="leading-[20px]">for payday</p>
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-gray-100 border-solid inset-0 pointer-events-none rounded-[16px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]" />
+      <div
+        aria-hidden="true"
+        className="absolute border border-gray-100 border-solid inset-0 pointer-events-none rounded-[16px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]"
+      />
     </div>
   );
 }
@@ -91,10 +129,18 @@ function Frame9() {
       {/* Mobile: Stack images vertically */}
       <div className="md:hidden flex flex-col gap-4 items-center">
         <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden">
-          <img alt="" className="w-full h-full object-cover" src="/assets/worker-1.png" />
+          <img
+            alt=""
+            className="w-full h-full object-cover"
+            src="/assets/worker-1.png"
+          />
         </div>
         <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden">
-          <img alt="" className="w-full h-full object-cover" src="/assets/worker-2.png" />
+          <img
+            alt=""
+            className="w-full h-full object-cover"
+            src="/assets/worker-2.png"
+          />
         </div>
       </div>
 
@@ -111,9 +157,17 @@ function Frame9() {
 
 function Link() {
   return (
-    <div className="font-semibold relative shrink-0 text-[#f64162] w-full md:w-auto" data-name="Link">
-      <a href="#" className="inline-flex items-center gap-2 hover:opacity-80 transition-opacity">
-        <span className="text-[15.6px] leading-[24px]">See how it works for employees</span>
+    <div
+      className="font-semibold relative shrink-0 text-[#f64162] w-full md:w-auto"
+      data-name="Link"
+    >
+      <a
+        href="#"
+        className="inline-flex items-center gap-2 hover:opacity-80 transition-opacity"
+      >
+        <span className="text-[15.6px] leading-[24px]">
+          See how it works for employees
+        </span>
         <span className="text-[16px] leading-[24px]">{`>`}</span>
       </a>
     </div>
@@ -127,7 +181,8 @@ function Frame10() {
         Supporting Every Employee's Journey Toward Financial Growth
       </h2>
       <p className="text-[15.6px] leading-[24px] text-gray-800">
-        FinWage enables employees to confidently manage and optimize their earnings, fostering financial wellness.
+        FinWage enables employees to confidently manage and optimize their
+        earnings, fostering financial wellness.
       </p>
       <Link />
     </div>

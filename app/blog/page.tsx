@@ -1,11 +1,12 @@
-import { getAllPosts } from "@/data/posts";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Clock, Calendar } from "lucide-react";
+import { getAllPosts } from "@/data/posts";
 
 export const metadata = {
   title: "Blog - FinWage",
-  description: "Expert insights on financial wellness, earned wage access, and the future of payroll.",
+  description:
+    "Expert insights on financial wellness, earned wage access, and the future of payroll.",
 };
 
 export default function BlogPage() {
@@ -15,10 +16,22 @@ export default function BlogPage() {
 
   const categories = [
     { name: "All Posts", count: posts.length },
-    { name: "Financial Wellness", count: posts.filter(p => p.category === "Financial Wellness").length },
-    { name: "Employer Benefits", count: posts.filter(p => p.category === "Employer Benefits").length },
-    { name: "Industry Trends", count: posts.filter(p => p.category === "Industry Trends").length },
-    { name: "Employer Guide", count: posts.filter(p => p.category === "Employer Guide").length },
+    {
+      name: "Financial Wellness",
+      count: posts.filter((p) => p.category === "Financial Wellness").length,
+    },
+    {
+      name: "Employer Benefits",
+      count: posts.filter((p) => p.category === "Employer Benefits").length,
+    },
+    {
+      name: "Industry Trends",
+      count: posts.filter((p) => p.category === "Industry Trends").length,
+    },
+    {
+      name: "Employer Guide",
+      count: posts.filter((p) => p.category === "Employer Guide").length,
+    },
   ];
 
   return (
@@ -31,7 +44,8 @@ export default function BlogPage() {
               Blog & Insights
             </h1>
             <p className="text-xl md:text-2xl text-blue-100">
-              Expert perspectives on financial wellness, employee benefits, and the future of payroll
+              Expert perspectives on financial wellness, employee benefits, and
+              the future of payroll
             </p>
           </div>
         </div>
@@ -43,7 +57,8 @@ export default function BlogPage() {
           <div className="flex flex-wrap gap-3">
             {categories.map((category, index) => (
               <button
-                key={index}
+                key={category.name}
+                type="button"
                 className={`px-4 py-2 rounded-full font-semibold transition-all ${
                   index === 0
                     ? "bg-[#1d44c3] text-white"
@@ -109,12 +124,19 @@ export default function BlogPage() {
                           />
                         </div>
                         <div>
-                          <div className="font-semibold text-gray-900">{featuredPost.author.name}</div>
-                          <div className="text-sm text-gray-500">{featuredPost.author.role}</div>
+                          <div className="font-semibold text-gray-900">
+                            {featuredPost.author.name}
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            {featuredPost.author.role}
+                          </div>
                         </div>
                       </div>
                       <div className="ml-auto">
-                        <button className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 transition-all">
+                        <button
+                          type="button"
+                          className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 transition-all"
+                        >
                           Read More
                           <ArrowRight className="w-5 h-5" />
                         </button>
@@ -166,9 +188,7 @@ export default function BlogPage() {
                     <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1d44c3] transition-colors">
                       {post.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 flex-1">
-                      {post.excerpt}
-                    </p>
+                    <p className="text-gray-600 mb-4 flex-1">{post.excerpt}</p>
                     <div className="flex items-center justify-between pt-4 border-t">
                       <div className="flex items-center gap-2">
                         <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-200">
@@ -196,11 +216,10 @@ export default function BlogPage() {
       {/* Newsletter CTA */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white">
         <div className="max-w-[800px] mx-auto px-4 md:px-6 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Stay Updated
-          </h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">Stay Updated</h2>
           <p className="text-xl text-blue-100 mb-8">
-            Get the latest insights on financial wellness and employee benefits delivered to your inbox.
+            Get the latest insights on financial wellness and employee benefits
+            delivered to your inbox.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <input
@@ -208,7 +227,10 @@ export default function BlogPage() {
               placeholder="Enter your email"
               className="flex-1 px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
             />
-            <button className="px-8 py-4 bg-white text-[#1d44c3] rounded-full font-semibold hover:bg-gray-100 transition-all">
+            <button
+              type="button"
+              className="px-8 py-4 bg-white text-[#1d44c3] rounded-full font-semibold hover:bg-gray-100 transition-all"
+            >
               Subscribe
             </button>
           </div>

@@ -1,4 +1,11 @@
-import { BookOpen, TrendingUp, Users, Award, Calendar, ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  Award,
+  BookOpen,
+  Calendar,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 import Image from "next/image";
 
 export default function ResourcesPage() {
@@ -6,86 +13,106 @@ export default function ResourcesPage() {
     {
       category: "Financial Wellness",
       title: "The Real Cost of Living Paycheck to Paycheck",
-      excerpt: "How earned wage access is helping millions of workers break free from the payday cycle and build long-term financial security.",
+      excerpt:
+        "How earned wage access is helping millions of workers break free from the payday cycle and build long-term financial security.",
       image: "/assets/analytic-image.png",
       date: "Jan 15, 2025",
-      readTime: "5 min read"
+      readTime: "5 min read",
     },
     {
       category: "Employer Benefits",
       title: "Why Top Companies Are Offering Wage Access",
-      excerpt: "The ROI of financial wellness benefits and how they're transforming employee retention strategies.",
+      excerpt:
+        "The ROI of financial wellness benefits and how they're transforming employee retention strategies.",
       image: "/assets/office-meeting.png",
       date: "Jan 10, 2025",
-      readTime: "7 min read"
+      readTime: "7 min read",
     },
     {
       category: "Industry Trends",
       title: "The Future of Payroll: On-Demand Wages",
-      excerpt: "Exploring how technology is revolutionizing when and how employees get paid.",
+      excerpt:
+        "Exploring how technology is revolutionizing when and how employees get paid.",
       image: "/assets/laptop-office.png",
       date: "Jan 5, 2025",
-      readTime: "6 min read"
-    }
+      readTime: "6 min read",
+    },
   ];
 
   const categories = [
-    { name: "Financial Wellness", count: 24, icon: <TrendingUp className="w-6 h-6" /> },
-    { name: "Employee Retention", count: 18, icon: <Users className="w-6 h-6" /> },
-    { name: "Payroll Trends", count: 15, icon: <Calendar className="w-6 h-6" /> },
+    {
+      name: "Financial Wellness",
+      count: 24,
+      icon: <TrendingUp className="w-6 h-6" />,
+    },
+    {
+      name: "Employee Retention",
+      count: 18,
+      icon: <Users className="w-6 h-6" />,
+    },
+    {
+      name: "Payroll Trends",
+      count: 15,
+      icon: <Calendar className="w-6 h-6" />,
+    },
     { name: "Case Studies", count: 12, icon: <Award className="w-6 h-6" /> },
-    { name: "Industry News", count: 32, icon: <BookOpen className="w-6 h-6" /> }
+    {
+      name: "Industry News",
+      count: 32,
+      icon: <BookOpen className="w-6 h-6" />,
+    },
   ];
 
   const pressReleases = [
     {
-      title: "FinWage Raises $25M Series A to Expand Financial Wellness Platform",
+      title:
+        "FinWage Raises $25M Series A to Expand Financial Wellness Platform",
       date: "December 2024",
-      source: "TechCrunch"
+      source: "TechCrunch",
     },
     {
       title: "FinWage Named 'Best Workplace Benefit' by HR Tech Awards",
       date: "November 2024",
-      source: "HR Technology"
+      source: "HR Technology",
     },
     {
       title: "100,000 Workers Now Using FinWage for Instant Wage Access",
       date: "October 2024",
-      source: "Business Wire"
-    }
+      source: "Business Wire",
+    },
   ];
 
   const recentArticles = [
     {
       title: "5 Ways Financial Stress Impacts Employee Productivity",
       category: "Financial Wellness",
-      date: "Jan 12, 2025"
+      date: "Jan 12, 2025",
     },
     {
       title: "How to Choose the Right Wage Access Provider",
       category: "Employer Guide",
-      date: "Jan 8, 2025"
+      date: "Jan 8, 2025",
     },
     {
       title: "Understanding the Earned Wage Access Regulation Landscape",
       category: "Compliance",
-      date: "Jan 3, 2025"
+      date: "Jan 3, 2025",
     },
     {
       title: "Case Study: Reducing Turnover by 30% with FinWage",
       category: "Case Studies",
-      date: "Dec 28, 2024"
+      date: "Dec 28, 2024",
     },
     {
       title: "The Psychology of Payday: Why Timing Matters",
       category: "Research",
-      date: "Dec 22, 2024"
+      date: "Dec 22, 2024",
     },
     {
       title: "Building a Financial Wellness Program That Works",
       category: "Employer Guide",
-      date: "Dec 18, 2024"
-    }
+      date: "Dec 18, 2024",
+    },
   ];
 
   return (
@@ -98,7 +125,8 @@ export default function ResourcesPage() {
               Resources & Insights
             </h1>
             <p className="text-xl md:text-2xl text-blue-100">
-              Expert perspectives on financial wellness, employee benefits, and the future of payroll
+              Expert perspectives on financial wellness, employee benefits, and
+              the future of payroll
             </p>
           </div>
         </div>
@@ -116,8 +144,12 @@ export default function ResourcesPage() {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full text-[#1d44c3] mb-3 group-hover:bg-[#1d44c3] group-hover:text-white transition-all">
                   {category.icon}
                 </div>
-                <div className="font-semibold text-gray-900 mb-1">{category.name}</div>
-                <div className="text-sm text-gray-500">{category.count} articles</div>
+                <div className="font-semibold text-gray-900 mb-1">
+                  {category.name}
+                </div>
+                <div className="text-sm text-gray-500">
+                  {category.count} articles
+                </div>
               </button>
             ))}
           </div>
@@ -132,7 +164,10 @@ export default function ResourcesPage() {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {featuredArticles.map((article, index) => (
-              <article key={index} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group">
+              <article
+                key={index}
+                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
+              >
                 <div className="relative h-48">
                   <Image
                     src={article.image}
@@ -155,9 +190,7 @@ export default function ResourcesPage() {
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1d44c3] transition-colors">
                     {article.title}
                   </h3>
-                  <p className="text-gray-600 mb-4">
-                    {article.excerpt}
-                  </p>
+                  <p className="text-gray-600 mb-4">{article.excerpt}</p>
                   <button className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 transition-all">
                     Read More
                     <ArrowRight className="w-4 h-4" />
@@ -179,7 +212,10 @@ export default function ResourcesPage() {
               </h2>
               <div className="space-y-6">
                 {recentArticles.map((article, index) => (
-                  <div key={index} className="bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+                  <div
+                    key={index}
+                    className="bg-white rounded-xl p-6 hover:shadow-lg transition-all"
+                  >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <div className="inline-block bg-blue-100 text-[#1d44c3] px-3 py-1 rounded-full text-sm font-semibold mb-3">
@@ -188,7 +224,9 @@ export default function ResourcesPage() {
                         <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-[#1d44c3] transition-colors cursor-pointer">
                           {article.title}
                         </h3>
-                        <div className="text-sm text-gray-500">{article.date}</div>
+                        <div className="text-sm text-gray-500">
+                          {article.date}
+                        </div>
                       </div>
                       <ArrowRight className="w-5 h-5 text-gray-400 flex-shrink-0 mt-2" />
                     </div>
@@ -204,7 +242,8 @@ export default function ResourcesPage() {
                   Newsletter
                 </h3>
                 <p className="text-gray-600 mb-4">
-                  Get the latest insights on financial wellness and employee benefits delivered to your inbox.
+                  Get the latest insights on financial wellness and employee
+                  benefits delivered to your inbox.
                 </p>
                 <input
                   type="email"
@@ -240,7 +279,10 @@ export default function ResourcesPage() {
           </h2>
           <div className="space-y-6 max-w-3xl mx-auto">
             {pressReleases.map((press, index) => (
-              <div key={index} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 hover:shadow-lg transition-all">
+              <div
+                key={index}
+                className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 hover:shadow-lg transition-all"
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <h3 className="text-lg font-bold text-gray-900 mb-2">
@@ -249,7 +291,9 @@ export default function ResourcesPage() {
                     <div className="flex items-center gap-3 text-sm text-gray-600">
                       <span>{press.date}</span>
                       <span>•</span>
-                      <span className="text-[#1d44c3] font-semibold">{press.source}</span>
+                      <span className="text-[#1d44c3] font-semibold">
+                        {press.source}
+                      </span>
                     </div>
                   </div>
                   <ArrowRight className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" />

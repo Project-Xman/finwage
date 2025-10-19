@@ -1,4 +1,11 @@
-import { Mail, Phone, MapPin, ArrowRight, MessageSquare, Clock } from "lucide-react";
+import {
+  ArrowRight,
+  Clock,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+} from "lucide-react";
 
 export default function ContactPage() {
   return (
@@ -11,7 +18,8 @@ export default function ContactPage() {
               Get in Touch
             </h1>
             <p className="text-xl md:text-2xl text-blue-100">
-              Whether you're an employer looking to offer FinWage or an employee needing support, we're here to help.
+              Whether you're an employer looking to offer FinWage or an employee
+              needing support, we're here to help.
             </p>
           </div>
         </div>
@@ -31,7 +39,10 @@ export default function ContactPage() {
               <p className="text-gray-600 mb-6">
                 Schedule a demo and see how FinWage can transform your workplace
               </p>
-              <button className="bg-[#1d44c3] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#0d2463] transition-all w-full">
+              <button
+                type="button"
+                className="bg-[#1d44c3] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#0d2463] transition-all w-full"
+              >
                 Schedule Demo
               </button>
             </div>
@@ -46,7 +57,10 @@ export default function ContactPage() {
               <p className="text-gray-600 mb-6">
                 Get help with your account, transactions, or general questions
               </p>
-              <button className="bg-green-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-600 transition-all w-full">
+              <button
+                type="button"
+                className="bg-green-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-600 transition-all w-full"
+              >
                 Get Support
               </button>
             </div>
@@ -61,7 +75,10 @@ export default function ContactPage() {
               <p className="text-gray-600 mb-6">
                 Media, partnerships, or other questions
               </p>
-              <button className="bg-purple-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-600 transition-all w-full">
+              <button
+                type="button"
+                className="bg-purple-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-600 transition-all w-full"
+              >
                 Contact Us
               </button>
             </div>
@@ -78,7 +95,9 @@ export default function ContactPage() {
                 Request a Demo
               </h2>
               <p className="text-xl text-gray-600 mb-8">
-                See FinWage in action and learn how we can help your organization. Our team will walk you through the platform and answer all your questions.
+                See FinWage in action and learn how we can help your
+                organization. Our team will walk you through the platform and
+                answer all your questions.
               </p>
 
               <div className="space-y-6">
@@ -87,8 +106,12 @@ export default function ContactPage() {
                     <Clock className="w-6 h-6 text-[#1d44c3]" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg text-gray-900 mb-1">30-Minute Session</h3>
-                    <p className="text-gray-600">Quick overview of features and benefits</p>
+                    <h3 className="font-semibold text-lg text-gray-900 mb-1">
+                      30-Minute Session
+                    </h3>
+                    <p className="text-gray-600">
+                      Quick overview of features and benefits
+                    </p>
                   </div>
                 </div>
 
@@ -97,8 +120,12 @@ export default function ContactPage() {
                     <MessageSquare className="w-6 h-6 text-[#1d44c3]" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg text-gray-900 mb-1">Personalized</h3>
-                    <p className="text-gray-600">Tailored to your company's specific needs</p>
+                    <h3 className="font-semibold text-lg text-gray-900 mb-1">
+                      Personalized
+                    </h3>
+                    <p className="text-gray-600">
+                      Tailored to your company's specific needs
+                    </p>
                   </div>
                 </div>
 
@@ -107,16 +134,25 @@ export default function ContactPage() {
                     <ArrowRight className="w-6 h-6 text-[#1d44c3]" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg text-gray-900 mb-1">Next Steps</h3>
-                    <p className="text-gray-600">Clear path to implementation and onboarding</p>
+                    <h3 className="font-semibold text-lg text-gray-900 mb-1">
+                      Next Steps
+                    </h3>
+                    <p className="text-gray-600">
+                      Clear path to implementation and onboarding
+                    </p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-8 p-6 bg-blue-50 rounded-xl">
-                <h4 className="font-semibold text-gray-900 mb-2">Quick Questions?</h4>
+                <h4 className="font-semibold text-gray-900 mb-2">
+                  Quick Questions?
+                </h4>
                 <p className="text-gray-600 mb-3">Call us directly at:</p>
-                <a href="tel:1-800-FINWAGE" className="text-2xl font-bold text-[#1d44c3] hover:underline">
+                <a
+                  href="tel:1-800-FINWAGE"
+                  className="text-2xl font-bold text-[#1d44c3] hover:underline"
+                >
                   1-800-FINWAGE
                 </a>
               </div>
@@ -126,20 +162,28 @@ export default function ContactPage() {
               <form className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label
+                      htmlFor="contact-first-name"
+                      className="block text-sm font-semibold text-gray-700 mb-2"
+                    >
                       First Name *
                     </label>
                     <input
+                      id="contact-first-name"
                       type="text"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <label
+                      htmlFor="contact-last-name"
+                      className="block text-sm font-semibold text-gray-700 mb-2"
+                    >
                       Last Name *
                     </label>
                     <input
+                      id="contact-last-name"
                       type="text"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
                       required
@@ -148,10 +192,14 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label
+                    htmlFor="contact-email"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Work Email *
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
                     required
@@ -159,10 +207,14 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label
+                    htmlFor="contact-phone"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Phone Number *
                   </label>
                   <input
+                    id="contact-phone"
                     type="tel"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
                     required
@@ -170,10 +222,14 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label
+                    htmlFor="contact-company"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Company Name *
                   </label>
                   <input
+                    id="contact-company"
                     type="text"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
                     required
@@ -181,10 +237,16 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label
+                    htmlFor="contact-employee-count"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Number of Employees *
                   </label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent">
+                  <select
+                    id="contact-employee-count"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
+                  >
                     <option>1-50</option>
                     <option>51-200</option>
                     <option>201-500</option>
@@ -194,10 +256,16 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label
+                    htmlFor="contact-hear-about"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     How did you hear about us?
                   </label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent">
+                  <select
+                    id="contact-hear-about"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
+                  >
                     <option>Search Engine</option>
                     <option>Social Media</option>
                     <option>Referral</option>
@@ -207,10 +275,14 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label
+                    htmlFor="contact-message"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Message (Optional)
                   </label>
                   <textarea
+                    id="contact-message"
                     rows={4}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
                     placeholder="Tell us about your needs..."
@@ -249,24 +321,39 @@ export default function ContactPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all">
               <h3 className="font-bold text-gray-900 mb-2">Help Center</h3>
-              <p className="text-sm text-gray-600 mb-4">Search our knowledge base</p>
-              <button className="text-[#1d44c3] font-semibold hover:underline">
+              <p className="text-sm text-gray-600 mb-4">
+                Search our knowledge base
+              </p>
+              <button
+                type="button"
+                className="text-[#1d44c3] font-semibold hover:underline"
+              >
                 Visit Help Center →
               </button>
             </div>
 
             <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all">
               <h3 className="font-bold text-gray-900 mb-2">Live Chat</h3>
-              <p className="text-sm text-gray-600 mb-4">Chat with support team</p>
-              <button className="text-[#1d44c3] font-semibold hover:underline">
+              <p className="text-sm text-gray-600 mb-4">
+                Chat with support team
+              </p>
+              <button
+                type="button"
+                className="text-[#1d44c3] font-semibold hover:underline"
+              >
                 Start Chat →
               </button>
             </div>
 
             <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all">
               <h3 className="font-bold text-gray-900 mb-2">FAQ</h3>
-              <p className="text-sm text-gray-600 mb-4">Common questions answered</p>
-              <button className="text-[#1d44c3] font-semibold hover:underline">
+              <p className="text-sm text-gray-600 mb-4">
+                Common questions answered
+              </p>
+              <button
+                type="button"
+                className="text-[#1d44c3] font-semibold hover:underline"
+              >
                 View FAQs →
               </button>
             </div>
@@ -274,7 +361,10 @@ export default function ContactPage() {
             <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all">
               <h3 className="font-bold text-gray-900 mb-2">Email Support</h3>
               <p className="text-sm text-gray-600 mb-4">Send us a message</p>
-              <button className="text-[#1d44c3] font-semibold hover:underline">
+              <button
+                type="button"
+                className="text-[#1d44c3] font-semibold hover:underline"
+              >
                 support@finwage.com →
               </button>
             </div>
@@ -290,7 +380,8 @@ export default function ContactPage() {
               <MapPin className="w-8 h-8 text-[#1d44c3] mx-auto mb-4" />
               <h3 className="font-bold text-gray-900 mb-2">San Francisco HQ</h3>
               <p className="text-gray-600 text-sm">
-                123 Market Street<br />
+                123 Market Street
+                <br />
                 San Francisco, CA 94105
               </p>
             </div>
@@ -299,7 +390,8 @@ export default function ContactPage() {
               <Mail className="w-8 h-8 text-[#1d44c3] mx-auto mb-4" />
               <h3 className="font-bold text-gray-900 mb-2">Email</h3>
               <p className="text-gray-600 text-sm">
-                Sales: sales@finwage.com<br />
+                Sales: sales@finwage.com
+                <br />
                 Support: support@finwage.com
               </p>
             </div>
@@ -308,7 +400,8 @@ export default function ContactPage() {
               <Phone className="w-8 h-8 text-[#1d44c3] mx-auto mb-4" />
               <h3 className="font-bold text-gray-900 mb-2">Phone</h3>
               <p className="text-gray-600 text-sm">
-                Sales: 1-800-FINWAGE<br />
+                Sales: 1-800-FINWAGE
+                <br />
                 Support: 1-888-FINWAGE
               </p>
             </div>

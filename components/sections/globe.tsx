@@ -2,7 +2,7 @@
 
 import { Globe } from "@/components/ui/globe";
 import type { COBEOptions } from "cobe";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const stats = [
   {
@@ -23,7 +23,13 @@ const stats = [
   },
 ];
 
-function StatCard({ value, description }: { value: string; description: string }) {
+function StatCard({
+  value,
+  description,
+}: {
+  value: string;
+  description: string;
+}) {
   return (
     <div className="flex flex-col gap-2 w-full">
       <div className="relative">
@@ -46,11 +52,11 @@ export default function Global() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const GLOBE_CONFIG: COBEOptions = {
@@ -88,11 +94,13 @@ export default function Global() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center">
           {/* Globe - First on mobile, Second on desktop */}
           <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[800px] w-full flex items-center justify-center lg:justify-end overflow-visible order-1 lg:order-2">
-            <div 
-              className="absolute right-0 w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] xl:w-[1400px] xl:h-[1400px] lg:translate-x-[25%] xl:translate-x-[50%]" 
-              style={{ 
-                transform: isMobile ? 'none' : 'rotateX(15deg) rotateY(-10deg) rotateZ(5deg)',
-                willChange: 'transform'
+            <div
+              className="absolute right-0 w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] xl:w-[1400px] xl:h-[1400px] lg:translate-x-[25%] xl:translate-x-[50%]"
+              style={{
+                transform: isMobile
+                  ? "none"
+                  : "rotateX(15deg) rotateY(-10deg) rotateZ(5deg)",
+                willChange: "transform",
               }}
             >
               <Globe className="opacity-80 !max-w-none" config={GLOBE_CONFIG} />
@@ -107,16 +115,21 @@ export default function Global() {
                 Global Recognition for Financial Innovation
               </h1>
               <p className="text-sm sm:text-base md:text-lg text-white leading-6 md:leading-7 max-w-md tracking-wide">
-                FinWage makes moving money as easy and programmable as moving data. Our teams are 
-                based in offices around the world and we process hundreds of billions of dollars each 
-                year for ambitious businesses of all sizes.
+                FinWage makes moving money as easy and programmable as moving
+                data. Our teams are based in offices around the world and we
+                process hundreds of billions of dollars each year for ambitious
+                businesses of all sizes.
               </p>
             </div>
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
               {stats.map((stat, index) => (
-                <StatCard key={index} value={stat.value} description={stat.description} />
+                <StatCard
+                  key={index}
+                  value={stat.value}
+                  description={stat.description}
+                />
               ))}
             </div>
           </div>

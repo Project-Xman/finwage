@@ -19,7 +19,9 @@ const You: NextPage = () => {
       <div className="md:hidden flex flex-col items-center gap-6 sm:gap-8">
         <div className="relative w-[250px] sm:w-[300px] h-[250px] sm:h-[300px]">
           <div className="absolute inset-0 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-gray-100">
-            <h2 className="text-xl sm:text-2xl font-bold text-[#1d44c3] px-4 text-center">FinWage Cycle</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-[#1d44c3] px-4 text-center">
+              FinWage Cycle
+            </h2>
           </div>
         </div>
         <div className="space-y-4 sm:space-y-6 w-full max-w-md px-4 sm:px-0">
@@ -92,14 +94,12 @@ const You: NextPage = () => {
 
             {/* Center circle text */}
             <div className="absolute inset-0 flex items-center justify-center">
-              
-                <Image
-                  src={ImagePaths.APP_ICON}
-                  alt="Finwage Logo"
-                  fill
-                  className="object-contain"
-                />
-
+              <Image
+                src={ImagePaths.APP_ICON}
+                alt="Finwage Logo"
+                fill
+                className="object-contain"
+              />
             </div>
           </div>
 
@@ -152,7 +152,13 @@ const Card = ({
     <div className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 max-w-[320px] backdrop-blur-sm">
       <div className="flex justify-center mb-4">
         <div className="w-[120px] h-[120px] relative">
-          <Image src={image} alt={title} fill className="object-contain" unoptimized />
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-contain"
+            unoptimized
+          />
         </div>
       </div>
       <h3 className="text-xl font-bold text-[#1d44c3] mb-3 text-center">

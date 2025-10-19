@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
 export default function CookieConsent() {
@@ -62,9 +62,10 @@ export default function CookieConsent() {
                 We Value Your Privacy
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                We use cookies and similar technologies to enhance your browsing experience, 
-                analyze site traffic, and personalize content. By clicking "Accept All", you 
-                consent to our use of cookies. You can manage your preferences at any time.
+                We use cookies and similar technologies to enhance your browsing
+                experience, analyze site traffic, and personalize content. By
+                clicking "Accept All", you consent to our use of cookies. You
+                can manage your preferences at any time.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
@@ -97,7 +98,9 @@ export default function CookieConsent() {
           <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-300">
             {/* Modal Header */}
             <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-2xl">
-              <h2 className="text-xl font-bold text-gray-900">Cookie Preferences</h2>
+              <h2 className="text-xl font-bold text-gray-900">
+                Cookie Preferences
+              </h2>
               <button
                 onClick={() => setShowModal(false)}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -109,8 +112,9 @@ export default function CookieConsent() {
             {/* Modal Content */}
             <form onSubmit={handleSavePreferences} className="p-6">
               <p className="text-sm text-gray-600 mb-6">
-                We use different types of cookies to optimize your experience on our website. 
-                Click on the categories below to learn more and customize your preferences.
+                We use different types of cookies to optimize your experience on
+                our website. Click on the categories below to learn more and
+                customize your preferences.
               </p>
 
               {/* Essential Cookies */}
@@ -121,9 +125,10 @@ export default function CookieConsent() {
                       Essential Cookies
                     </h3>
                     <p className="text-sm text-gray-600">
-                      These cookies are necessary for the website to function and cannot be 
-                      disabled. They are usually set in response to actions you take, such as 
-                      setting privacy preferences or logging in.
+                      These cookies are necessary for the website to function
+                      and cannot be disabled. They are usually set in response
+                      to actions you take, such as setting privacy preferences
+                      or logging in.
                     </p>
                   </div>
                   <div className="ml-4">
@@ -142,9 +147,10 @@ export default function CookieConsent() {
                       Analytics Cookies
                     </h3>
                     <p className="text-sm text-gray-600 mb-3">
-                      These cookies help us understand how visitors interact with our website 
-                      by collecting and reporting information anonymously. This helps us improve 
-                      our website's performance.
+                      These cookies help us understand how visitors interact
+                      with our website by collecting and reporting information
+                      anonymously. This helps us improve our website's
+                      performance.
                     </p>
                     <ul className="text-sm text-gray-600 space-y-1 ml-4">
                       <li className="list-disc">Google Analytics</li>
@@ -174,8 +180,9 @@ export default function CookieConsent() {
                       Marketing Cookies
                     </h3>
                     <p className="text-sm text-gray-600 mb-3">
-                      These cookies are used to track visitors across websites to display 
-                      relevant advertisements and measure the effectiveness of marketing campaigns.
+                      These cookies are used to track visitors across websites
+                      to display relevant advertisements and measure the
+                      effectiveness of marketing campaigns.
                     </p>
                     <ul className="text-sm text-gray-600 space-y-1 ml-4">
                       <li className="list-disc">Facebook Pixel</li>
@@ -218,9 +225,10 @@ export default function CookieConsent() {
                       Browser Image Storage
                     </h3>
                     <p className="text-sm text-blue-800">
-                      We may store images temporarily in your browser cache to improve loading 
-                      times and enhance your experience. These images are stored locally and 
-                      can be cleared at any time through your browser settings.
+                      We may store images temporarily in your browser cache to
+                      improve loading times and enhance your experience. These
+                      images are stored locally and can be cleared at any time
+                      through your browser settings.
                     </p>
                   </div>
                 </div>
@@ -228,12 +236,19 @@ export default function CookieConsent() {
 
               {/* Privacy Policy Link */}
               <p className="text-sm text-gray-600 mb-6">
-                For more information about how we handle your data, please read our{" "}
-                <a href="/privacy-policy" className="text-[#1d44c3] hover:underline font-medium">
+                For more information about how we handle your data, please read
+                our{" "}
+                <a
+                  href="/privacy-policy"
+                  className="text-[#1d44c3] hover:underline font-medium"
+                >
                   Privacy Policy
-                </a>
-                {" "}and{" "}
-                <a href="/cookie-policy" className="text-[#1d44c3] hover:underline font-medium">
+                </a>{" "}
+                and{" "}
+                <a
+                  href="/cookie-policy"
+                  className="text-[#1d44c3] hover:underline font-medium"
+                >
                   Cookie Policy
                 </a>
                 .

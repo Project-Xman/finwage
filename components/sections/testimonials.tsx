@@ -24,9 +24,7 @@ function TestimonialCard({ quote, name, title, image }: TestimonialCardProps) {
     <div className="bg-white rounded-[16px] p-6 shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] border border-gray-100 min-w-[280px] w-[280px] md:min-w-[300px] md:w-[300px] flex-shrink-0">
       <div className="flex flex-col gap-4">
         <StarRating />
-        <p className="text-[13.5px] leading-[22.75px] text-gray-700">
-          {quote}
-        </p>
+        <p className="text-[13.5px] leading-[22.75px] text-gray-700">{quote}</p>
         <div className="flex items-center gap-4">
           <div className="rounded-full shadow-[0px_0px_0px_2px_#ffffff,0px_0px_0px_4px_#1d44c3] size-[40px] overflow-hidden">
             <img alt={name} className="size-full object-cover" src={image} />
@@ -47,7 +45,8 @@ function TestimonialCard({ quote, name, title, image }: TestimonialCardProps) {
 
 const testimonials = [
   {
-    quote: '"The AI-driven analytics from FinWage have revolutionized our product development cycle. Insights are now more accurate and faster than ever. A game-changer for tech companies."',
+    quote:
+      '"The AI-driven analytics from FinWage have revolutionized our product development cycle. Insights are now more accurate and faster than ever. A game-changer for tech companies."',
     name: "Alex Rivera",
     title: "CTO at InnovateTech",
     image: "/assets/person-1.png",
@@ -63,10 +62,12 @@ const testimonials = [
 function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
   return (
     <div className="flex overflow-hidden">
-      <div 
-        className={`flex gap-4 ${reverse ? 'animate-marquee-reverse' : 'animate-marquee'}`}
+      <div
+        className={`flex gap-4 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
         style={{
-          animation: reverse ? 'marquee-reverse 30s linear infinite' : 'marquee 30s linear infinite'
+          animation: reverse
+            ? "marquee-reverse 30s linear infinite"
+            : "marquee 30s linear infinite",
         }}
       >
         {[...testimonials, ...testimonials].map((testimonial, index) => (
@@ -79,10 +80,12 @@ function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
           />
         ))}
       </div>
-      <div 
-        className={`flex gap-4 ${reverse ? 'animate-marquee-reverse' : 'animate-marquee'}`}
+      <div
+        className={`flex gap-4 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
         style={{
-          animation: reverse ? 'marquee-reverse 30s linear infinite' : 'marquee 30s linear infinite'
+          animation: reverse
+            ? "marquee-reverse 30s linear infinite"
+            : "marquee 30s linear infinite",
         }}
         aria-hidden="true"
       >
@@ -102,7 +105,10 @@ function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
 
 export default function Testimonials() {
   return (
-    <div className="bg-[#f6f8ff] relative w-full py-12 md:py-16 lg:py-24 overflow-hidden" data-name="Testimonials">
+    <div
+      className="bg-[#f6f8ff] relative w-full py-12 md:py-16 lg:py-24 overflow-hidden"
+      data-name="Testimonials"
+    >
       <style>{`
         @keyframes marquee {
           0% {
@@ -122,7 +128,7 @@ export default function Testimonials() {
           }
         }
       `}</style>
-      
+
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
           <p className="font-bold text-[#f64162] text-[12px] md:text-[13.5px] tracking-[1.4px] uppercase mb-3 md:mb-4">
@@ -133,14 +139,14 @@ export default function Testimonials() {
           </h2>
         </div>
       </div>
-      
+
       <div className="relative">
         {/* Left fade overlay */}
         <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-gradient-to-r from-[#f6f8ff] to-transparent z-10 pointer-events-none" />
-        
+
         {/* Right fade overlay */}
         <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-gradient-to-l from-[#f6f8ff] to-transparent z-10 pointer-events-none" />
-        
+
         <div className="flex flex-col gap-3 md:gap-4">
           <MarqueeRow />
           <MarqueeRow reverse />

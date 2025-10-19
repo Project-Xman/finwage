@@ -45,7 +45,9 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-gray-300 text-sm leading-relaxed mb-6">
-              FinWage is a financial technology company that provides on-demand pay solutions to help employees access their earned wages while saving employers time and money.
+              FinWage is a financial technology company that provides on-demand
+              pay solutions to help employees access their earned wages while
+              saving employers time and money.
             </p>
           </div>
 
@@ -55,7 +57,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.label}>
-                  <Link 
+                  <Link
                     href={link.href}
                     className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
                   >
@@ -72,7 +74,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {productLinks.map((link) => (
                 <li key={link.label}>
-                  <Link 
+                  <Link
                     href={link.href}
                     className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
                   >
@@ -89,7 +91,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {supportLinks.map((link) => (
                 <li key={link.label}>
-                  <Link 
+                  <Link
                     href={link.href}
                     className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
                   >
@@ -108,20 +110,20 @@ export default function Footer() {
               © {currentYear} FinWage. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              <Link 
-                href="/terms" 
+              <Link
+                href="/terms"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
                 Terms of Service
               </Link>
-              <Link 
-                href="/privacy" 
+              <Link
+                href="/privacy"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
                 Privacy Policy
               </Link>
-              <Link 
-                href="/cookies" 
+              <Link
+                href="/cookies"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
                 Cookie Policy

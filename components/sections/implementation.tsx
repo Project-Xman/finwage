@@ -12,20 +12,35 @@ function ImplementationCard() {
               <p>Employee Adoption</p>
             </div>
           </div>
-          
+
           <div className="text-gray-800 text-sm md:text-base leading-6 w-full lg:flex-1">
-            <p>The FinWage Solution seamlessly and securely integrates with your existing payroll, time management, and banking systems. Our dedicated implementation team ensures minimal impact on payroll operations while delivering a smooth setup process. From there, our collaborative experts guide you through every step—technical integration, customized launch planning, employee activation, onboarding, training, marketing, and ongoing support—to ensure confident and widespread employee adoption.</p>
+            <p>
+              The FinWage Solution seamlessly and securely integrates with your
+              existing payroll, time management, and banking systems. Our
+              dedicated implementation team ensures minimal impact on payroll
+              operations while delivering a smooth setup process. From there,
+              our collaborative experts guide you through every step—technical
+              integration, customized launch planning, employee activation,
+              onboarding, training, marketing, and ongoing support—to ensure
+              confident and widespread employee adoption.
+            </p>
           </div>
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-gray-100 inset-0 pointer-events-none rounded-3xl shadow-2xl" />
+      <div
+        aria-hidden="true"
+        className="absolute border border-gray-100 inset-0 pointer-events-none rounded-3xl shadow-2xl"
+      />
     </div>
   );
 }
 
 function Container() {
   return (
-    <div className="flex flex-col gap-8 md:gap-12 items-center px-4 md:px-24 lg:px-28 py-8 md:py-16 w-full" data-name="Container">
+    <div
+      className="flex flex-col gap-8 md:gap-12 items-center px-4 md:px-24 lg:px-28 py-8 md:py-16 w-full"
+      data-name="Container"
+    >
       <div className="font-bold text-[#1d44c3] text-3xl md:text-4xl lg:text-5xl text-center">
         <p className="leading-tight">Implementation</p>
       </div>

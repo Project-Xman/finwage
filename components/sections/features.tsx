@@ -1,5 +1,5 @@
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
-import { FileText, Bell, Share2, Calendar as CalendarIcon } from "lucide-react";
+import { Bell, Calendar as CalendarIcon, FileText, Share2 } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 
@@ -44,7 +44,7 @@ const features = [
                 "relative w-full cursor-pointer overflow-hidden rounded-xl border p-4",
                 "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
                 "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
-                "transform-gpu blur-[1px] transition-all duration-300 ease-out hover:blur-none"
+                "transform-gpu blur-[1px] transition-all duration-300 ease-out hover:blur-none",
               )}
             >
               <div className="flex flex-row items-center gap-2">
@@ -73,11 +73,15 @@ const features = [
         <div className="flex flex-col gap-4 p-4">
           <div className="rounded-lg border bg-white p-4 shadow-sm">
             <p className="text-sm font-medium">Wage Available</p>
-            <p className="text-xs text-gray-600">Your earned wages are ready to access</p>
+            <p className="text-xs text-gray-600">
+              Your earned wages are ready to access
+            </p>
           </div>
           <div className="rounded-lg border bg-white p-4 shadow-sm">
             <p className="text-sm font-medium">Payment Processed</p>
-            <p className="text-xs text-gray-600">Your transfer has been completed</p>
+            <p className="text-xs text-gray-600">
+              Your transfer has been completed
+            </p>
           </div>
         </div>
       </div>
@@ -129,10 +133,11 @@ export default function Features() {
             Everything you need to empower your workforce
           </h2>
           <p className="text-base md:text-lg text-gray-800 leading-7 max-w-2xl">
-            Discover how FinWage provides comprehensive solutions for modern payroll management.
+            Discover how FinWage provides comprehensive solutions for modern
+            payroll management.
           </p>
         </div>
-        
+
         <BentoGrid>
           {features.map((feature) => (
             <BentoCard key={feature.name} {...feature} />

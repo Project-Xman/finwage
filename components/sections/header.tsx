@@ -91,7 +91,9 @@ export default function Header() {
                       <DropdownMenuContent align="start" className="w-48">
                         {item.dropdownItems?.map((dropdownItem) => (
                           <DropdownMenuItem key={dropdownItem.label} asChild>
-                            <Link href={dropdownItem.href}>{dropdownItem.label}</Link>
+                            <Link href={dropdownItem.href}>
+                              {dropdownItem.label}
+                            </Link>
                           </DropdownMenuItem>
                         ))}
                       </DropdownMenuContent>

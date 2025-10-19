@@ -1,8 +1,17 @@
-import { getPostBySlug, getAllPosts, getRelatedPosts } from "@/data/posts";
-import { notFound } from "next/navigation";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Calendar,
+  Clock,
+  Facebook,
+  Linkedin,
+  Share2,
+  Twitter,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Calendar, ArrowLeft, ArrowRight, Share2, Facebook, Twitter, Linkedin } from "lucide-react";
+import { notFound } from "next/navigation";
+import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/data/posts";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -11,7 +20,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
@@ -32,7 +45,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
@@ -47,7 +64,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       {/* Back Button */}
       <div className="bg-gray-50 border-b">
         <div className="max-w-[1280px] mx-auto px-4 md:px-6 py-4">
-          <Link 
+          <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-[#1d44c3] transition-colors"
           >
@@ -100,21 +117,35 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   />
                 </div>
                 <div>
-                  <div className="text-lg font-bold text-gray-900">{post.author.name}</div>
+                  <div className="text-lg font-bold text-gray-900">
+                    {post.author.name}
+                  </div>
                   <div className="text-gray-600">{post.author.role}</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <button className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all">
+                <button
+                  type="button"
+                  className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all"
+                >
                   <Twitter className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all">
+                <button
+                  type="button"
+                  className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all"
+                >
                   <Facebook className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all">
+                <button
+                  type="button"
+                  className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all"
+                >
                   <Linkedin className="w-5 h-5" />
                 </button>
-                <button className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all">
+                <button
+                  type="button"
+                  className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all"
+                >
                   <Share2 className="w-5 h-5" />
                 </button>
               </div>
@@ -134,7 +165,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Content */}
         <div className="max-w-[800px] mx-auto px-4 md:px-6 py-16">
-          <div 
+          <div
             className="prose prose-lg max-w-none
               prose-headings:font-bold prose-headings:text-gray-900
               prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
@@ -145,15 +176,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               prose-a:text-[#1d44c3] prose-a:no-underline hover:prose-a:underline
               prose-strong:text-gray-900 prose-strong:font-bold
               prose-blockquote:border-l-4 prose-blockquote:border-[#1d44c3] prose-blockquote:pl-6 prose-blockquote:italic"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: Blog content is sourced from trusted static data.
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
           {/* Tags */}
           <div className="mt-12 pt-8 border-t">
             <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag, index) => (
+              {post.tags.map((tag) => (
                 <span
-                  key={index}
+                  key={tag}
                   className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold hover:bg-[#1d44c3] hover:text-white transition-all cursor-pointer"
                 >
                   #{tag}
@@ -223,12 +255,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/demo">
-              <button className="px-8 py-4 bg-white text-[#1d44c3] rounded-full font-semibold hover:bg-gray-100 transition-all">
+              <button
+                type="button"
+                className="px-8 py-4 bg-white text-[#1d44c3] rounded-full font-semibold hover:bg-gray-100 transition-all"
+              >
                 Schedule a Demo
               </button>
             </Link>
             <Link href="/contact">
-              <button className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-[#1d44c3] transition-all">
+              <button
+                type="button"
+                className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-[#1d44c3] transition-all"
+              >
                 Contact Sales
               </button>
             </Link>
