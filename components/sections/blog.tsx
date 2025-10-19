@@ -48,6 +48,7 @@ function BlogCard({ type, title, image }: { type: string; title: string; image: 
             width={128}
             height={80}
             className="w-full h-full object-cover"
+            unoptimized
           />
         </div>
         <div className="flex-1 flex flex-col gap-2">
