@@ -8,47 +8,73 @@ function HeroImageContainer({ className }: { className?: string }) {
   return (
     <div className={`${className} relative`} data-name="Hero Image Container">
       {/* Circular Container for the Hero Image */}
-      {/* This div defines the size and shape (circle) */}
       <div 
-        className="absolute rounded-full overflow-hidden left-[6px] top-[2px] w-[3px] h-[1000px]"
-        style={{ width: '1000px', height: '1000px' }} // Explicit styles for clarity, Tailwind should handle this
+        className="absolute rounded-full overflow-hidden"
+        style={{ 
+          width: '1000px', 
+          height: '1000px',
+          left: '6px',
+          top: '2px'
+        }}
       >
         {/* Image fills the circular container using object-cover */}
-        {/* Ensure /assets/hero-image.jpg is ideally a square image for best results */}
         <Image
           fill
           alt="Corporate workers brainstorming together"
-          className="absolute inset-0 object-cover pointer-events-none left-[120px]" // object-cover ensures it fills the circle
-          src="/assets/hero-image.jpg" // Placeholder: Replace with your actual square asset
+          className="object-cover pointer-events-none"
+          style={{ objectPosition: 'center' }}
+          src="/assets/hero-image.jpg"
         />
         {/* Blue Overlay - Covers the circular image area */}
         <div className="absolute inset-0 bg-blue-900 opacity-50"></div>
       </div>
 
       {/* White Arc Overlay */}
-      <div className="absolute left-[100px] top-[-126px] size-[900px]">
+      <div 
+        className="absolute"
+        style={{
+          left: '100px',
+          top: '-126px',
+          width: '900px',
+          height: '900px'
+        }}
+      >
         <Image
           fill
           alt=""
-          className="absolute inset-0 max-w-none object-cover pointer-events-none"
-          src="/assets/white-arc.png" // Placeholder: Replace with your actual asset
+          className="object-contain pointer-events-none"
+          src="/assets/white-arc.png"
           sizes="900px"
         />
       </div>
 
       {/* Play Icon Button */}
-      <div className="absolute left-[400px] top-[450px] cursor-pointer w-[160px] h-[160px] flex items-center justify-center">
+      <div 
+        className="absolute cursor-pointer flex items-center justify-center"
+        style={{
+          left: '400px',
+          top: '450px',
+          width: '160px',
+          height: '160px'
+        }}
+      >
         <Image
           fill
           alt="Play Video"
-          className="object-contain" // Fits the icon nicely within its button container
-          src="/assets/play-icon.png" // Placeholder: Replace with your actual asset
+          className="object-contain"
+          src="/assets/play-icon.png"
           sizes="160px"
         />
       </div>
 
       {/* FinWage Notification Card */}
-      <div className="absolute bottom-[63.19px] right-[10px] bg-white rounded-[24px] p-4 shadow-lg border border-gray-200 max-w-[300px] flex items-start gap-3">
+      <div 
+        className="absolute bg-white rounded-[24px] p-4 shadow-lg border border-gray-200 max-w-[300px] flex items-start gap-3"
+        style={{
+          bottom: '63.19px',
+          right: '10px'
+        }}
+      >
         {/* Bell Icon in Red Square */}
         <div className="bg-red-500 rounded-md p-2">
           <BellIcon className="size-5 text-white" />
