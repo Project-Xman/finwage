@@ -102,7 +102,7 @@ function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
 
 export default function Testimonials() {
   return (
-    <div className="bg-[#f6f8ff] relative w-full py-16 md:py-24 overflow-hidden" data-name="Testimonials">
+    <div className="bg-[#f6f8ff] relative w-full py-12 md:py-16 lg:py-24 overflow-hidden" data-name="Testimonials">
       <style>{`
         @keyframes marquee {
           0% {
@@ -124,11 +124,11 @@ export default function Testimonials() {
       `}</style>
       
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-        <div className="text-center mb-12 md:mb-16">
-          <p className="font-bold text-[#f64162] text-[13.5px] tracking-[1.4px] uppercase mb-4">
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
+          <p className="font-bold text-[#f64162] text-[12px] md:text-[13.5px] tracking-[1.4px] uppercase mb-3 md:mb-4">
             Testimonials
           </p>
-          <h2 className="text-[#1d44c3] text-[32px] md:text-[46.7px] leading-[48px]">
+          <h2 className="text-[#1d44c3] text-[28px] md:text-[38px] lg:text-[46.7px] leading-[1.2] md:leading-[48px] px-4">
             What Our Customers Are Saying
           </h2>
         </div>
@@ -136,14 +136,12 @@ export default function Testimonials() {
       
       <div className="relative">
         {/* Left fade overlay */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-r from-[#f6f8ff] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-gradient-to-r from-[#f6f8ff] to-transparent z-10 pointer-events-none" />
         
         {/* Right fade overlay */}
-        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-l from-[#f6f8ff] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-gradient-to-l from-[#f6f8ff] to-transparent z-10 pointer-events-none" />
         
-        <div className="flex flex-col gap-4">
-          <MarqueeRow />
-          <MarqueeRow reverse />
+        <div className="flex flex-col gap-3 md:gap-4">
           <MarqueeRow />
           <MarqueeRow reverse />
         </div>
