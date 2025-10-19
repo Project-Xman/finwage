@@ -12,12 +12,13 @@ const CycleSection: NextPage = () => {
           {/* Main Background Image Placeholder */}
           <div className="absolute top-[95px] left-[49px] w-[1151.4px] h-[767px] bg-gray-200 rounded-lg">
             <Image
-              src="/placeholder-image.jpg" // Replace with your image path
+              src="https://picsum.photos/1152/768"
               alt="FinWage Cycle"
               width={1151.4}
               height={767}
               className="w-full h-full object-cover rounded-lg"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              unoptimized
             />
           </div>
           
