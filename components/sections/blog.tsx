@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Placeholder images
-const imgFinWageChosenAsWorkdaysTrustedPartnerForOnDemandPayInnovation = "https://placehold.co/600x400";
-const imgCorporateWorkersBrainstormingTogether1 = "https://placehold.co/128x80";
-const imgCoupleDeskHoldingSmartphoneCreditCard2 = "https://placehold.co/128x80";
-const imgHealthyLifestyleSustainedHome1 = "https://placehold.co/128x80";
-const imgCloseUpCompanyTeamWorking1 = "https://placehold.co/128x80";
+const imgFinWageChosenAsWorkdaysTrustedPartnerForOnDemandPayInnovation = "https://picsum.photos/600/400";
+const imgCorporateWorkersBrainstormingTogether1 = "https://picsum.photos/128/80";
+const imgCoupleDeskHoldingSmartphoneCreditCard2 = "https://picsum.photos/129/80";
+const imgHealthyLifestyleSustainedHome1 = "https://picsum.photos/130/80";
+const imgCloseUpCompanyTeamWorking1 = "https://picsum.photos/131/80";
 
 const blogPosts = [
   {
