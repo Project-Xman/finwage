@@ -83,6 +83,7 @@ function FeaturedPost() {
             width={600}
             height={400}
             className="w-full h-auto"
+            unoptimized
           />
         </div>
 
