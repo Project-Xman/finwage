@@ -76,14 +76,11 @@ const CycleSection: NextPage = () => {
             {/* Earn Card */}
             <div className="absolute right-[23.22%] bottom-[-34px] left-[5.81%] w-[70.97%] h-[139px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[12px] rounded-lg bg-[rgba(255,255,255,0.95)] border border-gray-200 overflow-hidden">
               <div className="absolute top-[calc(50%_-_23.7px)] left-[20.8px] rounded-[12px] w-[48px] h-[48px] overflow-hidden flex items-center justify-center">
-                <div className="w-full h-full bg-gray-200 rounded-full flex items-center justify-center">
-                  <Image
-                    src="/icon-placeholder.svg" // Replace with your icon path
-                    alt=""
-                    width={24}
-                    height={24}
-                    className="object-contain"
-                  />
+                <div className="w-full h-full bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-600">
+                    <line x1="12" x2="12" y1="2" y2="22"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  </svg>
                 </div>
               </div>
               <div className="absolute top-[27px] left-[85px] leading-[28px] uppercase flex items-center w-[89px] h-[15px] text-[17.2px] text-[#1d44c3] font-bold">
