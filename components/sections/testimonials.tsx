@@ -58,18 +58,6 @@ const testimonials = [
     title: "Product Manager at Digital Wave",
     image: "/assets/person-2.png",
   },
-  {
-    quote: `"By integrating FinWage's sustainable energy solutions, we've seen a significant reduction in carbon footprint. Leading the way in eco-friendly business practices."`,
-    name: "Carlos Gomez",
-    title: "Head of R&D at EcoInnovate",
-    image: "/assets/person-3.png",
-  },
-  {
-    quote: `"FinWage's personalized learning plans have doubled student performance metrics. Education tailored to every learner's needs. Transforming the educational landscape."`,
-    name: "Sofia Patel",
-    title: "CEO at EduTech Innovations",
-    image: "/assets/person-4.png",
-  },
 ];
 
 function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
