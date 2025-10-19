@@ -152,7 +152,7 @@ const Card = ({
     <div className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 max-w-[320px] backdrop-blur-sm">
       <div className="flex justify-center mb-4">
         <div className="w-[120px] h-[120px] relative">
-          <Image src={image} alt={title} fill className="object-contain" />
+          <Image src={image} alt={title} fill className="object-contain" unoptimized />
         </div>
       </div>
       <h3 className="text-xl font-bold text-[#1d44c3] mb-3 text-center">
