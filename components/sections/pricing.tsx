@@ -1,3 +1,8 @@
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle2 } from "lucide-react";
+
 const pricingPlans = [
   {
     title: "Free",
@@ -63,75 +68,69 @@ export default function Pricing() {
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
           {pricingPlans.map((plan, index) => (
-            <div
+            <Card
               key={index}
-              className={`relative w-full max-w-sm mx-auto rounded-[20px] bg-white px-10 ${plan.isPopular ? "py-16 pt-14" : "py-12"} shadow-lg border-2 ${plan.isPopular ? "border-[#f64162] scale-105" : "border-gray-100"} hover:border-[#1d44c3] transition-all`}
+              className={`relative w-full max-w-sm mx-auto rounded-[20px] ${
+                plan.isPopular ? "lg:scale-105 border-2 border-[#f64162]" : "border-2 border-gray-100"
+              } hover:border-[#1d44c3] transition-all shadow-lg`}
             >
               {/* Popular Label */}
               {plan.isPopular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <div className="relative">
-                    <div className="bg-gradient-to-r from-[#f64162] to-[#ff6b88] px-6 py-2 rounded-full shadow-lg">
-                      <span className="text-white text-sm font-bold uppercase tracking-wider">
-                        Popular
-                      </span>
-                    </div>
-                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-[#f64162]"></div>
-                  </div>
+                  <Badge className="bg-gradient-to-r from-[#f64162] to-[#ff6b88] text-white px-6 py-2 rounded-full font-bold uppercase tracking-wider">
+                    Popular
+                  </Badge>
                 </div>
               )}
 
-              {/* Card Container */}
-              <div className="flex w-full flex-col items-center justify-center gap-4 tracking-[0.2px]">
-                {/* Title */}
-                <h3 className="text-2xl font-bold leading-8 text-black">
+              <CardHeader className="text-center pt-8">
+                <CardTitle className="text-2xl font-bold text-black">
                   {plan.title}
-                </h3>
-
-                {/* Subtitle */}
-                <p className="text-center text-base text-gray-700 min-h-12">
+                </CardTitle>
+                <CardDescription className="text-base text-gray-700 min-h-12">
                   {plan.subtitle}
-                </p>
+                </CardDescription>
+              </CardHeader>
 
+              <CardContent className="space-y-6">
                 {/* Price */}
-                <div className="my-0 flex justify-center items-start font-semibold text-black">
-                  <div className="text-[64px] leading-none">{plan.price}</div>
-                  <div className="ml-3 flex flex-col">
-                    <div className="mt-3 text-2xl font-bold">$</div>
-                    <div className="text-xl">{plan.period}</div>
+                <div className="flex justify-center items-start gap-1">
+                  <span className="text-5xl font-semibold text-black">{plan.price}</span>
+                  <div className="flex flex-col items-start ml-2">
+                    <span className="text-2xl font-bold">$</span>
+                    <span className="text-sm text-gray-600">{plan.period}</span>
                   </div>
                 </div>
 
                 {/* CTA Button */}
-                <button className="mb-1 w-full rounded-md bg-[#1d44c3] px-10 py-4 text-base font-semibold text-white hover:bg-[#153399] transition-colors">
+                <Button className="w-full bg-[#1d44c3] text-white hover:bg-[#153399] transition-colors h-12 font-semibold">
                   {plan.buttonText}
-                </button>
+                </Button>
 
                 {/* Features */}
-                <div className="flex w-full flex-col items-start justify-center gap-4 pt-4">
+                <div className="space-y-4 pt-4 border-t">
                   {plan.features.map((feature, featureIndex) => (
                     <div
                       key={featureIndex}
-                      className="flex w-full items-center justify-start gap-2"
+                      className="flex items-start gap-3"
                     >
                       {/* Icon */}
-                      <div className="h-8 w-8 flex-shrink-0">
-                        <img
-                          src="/assets/tick-3d.png"
-                          alt="Feature tick"
-                          className={`w-8 h-8 ${!feature.enabled ? "grayscale opacity-40" : ""}`}
-                        />
-                      </div>
-
+                      <CheckCircle2
+                        className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
+                          feature.enabled ? "text-green-500" : "text-gray-300"
+                        }`}
+                      />
                       {/* Description */}
-                      <p className="text-sm font-medium text-black">
+                      <p className={`text-sm font-medium ${
+                        feature.enabled ? "text-black" : "text-gray-400"
+                      }`}>
                         {feature.text}
                       </p>
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

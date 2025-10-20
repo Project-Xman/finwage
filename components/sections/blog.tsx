@@ -1,6 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 // Placeholder images
 const imgFinWageChosenAsWorkdaysTrustedPartnerForOnDemandPayInnovation =
@@ -51,8 +53,8 @@ function BlogCard({
   image: string;
 }) {
   return (
-    <div className="rounded-lg hover:shadow-md transition-shadow">
-      <div className="flex gap-3 h-[104px] items-center">
+    <Card className="rounded-lg hover:shadow-md transition-shadow border-0">
+      <CardContent className="p-0 flex gap-3 h-[104px] items-center">
         <div className="flex-shrink-0 w-32 h-20 rounded-md overflow-hidden">
           <Image
             src={image}
@@ -63,7 +65,7 @@ function BlogCard({
             unoptimized
           />
         </div>
-        <div className="flex-1 flex flex-col gap-2">
+        <div className="flex-1 flex flex-col gap-2 pr-4">
           <span className="text-xs font-bold text-gray-600 tracking-wider uppercase">
             {type}
           </span>
@@ -71,21 +73,24 @@ function BlogCard({
             {title}
           </h3>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 
 function FeaturedPost() {
   return (
     <div className="space-y-6">
-      <Link
-        href="#"
-        className="text-[#f64162] font-bold inline-flex items-center gap-2 hover:gap-3 transition-all"
+      <Button
+        variant="ghost"
+        className="text-[#f64162] hover:text-[#f64162] font-bold inline-flex items-center gap-2 hover:gap-3 transition-all p-0 h-auto"
+        asChild
       >
-        Explore all resources
-        <ArrowRight className="w-4 h-4" />
-      </Link>
+        <Link href="#">
+          Explore all resources
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </Button>
 
       <div className="space-y-6">
         <div className="rounded-xl overflow-hidden shadow-lg">
@@ -111,13 +116,16 @@ function FeaturedPost() {
             for joint customers—empowering employees to access their earned
             wages whenever they need them most.
           </p>
-          <a
-            href="#"
-            className="text-[#f64162] font-bold inline-flex items-center gap-2 hover:gap-3 transition-all"
+          <Button
+            variant="ghost"
+            className="text-[#f64162] hover:text-[#f64162] font-bold inline-flex items-center gap-2 hover:gap-3 transition-all p-0 h-auto"
+            asChild
           >
-            Learn more
-            <ArrowRight className="w-4 h-4" />
-          </a>
+            <Link href="#">
+              Learn more
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

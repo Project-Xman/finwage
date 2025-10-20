@@ -1,3 +1,4 @@
+import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
 
 function StarRating() {
@@ -5,7 +6,7 @@ function StarRating() {
     <div className="flex gap-2">
       {[...Array(5)].map((_, i) => (
         <div key={i} className="size-[16px]">
-          <Star className="block size-full text-yellow-400" />
+          <Star className="block size-full text-yellow-400 fill-yellow-400" />
         </div>
       ))}
     </div>
@@ -21,8 +22,8 @@ interface TestimonialCardProps {
 
 function TestimonialCard({ quote, name, title, image }: TestimonialCardProps) {
   return (
-    <div className="bg-white rounded-[16px] p-6 shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] border border-gray-100 min-w-[280px] w-[280px] md:min-w-[300px] md:w-[300px] flex-shrink-0">
-      <div className="flex flex-col gap-4">
+    <Card className="bg-white rounded-[16px] border border-gray-100 min-w-[280px] w-[280px] md:min-w-[300px] md:w-[300px] flex-shrink-0">
+      <CardContent className="p-6 flex flex-col gap-4">
         <StarRating />
         <p className="text-[13.5px] leading-[22.75px] text-gray-700">{quote}</p>
         <div className="flex items-center gap-4">
@@ -38,8 +39,8 @@ function TestimonialCard({ quote, name, title, image }: TestimonialCardProps) {
             </p>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 

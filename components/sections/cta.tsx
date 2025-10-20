@@ -2,6 +2,8 @@
 
 import { ImagePaths } from "@/lib/assets";
 import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 interface CardData {
   icon: string;
@@ -33,14 +35,13 @@ const cards: CardData[] = [
 
 function LetsTalkButton() {
   return (
-    <div
-      className="bg-[#1d44c3] box-border flex gap-2 items-center justify-center px-6 py-3 md:px-8 md:py-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200 w-full md:w-auto min-w-fit"
+    <Button
+      size="lg"
+      className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-xl transition-shadow rounded-full font-semibold w-full md:w-auto"
       data-name="Link"
     >
-      <div className="font-semibold text-sm md:text-base text-white whitespace-nowrap">
-        <p>{`Let's Talk`}</p>
-      </div>
-    </div>
+      Let's Talk
+    </Button>
   );
 }
 
@@ -59,13 +60,10 @@ function HeroSection() {
   );
 }
 
-function Card({ icon, bgColor, title, points }: CardData) {
+function CtaCard({ icon, bgColor, title, points }: CardData) {
   return (
-    <div
-      className="bg-white rounded-2xl md:rounded-3xl border border-[#d9d8d8] shadow-sm hover:shadow-md transition-shadow duration-200 p-6 md:p-8 h-full"
-      data-name="Background+Border+Shadow"
-    >
-      <div className="flex flex-col h-full">
+    <Card className="bg-white rounded-2xl md:rounded-3xl border border-[#d9d8d8] shadow-sm hover:shadow-md transition-shadow duration-200 h-full">
+      <CardContent className="p-6 md:p-8 flex flex-col h-full">
         {/* Icon + Title row */}
         <div className="mb-4 md:mb-6">
           <div className="flex items-center gap-4 md:gap-6">
@@ -100,8 +98,8 @@ function Card({ icon, bgColor, title, points }: CardData) {
             </p>
           ))}
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -111,7 +109,7 @@ function FeaturesGrid() {
       {/* Mobile: Single column (flex-col), MD+: Two column grid */}
       <div className="flex flex-col gap-6 md:grid md:grid-cols-2 md:gap-8 lg:gap-10">
         {cards.map((card, index) => (
-          <Card key={index} {...card} />
+          <CtaCard key={index} {...card} />
         ))}
       </div>
     </div>
@@ -120,15 +118,12 @@ function FeaturesGrid() {
 
 function ContentContainer() {
   return (
-    <div
-      className="bg-white rounded-2xl md:rounded-3xl border border-[#ecebeb] shadow-xl mx-4 md:mx-8 lg:mx-16 xl:mx-32 my-8 md:my-16"
-      data-name="Frame"
-    >
-      <div className="p-6 md:p-8 lg:p-12 xl:p-16 space-y-8 md:space-y-12 lg:space-y-16">
+    <Card className="bg-white rounded-2xl md:rounded-3xl border border-[#ecebeb] shadow-xl mx-4 md:mx-8 lg:mx-16 xl:mx-32 my-8 md:my-16">
+      <CardContent className="p-6 md:p-8 lg:p-12 xl:p-16 space-y-8 md:space-y-12 lg:space-y-16">
         <HeroSection />
         <FeaturesGrid />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 

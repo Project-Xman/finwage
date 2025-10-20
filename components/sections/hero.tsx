@@ -1,7 +1,9 @@
 "use client";
 
-import { BellIcon, ForwardIcon } from "lucide-react";
+import { BellIcon, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 function HeroImageContainer({ className, hideWhiteArc = false }: { className?: string; hideWhiteArc?: boolean }) {
   return (
@@ -69,39 +71,29 @@ function HeroImageContainer({ className, hideWhiteArc = false }: { className?: s
       </div>
 
       {/* FinWage Notification Card */}
-      <div
+      <Card
         className="absolute bg-white rounded-[24px] p-4 shadow-lg border border-gray-200 max-w-[300px] flex items-start gap-3"
         style={{
           bottom: "63.19px",
           right: "10px",
         }}
       >
-        {/* Bell Icon in Red Square */}
-        <div className="bg-red-500 rounded-md p-2">
-          <BellIcon className="size-5 text-white" />
-        </div>
-        {/* Text Content */}
-        <div className="flex flex-col">
-          <span className="text-[#1d44c3] text-[11.8px] font-semibold uppercase">
-            FINWAGE
-          </span>
-          <span className="text-gray-800 text-[13.7px]">
-            Your FinWage balance went up!
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Function for the Arrow Icon inside the button
-function ArrowIcon() {
-  return (
-    <div
-      className="absolute left-[150.41px] size-[20px] top-1/2 translate-y-[-50%]"
-      data-name="SVG"
-    >
-      <ForwardIcon className="block size-full" stroke="white" />
+        <CardContent className="flex items-start gap-3 p-0">
+          {/* Bell Icon in Red Square */}
+          <div className="bg-red-500 rounded-md p-2">
+            <BellIcon className="size-5 text-white" />
+          </div>
+          {/* Text Content */}
+          <div className="flex flex-col">
+            <span className="text-[#1d44c3] text-[11.8px] font-semibold uppercase">
+              FINWAGE
+            </span>
+            <span className="text-gray-800 text-[13.7px]">
+              Your FinWage balance went up!
+            </span>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
@@ -109,22 +101,14 @@ function ArrowIcon() {
 // Function for the "Get a Demo" Link/Button
 function DemoButton() {
   return (
-    <div
-      className="bg-[#1d44c3] h-[60px] overflow-clip relative rounded-[9999px] shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)] shrink-0 w-[210.41px]"
+    <Button
+      size="lg"
+      className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-lg transition-shadow rounded-full h-[60px] px-8 font-semibold text-[20px]"
       data-name="Link"
     >
-      {/* Gradient Overlay (likely for visual effect) */}
-      <div
-        className="absolute bg-gradient-to-r from-[#3c65d6] inset-0 opacity-0 to-[#1d44c3]"
-        data-name="Gradient"
-      />
-      {/* Button Text */}
-      <div className="absolute flex flex-col font-semibold h-[28px] justify-center leading-[0] left-[39px] text-[20px] text-white top-[30px] translate-y-[-50%] w-[131px]">
-        <p className="leading-[28px]">Get a Demo</p>
-      </div>
-      {/* Arrow Icon */}
-      <ArrowIcon />
-    </div>
+      Get a Demo
+      <ArrowRight className="ml-2 size-5" />
+    </Button>
   );
 }
 

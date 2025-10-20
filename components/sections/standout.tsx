@@ -1,4 +1,5 @@
 import { ArrowRight, Play } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const imgManTalking = "https://picsum.photos/600/400";
 const imgImagePhotoroom21 = "https://picsum.photos/150/300";
@@ -22,13 +23,13 @@ export default function StandOut() {
               </p>
             </div>
 
-            <a
-              href="#"
-              className="text-[#f64162] font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-base"
+            <Button
+              variant="ghost"
+              className="text-[#f64162] hover:text-[#f64162] font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-base w-fit p-0 h-auto"
             >
               See how we stand out
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </Button>
           </div>
 
           {/* Right Video Card */}
@@ -45,9 +46,12 @@ export default function StandOut() {
 
             {/* Play Button Overlay */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <button className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white/50 backdrop-blur-md shadow-2xl flex items-center justify-center hover:bg-white/60 transition-all group-hover:scale-110">
+              <Button
+                size="lg"
+                className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white/50 backdrop-blur-md shadow-2xl flex items-center justify-center hover:bg-white/60 transition-all group-hover:scale-110"
+              >
                 <Play className="w-10 h-10 md:w-12 md:h-12 text-white fill-white ml-1" />
-              </button>
+              </Button>
             </div>
           </div>
         </div>
