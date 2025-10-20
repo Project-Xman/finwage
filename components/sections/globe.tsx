@@ -1,8 +1,15 @@
 "use client";
-
-import { Globe } from "@/components/ui/globe";
-import type { COBEOptions } from "cobe";
+import { COBEOptions } from "cobe";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+
+const World = dynamic(
+  () => import("@/components/ui/globe").then((m) => m.Globe),
+  {
+    ssr: false,
+  }
+);
+
 
 const stats = [
   {
@@ -63,16 +70,16 @@ export default function Global() {
     width: 800,
     height: 800,
     onRender: () => {},
-    devicePixelRatio: isMobile ? 1 : 2, // Reduce quality on mobile
+    devicePixelRatio: 0.5,
     phi: 0,
     theta: 0.3,
     dark: 0,
     diffuse: 0.4,
-    mapSamples: isMobile ? 8000 : 16000, // Reduce samples on mobile
+    mapSamples: 10000,
     mapBrightness: 1.2,
-    baseColor: [1, 1, 1],
-    markerColor: [247 / 255, 75 / 255, 107 / 255], // Pink accent #f74b6b
-    glowColor: [1, 1, 1],
+    baseColor: [255 / 255, 179 / 255, 193 / 255], // Light pink #ffb3c1
+    markerColor: [255 / 255, 230 / 255, 235 / 255], // Very light pink #ffe6eb
+    glowColor: [255 / 255, 240 / 255, 245 / 255], // Lightest pink glow
     markers: [
       { location: [14.5995, 120.9842], size: 0.03 },
       { location: [19.076, 72.8777], size: 0.1 },
@@ -95,15 +102,12 @@ export default function Global() {
           {/* Globe - First on mobile, Second on desktop */}
           <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[800px] w-full flex items-center justify-center lg:justify-end overflow-visible order-1 lg:order-2">
             <div
-              className="absolute right-0 w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] xl:w-[1400px] xl:h-[1400px] lg:translate-x-[25%] xl:translate-x-[50%]"
+              className="absolute right-0 w-[600px] h-[600px] sm:w-[700px] sm:h-[700px] md:w-[800px] md:h-[800px] lg:w-[1000px] lg:h-[1000px] xl:w-[1200px] xl:h-[1200px] lg:translate-x-[25%] xl:translate-x-[35%]"
               style={{
-                transform: isMobile
-                  ? "none"
-                  : "rotateX(15deg) rotateY(-10deg) rotateZ(5deg)",
                 willChange: "transform",
               }}
             >
-              <Globe className="opacity-80 !max-w-none" config={GLOBE_CONFIG} />
+              <World className="opacity-80 !max-w-none w-full h-full" config={GLOBE_CONFIG} />
             </div>
           </div>
 

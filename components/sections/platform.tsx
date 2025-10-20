@@ -96,7 +96,7 @@ export default function PlatformSection() {
       </div>
 
       {/* Blue Arc - Fixed positioning */}
-      <div className="absolute bottom-0 left-0 w-[180px] h-[180px] md:w-[220px] md:h-[220px] z-10">
+      <div className="absolute bottom-20 left-0 w-[180px] h-[380px] md:w-[220px] md:h-[455px] z-10">
         <Image
           fill
           alt="Blue Arc"

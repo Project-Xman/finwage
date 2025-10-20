@@ -193,3 +193,7 @@
     }
   }
 }
+
+* {
+  box-sizing: border-box;
+}

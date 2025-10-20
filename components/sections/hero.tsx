@@ -3,7 +3,7 @@
 import { BellIcon, ForwardIcon } from "lucide-react";
 import Image from "next/image";
 
-function HeroImageContainer({ className }: { className?: string }) {
+function HeroImageContainer({ className, hideWhiteArc = false }: { className?: string; hideWhiteArc?: boolean }) {
   return (
     <div className={`${className} relative`} data-name="Hero Image Container">
       {/* Circular Container for the Hero Image */}
@@ -29,23 +29,25 @@ function HeroImageContainer({ className }: { className?: string }) {
       </div>
 
       {/* White Arc Overlay */}
-      <div
-        className="absolute"
-        style={{
-          left: "100px",
-          top: "-126px",
-          width: "900px",
-          height: "900px",
-        }}
-      >
-        <Image
-          fill
-          alt=""
-          className="object-contain pointer-events-none"
-          src="/assets/white-arc.png"
-          sizes="900px"
-        />
-      </div>
+      {!hideWhiteArc && (
+        <div
+          className="absolute"
+          style={{
+            left: "100px",
+            top: "-126px",
+            width: "900px",
+            height: "900px",
+          }}
+        >
+          <Image
+            fill
+            alt=""
+            className="object-contain pointer-events-none"
+            src="/assets/white-arc.png"
+            sizes="900px"
+          />
+        </div>
+      )}
 
       {/* Play Icon Button */}
       <div
@@ -135,11 +137,45 @@ export default function Hero() {
     >
       {/* Mobile Layout */}
       <div className="md:hidden flex flex-col items-center px-4 py-8 sm:py-12 gap-6 sm:gap-8">
-        {/* Circular Image Container - Scaled Down */}
-        <div className="relative w-full max-w-[400px] sm:max-w-[500px] aspect-square">
-          {/* Scale down the ImageContainer for mobile */}
-          <div className="scale-[0.35] sm:scale-[0.5] origin-center absolute inset-0 flex items-center justify-center">
-            <HeroImageContainer className="relative bg-white h-[945.191px] overflow-clip w-[1019.915px]" />
+        {/* Circular Image Container - Full Circle */}
+        <div className="relative w-full max-w-[350px] sm:max-w-[450px] aspect-square">
+          {/* Full circle with centered image - no white arc */}
+          <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl">
+            <Image
+              fill
+              alt="Corporate workers brainstorming together"
+              className="object-cover"
+              style={{ objectPosition: "center" }}
+              src="/assets/hero-image.jpg"
+            />
+            {/* Blue Overlay */}
+            <div className="absolute inset-0 bg-blue-900 opacity-50"></div>
+            
+            {/* Play Icon Button - Centered */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px]">
+              <Image
+                fill
+                alt="Play Video"
+                className="object-contain cursor-pointer"
+                src="/assets/play-icon.png"
+                sizes="100px"
+              />
+            </div>
+            
+            {/* FinWage Notification Card */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-2xl p-3 shadow-lg border border-gray-200 max-w-[280px] flex items-start gap-2">
+              <div className="bg-red-500 rounded-md p-1.5">
+                <BellIcon className="size-4 text-white" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[#1d44c3] text-[10px] font-semibold uppercase">
+                  FINWAGE
+                </span>
+                <span className="text-gray-800 text-[12px]">
+                  Your FinWage balance went up!
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -160,17 +196,18 @@ export default function Hero() {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden md:block relative h-[800px] lg:h-[945px]">
+      <div className="hidden md:block relative h-[700px] md:h-[800px] lg:h-[945px]">
         {/* Main Image Container */}
-        <HeroImageContainer className="absolute bg-white h-[1021.191px] left-[-131px] lg:left-[-131px] overflow-clip top-[-177px] w-[1046.915px] scale-75 lg:scale-100 origin-top-left" />
+        <HeroImageContainer className="absolute bg-white h-[1021.191px] left-[-240px] md:left-[-220px] lg:left-[-131px] overflow-clip top-[-177px] w-[1046.915px] scale-[0.5] md:scale-[0.6] lg:scale-100 origin-top-left" />
 
         {/* Text Content and Button */}
-        <div className="absolute left-[600px] lg:left-[912px] top-[97px] w-[400px] lg:w-[583px]">
-          <div className="flex flex-col font-bold leading-[64px] lg:leading-[96px] text-[#1d44c3] text-[62px] lg:text-[93px] tracking-[-2.4px] mb-[30px] lg:mb-[43px]">
+        <div className="absolute left-[280px] md:left-[400px] lg:left-[912px] top-[380px] md:top-[420px] lg:top-[97px] right-[40px] md:right-[80px] lg:right-auto lg:w-[583px] max-w-[600px] md:max-w-[700px] lg:max-w-none">
+          {/* Text Content */}
+          <div className="flex flex-col font-bold leading-[40px] md:leading-[48px] lg:leading-[96px] text-[#1d44c3] text-[38px] md:text-[46px] lg:text-[93px] tracking-[-1.5px] md:tracking-[-2px] lg:tracking-[-2.4px] mb-[16px] md:mb-[20px] lg:mb-[43px]">
             <p className="mb-0">Your Money,</p>
             <p className="mb-0">Your Control.</p>
           </div>
-          <div className="flex flex-col font-normal leading-[24px] lg:leading-[29.25px] text-[14px] lg:text-[17.4px] text-gray-800 mb-[30px] lg:mb-[43px]">
+          <div className="flex flex-col font-normal leading-[19px] md:leading-[21px] lg:leading-[29.25px] text-[12.5px] md:text-[13px] lg:text-[17.4px] text-gray-800 mb-[20px] md:mb-[24px] lg:mb-[43px]">
             <p className="mb-0">
               Work Today, Get Paid Today! A financial wellness
             </p>
@@ -179,11 +216,15 @@ export default function Hero() {
             </p>
             <p>wages while saving employers time and money</p>
           </div>
-          <DemoButton />
+          
+          {/* Button - Below text content */}
+          <div className="scale-[0.8] md:scale-[0.85] lg:scale-100 origin-left">
+            <DemoButton />
+          </div>
         </div>
 
         {/* Pink Arc Overlay (Right side) */}
-        <div className="absolute right-0 bottom-[100px] w-[120px] lg:w-[170px] h-[200px] lg:h-[300px]">
+        <div className="absolute right-0 bottom-[80px] md:bottom-[100px] w-[100px] md:w-[140px] lg:w-[170px] h-[160px] md:h-[220px] lg:h-[300px]">
           <Image
             fill
             src="/assets/pink-arc.png"

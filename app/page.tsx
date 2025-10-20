@@ -26,12 +26,12 @@ export default function Home() {
       <CycleSection />
       <Partners />
       <Employees />
-      <Testimonials />
-      <Features />
       <StandOut />
       <Integrations />
       <Pricing />
-      <Globe />
+      <Testimonials />
+      <Features />
+      {/* <Globe /> */}
       <Implementation />
       <Blogs />
       <Cta />

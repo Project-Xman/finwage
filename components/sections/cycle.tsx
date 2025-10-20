@@ -1,36 +1,71 @@
+import { BellIcon } from "lucide-react";
 import type { NextPage } from "next";
 import Image from "next/image";
 
-const CycleSection: NextPage = () => {
+function HeroImageContainer({ className }: { className?: string }) {
   return (
-    <div className="hidden lg:block relative w-full h-[734px] bg-white flex-shrink-0 text-left text-2xl text-white font-afacad">
-      {/* Main Container */}
-      <div className="absolute top-[-184px] left-[-162px] w-[1815px] flex items-center gap-16">
-        {/* Left Image Section */}
-        <div className="h-[907px] flex-1 relative bg-white">
-          {/* Main Background Image Placeholder */}
-          <div className="absolute top-[95px] left-[49px] w-[1151.4px] h-[767px] bg-gray-200 rounded-lg">
-            <Image
-              src="https://picsum.photos/1152/768"
-              alt="FinWage Cycle"
-              width={1151.4}
-              height={767}
-              className="w-full h-full object-cover rounded-lg"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              unoptimized
-            />
-          </div>
+    <div className={`${className} relative`} data-name="Hero Image Container">
+      {/* Circular Container for the Hero Image */}
+      <div
+        className="absolute rounded-full overflow-hidden"
+        style={{
+          width: "800px",
+          height: "800px",
+          left: "6px",
+          top: "2px",
+        }}
+      >
+        {/* Image fills the circular container using object-cover */}
+        <Image
+          fill
+          alt="Corporate workers brainstorming together"
+          className="object-cover pointer-events-none"
+          style={{ objectPosition: "center" }}
+          src="/assets/hero-image.jpg"
+        />
+        {/* Blue Overlay - Covers the circular image area */}
+        <div className="absolute inset-0 bg-pink-900 opacity-50"></div>
+      </div>
 
-          {/* Decorative Circles */}
-          <div className="absolute top-[-152px] left-[28px] rounded-full bg-white w-[849px] h-[849px]"></div>
-          <div className="absolute top-[-46px] left-[95px] rounded-full bg-[rgba(247,75,107,0.38)] w-[950.6px] h-[950.6px]"></div>
+      {/* White Arc Overlay */}
+      <div
+        className="absolute"
+        style={{
+          left: "100px",
+          top: "26px",
+          width: "600px",
+          height: "600px",
+        }}
+      >
+        <Image
+          fill
+          alt=""
+          className="object-contain pointer-events-none"
+          src="/assets/white-arc.png"
+          sizes="900px"
+        />
+      </div>
 
-          {/* Heading */}
-          <div className="absolute top-[233px] left-[217px] tracking-[-2.4px] leading-[96px] flex items-center w-[583px] h-[220px] font-bold text-4xl text-black">
-            FinWage Cycle
-          </div>
+      {/* Play Icon Button */}
+      <div
+        className="absolute cursor-pointer flex items-center justify-center"
+        style={{
+          left: "300px",
+          top: "350px",
+          width: "260px",
+          height: "160px",
+        }}
+      >
+        <Image
+          fill
+          alt="Play Video"
+          className="object-contain"
+          src="/assets/app-icon.png"
+          sizes="160px"
+        />
+      </div>
 
-          {/* Peace of Mind Card */}
+       {/* Peace of Mind Card */}
           <div className="absolute right-[-23.6%] bottom-[21px] w-[34.68%] h-[139px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[12px] rounded-lg bg-[rgba(255,255,255,0.95)] border border-gray-200 overflow-hidden">
             <div className="absolute top-[calc(50%_-_23.7px)] left-[20.8px] rounded-[12px] w-[48px] h-[48px] overflow-hidden flex items-center justify-center">
               <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
@@ -60,7 +95,16 @@ const CycleSection: NextPage = () => {
               </p>
             </div>
           </div>
-        </div>
+    </div>
+  );
+}
+
+const CycleSection: NextPage = () => {
+  return (
+    <div className="hidden md:block relative w-full h-[580px] md:h-[650px] lg:h-[734px] bg-white flex-shrink-0 text-left text-2xl text-white font-afacad overflow-hidden">
+      {/* Main Container */}
+      <div className="absolute top-[-140px] md:top-[-160px] lg:top-[-184px] left-[-280px] md:left-[-220px] lg:left-[-162px] w-[1815px] flex items-center gap-8 md:gap-12 lg:gap-16 overflow-clip scale-[0.65] md:scale-[0.8] lg:scale-100 origin-left">
+        <HeroImageContainer className="w-[1000px] h-[930px]" />
 
         {/* Right Content Section */}
         <div className="h-[619px] w-[748px] relative text-base text-[#1d44c3]">
@@ -165,8 +209,19 @@ const CycleSection: NextPage = () => {
               </div>
             </div>
 
-            {/* Decorative Circle */}
-            <div className="absolute top-[50px] right-[-100px] rounded-full bg-[#f74b6b] w-[315px] h-[315px]"></div>
+           
+
+
+            {/* Pink Arc Overlay (Right side) */}
+                    <div className="absolute right-0 bottom-[100px] w-[120px] lg:w-[170px] h-[200px] lg:h-[300px]">
+                      <Image
+                        fill
+                        src="/assets/pink-arc.png"
+                        alt=""
+                        className="object-contain"
+                        sizes="170px"
+                      />
+                    </div>
           </div>
         </div>
       </div>
