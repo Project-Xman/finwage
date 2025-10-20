@@ -2,6 +2,7 @@
 
 import { AlertTriangle, Home, RefreshCw } from "lucide-react";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function ErrorPage({
   error,
@@ -49,14 +50,14 @@ export default function ErrorPage({
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
-          <button
+          <Button
             type="button"
             onClick={reset}
             className="flex-1 bg-[#1d44c3] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#0d2463] transition-all inline-flex items-center justify-center gap-2"
           >
             <RefreshCw className="w-5 h-5" />
             Try Again
-          </button>
+          </Button>
 
           <a
             href="/"

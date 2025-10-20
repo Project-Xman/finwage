@@ -16,6 +16,22 @@ import PlatformSection from "@/components/sections/platform";
 import You from "@/components/sections/you";
 import CycleSection from "@/components/sections/cycle";
 
+export const metadata = {
+  title: "FinWage - Earned Wage Access for Financial Wellness",
+  description: "Work Today, Get Paid Today! FinWage provides earned wage access to help employees access their wages instantly while saving employers time and money.",
+  keywords: ["earned wage access", "financial wellness", "payroll", "employee benefits", "instant pay", "wage advance", "fintech"],
+  openGraph: {
+    title: "FinWage - Earned Wage Access for Financial Wellness",
+    description: "Work Today, Get Paid Today! Access your earned wages instantly.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FinWage - Earned Wage Access for Financial Wellness",
+    description: "Work Today, Get Paid Today! Access your earned wages instantly.",
+  },
+};
+
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -31,7 +47,7 @@ export default function Home() {
       <Pricing />
       <Testimonials />
       <Features />
-      {/* <Globe /> */}
+      <Globe />
       <Implementation />
       <Blogs />
       <Cta />

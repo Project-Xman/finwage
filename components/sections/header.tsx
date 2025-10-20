@@ -16,39 +16,38 @@ import { useState } from "react";
 // Navigation data
 const navigationItems = [
   {
-    label: "Employers",
-    href: "#employers",
-    hasDropdown: true,
-    dropdownItems: [
-      { label: "For Companies", href: "#companies" },
-      { label: "Payroll Solutions", href: "#payroll" },
-      { label: "HR Management", href: "#hr" },
-    ],
+    label: "For Employers",
+    href: "/for-employers",
+    hasDropdown: false,
   },
   {
-    label: "Solutions",
-    href: "#solutions",
-    hasDropdown: true,
-    dropdownItems: [
-      { label: "Payroll Management", href: "#payroll-management" },
-      { label: "Time Tracking", href: "#time-tracking" },
-      { label: "Benefits", href: "#benefits" },
-    ],
+    label: "For Employees",
+    href: "/for-employees",
+    hasDropdown: false,
   },
   {
-    label: "Our Partners",
-    href: "#partners",
+    label: "How It Works",
+    href: "/how-it-works",
+    hasDropdown: false,
+  },
+  {
+    label: "Pricing",
+    href: "/pricing",
     hasDropdown: false,
   },
   {
     label: "Resources",
-    href: "#resources",
+    href: "/resources",
     hasDropdown: true,
     dropdownItems: [
-      { label: "Blog", href: "#blog" },
-      { label: "Documentation", href: "#docs" },
-      { label: "API Reference", href: "#api" },
+      { label: "Blog", href: "/blog" },
+      { label: "Compliance", href: "/compliance" },
     ],
+  },
+  {
+    label: "About",
+    href: "/about",
+    hasDropdown: false,
   },
 ];
 
@@ -129,7 +128,7 @@ export default function Header() {
               className="bg-[#1d44c3] text-white hover:shadow-lg transition-shadow rounded-full h-10 px-6"
               asChild
             >
-              <Link href="/demo">Get a Demo</Link>
+              <Link href="/contact">Contact Us</Link>
             </Button>
           </div>
 
@@ -167,7 +166,7 @@ export default function Header() {
               className="bg-gradient-to-r from-primary to-blue-600 text-white hover:shadow-lg transition-shadow"
               asChild
             >
-              <Link href="/demo">Get a Demo</Link>
+              <Link href="/contact">Contact Us</Link>
             </Button>
             <Button
               variant={"ghost"}
@@ -207,8 +206,9 @@ export default function Header() {
               <Button
                 size="sm"
                 className="w-full bg-gradient-to-r from-primary to-blue-600 text-white"
+                asChild
               >
-                Get a Demo
+                <Link href="/contact">Contact Us</Link>
               </Button>
             </div>
           </nav>

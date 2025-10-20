@@ -12,6 +12,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/data/posts";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -124,30 +126,34 @@ export default async function BlogPostPage({
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all"
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white"
                 >
                   <Twitter className="w-5 h-5" />
-                </button>
-                <button
-                  type="button"
-                  className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all"
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white"
                 >
                   <Facebook className="w-5 h-5" />
-                </button>
-                <button
-                  type="button"
-                  className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all"
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white"
                 >
                   <Linkedin className="w-5 h-5" />
-                </button>
-                <button
-                  type="button"
-                  className="p-2 rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white transition-all"
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full bg-gray-100 hover:bg-[#1d44c3] hover:text-white"
                 >
                   <Share2 className="w-5 h-5" />
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -206,7 +212,7 @@ export default async function BlogPostPage({
             <div className="grid md:grid-cols-3 gap-8">
               {relatedPosts.map((relatedPost) => (
                 <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`}>
-                  <article className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group">
+                  <Card className="overflow-hidden shadow-lg hover:shadow-2xl transition-all group">
                     <div className="relative h-48">
                       <Image
                         src={relatedPost.image}
@@ -220,7 +226,7 @@ export default async function BlogPostPage({
                         </span>
                       </div>
                     </div>
-                    <div className="p-6">
+                    <CardContent className="p-6">
                       <div className="flex items-center gap-3 text-sm text-gray-500 mb-3">
                         <span>{relatedPost.date}</span>
                         <span>•</span>
@@ -235,8 +241,8 @@ export default async function BlogPostPage({
                         </div>
                         <ArrowRight className="w-4 h-4 text-[#1d44c3] group-hover:translate-x-1 transition-transform" />
                       </div>
-                    </div>
-                  </article>
+                    </CardContent>
+                  </Card>
                 </Link>
               ))}
             </div>
@@ -255,20 +261,14 @@ export default async function BlogPostPage({
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/demo">
-              <button
-                type="button"
-                className="px-8 py-4 bg-white text-[#1d44c3] rounded-full font-semibold hover:bg-gray-100 transition-all"
-              >
+              <Button size="lg" className="bg-white text-[#1d44c3] hover:bg-gray-100">
                 Schedule a Demo
-              </button>
+              </Button>
             </Link>
             <Link href="/contact">
-              <button
-                type="button"
-                className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-semibold hover:bg-white hover:text-[#1d44c3] transition-all"
-              >
-                Contact Sales
-              </button>
+              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-[#1d44c3]">
+                Contact Us
+              </Button>
             </Link>
           </div>
         </div>

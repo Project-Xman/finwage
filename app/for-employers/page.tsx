@@ -8,6 +8,20 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import ROICalculator from "@/components/roi-calculator";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+export const metadata = {
+  title: "For Employers - FinWage",
+  description: "Reduce turnover by 27% and attract top talent. FinWage helps employers offer earned wage access benefits that improve retention and productivity.",
+  keywords: ["employer benefits", "payroll solutions", "employee retention", "earned wage access", "HR solutions"],
+  openGraph: {
+    title: "For Employers - FinWage",
+    description: "Reduce turnover by 27% and attract top talent with earned wage access.",
+    type: "website",
+  },
+};
 
 export default function ForEmployersPage() {
   const benefits = [
@@ -80,28 +94,37 @@ export default function ForEmployersPage() {
                 through improved retention and productivity.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-white text-[#1d44c3] px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all shadow-lg flex items-center justify-center gap-2">
+                <Button
+                  size="lg"
+                  className="bg-white text-[#1d44c3] hover:bg-gray-100"
+                >
                   Schedule Demo
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-                <button className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all">
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="border-2 border-white text-white hover:bg-white/10"
+                >
                   Calculate ROI
-                </button>
+                </Button>
               </div>
             </div>
             <div className="relative">
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-                <div className="grid grid-cols-2 gap-6">
-                  {stats.map((stat, index) => (
-                    <div key={index} className="text-center">
-                      <div className="text-4xl md:text-5xl font-bold mb-2">
-                        {stat.value}
+              <Card className="bg-white/10 backdrop-blur-lg border-white/20">
+                <CardContent className="p-8">
+                  <div className="grid grid-cols-2 gap-6">
+                    {stats.map((stat, index) => (
+                      <div key={index} className="text-center">
+                        <div className="text-4xl md:text-5xl font-bold mb-2 text-white">
+                          {stat.value}
+                        </div>
+                        <div className="text-blue-100">{stat.label}</div>
                       </div>
-                      <div className="text-blue-100">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
@@ -123,16 +146,18 @@ export default function ForEmployersPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => (
-              <div
+              <Card
                 key={index}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8 hover:shadow-xl transition-all"
+                className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
               >
-                <div className="text-[#1d44c3] mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600">{benefit.description}</p>
-              </div>
+                <CardContent className="p-8">
+                  <div className="text-[#1d44c3] mb-4">{benefit.icon}</div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-600">{benefit.description}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -197,30 +222,37 @@ export default function ForEmployersPage() {
                 </div>
               </div>
 
-              <button className="bg-[#1d44c3] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#0d2463] transition-all shadow-lg flex items-center gap-2">
+              <Button
+                size="lg"
+                className="bg-[#1d44c3] hover:bg-[#0d2463]"
+              >
                 View Integration Details
-                <ArrowRight className="w-5 h-5" />
-              </button>
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-2xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                Works With Your Systems
-              </h3>
-              <div className="grid grid-cols-2 gap-4">
-                {integrations.map((integration, index) => (
-                  <div
-                    key={index}
-                    className="bg-gray-50 rounded-lg p-4 text-center font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#1d44c3] transition-colors"
-                  >
-                    {integration}
-                  </div>
-                ))}
-              </div>
-              <p className="text-center text-gray-500 mt-6 text-sm">
-                + Many more platforms supported
-              </p>
-            </div>
+            <Card className="shadow-2xl">
+              <CardHeader>
+                <CardTitle className="text-center">
+                  Works With Your Systems
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  {integrations.map((integration, index) => (
+                    <div
+                      key={index}
+                      className="bg-gray-50 rounded-lg p-4 text-center font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#1d44c3] transition-colors"
+                    >
+                      {integration}
+                    </div>
+                  ))}
+                </div>
+                <p className="text-center text-gray-500 text-sm">
+                  + Many more platforms supported
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -229,7 +261,7 @@ export default function ForEmployersPage() {
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="bg-gradient-to-br from-[#1d44c3] to-[#0d2463] rounded-3xl p-8 md:p-16 text-white">
-            <div className="max-w-3xl mx-auto text-center">
+            <div className="max-w-3xl mx-auto text-center mb-8">
               <h2 className="text-3xl md:text-5xl font-bold mb-6">
                 Calculate Your ROI
               </h2>
@@ -237,64 +269,9 @@ export default function ForEmployersPage() {
                 See exactly how much FinWage can save your company in reduced
                 turnover and recruiting costs.
               </p>
-
-              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8">
-                <div className="grid md:grid-cols-3 gap-6 text-left">
-                  <div>
-                    <label
-                      htmlFor="num-employees"
-                      className="block text-sm font-semibold mb-2"
-                    >
-                      Number of Employees
-                    </label>
-                    <input
-                      id="num-employees"
-                      type="number"
-                      placeholder="100"
-                      className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/50"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="turnover-rate"
-                      className="block text-sm font-semibold mb-2"
-                    >
-                      Current Turnover Rate
-                    </label>
-                    <input
-                      id="turnover-rate"
-                      type="text"
-                      placeholder="15%"
-                      className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/50"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="cost-per-hire"
-                      className="block text-sm font-semibold mb-2"
-                    >
-                      Avg. Cost Per Hire
-                    </label>
-                    <input
-                      id="cost-per-hire"
-                      type="text"
-                      placeholder="$4,000"
-                      className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-white/50"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <button className="bg-white text-[#1d44c3] px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all shadow-lg">
-                Calculate My Savings
-              </button>
-
-              <div className="mt-8 pt-8 border-t border-white/20">
-                <p className="text-sm text-blue-100">
-                  Most companies see positive ROI within the first 3 months
-                </p>
-              </div>
             </div>
+
+            <ROICalculator />
           </div>
         </div>
       </section>
@@ -309,10 +286,13 @@ export default function ForEmployersPage() {
             Schedule a demo with our team and see how FinWage can transform your
             workplace in just 30 minutes.
           </p>
-          <button className="bg-[#1d44c3] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#0d2463] transition-all shadow-lg inline-flex items-center gap-2">
+          <Button
+            size="lg"
+            className="bg-[#1d44c3] hover:bg-[#0d2463]"
+          >
             Schedule Your Demo
-            <ArrowRight className="w-5 h-5" />
-          </button>
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
         </div>
       </section>
     </main>

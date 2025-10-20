@@ -1,5 +1,18 @@
-import { Heart, Shield, TrendingUp } from "lucide-react";
+import { Heart, Shield, TrendingUp, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+export const metadata = {
+  title: "About Us - FinWage",
+  description: "Learn about FinWage's mission to transform financial wellness for millions of workers. Meet our leadership team and discover our journey.",
+  keywords: ["about FinWage", "company mission", "financial wellness", "earned wage access", "leadership team"],
+  openGraph: {
+    title: "About Us - FinWage",
+    description: "Learn about FinWage's mission to transform financial wellness for millions of workers.",
+    type: "website",
+  },
+};
 
 export default function AboutPage() {
   const leadership = [
@@ -146,18 +159,20 @@ export default function AboutPage() {
           {/* Values */}
           <div className="grid md:grid-cols-3 gap-8 mb-20">
             {values.map((value) => (
-              <div
+              <Card
                 key={value.id}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8 text-center"
+                className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 text-center"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
-                  {value.icon}
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  {value.title}
-                </h3>
-                <p className="text-gray-600">{value.description}</p>
-              </div>
+                <CardContent className="p-8">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
+                    {value.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    {value.title}
+                  </h3>
+                  <p className="text-gray-600">{value.description}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -177,9 +192,9 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {leadership.map((leader) => (
-              <div
+              <Card
                 key={leader.id}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all"
+                className="overflow-hidden shadow-lg hover:shadow-xl transition-all"
               >
                 <div className="relative h-64">
                   <Image
@@ -189,7 +204,7 @@ export default function AboutPage() {
                     className="object-cover"
                   />
                 </div>
-                <div className="p-6">
+                <CardContent className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-1">
                     {leader.name}
                   </h3>
@@ -197,8 +212,8 @@ export default function AboutPage() {
                     {leader.role}
                   </div>
                   <p className="text-gray-600 text-sm">{leader.bio}</p>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -219,18 +234,20 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto">
             <div className="space-y-8">
               {milestones.map((milestone) => (
-                <div key={milestone.id} className="flex gap-6">
+                <div key={milestone.id} className="flex gap-6 items-center">
                   <div className="flex-shrink-0">
                     <div className="w-20 h-20 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] rounded-full flex items-center justify-center text-white font-bold">
                       {milestone.year}
                     </div>
                   </div>
-                  <div className="flex-1 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                      {milestone.event}
-                    </h3>
-                    <p className="text-gray-600">{milestone.description}</p>
-                  </div>
+                  <Card className="flex-1 bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+                    <CardContent className="p-6">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                        {milestone.event}
+                      </h3>
+                      <p className="text-gray-600">{milestone.description}</p>
+                    </CardContent>
+                  </Card>
                 </div>
               ))}
             </div>
@@ -316,18 +333,12 @@ export default function AboutPage() {
             wellness revolution
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              type="button"
-              className="bg-[#1d44c3] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#0d2463] transition-all shadow-lg"
-            >
+            <Button size="lg" className="bg-[#1d44c3] hover:bg-[#0d2463]">
               For Employers
-            </button>
-            <button
-              type="button"
-              className="border-2 border-[#1d44c3] text-[#1d44c3] px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-50 transition-all"
-            >
+            </Button>
+            <Button size="lg" variant="ghost" className="border-2 border-[#1d44c3] text-[#1d44c3]">
               For Employees
-            </button>
+            </Button>
           </div>
         </div>
       </section>

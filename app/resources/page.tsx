@@ -7,6 +7,20 @@ import {
   Users,
 } from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+
+export const metadata = {
+  title: "Resources - FinWage",
+  description: "Access guides, case studies, webinars, and tools to help you get the most out of FinWage and achieve financial wellness.",
+  keywords: ["resources", "guides", "case studies", "webinars", "financial wellness tools"],
+  openGraph: {
+    title: "Resources - FinWage",
+    description: "Access guides, case studies, and tools for financial wellness.",
+    type: "website",
+  },
+};
 
 export default function ResourcesPage() {
   const featuredArticles = [
@@ -137,20 +151,19 @@ export default function ResourcesPage() {
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {categories.map((category, index) => (
-              <button
-                key={index}
-                className="bg-white rounded-xl p-6 text-center hover:shadow-xl transition-all group"
-              >
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full text-[#1d44c3] mb-3 group-hover:bg-[#1d44c3] group-hover:text-white transition-all">
-                  {category.icon}
-                </div>
-                <div className="font-semibold text-gray-900 mb-1">
-                  {category.name}
-                </div>
-                <div className="text-sm text-gray-500">
-                  {category.count} articles
-                </div>
-              </button>
+              <Card key={index} className="hover:shadow-xl transition-all group cursor-pointer">
+                <CardContent className="p-6 text-center">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full text-[#1d44c3] mb-3 group-hover:bg-[#1d44c3] group-hover:text-white transition-all">
+                    {category.icon}
+                  </div>
+                  <div className="font-semibold text-gray-900 mb-1">
+                    {category.name}
+                  </div>
+                  <div className="text-sm text-gray-500">
+                    {category.count} articles
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -164,9 +177,9 @@ export default function ResourcesPage() {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {featuredArticles.map((article, index) => (
-              <article
+              <Card
                 key={index}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
+                className="overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
               >
                 <div className="relative h-48">
                   <Image
@@ -181,7 +194,7 @@ export default function ResourcesPage() {
                     </span>
                   </div>
                 </div>
-                <div className="p-6">
+                <CardContent className="p-6">
                   <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
                     <span>{article.date}</span>
                     <span>•</span>
@@ -191,12 +204,12 @@ export default function ResourcesPage() {
                     {article.title}
                   </h3>
                   <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                  <button className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 transition-all">
+                  <Button variant="link" className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 p-0">
                     Read More
                     <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </article>
+                  </Button>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -245,14 +258,14 @@ export default function ResourcesPage() {
                   Get the latest insights on financial wellness and employee
                   benefits delivered to your inbox.
                 </p>
-                <input
+                <Input
                   type="email"
                   placeholder="Your email"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-3"
                 />
-                <button className="w-full bg-[#1d44c3] text-white py-3 rounded-lg font-semibold hover:bg-[#0d2463] transition-all">
+                <Button className="w-full bg-[#1d44c3] text-white py-3 rounded-lg font-semibold hover:bg-[#0d2463] transition-all">
                   Subscribe
-                </button>
+                </Button>
               </div>
 
               <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
@@ -262,9 +275,9 @@ export default function ResourcesPage() {
                 <p className="text-gray-600 mb-4">
                   "The Complete Guide to Implementing Earned Wage Access"
                 </p>
-                <button className="w-full bg-[#1d44c3] text-white py-3 rounded-lg font-semibold hover:bg-[#0d2463] transition-all">
+                <Button className="w-full bg-[#1d44c3] text-white py-3 rounded-lg font-semibold hover:bg-[#0d2463] transition-all">
                   Download Free
-                </button>
+                </Button>
               </div>
             </div>
           </div>

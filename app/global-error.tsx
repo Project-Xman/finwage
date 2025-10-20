@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function GlobalError({
   error,
@@ -44,13 +45,13 @@ export default function GlobalError({
               contact support.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button
+              <Button
                 type="button"
                 onClick={reset}
                 className="flex-1 bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition-all"
               >
                 Try Again
-              </button>
+              </Button>
               <a
                 href="/"
                 className="flex-1 bg-gray-100 text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition-all"

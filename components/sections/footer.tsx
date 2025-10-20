@@ -10,19 +10,19 @@ export default function Footer() {
   const companyLinks = [
     { label: "About Us", href: "/about" },
     { label: "Careers", href: "/careers" },
-    { label: "Press", href: "/press" },
+    { label: "Contact", href: "/contact" },
   ];
 
   const productLinks = [
-    { label: "On-Demand Pay", href: "/on-demand-pay" },
-    { label: "Employee Benefits", href: "/employee-benefits" },
-    { label: "Financial Wellness", href: "/financial-wellness" },
+    { label: "For Employers", href: "/for-employers" },
+    { label: "For Employees", href: "/for-employees" },
+    { label: "How It Works", href: "/how-it-works" },
   ];
 
   const supportLinks = [
-    { label: "Help Center", href: "/help" },
-    { label: "Contact Us", href: "/contact" },
-    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Blog", href: "/blog" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Compliance", href: "/compliance" },
   ];
 
   return (
@@ -87,7 +87,7 @@ export default function Footer() {
 
           {/* Support Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Support</h3>
+            <h3 className="text-lg font-semibold mb-6">Resources</h3>
             <ul className="space-y-3">
               {supportLinks.map((link) => (
                 <li key={link.label}>
@@ -111,22 +111,22 @@ export default function Footer() {
             </p>
             <div className="flex space-x-6">
               <Link
-                href="/terms"
+                href="/compliance"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
-                Terms of Service
+                Compliance
               </Link>
               <Link
-                href="/privacy"
+                href="/resources"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
-                Privacy Policy
+                Resources
               </Link>
               <Link
-                href="/cookies"
+                href="/contact"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
-                Cookie Policy
+                Contact
               </Link>
             </div>
           </div>

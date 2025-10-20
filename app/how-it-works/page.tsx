@@ -1,4 +1,17 @@
 import { ArrowRight, Building2, Check, Users, Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata = {
+  title: "How It Works - FinWage",
+  description: "Learn how FinWage works for both employees and employers. Simple setup, instant access to earned wages, and seamless integration.",
+  keywords: ["how it works", "earned wage access process", "payroll integration", "fintech platform"],
+  openGraph: {
+    title: "How It Works - FinWage",
+    description: "Learn how FinWage provides instant access to earned wages for employees.",
+    type: "website",
+  },
+};
 
 export default function HowItWorksPage() {
   const employeeSteps = [
@@ -70,18 +83,20 @@ export default function HowItWorksPage() {
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {employeeSteps.map((item, index) => (
               <div key={item.step} className="relative">
-                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 h-full">
-                  <div className="text-6xl mb-6">{item.icon}</div>
-                  <div className="text-sm font-bold text-[#1d44c3] mb-2">
-                    STEP {item.step}
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
+                <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 h-full">
+                  <CardContent className="p-8">
+                    <div className="text-6xl mb-6">{item.icon}</div>
+                    <div className="text-sm font-bold text-[#1d44c3] mb-2">
+                      STEP {item.step}
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </CardContent>
+                </Card>
                 {index < employeeSteps.length - 1 && (
                   <div className="hidden md:block absolute top-1/2 -right-6 transform -translate-y-1/2">
                     <ArrowRight className="w-12 h-12 text-blue-200" />
@@ -121,53 +136,52 @@ export default function HowItWorksPage() {
                 ))}
               </div>
 
-              <button
-                type="button"
-                className="bg-[#1d44c3] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#0d2463] transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
-              >
+              <Button size="lg" className="bg-[#1d44c3] hover:bg-[#0d2463]">
                 Schedule Integration Demo
-                <ArrowRight className="w-5 h-5" />
-              </button>
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
             </div>
 
             <div className="relative">
-              <div className="bg-white rounded-2xl shadow-2xl p-8">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-xl">
-                    <Zap className="w-8 h-8 text-[#1d44c3]" />
-                    <div>
-                      <div className="font-semibold text-gray-900">
-                        Quick Setup
+              <Card className="shadow-2xl">
+                <CardContent className="p-8">
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-xl">
+                      <Zap className="w-8 h-8 text-[#1d44c3]" />
+                      <div>
+                        <div className="font-semibold text-gray-900">
+                          Quick Setup
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          Integration in 2-3 days
+                        </div>
                       </div>
-                      <div className="text-sm text-gray-600">
-                        Integration in 2-3 days
+                    </div>
+                    <div className="flex items-center gap-4 p-4 bg-green-50 rounded-xl">
+                      <Check className="w-8 h-8 text-green-600" />
+                      <div>
+                        <div className="font-semibold text-gray-900">
+                          Automated Sync
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          Real-time payroll updates
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 p-4 bg-purple-50 rounded-xl">
+                      <Users className="w-8 h-8 text-purple-600" />
+                      <div>
+                        <div className="font-semibold text-gray-900">
+                          Full Support
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          Dedicated account manager
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4 p-4 bg-green-50 rounded-xl">
-                    <Check className="w-8 h-8 text-green-600" />
-                    <div>
-                      <div className="font-semibold text-gray-900">
-                        Automated Sync
-                      </div>
-                      <div className="text-sm text-gray-600">
-                        Real-time payroll updates
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 bg-purple-50 rounded-xl">
-                    <Users className="w-8 h-8 text-purple-600" />
-                    <div>
-                      <div className="font-semibold text-gray-900">
-                        Full Support
-                      </div>
-                      <div className="text-sm text-gray-600">
-                        Dedicated account manager
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
@@ -189,11 +203,13 @@ export default function HowItWorksPage() {
                 { title: "Auto Repayment", desc: "On next payday" },
               ].map((item, index) => (
                 <div key={item.title} className="relative">
-                  <div className="bg-gradient-to-br from-blue-500 to-purple-500 text-white rounded-xl p-6 text-center">
-                    <div className="text-3xl font-bold mb-2">{index + 1}</div>
-                    <div className="font-semibold mb-1">{item.title}</div>
-                    <div className="text-sm opacity-90">{item.desc}</div>
-                  </div>
+                  <Card className="bg-gradient-to-br from-blue-500 to-purple-500 text-white border-0">
+                    <CardContent className="p-6 text-center">
+                      <div className="text-3xl font-bold mb-2">{index + 1}</div>
+                      <div className="font-semibold mb-1">{item.title}</div>
+                      <div className="text-sm opacity-90">{item.desc}</div>
+                    </CardContent>
+                  </Card>
                   {index < 3 && (
                     <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
                       <ArrowRight className="w-6 h-6 text-blue-300" />
@@ -217,18 +233,12 @@ export default function HowItWorksPage() {
             employees
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              type="button"
-              className="bg-white text-[#1d44c3] px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all shadow-lg"
-            >
+            <Button size="lg" className="bg-white text-[#1d44c3] hover:bg-gray-100">
               Get Started Now
-            </button>
-            <button
-              type="button"
-              className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all"
-            >
+            </Button>
+            <Button size="lg" variant="ghost" className="border-2 border-white text-white hover:bg-white/10">
               Watch Demo
-            </button>
+            </Button>
           </div>
         </div>
       </section>

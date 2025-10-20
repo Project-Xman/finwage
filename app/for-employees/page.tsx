@@ -8,6 +8,25 @@ import {
   Zap,
 } from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+export const metadata = {
+  title: "For Employees - FinWage",
+  description: "Get instant access to your earned wages with FinWage. Zero fees, no interest, completely free financial wellness tool.",
+  keywords: ["employee benefits", "wage access", "instant pay", "financial wellness", "earned wage access"],
+  openGraph: {
+    title: "For Employees - FinWage",
+    description: "Get instant access to your earned wages. Zero fees, no interest.",
+    type: "website",
+  },
+};
 
 export default function ForEmployeesPage() {
   const benefits = [
@@ -139,27 +158,30 @@ export default function ForEmployeesPage() {
                 waiting. Just financial freedom when you need it most.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  type="button"
-                  className="bg-white text-[#1d44c3] px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all shadow-lg flex items-center justify-center gap-2"
+                <Button
+                  size="lg"
+                  className="bg-white text-[#1d44c3] hover:bg-gray-100"
                 >
                   Get Started
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-                <button
-                  type="button"
-                  className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all"
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="border-2 border-white text-white hover:bg-white/10"
                 >
                   Watch How It Works
-                </button>
+                </Button>
               </div>
             </div>
-            <div className="relative">
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+            <Card className="bg-white/10 backdrop-blur-lg border-white/20">
+              <CardContent className="p-8">
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <span className="text-blue-100">Earned This Week</span>
-                    <span className="text-3xl font-bold">$485.00</span>
+                    <span className="text-3xl font-bold text-white">
+                      $485.00
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-blue-100">Available Now</span>
@@ -167,15 +189,12 @@ export default function ForEmployeesPage() {
                       $242.50
                     </span>
                   </div>
-                  <button
-                    type="button"
-                    className="w-full bg-white text-[#1d44c3] py-4 rounded-full font-semibold hover:bg-gray-100 transition-all"
-                  >
+                  <Button className="w-full bg-white text-[#1d44c3] hover:bg-gray-100">
                     Access My Wages
-                  </button>
+                  </Button>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -195,16 +214,18 @@ export default function ForEmployeesPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit) => (
-              <div
+              <Card
                 key={benefit.id}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8 hover:shadow-xl transition-all"
+                className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
               >
-                <div className="text-[#1d44c3] mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600">{benefit.description}</p>
-              </div>
+                <CardContent className="p-8">
+                  <div className="text-[#1d44c3] mb-4">{benefit.icon}</div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-600">{benefit.description}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -224,42 +245,41 @@ export default function ForEmployeesPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (
-              <div
-                key={testimonial.id}
-                className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all"
-              >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="relative w-16 h-16 rounded-full overflow-hidden">
-                    <Image
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <div className="font-bold text-gray-900">
-                      {testimonial.name}
+              <Card key={testimonial.id} className="shadow-lg hover:shadow-xl transition-all">
+                <CardContent className="p-8">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="relative w-16 h-16 rounded-full overflow-hidden">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
-                    <div className="text-sm text-gray-600">
-                      {testimonial.role}
+                    <div>
+                      <div className="font-bold text-gray-900">
+                        {testimonial.name}
+                      </div>
+                      <div className="text-sm text-gray-600">
+                        {testimonial.role}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <span
-                      key={`${testimonial.id}-star-${i}`}
-                      className="text-yellow-400 text-xl"
-                    >
-                      ★
-                    </span>
-                  ))}
-                </div>
-                <p className="text-gray-700 leading-relaxed">
-                  "{testimonial.quote}"
-                </p>
-              </div>
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <span
+                        key={`${testimonial.id}-star-${i}`}
+                        className="text-yellow-400 text-xl"
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    "{testimonial.quote}"
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -277,28 +297,29 @@ export default function ForEmployeesPage() {
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-6">
-            {faqs.map((faq) => (
-              <div
-                key={faq.id}
-                className="bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-all"
-              >
-                <h3 className="text-lg font-bold text-gray-900 mb-3">
-                  {faq.question}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-              </div>
-            ))}
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible>
+              {faqs.map((faq, index) => (
+                <AccordionItem key={faq.id} value={`item-${index}`}>
+                  <AccordionTrigger className="text-lg font-bold text-gray-900 hover:text-[#1d44c3]">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600 leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
 
           <div className="text-center mt-12">
             <p className="text-gray-600 mb-4">Still have questions?</p>
-            <button
-              type="button"
-              className="text-[#1d44c3] font-semibold hover:underline"
+            <Button
+              variant="link"
+              className="text-[#1d44c3] font-semibold text-base hover:underline"
             >
               Contact Our Support Team →
-            </button>
+            </Button>
           </div>
         </div>
       </section>
@@ -313,13 +334,13 @@ export default function ForEmployeesPage() {
             Join thousands of employees who have found financial freedom with
             FinWage
           </p>
-          <button
-            type="button"
-            className="bg-white text-[#1d44c3] px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all shadow-lg inline-flex items-center gap-2"
+          <Button
+            size="lg"
+            className="bg-white text-[#1d44c3] hover:bg-gray-100"
           >
             Get Started Today
-            <ArrowRight className="w-5 h-5" />
-          </button>
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
         </div>
       </section>
     </main>

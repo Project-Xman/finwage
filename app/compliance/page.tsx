@@ -6,6 +6,19 @@ import {
   Lock,
   Shield,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata = {
+  title: "Compliance & Security - FinWage",
+  description: "FinWage is fully compliant with all federal and state regulations. SOC 2 certified, AML compliant, and GDPR compliant.",
+  keywords: ["compliance", "security", "SOC 2", "AML", "GDPR", "data protection"],
+  openGraph: {
+    title: "Compliance & Security - FinWage",
+    description: "Bank-level security and full regulatory compliance.",
+    type: "website",
+  },
+};
 
 export default function CompliancePage() {
   const complianceItems = [
@@ -104,26 +117,28 @@ export default function CompliancePage() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {complianceItems.map((item) => (
-              <div
+              <Card
                 key={item.title}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8"
+                className="bg-gradient-to-br from-blue-50 to-purple-50 border-0"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
-                  {item.icon}
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 mb-6">{item.description}</p>
-                <ul className="space-y-3">
-                  {item.details.map((detail) => (
-                    <li key={detail} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{detail}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <CardContent className="p-8">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 mb-6">{item.description}</p>
+                  <ul className="space-y-3">
+                    {item.details.map((detail) => (
+                      <li key={detail} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-700">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -318,12 +333,13 @@ export default function CompliancePage() {
               <p className="text-gray-600 mb-4">
                 Have questions about our compliance or security practices?
               </p>
-              <button
+              <Button
                 type="button"
                 className="text-[#1d44c3] font-semibold hover:underline"
+                variant="link"
               >
                 Contact Our Compliance Team →
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -339,12 +355,12 @@ export default function CompliancePage() {
             Join thousands of companies who trust FinWage with their payroll
             data and employee information
           </p>
-          <button
+          <Button
             type="button"
             className="bg-[#1d44c3] text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-[#0d2463] transition-all shadow-lg"
           >
             Schedule Security Overview
-          </button>
+          </Button>
         </div>
       </section>
     </main>

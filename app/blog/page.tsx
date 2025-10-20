@@ -2,11 +2,19 @@ import { ArrowRight, Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllPosts } from "@/data/posts";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 export const metadata = {
   title: "Blog - FinWage",
-  description:
-    "Expert insights on financial wellness, earned wage access, and the future of payroll.",
+  description: "Expert insights on financial wellness, earned wage access, and the future of payroll.",
+  keywords: ["blog", "financial wellness", "earned wage access", "payroll", "fintech insights"],
+  openGraph: {
+    title: "Blog - FinWage",
+    description: "Expert insights on financial wellness, earned wage access, and the future of payroll.",
+    type: "website",
+  },
 };
 
 export default function BlogPage() {
@@ -56,17 +64,13 @@ export default function BlogPage() {
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="flex flex-wrap gap-3">
             {categories.map((category, index) => (
-              <button
+              <Button
                 key={category.name}
-                type="button"
-                className={`px-4 py-2 rounded-full font-semibold transition-all ${
-                  index === 0
-                    ? "bg-[#1d44c3] text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
+                variant={index === 0 ? "default" : "outline"}
+                className={index === 0 ? "bg-[#1d44c3] hover:bg-[#0d2463]" : ""}
               >
                 {category.name} ({category.count})
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -80,7 +84,7 @@ export default function BlogPage() {
               Featured Post
             </h2>
             <Link href={`/blog/${featuredPost.slug}`}>
-              <article className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all group">
+              <Card className="bg-white overflow-hidden shadow-xl hover:shadow-2xl transition-all group">
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="relative h-64 md:h-full min-h-[400px]">
                     <Image
@@ -95,7 +99,7 @@ export default function BlogPage() {
                       </span>
                     </div>
                   </div>
-                  <div className="p-8 md:p-12 flex flex-col justify-center">
+                  <CardContent className="p-8 md:p-12 flex flex-col justify-center">
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
@@ -133,18 +137,15 @@ export default function BlogPage() {
                         </div>
                       </div>
                       <div className="ml-auto">
-                        <button
-                          type="button"
-                          className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 transition-all"
-                        >
+                        <Button variant="link" className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3">
                           Read More
                           <ArrowRight className="w-5 h-5" />
-                        </button>
+                        </Button>
                       </div>
                     </div>
-                  </div>
+                  </CardContent>
                 </div>
-              </article>
+              </Card>
             </Link>
           </div>
         </section>
@@ -222,17 +223,17 @@ export default function BlogPage() {
             delivered to your inbox.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
+            <Input
               type="email"
               placeholder="Enter your email"
               className="flex-1 px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
             />
-            <button
+            <Button
               type="button"
               className="px-8 py-4 bg-white text-[#1d44c3] rounded-full font-semibold hover:bg-gray-100 transition-all"
             >
               Subscribe
-            </button>
+            </Button>
           </div>
         </div>
       </section>

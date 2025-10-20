@@ -6,6 +6,29 @@ import {
   MessageSquare,
   Phone,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+export const metadata = {
+  title: "Contact Us - FinWage",
+  description: "Get in touch with FinWage. Schedule a demo, request support, or send us your questions. We're here to help.",
+  keywords: ["contact", "support", "demo", "customer service", "finwage contact"],
+  openGraph: {
+    title: "Contact Us - FinWage",
+    description: "Get in touch with FinWage. Schedule a demo or request support.",
+    type: "website",
+  },
+};
 
 export default function ContactPage() {
   return (
@@ -29,59 +52,56 @@ export default function ContactPage() {
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
-                <MessageSquare className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                For Employers
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Schedule a demo and see how FinWage can transform your workplace
-              </p>
-              <button
-                type="button"
-                className="bg-[#1d44c3] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#0d2463] transition-all w-full"
-              >
-                Schedule Demo
-              </button>
-            </div>
+            <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+              <CardHeader className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6 mx-auto">
+                  <MessageSquare className="w-8 h-8" />
+                </div>
+                <CardTitle>For Employers</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="mb-6">
+                  Schedule a demo and see how FinWage can transform your workplace
+                </CardDescription>
+                <Button className="bg-[#1d44c3] hover:bg-[#0d2463] w-full">
+                  Schedule Demo
+                </Button>
+              </CardContent>
+            </Card>
 
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 rounded-full text-white mb-6">
-                <Phone className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                Employee Support
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Get help with your account, transactions, or general questions
-              </p>
-              <button
-                type="button"
-                className="bg-green-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-600 transition-all w-full"
-              >
-                Get Support
-              </button>
-            </div>
+            <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+              <CardHeader className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 rounded-full text-white mb-6 mx-auto">
+                  <Phone className="w-8 h-8" />
+                </div>
+                <CardTitle>Employee Support</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="mb-6">
+                  Get help with your account, transactions, or general questions
+                </CardDescription>
+                <Button className="bg-green-500 hover:bg-green-600 w-full">
+                  Get Support
+                </Button>
+              </CardContent>
+            </Card>
 
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-500 rounded-full text-white mb-6">
-                <Mail className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                General Inquiries
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Media, partnerships, or other questions
-              </p>
-              <button
-                type="button"
-                className="bg-purple-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-600 transition-all w-full"
-              >
-                Contact Us
-              </button>
-            </div>
+            <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+              <CardHeader className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-500 rounded-full text-white mb-6 mx-auto">
+                  <Mail className="w-8 h-8" />
+                </div>
+                <CardTitle>General Inquiries</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="mb-6">
+                  Media, partnerships, or other questions
+                </CardDescription>
+                <Button className="bg-purple-500 hover:bg-purple-600 w-full">
+                  Contact Us
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -95,9 +115,7 @@ export default function ContactPage() {
                 Request a Demo
               </h2>
               <p className="text-xl text-gray-600 mb-8">
-                See FinWage in action and learn how we can help your
-                organization. Our team will walk you through the platform and
-                answer all your questions.
+                See FinWage in action and learn how we can help your organization. Our team will walk you through the platform and answer all your questions.
               </p>
 
               <div className="space-y-6">
@@ -144,164 +162,141 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="mt-8 p-6 bg-blue-50 rounded-xl">
-                <h4 className="font-semibold text-gray-900 mb-2">
-                  Quick Questions?
-                </h4>
-                <p className="text-gray-600 mb-3">Call us directly at:</p>
-                <a
-                  href="tel:1-800-FINWAGE"
-                  className="text-2xl font-bold text-[#1d44c3] hover:underline"
-                >
-                  1-800-FINWAGE
-                </a>
-              </div>
+              <Card className="mt-8 bg-blue-50 border-0">
+                <CardHeader>
+                  <CardTitle>Quick Questions?</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-3">Call us directly at:</p>
+                  <a
+                    href="tel:1-800-FINWAGE"
+                    className="text-2xl font-bold text-[#1d44c3] hover:underline"
+                  >
+                    1-800-FINWAGE
+                  </a>
+                </CardContent>
+              </Card>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-2xl p-8">
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      htmlFor="contact-first-name"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      First Name *
-                    </label>
-                    <input
-                      id="contact-first-name"
-                      type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
+            <Card className="shadow-2xl">
+              <CardHeader>
+                <CardTitle>Demo Request Form</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="contact-first-name">First Name *</Label>
+                      <Input
+                        id="contact-first-name"
+                        type="text"
+                        placeholder="John"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="contact-last-name">Last Name *</Label>
+                      <Input
+                        id="contact-last-name"
+                        type="text"
+                        placeholder="Doe"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-email">Work Email *</Label>
+                    <Input
+                      id="contact-email"
+                      type="email"
+                      placeholder="john@company.com"
                       required
                     />
                   </div>
-                  <div>
-                    <label
-                      htmlFor="contact-last-name"
-                      className="block text-sm font-semibold text-gray-700 mb-2"
-                    >
-                      Last Name *
-                    </label>
-                    <input
-                      id="contact-last-name"
-                      type="text"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
+
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-phone">Phone Number *</Label>
+                    <Input
+                      id="contact-phone"
+                      type="tel"
+                      placeholder="+1 (555) 000-0000"
                       required
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label
-                    htmlFor="contact-email"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Work Email *
-                  </label>
-                  <input
-                    id="contact-email"
-                    type="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
-                    required
-                  />
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-company">Company Name *</Label>
+                    <Input
+                      id="contact-company"
+                      type="text"
+                      placeholder="Acme Corporation"
+                      required
+                    />
+                  </div>
 
-                <div>
-                  <label
-                    htmlFor="contact-phone"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Phone Number *
-                  </label>
-                  <input
-                    id="contact-phone"
-                    type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
-                    required
-                  />
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-employee-count">
+                      Number of Employees *
+                    </Label>
+                    <Select>
+                      <SelectTrigger id="contact-employee-count">
+                        <SelectValue placeholder="Select a range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="1-50">1-50</SelectItem>
+                        <SelectItem value="51-200">51-200</SelectItem>
+                        <SelectItem value="201-500">201-500</SelectItem>
+                        <SelectItem value="501-1000">501-1000</SelectItem>
+                        <SelectItem value="1000+">1000+</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                <div>
-                  <label
-                    htmlFor="contact-company"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Company Name *
-                  </label>
-                  <input
-                    id="contact-company"
-                    type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
-                    required
-                  />
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-hear-about">
+                      How did you hear about us?
+                    </Label>
+                    <Select>
+                      <SelectTrigger id="contact-hear-about">
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="search">Search Engine</SelectItem>
+                        <SelectItem value="social">Social Media</SelectItem>
+                        <SelectItem value="referral">Referral</SelectItem>
+                        <SelectItem value="conference">
+                          Conference/Event
+                        </SelectItem>
+                           <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                <div>
-                  <label
-                    htmlFor="contact-employee-count"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Number of Employees *
-                  </label>
-                  <select
-                    id="contact-employee-count"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
-                  >
-                    <option>1-50</option>
-                    <option>51-200</option>
-                    <option>201-500</option>
-                    <option>501-1000</option>
-                    <option>1000+</option>
-                  </select>
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="contact-message">Message (Optional)</Label>
+                    <Textarea
+                      id="contact-message"
+                      placeholder="Tell us about your needs..."
+                      rows={4}
+                    />
+                  </div>
 
-                <div>
-                  <label
-                    htmlFor="contact-hear-about"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  <Button
+                    type="submit"
+                    className="w-full bg-[#1d44c3] hover:bg-[#0d2463]"
+                    size="lg"
                   >
-                    How did you hear about us?
-                  </label>
-                  <select
-                    id="contact-hear-about"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
-                  >
-                    <option>Search Engine</option>
-                    <option>Social Media</option>
-                    <option>Referral</option>
-                    <option>Conference/Event</option>
-                    <option>Other</option>
-                  </select>
-                </div>
+                    Request Demo
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
 
-                <div>
-                  <label
-                    htmlFor="contact-message"
-                    className="block text-sm font-semibold text-gray-700 mb-2"
-                  >
-                    Message (Optional)
-                  </label>
-                  <textarea
-                    id="contact-message"
-                    rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1d44c3] focus:border-transparent"
-                    placeholder="Tell us about your needs..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-[#1d44c3] text-white py-4 rounded-full text-lg font-semibold hover:bg-[#0d2463] transition-all shadow-lg flex items-center justify-center gap-2"
-                >
-                  Request Demo
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-
-                <p className="text-sm text-gray-500 text-center">
-                  By submitting this form, you agree to our Privacy Policy
-                </p>
-              </form>
-            </div>
+                  <p className="text-sm text-gray-500 text-center">
+                    By submitting this form, you agree to our Privacy Policy
+                  </p>
+                </form>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -319,55 +314,45 @@ export default function ContactPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all">
-              <h3 className="font-bold text-gray-900 mb-2">Help Center</h3>
-              <p className="text-sm text-gray-600 mb-4">
-                Search our knowledge base
-              </p>
-              <button
-                type="button"
-                className="text-[#1d44c3] font-semibold hover:underline"
-              >
-                Visit Help Center →
-              </button>
-            </div>
+            <Card className="text-center">
+              <CardHeader>
+                <CardTitle>Help Center</CardTitle>
+                <CardDescription>Search our knowledge base</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button variant="link">Visit Help Center →</Button>
+              </CardContent>
+            </Card>
 
-            <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all">
-              <h3 className="font-bold text-gray-900 mb-2">Live Chat</h3>
-              <p className="text-sm text-gray-600 mb-4">
-                Chat with support team
-              </p>
-              <button
-                type="button"
-                className="text-[#1d44c3] font-semibold hover:underline"
-              >
-                Start Chat →
-              </button>
-            </div>
+            <Card className="text-center">
+              <CardHeader>
+                <CardTitle>Live Chat</CardTitle>
+                <CardDescription>Chat with support team</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button variant="link">Start Chat →</Button>
+              </CardContent>
+            </Card>
 
-            <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all">
-              <h3 className="font-bold text-gray-900 mb-2">FAQ</h3>
-              <p className="text-sm text-gray-600 mb-4">
-                Common questions answered
-              </p>
-              <button
-                type="button"
-                className="text-[#1d44c3] font-semibold hover:underline"
-              >
-                View FAQs →
-              </button>
-            </div>
+            <Card className="text-center">
+              <CardHeader>
+                <CardTitle>FAQ</CardTitle>
+                <CardDescription>Common questions answered</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button variant="link">View FAQs →</Button>
+              </CardContent>
+            </Card>
 
-            <div className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all">
-              <h3 className="font-bold text-gray-900 mb-2">Email Support</h3>
-              <p className="text-sm text-gray-600 mb-4">Send us a message</p>
-              <button
-                type="button"
-                className="text-[#1d44c3] font-semibold hover:underline"
-              >
-                support@finwage.com →
-              </button>
-            </div>
+            <Card className="text-center">
+              <CardHeader>
+                <CardTitle>Email Support</CardTitle>
+                <CardDescription>Send us a message</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button variant="link">support@finwage.com →</Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -376,35 +361,43 @@ export default function ContactPage() {
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl p-8 text-center">
-              <MapPin className="w-8 h-8 text-[#1d44c3] mx-auto mb-4" />
-              <h3 className="font-bold text-gray-900 mb-2">San Francisco HQ</h3>
-              <p className="text-gray-600 text-sm">
-                123 Market Street
-                <br />
-                San Francisco, CA 94105
-              </p>
-            </div>
+            <Card className="text-center">
+              <CardContent className="p-8">
+                <MapPin className="w-8 h-8 text-primary mx-auto mb-4" />
+                <h3 className="font-bold text-gray-900 mb-2">
+                  San Francisco HQ
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  123 Market Street
+                  <br />
+                  San Francisco, CA 94105
+                </p>
+              </CardContent>
+            </Card>
 
-            <div className="bg-white rounded-xl p-8 text-center">
-              <Mail className="w-8 h-8 text-[#1d44c3] mx-auto mb-4" />
-              <h3 className="font-bold text-gray-900 mb-2">Email</h3>
-              <p className="text-gray-600 text-sm">
-                Sales: sales@finwage.com
-                <br />
-                Support: support@finwage.com
-              </p>
-            </div>
+            <Card className="text-center">
+              <CardContent className="p-8">
+                <Mail className="w-8 h-8 text-primary mx-auto mb-4" />
+                <h3 className="font-bold text-gray-900 mb-2">Email</h3>
+                <p className="text-gray-600 text-sm">
+                  Sales: sales@finwage.com
+                  <br />
+                  Support: support@finwage.com
+                </p>
+              </CardContent>
+            </Card>
 
-            <div className="bg-white rounded-xl p-8 text-center">
-              <Phone className="w-8 h-8 text-[#1d44c3] mx-auto mb-4" />
-              <h3 className="font-bold text-gray-900 mb-2">Phone</h3>
-              <p className="text-gray-600 text-sm">
-                Sales: 1-800-FINWAGE
-                <br />
-                Support: 1-888-FINWAGE
-              </p>
-            </div>
+            <Card className="text-center">
+              <CardContent className="p-8">
+                <Phone className="w-8 h-8 text-primary mx-auto mb-4" />
+                <h3 className="font-bold text-gray-900 mb-2">Phone</h3>
+                <p className="text-gray-600 text-sm">
+                  Sales: 1-800-FINWAGE
+                  <br />
+                  Support: 1-888-FINWAGE
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

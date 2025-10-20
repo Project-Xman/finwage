@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
@@ -69,24 +72,24 @@ export default function CookieConsent() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-              <button
+              <Button
                 onClick={handleAcceptEssential}
                 className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
               >
                 Essential Only
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={handleCustomize}
                 className="px-6 py-2.5 text-sm font-medium text-[#1d44c3] bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
               >
                 Customize
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={handleAcceptAll}
                 className="px-6 py-2.5 text-sm font-medium text-white bg-[#1d44c3] rounded-lg hover:bg-[#153399] transition-colors"
               >
                 Accept All
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -101,12 +104,12 @@ export default function CookieConsent() {
               <h2 className="text-xl font-bold text-gray-900">
                 Cookie Preferences
               </h2>
-              <button
+              <Button
                 onClick={() => setShowModal(false)}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <X className="w-5 h-5 text-gray-500" />
-              </button>
+              </Button>
             </div>
 
             {/* Modal Content */}
@@ -159,15 +162,10 @@ export default function CookieConsent() {
                     </ul>
                   </div>
                   <div className="ml-4">
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        name="analytics"
-                        className="sr-only peer"
-                        defaultChecked
-                      />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#1d44c3]"></div>
-                    </label>
+                    <Checkbox
+                      name="analytics"
+                      defaultChecked
+                    />
                   </div>
                 </div>
               </div>
@@ -191,15 +189,10 @@ export default function CookieConsent() {
                     </ul>
                   </div>
                   <div className="ml-4">
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        name="marketing"
-                        className="sr-only peer"
-                        defaultChecked
-                      />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#1d44c3]"></div>
-                    </label>
+                    <Checkbox
+                      name="marketing"
+                      defaultChecked
+                    />
                   </div>
                 </div>
               </div>
@@ -256,19 +249,20 @@ export default function CookieConsent() {
 
               {/* Modal Actions */}
               <div className="flex flex-col sm:flex-row gap-3">
-                <button
+                <Button
                   type="button"
                   onClick={handleAcceptEssential}
                   className="flex-1 px-6 py-3 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                  variant="outline"
                 >
                   Accept Essential Only
-                </button>
-                <button
+                </Button>
+                <Button
                   type="submit"
                   className="flex-1 px-6 py-3 text-sm font-medium text-white bg-[#1d44c3] rounded-lg hover:bg-[#153399] transition-colors"
                 >
                   Save Preferences
-                </button>
+                </Button>
               </div>
             </form>
           </div>

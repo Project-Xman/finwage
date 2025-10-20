@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import CookieConsent from "@/components/cookie-consent";
+import Header from "@/components/sections/header";
+import Footer from "@/components/sections/footer";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -92,8 +94,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>
-        {children}
+      <body className={`${poppins.variable} antialiased flex flex-col min-h-screen`}>
+        <Header />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
         <CookieConsent />
       </body>
     </html>
