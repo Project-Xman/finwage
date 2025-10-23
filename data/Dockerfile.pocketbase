@@ -1,0 +1,28 @@
+# PocketBase Dockerfile
+FROM alpine:latest
+
+# Install dependencies
+RUN apk add --no-cache \
+    ca-certificates \
+    wget \
+    unzip
+
+# Set working directory
+WORKDIR /pb
+
+# Download and install PocketBase
+# Update version number as needed
+ARG POCKETBASE_VERSION=0.23.4
+RUN wget https://github.com/pocketbase/pocketbase/releases/download/v${POCKETBASE_VERSION}/pocketbase_${POCKETBASE_VERSION}_linux_amd64.zip \
+    && unzip pocketbase_${POCKETBASE_VERSION}_linux_amd64.zip \
+    && rm pocketbase_${POCKETBASE_VERSION}_linux_amd64.zip \
+    && chmod +x /pb/pocketbase
+
+# Create directories for data and migrations
+RUN mkdir -p /pb/pb_data /pb/pb_migrations
+
+# Expose PocketBase port
+EXPOSE 8090
+
+# Start PocketBase
+CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8090"]
