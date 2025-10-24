@@ -8,6 +8,59 @@
  */
 
 // ============================================================
+// AUTHORS DATA
+// ============================================================
+
+export const authorsSeedData = [
+  {
+    name: "Sarah Johnson",
+    slug: "sarah-johnson",
+    email: "sarah@finwage.com",
+    bio: "Former VP of Financial Services with 15+ years in fintech innovation.",
+    role: "Chief Executive Officer",
+    social_links: {
+      linkedin: "https://linkedin.com/in/sarahjohnson",
+      twitter: "https://twitter.com/sarahjohnson"
+    },
+    active: true
+  },
+  {
+    name: "Michael Chen",
+    slug: "michael-chen",
+    email: "michael@finwage.com",
+    bio: "Tech innovator with expertise in blockchain and distributed systems.",
+    role: "Chief Technology Officer",
+    social_links: {
+      linkedin: "https://linkedin.com/in/michaelchen",
+      github: "https://github.com/michaelchen"
+    },
+    active: true
+  },
+  {
+    name: "Emily Rodriguez",
+    slug: "emily-rodriguez",
+    email: "emily@finwage.com",
+    bio: "CPA with 12 years of experience in corporate finance and strategy.",
+    role: "Chief Financial Officer",
+    social_links: {
+      linkedin: "https://linkedin.com/in/emilyrodriguez"
+    },
+    active: true
+  },
+  {
+    name: "James Williams",
+    slug: "james-williams",
+    email: "james@finwage.com",
+    bio: "Operations expert focused on scaling and efficiency.",
+    role: "VP of Operations",
+    social_links: {
+      linkedin: "https://linkedin.com/in/jameswilliams"
+    },
+    active: true
+  }
+];
+
+// ============================================================
 // LEADERSHIP DATA
 // ============================================================
 
@@ -53,7 +106,7 @@ export const leadershipSeedData = [
     bio: "Operations expert focused on scaling and efficiency.",
     email: "james@finwage.com",
     order: 4,
-    featured: false,
+    featured: true,
     social_links: {
       linkedin: "https://linkedin.com/in/jameswilliams"
     }
@@ -395,7 +448,7 @@ export const contactOptionsSeedData = [
     description: "Reach our support team via email for detailed assistance.",
     icon: "Mail",
     type: "email",
-    action_url: "mailto:support@finwage.com",
+    action_url: "https://finwage.com/support",
     featured: true
   },
   {
@@ -411,7 +464,7 @@ export const contactOptionsSeedData = [
     description: "Call our dedicated support line for urgent assistance.",
     icon: "Phone",
     type: "phone",
-    action_url: "tel:1-800-FIN-WAGE",
+    action_url: "https://finwage.com/contact",
     featured: true
   },
   {
@@ -555,6 +608,305 @@ export const categoriesSeedData = [
 ];
 
 // ============================================================
+// BLOGS DATA
+// ============================================================
+
+export const blogsSeedData = [
+  {
+    title: "The Future of Earned Wage Access",
+    slug: "future-of-earned-wage-access",
+    content: "Earned wage access is revolutionizing how employees manage their finances...",
+    excerpt: "Exploring the latest trends in financial technology and employee benefits.",
+    author: "sarah-johnson",
+    category: "financial-wellness",
+    tags: ["fintech", "employee-benefits", "financial-wellness"],
+    featured: true,
+    published: true,
+    published_date: "2025-01-15",
+    views: 1500
+  },
+  {
+    title: "How Earned Wage Access Improves Employee Retention",
+    slug: "earned-wage-access-employee-retention",
+    content: "Companies offering earned wage access see higher employee satisfaction...",
+    excerpt: "A deep dive into the impact of financial wellness on workplace productivity.",
+    author: "emily-rodriguez",
+    category: "employer-benefits",
+    tags: ["retention", "productivity", "benefits"],
+    featured: true,
+    published: true,
+    published_date: "2025-01-10",
+    views: 1200
+  },
+  {
+    title: "Financial Wellness: Beyond Traditional Benefits",
+    slug: "financial-wellness-beyond-traditional-benefits",
+    content: "Traditional employee benefits are evolving to include financial wellness programs...",
+    excerpt: "Why earned wage access is becoming a cornerstone of modern benefits packages.",
+    author: "michael-chen",
+    category: "financial-wellness",
+    tags: ["benefits", "financial-wellness", "employee-retention"],
+    featured: false,
+    published: true,
+    published_date: "2025-01-05",
+    views: 980
+  },
+  {
+    title: "The ROI of Earned Wage Access for Employers",
+    slug: "roi-earned-wage-access-employers",
+    content: "Investing in earned wage access delivers measurable returns for businesses...",
+    excerpt: "Cost-benefit analysis of implementing earned wage access programs.",
+    author: "sarah-johnson",
+    category: "employer-benefits",
+    tags: ["roi", "employers", "cost-benefit"],
+    featured: true,
+    published: true,
+    published_date: "2024-12-28",
+    views: 1350
+  },
+  {
+    title: "Compliance and Security in Wage Access Solutions",
+    slug: "compliance-security-wage-access",
+    content: "Understanding the regulatory landscape and security requirements...",
+    excerpt: "How FinWage ensures compliance and protects employee data.",
+    author: "james-williams",
+    category: "compliance",
+    tags: ["compliance", "security", "regulations"],
+    featured: false,
+    published: true,
+    published_date: "2024-12-20",
+    views: 750
+  },
+  {
+    title: "Industry Trends: What's Next for Fintech",
+    slug: "industry-trends-next-fintech",
+    content: "Emerging technologies shaping the future of financial services...",
+    excerpt: "AI, blockchain, and earned wage access innovations.",
+    author: "michael-chen",
+    category: "industry-trends",
+    tags: ["fintech", "ai", "blockchain", "innovation"],
+    featured: false,
+    published: true,
+    published_date: "2024-12-15",
+    views: 620
+  }
+];
+
+// ============================================================
+// FEATURES DATA
+// ============================================================
+
+export const featuresSeedData = [
+  {
+    title: "Instant Wage Access",
+    slug: "instant-wage-access",
+    description: "Access your earned wages instantly without waiting for payday.",
+    icon: "Zap",
+    category: "Core Features",
+    order: 1,
+    featured: true,
+    active: true
+  },
+  {
+    title: "Real-time Analytics",
+    slug: "real-time-analytics",
+    description: "Track your spending and savings with real-time insights.",
+    icon: "BarChart",
+    category: "Analytics",
+    order: 2,
+    featured: true,
+    active: true
+  }
+];
+
+// ============================================================
+// INTEGRATIONS DATA
+// ============================================================
+
+export const integrationsSeedData = [
+  {
+    name: "Slack",
+    slug: "slack",
+    description: "Get notified about your wage access directly in Slack.",
+    category: "Communication",
+    documentation_url: "https://docs.finwage.com/integrations/slack",
+    featured: true,
+    order: 1,
+    active: true
+  },
+  {
+    name: "QuickBooks",
+    slug: "quickbooks",
+    description: "Seamlessly sync your financial data with QuickBooks.",
+    category: "Accounting",
+    documentation_url: "https://docs.finwage.com/integrations/quickbooks",
+    featured: true,
+    order: 2,
+    active: true
+  },
+  {
+    name: "Gusto",
+    slug: "gusto",
+    description: "Integrate with Gusto for automated payroll synchronization.",
+    category: "HR & Payroll",
+    documentation_url: "https://docs.finwage.com/integrations/gusto",
+    featured: true,
+    order: 3,
+    active: true
+  },
+  {
+    name: "ADP",
+    slug: "adp",
+    description: "Connect with ADP for comprehensive workforce management.",
+    category: "HR & Payroll",
+    documentation_url: "https://docs.finwage.com/integrations/adp",
+    featured: false,
+    order: 4,
+    active: true
+  },
+  {
+    name: "BambooHR",
+    slug: "bamboohr",
+    description: "Sync employee data and benefits with BambooHR.",
+    category: "HR & Payroll",
+    documentation_url: "https://docs.finwage.com/integrations/bamboohr",
+    featured: false,
+    order: 5,
+    active: true
+  },
+  {
+    name: "Microsoft Teams",
+    slug: "microsoft-teams",
+    description: "Receive notifications and updates in Microsoft Teams.",
+    category: "Communication",
+    documentation_url: "https://docs.finwage.com/integrations/microsoft-teams",
+    featured: false,
+    order: 6,
+    active: true
+  },
+  {
+    name: "Zapier",
+    slug: "zapier",
+    description: "Automate workflows with thousands of app integrations.",
+    category: "Automation",
+    documentation_url: "https://docs.finwage.com/integrations/zapier",
+    featured: true,
+    order: 7,
+    active: true
+  },
+  {
+    name: "Xero",
+    slug: "xero",
+    description: "Sync accounting data with Xero for better financial insights.",
+    category: "Accounting",
+    documentation_url: "https://docs.finwage.com/integrations/xero",
+    featured: false,
+    order: 8,
+    active: true
+  }
+];
+
+// ============================================================
+// PARTNERS DATA
+// ============================================================
+
+export const partnersSeedData = [
+  {
+    name: "TechCorp",
+    slug: "techcorp",
+    website: "https://techcorp.com",
+    description: "Leading technology solutions provider.",
+    category: "Technology",
+    featured: true,
+    order: 1,
+    active: true
+  },
+  {
+    name: "FinanceHub",
+    slug: "financehub",
+    website: "https://financehub.com",
+    description: "Comprehensive financial management platform.",
+    category: "Finance",
+    featured: true,
+    order: 2,
+    active: true
+  }
+];
+
+// ============================================================
+// TESTIMONIALS DATA
+// ============================================================
+
+export const testimonialsSeedData = [
+  {
+    name: "John Doe",
+    company: "RetailCorp",
+    position: "Sales Associate",
+    quote: "FinWage has been a game-changer for my financial stability.",
+    rating: 5,
+    verified: true,
+    featured: true,
+    order: 1
+  },
+  {
+    name: "Jane Smith",
+    company: "ServicePro",
+    position: "Customer Service Rep",
+    quote: "The instant access to my earnings has reduced my financial stress significantly.",
+    rating: 5,
+    verified: true,
+    featured: true,
+    order: 2
+  }
+];
+
+// ============================================================
+// PRICING PLANS DATA
+// ============================================================
+
+export const pricingPlansSeedData = [
+  {
+    name: "Starter",
+    slug: "starter",
+    description: "Perfect for small businesses getting started with earned wage access.",
+    price: 0,
+    currency: "USD",
+    features: ["Up to 50 employees", "Basic support", "Standard features"],
+    limitations: ["Limited API access", "Basic reporting"],
+    is_popular: false,
+    is_enterprise: false,
+    order: 1,
+    active: true
+  },
+  {
+    name: "Professional",
+    slug: "professional",
+    description: "Advanced features for growing businesses.",
+    price: 99,
+    currency: "USD",
+    features: ["Up to 500 employees", "Priority support", "Advanced analytics", "API access"],
+    limitations: ["Custom integrations not included"],
+    is_popular: true,
+    is_enterprise: false,
+    order: 2,
+    active: true
+  },
+  {
+    name: "Enterprise",
+    slug: "enterprise",
+    description: "Full-featured solution for large organizations.",
+    price: 299,
+    currency: "USD",
+    features: ["Unlimited employees", "Dedicated support", "Custom integrations", "Advanced security"],
+    limitations: [],
+    is_popular: false,
+    is_enterprise: true,
+    order: 3,
+    active: true
+  }
+];
+
+// ============================================================
 // PRESS RELEASES DATA
 // ============================================================
 
@@ -593,7 +945,9 @@ export const pressReleasesSeedData = [
 // ============================================================
 
 export const allSeedData = {
+  authors: authorsSeedData,
   leadership: leadershipSeedData,
+  blogs: blogsSeedData,
   company_values: companyValuesSeedData,
   milestones: milestonesSeedData,
   job_positions: jobPositionsSeedData,
@@ -605,5 +959,10 @@ export const allSeedData = {
   support_resources: supportResourcesSeedData,
   office_locations: officeLocationsSeedData,
   categories: categoriesSeedData,
-  press_releases: pressReleasesSeedData
+  features: featuresSeedData,
+  integrations: integrationsSeedData,
+  partners: partnersSeedData,
+  press_releases: pressReleasesSeedData,
+  pricing_plans: pricingPlansSeedData,
+  testimonials: testimonialsSeedData
 };

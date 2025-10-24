@@ -49,6 +49,9 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
+# Ensure proper permissions for the nextjs user
+RUN chown -R nextjs:nextjs /app/public
+
 USER nextjs
 
 EXPOSE 3000

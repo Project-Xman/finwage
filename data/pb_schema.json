@@ -379,7 +379,7 @@
   },
   {
     "id": "pbc_526341563",
-    "listRule": null,
+    "listRule": "",
     "viewRule": null,
     "createRule": "@request.auth.id != ''",
     "updateRule": "@request.auth.id != ''",
@@ -739,7 +739,7 @@
   },
   {
     "id": "pbc_1174553048",
-    "listRule": null,
+    "listRule": "",
     "viewRule": null,
     "createRule": "@request.auth.id != ''",
     "updateRule": "@request.auth.id != ''",
@@ -1651,7 +1651,7 @@
         "name": "logo",
         "presentable": false,
         "protected": false,
-        "required": true,
+        "required": false,
         "system": false,
         "thumbs": [
           "100x100",
@@ -2310,7 +2310,7 @@
         "name": "logo",
         "presentable": false,
         "protected": false,
-        "required": true,
+        "required": false,
         "system": false,
         "thumbs": [
           "100x100",
