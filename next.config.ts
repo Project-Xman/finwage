@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  cacheComponents: true,
   // reactCompiler: true, // Temporarily disabled for Docker build compatibility
   output: 'standalone',
   images: {

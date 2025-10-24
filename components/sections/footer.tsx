@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
 
   const companyLinks = [
     { label: "About Us", href: "/about" },
@@ -107,7 +106,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © {currentYear} FinWage. All rights reserved.
+              © 2025 FinWage. All rights reserved.
             </p>
             <div className="flex space-x-6">
               <Link
