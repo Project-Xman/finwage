@@ -1,37 +1,84 @@
 /**
- * PocketBase API Utilities
+ * PocketBase API Utilities for Next.js 15 Server Components
  * 
- * Centralized data fetching functions for all collections
+ * Optimized data fetching with proper caching strategies
  */
 
-import { POCKETBASE_URL, buildQueryParams } from './pocketbase';
+import { unstable_cache } from 'next/cache';
 import type {
-  Blog,
-  Author,
-  Testimonial,
-  PricingPlan,
-  Partner,
-  Feature,
-  Integration,
-  Leadership,
-  CompanyValue,
-  Milestone,
-  JobPosition,
-  Benefit,
-  CompanyStat,
-  ContactOption,
-  SupportResource,
-  OfficeLocation,
-  FaqCategory,
-  FaqItem,
-  Category,
-  PressRelease,
-  PocketBaseListResponse,
+  AuthorsResponse,
+  BlogsResponse,
+  CategoryResponse,
+  TestimonialsResponse,
+  PricingPlansResponse,
+  PartnersResponse,
+  FeaturesResponse,
+  IntegrationsResponse,
+  LeadershipResponse,
+  ValuesResponse,
+  CompanyMilestonesResponse,
+  JobsResponse,
+  EmployeeBenefitsResponse,
+  StatsResponse,
+  ContactsResponse,
+  SupportResponse,
+  LocationsResponse,
+  FaqTopicsResponse,
+  FaqsResponse,
+  PressResponse,
+  EnquiriesResponse,
 } from '@/types/pocketbase';
 
 // ============================================================
-// GENERIC UTILITIES
+// CONFIGURATION
 // ============================================================
+
+const POCKETBASE_URL = process.env.NEXT_PUBLIC_POCKETBASE_URL || 'http://127.0.0.1:8090';
+
+// Cache tags for revalidation
+export const CACHE_TAGS = {
+  BLOGS: 'blogs',
+  AUTHORS: 'authors',
+  TESTIMONIALS: 'testimonials',
+  PRICING: 'pricing',
+  PARTNERS: 'partners',
+  FEATURES: 'features',
+  INTEGRATIONS: 'integrations',
+  LEADERSHIP: 'leadership',
+  VALUES: 'values',
+  MILESTONES: 'milestones',
+  JOBS: 'jobs',
+  BENEFITS: 'benefits',
+  STATS: 'stats',
+  CONTACTS: 'contacts',
+  SUPPORT: 'support',
+  LOCATIONS: 'locations',
+  FAQ: 'faq',
+  CATEGORIES: 'categories',
+  PRESS: 'press',
+  ENQUIRIES: 'enquiries',
+} as const;
+
+// Cache durations (in seconds)
+export const CACHE_DURATION = {
+  STATIC: 3600 * 24 * 7, // 1 week - for rarely changing content
+  LONG: 3600 * 24, // 1 day - for stable content
+  MEDIUM: 3600, // 1 hour - for moderately dynamic content
+  SHORT: 300, // 5 minutes - for frequently updated content
+  DYNAMIC: 0, // No cache - for real-time data
+} as const;
+
+// ============================================================
+// TYPES
+// ============================================================
+
+interface PocketBaseListResponse<T> {
+  page: number;
+  perPage: number;
+  totalItems: number;
+  totalPages: number;
+  items: T[];
+}
 
 interface ListOptions {
   page?: number;
@@ -42,17 +89,70 @@ interface ListOptions {
   expand?: string;
 }
 
+interface CacheConfig {
+  revalidate?: number | false;
+  tags?: string[];
+}
+
+// ============================================================
+// UTILITY FUNCTIONS
+// ============================================================
+
 /**
- * Generic function to fetch records from any collection
+ * Build query parameters for PocketBase API
+ */
+function buildQueryParams(params: Record<string, any>): string {
+  const searchParams = new URLSearchParams();
+  
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      searchParams.append(key, String(value));
+    }
+  });
+  
+  return searchParams.toString();
+}
+
+/**
+ * Generic fetch with error handling and caching
+ */
+async function fetchWithCache<T>(
+  url: string,
+  cacheConfig: CacheConfig = {}
+): Promise<T> {
+  const { revalidate = CACHE_DURATION.MEDIUM, tags = [] } = cacheConfig;
+
+  try {
+    const response = await fetch(url, {
+      next: {
+        revalidate,
+        tags,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Fetch error:', error);
+    throw error;
+  }
+}
+
+/**
+ * Generic function to fetch records from any collection with caching
  */
 async function fetchCollection<T>(
   collectionName: string,
-  options: ListOptions = {}
+  options: ListOptions = {},
+  cacheConfig: CacheConfig = {}
 ): Promise<PocketBaseListResponse<T>> {
   const {
     page = 1,
     perPage = 20,
-    sort,
+    sort = '-created',
     filter,
     fields,
     expand,
@@ -61,96 +161,99 @@ async function fetchCollection<T>(
   const query = buildQueryParams({
     page,
     perPage,
-    sort: sort || '-created',
+    sort,
     filter,
     fields,
     expand,
   });
 
-  try {
-    const response = await fetch(
-      `${POCKETBASE_URL}/api/collections/${collectionName}/records?${query}`
-    );
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch ${collectionName}`);
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error(`Error fetching ${collectionName}:`, error);
-    throw error;
-  }
+  const url = `${POCKETBASE_URL}/api/collections/${collectionName}/records?${query}`;
+  
+  return fetchWithCache<PocketBaseListResponse<T>>(url, cacheConfig);
 }
 
 /**
- * Generic function to fetch a single record
+ * Generic function to fetch a single record with caching
  */
 async function fetchRecord<T>(
   collectionName: string,
   recordId: string,
-  options: { expand?: string; fields?: string } = {}
+  options: { expand?: string; fields?: string } = {},
+  cacheConfig: CacheConfig = {}
 ): Promise<T> {
   const query = buildQueryParams(options);
-
-  try {
-    const response = await fetch(
-      `${POCKETBASE_URL}/api/collections/${collectionName}/records/${recordId}?${query}`
-    );
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch record from ${collectionName}`);
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error(`Error fetching record from ${collectionName}:`, error);
-    throw error;
-  }
+  const url = `${POCKETBASE_URL}/api/collections/${collectionName}/records/${recordId}?${query}`;
+  
+  return fetchWithCache<T>(url, cacheConfig);
 }
 
 // ============================================================
 // BLOGS API
 // ============================================================
 
-export async function getBlogs(options: ListOptions = {}): Promise<PocketBaseListResponse<Blog>> {
-  return fetchCollection<Blog>('blogs', {
+export async function getBlogs(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<BlogsResponse>> {
+  return fetchCollection<BlogsResponse>('Blogs', {
     perPage: options.perPage || 20,
+    expand: 'author,category',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.SHORT,
+    tags: [CACHE_TAGS.BLOGS],
   });
 }
 
-export async function getBlogBySlug(slug: string): Promise<Blog> {
-  const response = await getBlogs({
-    filter: `slug = "${slug}"`,
-    perPage: 1,
-  });
+export const getBlogBySlug = unstable_cache(
+  async (slug: string): Promise<BlogsResponse> => {
+    const response = await fetchCollection<BlogsResponse>('Blogs', {
+      filter: `slug = "${slug}" && published = true`,
+      perPage: 1,
+      expand: 'author,category',
+    }, {
+      revalidate: CACHE_DURATION.MEDIUM,
+      tags: [CACHE_TAGS.BLOGS, `blog-${slug}`],
+    });
 
-  if (!response.items.length) {
-    throw new Error(`Blog post not found: ${slug}`);
+    if (!response.items.length) {
+      throw new Error(`Blog post not found: ${slug}`);
+    }
+
+    return response.items[0];
+  },
+  ['blog-by-slug'],
+  {
+    revalidate: CACHE_DURATION.MEDIUM,
+    tags: [CACHE_TAGS.BLOGS],
   }
+);
 
-  return response.items[0];
-}
-
-export async function getFeaturedBlogs(limit: number = 3): Promise<Blog[]> {
-  const response = await getBlogs({
-    filter: 'featured = true',
+export async function getFeaturedBlogs(limit: number = 3): Promise<BlogsResponse[]> {
+  const response = await fetchCollection<BlogsResponse>('Blogs', {
+    filter: 'featured = true && published = true',
     perPage: limit,
-    sort: '-date',
+    sort: '-published_date',
+    expand: 'author,category',
+  }, {
+    revalidate: CACHE_DURATION.MEDIUM,
+    tags: [CACHE_TAGS.BLOGS, 'featured-blogs'],
   });
 
   return response.items;
 }
 
 export async function getBlogsByCategory(
-  category: string,
+  categoryId: string,
   limit: number = 10
-): Promise<Blog[]> {
-  const response = await getBlogs({
-    filter: `category = "${category}"`,
+): Promise<BlogsResponse[]> {
+  const response = await fetchCollection<BlogsResponse>('Blogs', {
+    filter: `category = "${categoryId}" && published = true`,
     perPage: limit,
-    sort: '-date',
+    sort: '-published_date',
+    expand: 'author,category',
+  }, {
+    revalidate: CACHE_DURATION.SHORT,
+    tags: [CACHE_TAGS.BLOGS, `category-${categoryId}`],
   });
 
   return response.items;
@@ -160,30 +263,65 @@ export async function getBlogsByCategory(
 // AUTHORS API
 // ============================================================
 
-export async function getAuthors(options: ListOptions = {}): Promise<PocketBaseListResponse<Author>> {
-  return fetchCollection<Author>('authors', options);
+export async function getAuthors(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<AuthorsResponse>> {
+  return fetchCollection<AuthorsResponse>('Authors', {
+    filter: 'active = true',
+    ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.AUTHORS],
+  });
 }
 
-export async function getAuthorById(authorId: string): Promise<Author> {
-  return fetchRecord<Author>('authors', authorId);
+export async function getAuthorById(authorId: string): Promise<AuthorsResponse> {
+  return fetchRecord<AuthorsResponse>('Authors', authorId, {}, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.AUTHORS, `author-${authorId}`],
+  });
+}
+
+export async function getAuthorBySlug(slug: string): Promise<AuthorsResponse> {
+  const response = await fetchCollection<AuthorsResponse>('Authors', {
+    filter: `slug = "${slug}" && active = true`,
+    perPage: 1,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.AUTHORS, `author-${slug}`],
+  });
+
+  if (!response.items.length) {
+    throw new Error(`Author not found: ${slug}`);
+  }
+
+  return response.items[0];
 }
 
 // ============================================================
 // TESTIMONIALS API
 // ============================================================
 
-export async function getTestimonials(options: ListOptions = {}): Promise<PocketBaseListResponse<Testimonial>> {
-  return fetchCollection<Testimonial>('testimonials', {
-    sort: options.sort || '-order',
+export async function getTestimonials(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<TestimonialsResponse>> {
+  return fetchCollection<TestimonialsResponse>('Testimonials', {
+    sort: options.sort || 'order',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.TESTIMONIALS],
   });
 }
 
-export async function getFeaturedTestimonials(limit: number = 6): Promise<Testimonial[]> {
-  const response = await getTestimonials({
+export async function getFeaturedTestimonials(limit: number = 6): Promise<TestimonialsResponse[]> {
+  const response = await fetchCollection<TestimonialsResponse>('Testimonials', {
     filter: 'featured = true',
     perPage: limit,
     sort: 'order',
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.TESTIMONIALS, 'featured-testimonials'],
   });
 
   return response.items;
@@ -193,18 +331,26 @@ export async function getFeaturedTestimonials(limit: number = 6): Promise<Testim
 // PRICING PLANS API
 // ============================================================
 
-export async function getPricingPlans(options: ListOptions = {}): Promise<PocketBaseListResponse<PricingPlan>> {
-  return fetchCollection<PricingPlan>('pricing_plans', {
+export async function getPricingPlans(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<PricingPlansResponse>> {
+  return fetchCollection<PricingPlansResponse>('Pricing_Plans', {
     filter: options.filter || 'active = true',
     sort: options.sort || 'order',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.PRICING],
   });
 }
 
-export async function getPopularPlan(): Promise<PricingPlan | null> {
-  const response = await getPricingPlans({
-    filter: 'isPopular = true && active = true',
+export async function getPopularPlan(): Promise<PricingPlansResponse | null> {
+  const response = await fetchCollection<PricingPlansResponse>('Pricing_Plans', {
+    filter: 'is_popular = true && active = true',
     perPage: 1,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.PRICING, 'popular-plan'],
   });
 
   return response.items.length > 0 ? response.items[0] : null;
@@ -214,18 +360,27 @@ export async function getPopularPlan(): Promise<PricingPlan | null> {
 // PARTNERS API
 // ============================================================
 
-export async function getPartners(options: ListOptions = {}): Promise<PocketBaseListResponse<Partner>> {
-  return fetchCollection<Partner>('partners', {
+export async function getPartners(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<PartnersResponse>> {
+  return fetchCollection<PartnersResponse>('Partners', {
     filter: options.filter || 'active = true',
     sort: options.sort || 'order',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.PARTNERS],
   });
 }
 
-export async function getFeaturedPartners(limit: number = 8): Promise<Partner[]> {
-  const response = await getPartners({
+export async function getFeaturedPartners(limit: number = 8): Promise<PartnersResponse[]> {
+  const response = await fetchCollection<PartnersResponse>('Partners', {
     filter: 'featured = true && active = true',
     perPage: limit,
+    sort: 'order',
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.PARTNERS, 'featured-partners'],
   });
 
   return response.items;
@@ -235,16 +390,39 @@ export async function getFeaturedPartners(limit: number = 8): Promise<Partner[]>
 // FEATURES API
 // ============================================================
 
-export async function getFeatures(options: ListOptions = {}): Promise<PocketBaseListResponse<Feature>> {
-  return fetchCollection<Feature>('features', {
+export async function getFeatures(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<FeaturesResponse>> {
+  return fetchCollection<FeaturesResponse>('Features', {
+    filter: 'active = true',
     sort: options.sort || 'order',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.FEATURES],
   });
 }
 
-export async function getFeaturesByCategory(category: string): Promise<Feature[]> {
-  const response = await getFeatures({
-    filter: `category = "${category}"`,
+export async function getFeaturesByCategory(category: string): Promise<FeaturesResponse[]> {
+  const response = await fetchCollection<FeaturesResponse>('Features', {
+    filter: `category = "${category}" && active = true`,
+    sort: 'order',
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.FEATURES, `features-${category}`],
+  });
+
+  return response.items;
+}
+
+export async function getFeaturedFeatures(limit: number = 6): Promise<FeaturesResponse[]> {
+  const response = await fetchCollection<FeaturesResponse>('Features', {
+    filter: 'featured = true && active = true',
+    perPage: limit,
+    sort: 'order',
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.FEATURES, 'featured-features'],
   });
 
   return response.items;
@@ -254,17 +432,39 @@ export async function getFeaturesByCategory(category: string): Promise<Feature[]
 // INTEGRATIONS API
 // ============================================================
 
-export async function getIntegrations(options: ListOptions = {}): Promise<PocketBaseListResponse<Integration>> {
-  return fetchCollection<Integration>('integrations', {
+export async function getIntegrations(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<IntegrationsResponse>> {
+  return fetchCollection<IntegrationsResponse>('Integrations', {
     filter: options.filter || 'active = true',
     sort: options.sort || 'order',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.INTEGRATIONS],
   });
 }
 
-export async function getIntegrationsByCategory(category: string): Promise<Integration[]> {
-  const response = await getIntegrations({
+export async function getIntegrationsByCategory(category: string): Promise<IntegrationsResponse[]> {
+  const response = await fetchCollection<IntegrationsResponse>('Integrations', {
     filter: `category = "${category}" && active = true`,
+    sort: 'order',
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.INTEGRATIONS, `integrations-${category}`],
+  });
+
+  return response.items;
+}
+
+export async function getFeaturedIntegrations(limit: number = 8): Promise<IntegrationsResponse[]> {
+  const response = await fetchCollection<IntegrationsResponse>('Integrations', {
+    filter: 'featured = true && active = true',
+    perPage: limit,
+    sort: 'order',
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.INTEGRATIONS, 'featured-integrations'],
   });
 
   return response.items;
@@ -274,16 +474,25 @@ export async function getIntegrationsByCategory(category: string): Promise<Integ
 // LEADERSHIP API
 // ============================================================
 
-export async function getLeadershipTeam(options: ListOptions = {}): Promise<PocketBaseListResponse<Leadership>> {
-  return fetchCollection<Leadership>('leadership', {
+export async function getLeadershipTeam(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<LeadershipResponse>> {
+  return fetchCollection<LeadershipResponse>('Leadership', {
     sort: options.sort || 'order',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.STATIC,
+    tags: [CACHE_TAGS.LEADERSHIP],
   });
 }
 
-export async function getFeaturedLeadership(): Promise<Leadership[]> {
-  const response = await getLeadershipTeam({
+export async function getFeaturedLeadership(): Promise<LeadershipResponse[]> {
+  const response = await fetchCollection<LeadershipResponse>('Leadership', {
     filter: 'featured = true',
+    sort: 'order',
+  }, {
+    revalidate: CACHE_DURATION.STATIC,
+    tags: [CACHE_TAGS.LEADERSHIP, 'featured-leadership'],
   });
 
   return response.items;
@@ -293,67 +502,130 @@ export async function getFeaturedLeadership(): Promise<Leadership[]> {
 // COMPANY VALUES API
 // ============================================================
 
-export async function getCompanyValues(options: ListOptions = {}): Promise<PocketBaseListResponse<CompanyValue>> {
-  return fetchCollection<CompanyValue>('company_values', {
+export async function getCompanyValues(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<ValuesResponse>> {
+  return fetchCollection<ValuesResponse>('Values', {
     sort: options.sort || 'order',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.STATIC,
+    tags: [CACHE_TAGS.VALUES],
   });
+}
+
+export async function getFeaturedValues(): Promise<ValuesResponse[]> {
+  const response = await fetchCollection<ValuesResponse>('Values', {
+    filter: 'featured = true',
+    sort: 'order',
+  }, {
+    revalidate: CACHE_DURATION.STATIC,
+    tags: [CACHE_TAGS.VALUES, 'featured-values'],
+  });
+
+  return response.items;
 }
 
 // ============================================================
 // MILESTONES API
 // ============================================================
 
-export async function getMilestones(options: ListOptions = {}): Promise<PocketBaseListResponse<Milestone>> {
-  return fetchCollection<Milestone>('milestones', {
+export async function getMilestones(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<CompanyMilestonesResponse>> {
+  return fetchCollection<CompanyMilestonesResponse>('Company_Milestones', {
     sort: options.sort || '-year',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.STATIC,
+    tags: [CACHE_TAGS.MILESTONES],
   });
+}
+
+export async function getFeaturedMilestones(): Promise<CompanyMilestonesResponse[]> {
+  const response = await fetchCollection<CompanyMilestonesResponse>('Company_Milestones', {
+    filter: 'featured = true',
+    sort: '-year',
+  }, {
+    revalidate: CACHE_DURATION.STATIC,
+    tags: [CACHE_TAGS.MILESTONES, 'featured-milestones'],
+  });
+
+  return response.items;
 }
 
 // ============================================================
 // JOB POSITIONS API
 // ============================================================
 
-export async function getJobPositions(options: ListOptions = {}): Promise<PocketBaseListResponse<JobPosition>> {
-  return fetchCollection<JobPosition>('job_positions', {
+export async function getJobPositions(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<JobsResponse>> {
+  return fetchCollection<JobsResponse>('Jobs', {
     filter: options.filter || 'status = "open"',
     sort: options.sort || '-created',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.SHORT,
+    tags: [CACHE_TAGS.JOBS],
   });
 }
 
-export async function getFeaturedJobs(limit: number = 5): Promise<JobPosition[]> {
-  const response = await getJobPositions({
+export async function getFeaturedJobs(limit: number = 5): Promise<JobsResponse[]> {
+  const response = await fetchCollection<JobsResponse>('Jobs', {
     filter: 'featured = true && status = "open"',
     perPage: limit,
+    sort: '-created',
+  }, {
+    revalidate: CACHE_DURATION.SHORT,
+    tags: [CACHE_TAGS.JOBS, 'featured-jobs'],
   });
 
   return response.items;
 }
 
-export async function getJobsByDepartment(department: string): Promise<JobPosition[]> {
-  const response = await getJobPositions({
+export async function getJobsByDepartment(department: string): Promise<JobsResponse[]> {
+  const response = await fetchCollection<JobsResponse>('Jobs', {
     filter: `department = "${department}" && status = "open"`,
+    sort: '-created',
+  }, {
+    revalidate: CACHE_DURATION.SHORT,
+    tags: [CACHE_TAGS.JOBS, `jobs-${department}`],
   });
 
   return response.items;
+}
+
+export async function getJobById(jobId: string): Promise<JobsResponse> {
+  return fetchRecord<JobsResponse>('Jobs', jobId, {}, {
+    revalidate: CACHE_DURATION.SHORT,
+    tags: [CACHE_TAGS.JOBS, `job-${jobId}`],
+  });
 }
 
 // ============================================================
 // BENEFITS API
 // ============================================================
 
-export async function getBenefits(options: ListOptions = {}): Promise<PocketBaseListResponse<Benefit>> {
-  return fetchCollection<Benefit>('benefits', {
+export async function getBenefits(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<EmployeeBenefitsResponse>> {
+  return fetchCollection<EmployeeBenefitsResponse>('Employee_Benefits', {
     sort: options.sort || 'order',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.BENEFITS],
   });
 }
 
-export async function getBenefitsByCategory(category: string): Promise<Benefit[]> {
-  const response = await getBenefits({
+export async function getBenefitsByCategory(category: string): Promise<EmployeeBenefitsResponse[]> {
+  const response = await fetchCollection<EmployeeBenefitsResponse>('Employee_Benefits', {
     filter: `category = "${category}"`,
+    sort: 'order',
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.BENEFITS, `benefits-${category}`],
   });
 
   return response.items;
@@ -363,10 +635,15 @@ export async function getBenefitsByCategory(category: string): Promise<Benefit[]
 // COMPANY STATS API
 // ============================================================
 
-export async function getCompanyStats(options: ListOptions = {}): Promise<PocketBaseListResponse<CompanyStat>> {
-  return fetchCollection<CompanyStat>('company_stats', {
+export async function getCompanyStats(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<StatsResponse>> {
+  return fetchCollection<StatsResponse>('Stats', {
     sort: options.sort || 'order',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.MEDIUM,
+    tags: [CACHE_TAGS.STATS],
   });
 }
 
@@ -374,27 +651,52 @@ export async function getCompanyStats(options: ListOptions = {}): Promise<Pocket
 // CONTACT OPTIONS API
 // ============================================================
 
-export async function getContactOptions(options: ListOptions = {}): Promise<PocketBaseListResponse<ContactOption>> {
-  return fetchCollection<ContactOption>('contact_options', {
+export async function getContactOptions(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<ContactsResponse>> {
+  return fetchCollection<ContactsResponse>('Contacts', {
     sort: options.sort || '-featured',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.CONTACTS],
   });
+}
+
+export async function getFeaturedContactOptions(): Promise<ContactsResponse[]> {
+  const response = await fetchCollection<ContactsResponse>('Contacts', {
+    filter: 'featured = true',
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.CONTACTS, 'featured-contacts'],
+  });
+
+  return response.items;
 }
 
 // ============================================================
 // SUPPORT RESOURCES API
 // ============================================================
 
-export async function getSupportResources(options: ListOptions = {}): Promise<PocketBaseListResponse<SupportResource>> {
-  return fetchCollection<SupportResource>('support_resources', {
+export async function getSupportResources(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<SupportResponse>> {
+  return fetchCollection<SupportResponse>('Support', {
     sort: options.sort || 'order',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.SUPPORT],
   });
 }
 
-export async function getSupportResourcesByCategory(category: string): Promise<SupportResource[]> {
-  const response = await getSupportResources({
+export async function getSupportResourcesByCategory(category: string): Promise<SupportResponse[]> {
+  const response = await fetchCollection<SupportResponse>('Support', {
     filter: `category = "${category}"`,
+    sort: 'order',
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.SUPPORT, `support-${category}`],
   });
 
   return response.items;
@@ -404,13 +706,21 @@ export async function getSupportResourcesByCategory(category: string): Promise<S
 // OFFICE LOCATIONS API
 // ============================================================
 
-export async function getOfficeLocations(options: ListOptions = {}): Promise<PocketBaseListResponse<OfficeLocation>> {
-  return fetchCollection<OfficeLocation>('office_locations', options);
+export async function getOfficeLocations(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<LocationsResponse>> {
+  return fetchCollection<LocationsResponse>('Locations', options, {
+    revalidate: CACHE_DURATION.STATIC,
+    tags: [CACHE_TAGS.LOCATIONS],
+  });
 }
 
-export async function getOfficeLocationsByCity(city: string): Promise<OfficeLocation[]> {
-  const response = await getOfficeLocations({
+export async function getOfficeLocationsByCity(city: string): Promise<LocationsResponse[]> {
+  const response = await fetchCollection<LocationsResponse>('Locations', {
     filter: `city = "${city}"`,
+  }, {
+    revalidate: CACHE_DURATION.STATIC,
+    tags: [CACHE_TAGS.LOCATIONS, `locations-${city}`],
   });
 
   return response.items;
@@ -420,33 +730,54 @@ export async function getOfficeLocationsByCity(city: string): Promise<OfficeLoca
 // FAQ API
 // ============================================================
 
-export async function getFaqCategories(options: ListOptions = {}): Promise<PocketBaseListResponse<FaqCategory>> {
-  return fetchCollection<FaqCategory>('faq_categories', {
+export async function getFaqTopics(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<FaqTopicsResponse>> {
+  return fetchCollection<FaqTopicsResponse>('Faq_Topics', {
     sort: options.sort || 'order',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.FAQ, 'faq-topics'],
   });
 }
 
-export async function getFaqItems(options: ListOptions = {}): Promise<PocketBaseListResponse<FaqItem>> {
-  return fetchCollection<FaqItem>('faq_items', {
+export async function getFaqItems(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<FaqsResponse>> {
+  return fetchCollection<FaqsResponse>('Faqs', {
     sort: options.sort || 'order',
     expand: options.expand || 'category',
+    filter: options.filter,
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.FAQ],
   });
 }
 
-export async function getFeaturedFaqItems(limit: number = 6): Promise<FaqItem[]> {
-  const response = await getFaqItems({
+export async function getFeaturedFaqItems(limit: number = 6): Promise<FaqsResponse[]> {
+  const response = await fetchCollection<FaqsResponse>('Faqs', {
     filter: 'featured = true',
     perPage: limit,
+    sort: 'order',
+    expand: 'category',
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.FAQ, 'featured-faqs'],
   });
 
   return response.items;
 }
 
-export async function getFaqItemsByCategory(categoryId: string): Promise<FaqItem[]> {
-  const response = await getFaqItems({
+export async function getFaqItemsByCategory(categoryId: string): Promise<FaqsResponse[]> {
+  const response = await fetchCollection<FaqsResponse>('Faqs', {
     filter: `category = "${categoryId}"`,
+    sort: 'order',
+    expand: 'category',
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.FAQ, `faqs-${categoryId}`],
   });
 
   return response.items;
@@ -456,14 +787,22 @@ export async function getFaqItemsByCategory(categoryId: string): Promise<FaqItem
 // CATEGORIES API
 // ============================================================
 
-export async function getCategories(options: ListOptions = {}): Promise<PocketBaseListResponse<Category>> {
-  return fetchCollection<Category>('categories', options);
+export async function getCategories(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<CategoryResponse>> {
+  return fetchCollection<CategoryResponse>('Category', options, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.CATEGORIES],
+  });
 }
 
-export async function getCategoryBySlug(slug: string): Promise<Category> {
-  const response = await getCategories({
+export async function getCategoryBySlug(slug: string): Promise<CategoryResponse> {
+  const response = await fetchCollection<CategoryResponse>('Category', {
     filter: `slug = "${slug}"`,
     perPage: 1,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.CATEGORIES, `category-${slug}`],
   });
 
   if (!response.items.length) {
@@ -477,35 +816,122 @@ export async function getCategoryBySlug(slug: string): Promise<Category> {
 // PRESS RELEASES API
 // ============================================================
 
-export async function getPressReleases(options: ListOptions = {}): Promise<PocketBaseListResponse<PressRelease>> {
-  return fetchCollection<PressRelease>('press_releases', {
+export async function getPressReleases(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<PressResponse>> {
+  return fetchCollection<PressResponse>('Press', {
     filter: options.filter || 'published = true',
     sort: options.sort || '-published_date',
     ...options,
+  }, {
+    revalidate: CACHE_DURATION.SHORT,
+    tags: [CACHE_TAGS.PRESS],
   });
 }
 
-export async function getFeaturedPressReleases(limit: number = 5): Promise<PressRelease[]> {
-  const response = await getPressReleases({
+export async function getFeaturedPressReleases(limit: number = 5): Promise<PressResponse[]> {
+  const response = await fetchCollection<PressResponse>('Press', {
     filter: 'featured = true && published = true',
     perPage: limit,
+    sort: '-published_date',
+  }, {
+    revalidate: CACHE_DURATION.SHORT,
+    tags: [CACHE_TAGS.PRESS, 'featured-press'],
   });
 
   return response.items;
 }
 
 // ============================================================
-// ERROR HANDLING HELPER
+// ENQUIRIES API
 // ============================================================
 
-export function handleApiError(error: unknown): { message: string; code?: number } {
-  if (error instanceof Error) {
-    return {
-      message: error.message || 'An error occurred while fetching data',
-    };
+export async function getEnquiries(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<EnquiriesResponse>> {
+  return fetchCollection<EnquiriesResponse>('Enquiries', {
+    sort: options.sort || '-created',
+    ...options,
+  }, {
+    revalidate: CACHE_DURATION.SHORT,
+    tags: [CACHE_TAGS.ENQUIRIES],
+  });
+}
+
+export async function createEnquiry(
+  data: Partial<EnquiriesResponse>
+): Promise<EnquiriesResponse> {
+  const url = `${POCKETBASE_URL}/api/collections/Enquiries/records`;
+  
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new PocketBaseError(
+      `Failed to create enquiry: ${response.statusText}`,
+      response.status,
+      'Enquiries'
+    );
   }
 
-  return {
-    message: 'An unknown error occurred',
-  };
+  return response.json();
+}
+
+// ============================================================
+// CACHE REVALIDATION HELPERS
+// ============================================================
+
+/**
+ * Revalidate specific cache tags
+ * Use this in Server Actions or API routes for on-demand revalidation
+ */
+export async function revalidateCache(tags: string[]) {
+  const { revalidateTag } = await import('next/cache');
+  tags.forEach(tag => revalidateTag(tag, 'default'));
+}
+
+/**
+ * Revalidate all blog-related caches
+ */
+export async function revalidateBlogs() {
+  await revalidateCache([CACHE_TAGS.BLOGS]);
+}
+
+/**
+ * Revalidate specific blog by slug
+ */
+export async function revalidateBlogBySlug(slug: string) {
+  await revalidateCache([CACHE_TAGS.BLOGS, `blog-${slug}`]);
+}
+
+// ============================================================
+// ERROR HANDLING
+// ============================================================
+
+export class PocketBaseError extends Error {
+  constructor(
+    message: string,
+    public statusCode?: number,
+    public collection?: string
+  ) {
+    super(message);
+    this.name = 'PocketBaseError';
+  }
+}
+
+export function handleApiError(error: unknown): PocketBaseError {
+  if (error instanceof PocketBaseError) {
+    return error;
+  }
+
+  if (error instanceof Error) {
+    return new PocketBaseError(error.message);
+  }
+
+  return new PocketBaseError('An unknown error occurred');
 }

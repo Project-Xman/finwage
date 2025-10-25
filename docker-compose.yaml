@@ -2,21 +2,21 @@ version: '3.8'
 
 services:
   # Next.js Application
-  nextjs:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: finwage-app
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - NEXT_PUBLIC_POCKETBASE_URL=http://pocketbase:8090
-    depends_on:
-      - pocketbase
-    networks:
-      - finwage-network
+  # nextjs:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: finwage-app
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - NODE_ENV=production
+  #     - NEXT_PUBLIC_POCKETBASE_URL=http://pocketbase:8090
+  #   depends_on:
+  #     - pocketbase
+  #   networks:
+  #     - finwage-network
 
   # PocketBase Backend
   pocketbase:

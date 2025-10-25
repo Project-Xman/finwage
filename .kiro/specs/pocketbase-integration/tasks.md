@@ -1,0 +1,280 @@
+# Implementation Plan
+
+- [-] 1. Set up core infrastructure and utilities
+  - Create utility functions for PocketBase file URL construction
+  - Create error handling utilities and custom error classes
+  - Set up environment variable validation
+  - _Requirements: 11.1, 11.2, 11.3, 15.1, 15.2, 15.3_
+
+- [ ] 2. Create service layer for blog content
+  - [ ] 2.1 Implement `/lib/services/blogs.ts` with functions for fetching blogs, featured blogs, and blogs by category
+    - Write `getBlogs()` function with pagination support
+    - Write `getBlogBySlug()` function with author and category expansion
+    - Write `getFeaturedBlogs()` function for homepage
+    - Write `getBlogsByCategory()` function for filtering
+    - _Requirements: 2.1, 2.2, 2.4_
+  - [ ] 2.2 Implement `/lib/services/authors.ts` for author data
+    - Write `getAuthors()` function
+    - Write `getAuthorBySlug()` function
+    - _Requirements: 2.1, 2.2_
+  - [ ] 2.3 Implement `/lib/services/categories.ts` for blog categories
+    - Write `getCategories()` function
+    - Write `getCategoryBySlug()` function
+    - _Requirements: 2.1_
+
+- [ ] 3. Integrate blog pages with PocketBase data
+  - [ ] 3.1 Update `/app/blog/page.tsx` to fetch and display blogs from PocketBase
+    - Replace mock data with service layer calls
+    - Implement category filtering
+    - Add proper caching configuration
+    - _Requirements: 2.1, 2.5_
+  - [ ] 3.2 Update `/app/blog/[slug]/page.tsx` for blog detail pages
+    - Implement `generateStaticParams` for static generation
+    - Fetch blog data by slug with relations
+    - Handle 404 for non-existent blogs
+    - _Requirements: 2.2, 2.3, 13.1, 13.3_
+  - [ ] 3.3 Update homepage blog section `/components/sections/blog.tsx`
+    - Fetch featured blogs from PocketBase
+    - Display with proper image URLs
+    - _Requirements: 2.4_
+
+- [ ] 4. Create service layer for testimonials and pricing
+  - [ ] 4.1 Implement `/lib/services/testimonials.ts`
+    - Write `getTestimonials()` function
+    - Write `getFeaturedTestimonials()` function
+    - _Requirements: 4.1, 4.2, 4.4_
+  - [ ] 4.2 Implement `/lib/services/pricing.ts`
+    - Write `getPricingPlans()` function
+    - Write `getPopularPlan()` function
+    - _Requirements: 5.1, 5.2, 5.3_
+
+- [ ] 5. Integrate testimonials and pricing sections
+  - [ ] 5.1 Update `/components/sections/testimonials.tsx` to use PocketBase data
+    - Replace mock data with service calls
+    - Display testimonial images using proper URLs
+    - _Requirements: 4.1, 4.2, 4.3, 4.5_
+  - [ ] 5.2 Update `/app/pricing/page.tsx` to use PocketBase pricing data
+    - Fetch pricing plans with proper caching
+    - Transform data for display
+    - Highlight popular plan
+    - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [ ] 5.3 Update `/components/sections/pricing.tsx` for homepage pricing section
+    - Fetch and display pricing plans
+    - _Requirements: 5.1, 5.2_
+
+- [ ] 6. Create service layer for features and integrations
+  - [ ] 6.1 Implement `/lib/services/features.ts`
+    - Write `getFeatures()` function
+    - Write `getFeaturedFeatures()` function
+    - Write `getFeaturesByCategory()` function
+    - _Requirements: 6.1, 6.3, 6.5_
+  - [ ] 6.2 Implement `/lib/services/integrations.ts`
+    - Write `getIntegrations()` function
+    - Write `getFeaturedIntegrations()` function
+    - Write `getIntegrationsByCategory()` function
+    - _Requirements: 6.2, 6.4, 6.5_
+  - [ ] 6.3 Implement `/lib/services/partners.ts`
+    - Write `getPartners()` function
+    - Write `getFeaturedPartners()` function
+    - _Requirements: 9.1, 9.2_
+
+- [ ] 7. Integrate features, integrations, and partners sections
+  - [ ] 7.1 Update `/components/sections/features.tsx` to use PocketBase data
+    - Fetch features with proper caching
+    - Display feature icons and images
+    - _Requirements: 6.1, 6.3_
+  - [ ] 7.2 Update `/components/sections/integrations.tsx` to use PocketBase data
+    - Fetch integrations with logos
+    - Display with proper image URLs
+    - _Requirements: 6.2, 6.4_
+  - [ ] 7.3 Update `/components/sections/partners.tsx` to use PocketBase data
+    - Fetch featured partners
+    - Display partner logos
+    - _Requirements: 9.1, 9.2_
+
+- [ ] 8. Create service layer for company information
+  - [ ] 8.1 Implement `/lib/services/company.ts`
+    - Write `getLeadershipTeam()` function
+    - Write `getCompanyValues()` function
+    - Write `getMilestones()` function
+    - Write `getCompanyStats()` function
+    - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
+
+- [ ] 9. Integrate company information pages
+  - [ ] 9.1 Update `/app/about/page.tsx` to use PocketBase data
+    - Fetch leadership team with profiles
+    - Fetch company values
+    - Fetch milestones
+    - Display with proper image URLs
+    - _Requirements: 7.1, 7.2, 7.3, 7.5_
+  - [ ] 9.2 Update homepage sections with company stats
+    - Fetch and display company statistics
+    - _Requirements: 7.4_
+
+- [ ] 10. Create service layer for careers
+  - [ ] 10.1 Implement `/lib/services/careers.ts`
+    - Write `getJobPositions()` function with status filtering
+    - Write `getFeaturedJobs()` function
+    - Write `getJobsByDepartment()` function
+    - Write `getJobById()` function
+    - _Requirements: 3.1, 3.2, 3.4, 3.5_
+  - [ ] 10.2 Implement `/lib/services/benefits.ts`
+    - Write `getBenefits()` function
+    - Write `getBenefitsByCategory()` function
+    - _Requirements: 3.2_
+  - [ ] 10.3 Implement `/lib/services/locations.ts`
+    - Write `getOfficeLocations()` function
+    - _Requirements: 3.2_
+
+- [ ] 11. Integrate careers page
+  - [ ] 11.1 Update `/app/careers/page.tsx` to use PocketBase data
+    - Fetch open job positions
+    - Implement department filtering
+    - Display featured jobs prominently
+    - Add proper caching with short revalidation
+    - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
+  - [ ] 11.2 Update employee benefits section
+    - Fetch and display employee benefits
+    - _Requirements: 3.2_
+
+- [ ] 12. Create service layer for contact and support
+  - [ ] 12.1 Implement `/lib/services/contact.ts`
+    - Write `getContactOptions()` function
+    - Write `createEnquiry()` function for form submission
+    - _Requirements: 8.1, 8.2_
+  - [ ] 12.2 Implement `/lib/services/support.ts`
+    - Write `getSupportResources()` function
+    - Write `getFaqTopics()` function
+    - Write `getFaqItems()` function
+    - Write `getFeaturedFaqItems()` function
+    - _Requirements: 10.1, 10.2, 10.3, 10.5_
+
+- [ ] 13. Implement contact form with Server Actions
+  - [ ] 13.1 Create `/lib/actions/contact.ts` Server Action
+    - Implement form validation using Zod
+    - Call `createEnquiry()` service function
+    - Handle success and error states
+    - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
+  - [ ] 13.2 Create or update contact form component
+    - Implement client component with form state
+    - Use Server Action for submission
+    - Display success/error messages
+    - _Requirements: 8.3, 8.4_
+  - [ ] 13.3 Update `/app/contact/page.tsx` to use contact form
+    - Integrate contact form component
+    - Fetch contact options from PocketBase
+    - _Requirements: 8.1, 8.5_
+
+- [ ] 14. Integrate FAQ and support sections
+  - [ ] 14.1 Update FAQ sections to use PocketBase data
+    - Fetch FAQ items with category relationships
+    - Group FAQs by category
+    - Display featured FAQs
+    - _Requirements: 10.1, 10.2, 10.3, 10.5_
+  - [ ] 14.2 Update support resources sections
+    - Fetch support resources by category
+    - Display with proper links
+    - _Requirements: 10.4, 10.5_
+
+- [ ] 15. Create service layer for press releases
+  - [ ] 15.1 Implement `/lib/services/press.ts`
+    - Write `getPressReleases()` function
+    - Write `getFeaturedPressReleases()` function
+    - _Requirements: 9.3, 9.4_
+
+- [ ] 16. Integrate press releases section
+  - [ ] 16.1 Update press/media sections to use PocketBase data
+    - Fetch published press releases
+    - Display featured press releases
+    - Add proper caching
+    - _Requirements: 9.3, 9.4, 9.5_
+
+- [ ] 17. Implement image handling utilities
+  - [ ] 17.1 Create image URL helper functions
+    - Implement `getFileUrl()` function
+    - Implement `getImageUrl()` function with thumbnail support
+    - Add fallback image handling
+    - _Requirements: 14.1, 14.2, 14.3_
+  - [ ] 17.2 Update all components to use Next.js Image component
+    - Replace img tags with Next.js Image
+    - Add proper alt text for accessibility
+    - Implement loading states
+    - _Requirements: 14.2, 14.4, 14.5_
+
+- [ ] 18. Implement caching and performance optimizations
+  - [ ] 18.1 Configure cache durations for all service functions
+    - Set appropriate revalidation periods based on content type
+    - Add cache tags for granular invalidation
+    - _Requirements: 12.1, 12.3_
+  - [ ] 18.2 Implement parallel data fetching where applicable
+    - Use Promise.all for independent data fetches
+    - Optimize page load times
+    - _Requirements: 12.5_
+  - [ ] 18.3 Add Suspense boundaries for streaming
+    - Wrap async components in Suspense
+    - Create loading skeleton components
+    - _Requirements: 12.5_
+  - [ ] 18.4 Implement cache revalidation helpers
+    - Create revalidation functions for on-demand updates
+    - Add revalidation to Server Actions
+    - _Requirements: 12.3, 13.4_
+
+- [ ] 19. Implement error handling and validation
+  - [ ] 19.1 Add try-catch blocks to all service functions
+    - Handle fetch errors gracefully
+    - Return null or empty arrays as fallbacks
+    - Log errors for debugging
+    - _Requirements: 11.2, 11.3_
+  - [ ] 19.2 Create error boundary components
+    - Add error.tsx files for key routes
+    - Implement user-friendly error messages
+    - _Requirements: 11.3_
+  - [ ] 19.3 Add input validation for forms
+    - Implement Zod schemas for form validation
+    - Validate data before submission
+    - _Requirements: 8.2, 11.4_
+  - [ ] 19.4 Add 404 handling for dynamic routes
+    - Use notFound() for missing content
+    - Create custom 404 pages
+    - _Requirements: 13.3_
+
+- [ ] 20. Configure environment and deployment settings
+  - [ ] 20.1 Set up environment variables
+    - Document required environment variables
+    - Add validation for environment variables
+    - Configure for different environments
+    - _Requirements: 15.1, 15.2, 15.3, 15.4, 15.5_
+  - [ ] 20.2 Update Next.js configuration
+    - Add PocketBase domain to image configuration
+    - Configure build optimizations
+    - _Requirements: 14.2_
+  - [ ] 20.3 Implement generateStaticParams for all dynamic routes
+    - Add to blog detail pages
+    - Add to any other dynamic routes
+    - _Requirements: 13.1, 13.2, 13.4_
+
+- [ ] 21. Final integration and testing
+  - [ ] 21.1 Test all pages with real PocketBase data
+    - Verify data displays correctly
+    - Check image loading
+    - Test error scenarios
+    - _Requirements: All_
+  - [ ] 21.2 Verify caching behavior
+    - Test cache revalidation
+    - Verify cache tags work correctly
+    - _Requirements: 12.1, 12.2, 12.3_
+  - [ ] 21.3 Test form submissions
+    - Submit contact form
+    - Verify data saves to PocketBase
+    - Test validation and error handling
+    - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
+  - [ ] 21.4 Performance audit
+    - Check page load times
+    - Verify static generation works
+    - Test on different devices
+    - _Requirements: 12.1, 12.2, 12.4, 12.5_
+  - [ ] 21.5 Accessibility audit
+    - Verify alt text on all images
+    - Test keyboard navigation
+    - Check screen reader compatibility
+    - _Requirements: 14.5_

@@ -46,6 +46,7 @@
         "motion": "^12.23.24",
         "next": "16.0.0",
         "next-themes": "^0.4.6",
+        "pocketbase": "^0.26.2",
         "react": "19.2.0",
         "react-day-picker": "^9.11.1",
         "react-dom": "19.2.0",
@@ -604,6 +605,8 @@
     "phenomenon": ["phenomenon@1.6.0", "", {}, "sha512-7h9/fjPD3qNlgggzm88cY58l9sudZ6Ey+UmZsizfhtawO6E3srZQXywaNm2lBwT72TbpHYRPy7ytIHeBUD/G0A=="],
 
     "picocolors": ["picocolors@1.1.1", "", {}, "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="],
+
+    "pocketbase": ["pocketbase@0.26.2", "", {}, "sha512-WA8EOBc3QnSJh8rJ3iYoi9DmmPOMFIgVfAmIGux7wwruUEIzXgvrO4u0W2htfQjGIcyezJkdZOy5Xmh7SxAftw=="],
 
     "point-in-polygon-hao": ["point-in-polygon-hao@1.2.4", "", { "dependencies": { "robust-predicates": "^3.0.2" } }, "sha512-x2pcvXeqhRHlNRdhLs/tgFapAbSSe86wa/eqmj1G6pWftbEs5aVRJhRGM6FYSUERKu0PjekJzMq0gsI2XyiclQ=="],
 
