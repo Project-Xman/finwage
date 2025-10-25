@@ -178,7 +178,29 @@ Platform integrations
 
 ## New Collections
 
-### 8. **leadership**
+### 8. **webhooks**
+System collection for managing webhooks
+
+| Field Name | Type | Required | Options | Description |
+|------------|------|----------|---------|-------------|
+| `id` | text | ✓ | Auto-generated | Unique identifier |
+| `name` | text | ✓ | | Webhook name/identifier |
+| `collection` | text | ✓ | | Target collection name |
+| `destination` | url | ✓ | | Webhook endpoint URL |
+| `headers` | json | | | Custom HTTP headers as JSON object |
+| `active` | bool | | Default: true | Webhook active status |
+| `created` | autodate | ✓ | | Created timestamp |
+| `updated` | autodate | ✓ | | Updated timestamp |
+
+**System Collection**: This is a system collection that handles webhook events for create, update, and delete operations on any collection.
+
+**Rules:**
+- Only accessible by administrators
+- Automatically triggers on record operations
+
+---
+
+### 9. **leadership**
 Leadership team members
 
 | Field Name | Type | Required | Options | Description |
@@ -197,7 +219,7 @@ Leadership team members
 
 ---
 
-### 9. **company_values**
+### 10. **company_values**
 Company values and principles
 
 | Field Name | Type | Required | Options | Description |
@@ -213,7 +235,7 @@ Company values and principles
 
 ---
 
-### 10. **milestones**
+### 11. **milestones**
 Company milestones and timeline
 
 | Field Name | Type | Required | Options | Description |
@@ -229,7 +251,7 @@ Company milestones and timeline
 
 ---
 
-### 11. **job_positions**
+### 12. **job_positions**
 Job openings and career positions
 
 | Field Name | Type | Required | Options | Description |
@@ -253,7 +275,7 @@ Job openings and career positions
 
 ---
 
-### 12. **benefits**
+### 13. **benefits**
 Employee benefits
 
 | Field Name | Type | Required | Options | Description |
@@ -269,7 +291,7 @@ Employee benefits
 
 ---
 
-### 13. **company_stats**
+### 14. **company_stats**
 Company statistics and metrics
 
 | Field Name | Type | Required | Options | Description |
@@ -285,7 +307,7 @@ Company statistics and metrics
 
 ---
 
-### 14. **contact_options**
+### 15. **contact_options**
 Contact methods and options
 
 | Field Name | Type | Required | Options | Description |
@@ -302,7 +324,7 @@ Contact methods and options
 
 ---
 
-### 15. **support_resources**
+### 16. **support_resources**
 Support and help resources
 
 | Field Name | Type | Required | Options | Description |
@@ -318,7 +340,7 @@ Support and help resources
 
 ---
 
-### 16. **office_locations**
+### 17. **office_locations**
 Office and branch locations
 
 | Field Name | Type | Required | Options | Description |
@@ -338,7 +360,7 @@ Office and branch locations
 
 ---
 
-### 17. **faq_categories**
+### 18. **faq_categories**
 FAQ category organization
 
 | Field Name | Type | Required | Options | Description |
@@ -352,7 +374,7 @@ FAQ category organization
 
 ---
 
-### 18. **faq_items**
+### 19. **faq_items**
 Frequently asked questions
 
 | Field Name | Type | Required | Options | Description |
@@ -368,7 +390,7 @@ Frequently asked questions
 
 ---
 
-### 19. **categories**
+### 20. **categories**
 Content categories (for blogs, resources, etc.)
 
 | Field Name | Type | Required | Options | Description |
@@ -385,7 +407,7 @@ Content categories (for blogs, resources, etc.)
 
 ---
 
-### 20. **press_releases**
+### 21. **press_releases**
 Press releases and media announcements
 
 | Field Name | Type | Required | Options | Description |
@@ -473,8 +495,8 @@ faq_items
 
 - **Migration file**: `1735002001_create_extended_schema.js`
 - **Created**: December 24, 2024
-- **Collections added**: 13 new collections
-- **Total collections**: 20
+- **Collections added**: 14 new collections (including webhooks)
+- **Total collections**: 21
 
 ---
 

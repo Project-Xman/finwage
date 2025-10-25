@@ -18,7 +18,7 @@ services:
   #   networks:
   #     - finwage-network
 
-  # PocketBase Backend
+  # PocketBase Backend with Webhooks
   pocketbase:
     build:
       context: ./data
@@ -32,6 +32,7 @@ services:
       - ./data/pb_migrations:/pb/pb_migrations
     environment:
       - PB_ENCRYPTION_KEY=${PB_ENCRYPTION_KEY:-your-secret-key-change-this}
+      - WEBHOOK_SECRET=${WEBHOOK_SECRET:-webhook-secret-change-this}
     networks:
       - finwage-network
     healthcheck:

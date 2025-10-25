@@ -24,6 +24,20 @@ interface PocketBaseWebhookPayload {
   collection: string;
   record: {
     id: string;
+    slug?: string;
+    published?: boolean;
+    active?: boolean;
+    featured?: boolean;
+    [key: string]: any;
+  };
+  auth?: {
+    id: string;
+    email: string;
+    [key: string]: any;
+  };
+  admin?: {
+    id: string;
+    email: string;
     [key: string]: any;
   };
 }
@@ -44,7 +58,7 @@ export async function POST(request: NextRequest) {
     const expectedSecret = process.env.POCKETBASE_WEBHOOK_SECRET;
 
     if (expectedSecret && webhookSecret !== expectedSecret) {
-      console.error('Invalid webhook secret');
+      console.error('[Webhook] Invalid webhook secret');
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
@@ -53,28 +67,45 @@ export async function POST(request: NextRequest) {
 
     // Parse webhook payload
     const payload: PocketBaseWebhookPayload = await request.json();
-    const { action, collection, record } = payload;
+    const { action, collection, record, auth, admin } = payload;
 
-    // Log webhook event
-    console.log(`[Webhook] ${action} on ${collection}:${record.id}`);
+    // Enhanced logging with context
+    console.log(`[Webhook] ${action.toUpperCase()} on ${collection}:${record.id}`, {
+      recordSlug: record.slug,
+      published: record.published,
+      active: record.active,
+      featured: record.featured,
+      user: auth?.email || admin?.email || 'system',
+      timestamp: new Date().toISOString(),
+    });
 
-    // Handle revalidation based on collection
-    await handlePocketBaseWebhook(collection);
+    // Handle revalidation based on collection and record data
+    const revalidationResult = await handlePocketBaseWebhook(collection, record, action);
 
-    // Return success response
+    // Return detailed success response
     return NextResponse.json({
       success: true,
       message: `Cache revalidated for ${collection}`,
+      collection,
+      action,
+      recordId: record.id,
+      recordSlug: record.slug,
+      revalidated: revalidationResult,
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
-    console.error('Webhook processing error:', error);
+    console.error('[Webhook] Processing error:', {
+      error: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      timestamp: new Date().toISOString(),
+    });
     
     return NextResponse.json(
       {
         success: false,
         error: 'Failed to process webhook',
         message: error instanceof Error ? error.message : 'Unknown error',
+        timestamp: new Date().toISOString(),
       },
       { status: 500 }
     );

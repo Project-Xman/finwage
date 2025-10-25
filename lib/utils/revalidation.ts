@@ -27,7 +27,7 @@ import { CACHE_TAGS } from '@/lib/utils/cache-config';
  */
 export async function revalidateTags(tags: string[]): Promise<void> {
   for (const tag of tags) {
-    revalidateTag(tag, 'page');
+    revalidateTag(tag);
   }
 }
 
@@ -42,7 +42,7 @@ export async function revalidateTags(tags: string[]): Promise<void> {
  * ```
  */
 export async function revalidateSingleTag(tag: string): Promise<void> {
-  revalidateTag(tag, 'page');
+  revalidateTag(tag);
 }
 
 // ============================================================
@@ -369,47 +369,186 @@ export async function revalidateByFrequency(
  * Call this from an API route that receives PocketBase webhooks
  * 
  * @param collection - PocketBase collection name
+ * @param record - The record that was modified
+ * @param action - The action performed (create, update, delete)
+ * @returns Object with revalidation details
  * 
  * @example
  * ```ts
  * // In app/api/webhooks/pocketbase/route.ts
  * export async function POST(request: Request) {
- *   const { collection } = await request.json();
- *   await handlePocketBaseWebhook(collection);
- *   return Response.json({ success: true });
+ *   const { collection, record, action } = await request.json();
+ *   const result = await handlePocketBaseWebhook(collection, record, action);
+ *   return Response.json({ success: true, revalidated: result });
  * }
  * ```
  */
 export async function handlePocketBaseWebhook(
-  collection: string
-): Promise<void> {
+  collection: string,
+  record?: { id: string; slug?: string; published?: boolean; active?: boolean; [key: string]: any },
+  action?: 'create' | 'update' | 'delete'
+): Promise<{ tags: string[]; paths: string[]; collection: string }> {
+  const revalidated = { tags: [] as string[], paths: [] as string[], collection };
+
+  // Collection mapping with enhanced revalidation logic
   const collectionMap: Record<string, () => Promise<void>> = {
-    Blogs: revalidateBlogs,
-    Authors: revalidateBlogs,
-    Category: revalidateBlogs,
-    Testimonials: revalidateTestimonials,
-    Pricing_Plans: revalidatePricing,
-    Features: revalidateFeatures,
-    Integrations: revalidateIntegrations,
-    Partners: revalidatePartners,
-    Jobs: revalidateJobs,
-    Employee_Benefits: revalidateJobs,
-    Locations: revalidateJobs,
-    Leadership: revalidateCompanyInfo,
-    Values: revalidateCompanyInfo,
-    Company_Milestones: revalidateCompanyInfo,
-    Stats: revalidateCompanyInfo,
-    Support: revalidateSupport,
-    Faqs: revalidateSupport,
-    Faq_Topics: revalidateSupport,
-    Contacts: revalidateSupport,
-    Press: revalidatePress,
+    // Content Collections
+    blogs: async () => {
+      revalidated.tags.push('blogs', 'authors', 'categories');
+      revalidated.paths.push('/blog');
+      if (record?.slug) {
+        revalidated.tags.push(`blog-${record.slug}`);
+        revalidated.paths.push(`/blog/${record.slug}`);
+      }
+      await revalidateBlogs();
+      if (record?.slug) {
+        await revalidateBlogBySlug(record.slug);
+      }
+    },
+    authors: async () => {
+      revalidated.tags.push('authors', 'blogs');
+      await revalidateBlogs();
+    },
+    categories: async () => {
+      revalidated.tags.push('categories', 'blogs');
+      await revalidateBlogs();
+    },
+
+    // Marketing Collections
+    testimonials: async () => {
+      revalidated.tags.push('testimonials');
+      revalidated.paths.push('/');
+      await revalidateTestimonials();
+    },
+    pricing_plans: async () => {
+      revalidated.tags.push('pricing');
+      revalidated.paths.push('/pricing', '/');
+      await revalidatePricing();
+    },
+    partners: async () => {
+      revalidated.tags.push('partners');
+      revalidated.paths.push('/');
+      await revalidatePartners();
+    },
+    press_releases: async () => {
+      revalidated.tags.push('press');
+      revalidated.paths.push('/resources');
+      await revalidatePress();
+    },
+
+    // Product Collections
+    features: async () => {
+      revalidated.tags.push('features');
+      revalidated.paths.push('/');
+      await revalidateFeatures();
+    },
+    integrations: async () => {
+      revalidated.tags.push('integrations');
+      revalidated.paths.push('/');
+      await revalidateIntegrations();
+    },
+
+    // Company Collections
+    leadership: async () => {
+      revalidated.tags.push('leadership');
+      revalidated.paths.push('/about');
+      await revalidateCompanyInfo();
+    },
+    company_values: async () => {
+      revalidated.tags.push('values');
+      revalidated.paths.push('/about');
+      await revalidateCompanyInfo();
+    },
+    milestones: async () => {
+      revalidated.tags.push('milestones');
+      revalidated.paths.push('/about');
+      await revalidateCompanyInfo();
+    },
+    company_stats: async () => {
+      revalidated.tags.push('stats');
+      revalidated.paths.push('/about', '/');
+      await revalidateCompanyInfo();
+    },
+
+    // Careers Collections
+    job_positions: async () => {
+      revalidated.tags.push('jobs');
+      revalidated.paths.push('/careers');
+      await revalidateJobs();
+    },
+    benefits: async () => {
+      revalidated.tags.push('benefits');
+      revalidated.paths.push('/careers');
+      await revalidateJobs();
+    },
+    office_locations: async () => {
+      revalidated.tags.push('locations');
+      revalidated.paths.push('/careers', '/contact');
+      await revalidateJobs();
+    },
+
+    // Support Collections
+    support_resources: async () => {
+      revalidated.tags.push('support');
+      revalidated.paths.push('/resources', '/contact');
+      await revalidateSupport();
+    },
+    faq_items: async () => {
+      revalidated.tags.push('faq');
+      revalidated.paths.push('/resources');
+      await revalidateSupport();
+    },
+    faq_categories: async () => {
+      revalidated.tags.push('faq');
+      revalidated.paths.push('/resources');
+      await revalidateSupport();
+    },
+    contact_options: async () => {
+      revalidated.tags.push('contacts');
+      revalidated.paths.push('/contact');
+      await revalidateSupport();
+    },
+
+    // Legacy collection names (for backward compatibility)
+    Blogs: async () => await collectionMap.blogs(),
+    Authors: async () => await collectionMap.authors(),
+    Category: async () => await collectionMap.categories(),
+    Testimonials: async () => await collectionMap.testimonials(),
+    Pricing_Plans: async () => await collectionMap.pricing_plans(),
+    Features: async () => await collectionMap.features(),
+    Integrations: async () => await collectionMap.integrations(),
+    Partners: async () => await collectionMap.partners(),
+    Jobs: async () => await collectionMap.job_positions(),
+    Employee_Benefits: async () => await collectionMap.benefits(),
+    Locations: async () => await collectionMap.office_locations(),
+    Leadership: async () => await collectionMap.leadership(),
+    Values: async () => await collectionMap.company_values(),
+    Company_Milestones: async () => await collectionMap.milestones(),
+    Stats: async () => await collectionMap.company_stats(),
+    Support: async () => await collectionMap.support_resources(),
+    Faqs: async () => await collectionMap.faq_items(),
+    Faq_Topics: async () => await collectionMap.faq_categories(),
+    Contacts: async () => await collectionMap.contact_options(),
+    Press: async () => await collectionMap.press_releases(),
   };
 
-  const revalidateFn = collectionMap[collection];
+  // Normalize collection name (handle both snake_case and PascalCase)
+  const normalizedCollection = collection.toLowerCase().replace(/[_\s]+/g, '_');
+  const revalidateFn = collectionMap[normalizedCollection] || collectionMap[collection];
+  
   if (revalidateFn) {
     await revalidateFn();
+    console.log(`[Revalidation] Successfully revalidated ${collection}:`, {
+      tags: revalidated.tags,
+      paths: revalidated.paths,
+      action,
+      recordId: record?.id,
+    });
+  } else {
+    console.warn(`[Revalidation] No handler found for collection: ${collection}`);
   }
+
+  return revalidated;
 }
 
 // ============================================================
