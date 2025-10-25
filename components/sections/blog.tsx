@@ -3,82 +3,50 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { getFeaturedBlogs, getBlogs } from "@/lib/services/blogs";
+import { getImageUrl } from "@/lib/utils/pocketbase";
+import type { BlogsResponse, CategoryResponse } from "@/types/pocketbase";
 
-// Placeholder images
-const imgFinWageChosenAsWorkdaysTrustedPartnerForOnDemandPayInnovation =
-  "https://picsum.photos/600/400";
-const imgCorporateWorkersBrainstormingTogether1 =
-  "https://picsum.photos/128/80";
-const imgCoupleDeskHoldingSmartphoneCreditCard2 =
-  "https://picsum.photos/129/80";
-const imgHealthyLifestyleSustainedHome1 = "https://picsum.photos/130/80";
-const imgCloseUpCompanyTeamWorking1 = "https://picsum.photos/131/80";
+type BlogWithExpand = BlogsResponse<unknown, { category?: CategoryResponse }>;
 
-const blogPosts = [
-  {
-    type: "REPORT",
-    title: "FinWage Tops List as #1 Adopted Financial Wellness Benefit",
-    image: imgCorporateWorkersBrainstormingTogether1,
-  },
-  {
-    type: "BLOG",
-    title: "How Improved Financial Wellness Can Help Employers",
-    image: imgCoupleDeskHoldingSmartphoneCreditCard2,
-  },
-  {
-    type: "BLOG",
-    title:
-      "Empower Your Workforce With Real-Time Digital Access Through FinWage Tips",
-    image: imgHealthyLifestyleSustainedHome1,
-  },
-  {
-    type: "BLOG",
-    title: "The Hidden Benefits of On-Demand Pay for Employers",
-    image: imgCloseUpCompanyTeamWorking1,
-  },
-  {
-    type: "BLOG",
-    title: "The Hidden Benefits of On-Demand Pay for Employers",
-    image: imgHealthyLifestyleSustainedHome1,
-  },
-];
+function BlogCard({ post }: { post: BlogWithExpand }) {
+  const categoryName = post.expand?.category?.name || 'BLOG';
+  const imageUrl = getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' });
 
-function BlogCard({
-  type,
-  title,
-  image,
-}: {
-  type: string;
-  title: string;
-  image: string;
-}) {
   return (
-    <Card className="rounded-lg hover:shadow-md transition-shadow border-0">
-      <CardContent className="p-0 flex gap-3 h-[104px] items-center">
-        <div className="flex-shrink-0 w-32 h-20 rounded-md overflow-hidden">
-          <Image
-            src={image}
-            alt={title}
-            width={128}
-            height={80}
-            className="w-full h-full object-cover"
-            unoptimized
-          />
-        </div>
-        <div className="flex-1 flex flex-col gap-2 pr-4">
-          <span className="text-xs font-bold text-gray-600 tracking-wider uppercase">
-            {type}
-          </span>
-          <h3 className="text-base font-bold text-[#1d44c3] leading-5 line-clamp-2">
-            {title}
-          </h3>
-        </div>
-      </CardContent>
-    </Card>
+    <Link href={`/blog/${post.slug}`}>
+      <Card className="rounded-lg hover:shadow-md transition-shadow border-0">
+        <CardContent className="p-0 flex gap-3 h-[104px] items-center">
+          <div className="flex-shrink-0 w-32 h-20 rounded-md overflow-hidden">
+            <Image
+              src={imageUrl}
+              alt={post.title}
+              width={128}
+              height={80}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="flex-1 flex flex-col gap-2 pr-4">
+            <span className="text-xs font-bold text-gray-600 tracking-wider uppercase">
+              {categoryName}
+            </span>
+            <h3 className="text-base font-bold text-[#1d44c3] leading-5 line-clamp-2">
+              {post.title}
+            </h3>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
 
-function FeaturedPost() {
+function FeaturedPost({ post }: { post: BlogWithExpand | null }) {
+  if (!post) {
+    return null;
+  }
+
+  const imageUrl = getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' });
+
   return (
     <div className="space-y-6">
       <Button
@@ -86,42 +54,40 @@ function FeaturedPost() {
         className="text-[#f64162] hover:text-[#f64162] font-bold inline-flex items-center gap-2 hover:gap-3 transition-all p-0 h-auto"
         asChild
       >
-        <Link href="#">
+        <Link href="/blog">
           Explore all resources
           <ArrowRight className="w-4 h-4" />
         </Link>
       </Button>
 
       <div className="space-y-6">
-        <div className="rounded-xl overflow-hidden shadow-lg">
-          <Image
-            src={
-              imgFinWageChosenAsWorkdaysTrustedPartnerForOnDemandPayInnovation
-            }
-            alt="FinWage Chosen as Workday's Trusted Partner for On-Demand Pay Innovation"
-            width={600}
-            height={400}
-            className="w-full h-auto"
-            unoptimized
-          />
-        </div>
+        <Link href={`/blog/${post.slug}`}>
+          <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+            <Image
+              src={imageUrl}
+              alt={post.title}
+              width={600}
+              height={400}
+              className="w-full h-auto"
+            />
+          </div>
+        </Link>
 
         <div className="space-y-4">
-          <h3 className="text-2xl md:text-3xl font-bold text-[#1d44c3] leading-8">
-            FinWage Chosen as Workday's Trusted Partner for On-Demand Pay
-            Innovation
-          </h3>
+          <Link href={`/blog/${post.slug}`}>
+            <h3 className="text-2xl md:text-3xl font-bold text-[#1d44c3] leading-8 hover:text-[#0d2463] transition-colors">
+              {post.title}
+            </h3>
+          </Link>
           <p className="text-gray-800 leading-6">
-            Together, the companies are delivering a more integrated experience
-            for joint customers—empowering employees to access their earned
-            wages whenever they need them most.
+            {post.excerpt}
           </p>
           <Button
             variant="ghost"
             className="text-[#f64162] hover:text-[#f64162] font-bold inline-flex items-center gap-2 hover:gap-3 transition-all p-0 h-auto"
             asChild
           >
-            <Link href="#">
+            <Link href={`/blog/${post.slug}`}>
               Learn more
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -132,7 +98,7 @@ function FeaturedPost() {
   );
 }
 
-function LatestPosts() {
+function LatestPosts({ posts }: { posts: BlogWithExpand[] }) {
   return (
     <div className="space-y-6">
       <div className="border-b border-gray-200 pb-4">
@@ -142,20 +108,24 @@ function LatestPosts() {
       </div>
 
       <div className="space-y-6">
-        {blogPosts.map((post, index) => (
-          <BlogCard
-            key={index}
-            type={post.type}
-            title={post.title}
-            image={post.image}
-          />
+        {posts.map((post) => (
+          <BlogCard key={post.id} post={post} />
         ))}
       </div>
     </div>
   );
 }
 
-export default function Blogs() {
+export default async function Blogs() {
+  // Fetch featured blog and latest blogs in parallel
+  const [featuredBlogs, latestBlogs] = await Promise.all([
+    getFeaturedBlogs(1),
+    getBlogs({ perPage: 5 }),
+  ]);
+
+  const featuredPost = (featuredBlogs[0] as BlogWithExpand) || null;
+  const latestPosts = latestBlogs.items as BlogWithExpand[];
+
   return (
     <section className="bg-[#f7f9ff] py-12 md:py-24 px-4 md:px-8 lg:px-32">
       <div className="max-w-7xl mx-auto">
@@ -173,8 +143,8 @@ export default function Blogs() {
 
         {/* Grid Layout - 1 column on mobile, 2 columns on md+ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-          <FeaturedPost />
-          <LatestPosts />
+          <FeaturedPost post={featuredPost} />
+          <LatestPosts posts={latestPosts} />
         </div>
       </div>
     </section>

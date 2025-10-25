@@ -2,12 +2,13 @@ import {
   Award,
   CheckCircle,
   FileText,
-  Globe,
   Lock,
   Shield,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { getComplianceItems, getSecurityFeatures } from "@/lib/services/compliance";
+import { renderIcon } from "@/lib/utils/icon-mapper";
 
 export const metadata = {
   title: "Compliance & Security - FinWage",
@@ -20,66 +21,15 @@ export const metadata = {
   },
 };
 
-export default function CompliancePage() {
-  const complianceItems = [
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: "AML Compliance",
-      description:
-        "Full Anti-Money Laundering protocols and Know Your Customer (KYC) verification processes",
-      details: [
-        "Transaction monitoring and reporting",
-        "Identity verification for all users",
-        "Suspicious activity detection",
-        "Regular compliance audits",
-      ],
-    },
-    {
-      icon: <Lock className="w-8 h-8" />,
-      title: "Data Protection & Privacy",
-      description:
-        "Bank-level encryption and comprehensive data protection measures",
-      details: [
-        "256-bit SSL encryption",
-        "GDPR compliant data handling",
-        "CCPA privacy protections",
-        "SOC 2 Type II certified",
-      ],
-    },
-    {
-      icon: <FileText className="w-8 h-8" />,
-      title: "Regulatory Licensing",
-      description: "Licensed and authorized in all operating jurisdictions",
-      details: [
-        "Licensed in all 50 US states",
-        "Money transmitter licenses",
-        "State-level compliance",
-        "Regular regulatory reporting",
-      ],
-    },
-    {
-      icon: <Globe className="w-8 h-8" />,
-      title: "International Standards",
-      description: "Meeting global security and compliance standards",
-      details: [
-        "ISO 27001 certified",
-        "PCI DSS compliant",
-        "FINRA compliance",
-        "Regular third-party audits",
-      ],
-    },
-  ];
+export const revalidate = 3600;
 
-  const securityFeatures = [
-    "Multi-factor authentication",
-    "Real-time fraud detection",
-    "Encrypted data storage",
-    "Regular security audits",
-    "24/7 monitoring systems",
-    "Secure API endpoints",
-    "Role-based access controls",
-    "Automatic security updates",
-  ];
+export default async function CompliancePage() {
+  const [complianceResult, securityFeatures] = await Promise.all([
+    getComplianceItems({ perPage: 20 }),
+    getSecurityFeatures({ perPage: 50 }),
+  ]);
+
+  const complianceItems = complianceResult.items;
 
   return (
     <main className="min-h-screen">
@@ -116,30 +66,38 @@ export default function CompliancePage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {complianceItems.map((item) => (
-              <Card
-                key={item.title}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 border-0"
-              >
-                <CardContent className="p-8">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600 mb-6">{item.description}</p>
-                  <ul className="space-y-3">
-                    {item.details.map((detail) => (
-                      <li key={detail} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-700">{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+            {complianceItems.length > 0 ? (
+              complianceItems.map((item) => (
+                <Card
+                  key={item.id}
+                  className="bg-gradient-to-br from-blue-50 to-purple-50 border-0"
+                >
+                  <CardContent className="p-8">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
+                      {renderIcon(item.icon, "w-8 h-8")}
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 mb-6">{item.description}</p>
+                    <ul className="space-y-3">
+                      {Array.isArray(item.details) && item.details.map((detail: string, index: number) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-700">{detail}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <div className="col-span-2 text-center py-12">
+                <p className="text-gray-600 text-lg">
+                  Compliance information is currently being updated. Please check back soon.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -191,14 +149,20 @@ export default function CompliancePage() {
                 Security Features
               </h3>
               <div className="space-y-4">
-                {securityFeatures.map((feature) => (
-                  <div key={feature} className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                      <CheckCircle className="w-4 h-4 text-white" />
+                {securityFeatures.length > 0 ? (
+                  securityFeatures.map((feature) => (
+                    <div key={feature.id} className="flex items-center gap-3">
+                      <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-gray-700">{feature.description}</span>
                     </div>
-                    <span className="text-gray-700">{feature}</span>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p className="text-gray-600">
+                    Security features information is currently being updated.
+                  </p>
+                )}
               </div>
             </div>
           </div>

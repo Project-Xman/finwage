@@ -27,46 +27,24 @@ import type {
   FaqsResponse,
   PressResponse,
   EnquiriesResponse,
+  ComplianceItemsResponse,
+  SecurityFeaturesResponse,
+  EmployerBenefitsResponse,
+  EmployerStatsResponse,
+  ProcessStepsResponse,
+  CtaCardsResponse,
 } from '@/types/pocketbase';
 
 // ============================================================
 // CONFIGURATION
 // ============================================================
 
+import { CACHE_TAGS, CACHE_DURATION } from '@/lib/utils/cache-config';
+
 const POCKETBASE_URL = process.env.NEXT_PUBLIC_POCKETBASE_URL || 'http://127.0.0.1:8090';
 
-// Cache tags for revalidation
-export const CACHE_TAGS = {
-  BLOGS: 'blogs',
-  AUTHORS: 'authors',
-  TESTIMONIALS: 'testimonials',
-  PRICING: 'pricing',
-  PARTNERS: 'partners',
-  FEATURES: 'features',
-  INTEGRATIONS: 'integrations',
-  LEADERSHIP: 'leadership',
-  VALUES: 'values',
-  MILESTONES: 'milestones',
-  JOBS: 'jobs',
-  BENEFITS: 'benefits',
-  STATS: 'stats',
-  CONTACTS: 'contacts',
-  SUPPORT: 'support',
-  LOCATIONS: 'locations',
-  FAQ: 'faq',
-  CATEGORIES: 'categories',
-  PRESS: 'press',
-  ENQUIRIES: 'enquiries',
-} as const;
-
-// Cache durations (in seconds)
-export const CACHE_DURATION = {
-  STATIC: 3600 * 24 * 7, // 1 week - for rarely changing content
-  LONG: 3600 * 24, // 1 day - for stable content
-  MEDIUM: 3600, // 1 hour - for moderately dynamic content
-  SHORT: 300, // 5 minutes - for frequently updated content
-  DYNAMIC: 0, // No cache - for real-time data
-} as const;
+// Re-export cache configuration for backward compatibility
+export { CACHE_TAGS, CACHE_DURATION };
 
 // ============================================================
 // TYPES
@@ -655,7 +633,7 @@ export async function getContactOptions(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<ContactsResponse>> {
   return fetchCollection<ContactsResponse>('Contacts', {
-    sort: options.sort || '-featured',
+    sort: options.sort || '-is_featured',
     ...options,
   }, {
     revalidate: CACHE_DURATION.LONG,
@@ -665,7 +643,7 @@ export async function getContactOptions(
 
 export async function getFeaturedContactOptions(): Promise<ContactsResponse[]> {
   const response = await fetchCollection<ContactsResponse>('Contacts', {
-    filter: 'featured = true',
+    filter: 'is_featured = true',
   }, {
     revalidate: CACHE_DURATION.LONG,
     tags: [CACHE_TAGS.CONTACTS, 'featured-contacts'],
@@ -880,6 +858,145 @@ export async function createEnquiry(
   }
 
   return response.json();
+}
+
+// ============================================================
+// COMPLIANCE ITEMS API
+// ============================================================
+
+export async function getComplianceItems(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<ComplianceItemsResponse>> {
+  return fetchCollection<ComplianceItemsResponse>('Compliance_Items', {
+    sort: options.sort || 'order',
+    ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.COMPLIANCE],
+  });
+}
+
+// ============================================================
+// SECURITY FEATURES API
+// ============================================================
+
+export async function getSecurityFeatures(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<SecurityFeaturesResponse>> {
+  return fetchCollection<SecurityFeaturesResponse>('Security_Features', {
+    sort: options.sort || 'order',
+    ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.SECURITY],
+  });
+}
+
+// ============================================================
+// EMPLOYEE BENEFITS API (Marketing Pages)
+// ============================================================
+
+export async function getEmployeeBenefitsMarketing(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<EmployeeBenefitsResponse>> {
+  return fetchCollection<EmployeeBenefitsResponse>('Employee_Benefits', {
+    sort: options.sort || 'order',
+    ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.EMPLOYEE_BENEFITS],
+  });
+}
+
+// ============================================================
+// EMPLOYER BENEFITS API
+// ============================================================
+
+export async function getEmployerBenefits(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<EmployerBenefitsResponse>> {
+  return fetchCollection<EmployerBenefitsResponse>('Employer_Benefits', {
+    sort: options.sort || 'order',
+    ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.EMPLOYER_BENEFITS],
+  });
+}
+
+// ============================================================
+// FAQS API (Marketing Pages with Category Filtering)
+// ============================================================
+
+export async function getFAQsMarketing(
+  options: ListOptions & { category?: string } = {}
+): Promise<PocketBaseListResponse<FaqsResponse>> {
+  const filter = options.category 
+    ? `category_text = "${options.category}"` 
+    : options.filter;
+  
+  return fetchCollection<FaqsResponse>('Faqs', {
+    sort: options.sort || 'order',
+    filter,
+    perPage: options.perPage || 50,
+    ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.FAQ, options.category ? `faq-${options.category}` : undefined].filter(Boolean) as string[],
+  });
+}
+
+// ============================================================
+// PROCESS STEPS API
+// ============================================================
+
+export async function getProcessSteps(
+  options: ListOptions & { category?: string } = {}
+): Promise<PocketBaseListResponse<ProcessStepsResponse>> {
+  const filter = options.category 
+    ? `category = "${options.category}"` 
+    : options.filter;
+  
+  return fetchCollection<ProcessStepsResponse>('Process_Steps', {
+    sort: options.sort || 'order',
+    filter,
+    ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.PROCESS_STEPS, options.category ? `process-${options.category}` : undefined].filter(Boolean) as string[],
+  });
+}
+
+// ============================================================
+// EMPLOYER STATS API
+// ============================================================
+
+export async function getEmployerStats(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<EmployerStatsResponse>> {
+  return fetchCollection<EmployerStatsResponse>('Employer_Stats', {
+    sort: options.sort || 'order',
+    ...options,
+  }, {
+    revalidate: CACHE_DURATION.MEDIUM,
+    tags: [CACHE_TAGS.EMPLOYER_STATS],
+  });
+}
+
+// ============================================================
+// CTA CARDS API
+// ============================================================
+
+export async function getCTACards(
+  options: ListOptions = {}
+): Promise<PocketBaseListResponse<CtaCardsResponse>> {
+  return fetchCollection<CtaCardsResponse>('CTA_Cards', {
+    sort: options.sort || 'order',
+    ...options,
+  }, {
+    revalidate: CACHE_DURATION.LONG,
+    tags: [CACHE_TAGS.CTA_CARDS],
+  });
 }
 
 // ============================================================

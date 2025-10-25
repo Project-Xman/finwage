@@ -1,6 +1,8 @@
 import { ArrowRight, Building2, Check, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { getProcessSteps } from "@/lib/services/process";
+import { getEmployerBenefits } from "@/lib/services/benefits";
 
 export const metadata = {
   title: "How It Works - FinWage",
@@ -13,39 +15,14 @@ export const metadata = {
   },
 };
 
-export default function HowItWorksPage() {
-  const employeeSteps = [
-    {
-      step: "01",
-      title: "Request",
-      description:
-        "Access your earned wages instantly through the FinWage app. Simple, secure, and stress-free.",
-      icon: "💳",
-    },
-    {
-      step: "02",
-      title: "Advance",
-      description:
-        "Get your money deposited directly to your account within minutes. No waiting for payday.",
-      icon: "⚡",
-    },
-    {
-      step: "03",
-      title: "Repay",
-      description:
-        "Automatic repayment on your next payday. No hidden fees, no debt cycles.",
-      icon: "✓",
-    },
-  ];
+export const revalidate = 3600;
 
-  const employerBenefits = [
-    "Seamless HR/Payroll Integration",
-    "Zero Administrative Burden",
-    "Boost Employee Satisfaction",
-    "Reduce Turnover by 27%",
-    "Attract Top Talent",
-    "Compliance Built-In",
-  ];
+export default async function HowItWorksPage() {
+  // Fetch data from PocketBase in parallel
+  const [employeeSteps, employerBenefits] = await Promise.all([
+    getProcessSteps({ perPage: 10, category: 'employee' }),
+    getEmployerBenefits({ perPage: 20 }),
+  ]);
 
   return (
     <main className="min-h-screen">
@@ -81,29 +58,35 @@ export default function HowItWorksPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-            {employeeSteps.map((item, index) => (
-              <div key={item.step} className="relative">
-                <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 h-full">
-                  <CardContent className="p-8">
-                    <div className="text-6xl mb-6">{item.icon}</div>
-                    <div className="text-sm font-bold text-[#1d44c3] mb-2">
-                      STEP {item.step}
+            {employeeSteps.length > 0 ? (
+              employeeSteps.map((item, index) => (
+                <div key={item.id} className="relative">
+                  <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 h-full">
+                    <CardContent className="p-8">
+                      <div className="text-6xl mb-6">{item.icon}</div>
+                      <div className="text-sm font-bold text-[#1d44c3] mb-2">
+                        STEP {item.step}
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                  {index < employeeSteps.length - 1 && (
+                    <div className="hidden md:block absolute top-1/2 -right-6 transform -translate-y-1/2">
+                      <ArrowRight className="w-12 h-12 text-blue-200" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {item.description}
-                    </p>
-                  </CardContent>
-                </Card>
-                {index < employeeSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-6 transform -translate-y-1/2">
-                    <ArrowRight className="w-12 h-12 text-blue-200" />
-                  </div>
-                )}
+                  )}
+                </div>
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-12">
+                <p className="text-gray-500">No process steps available at this time.</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -126,14 +109,18 @@ export default function HowItWorksPage() {
               </p>
 
               <div className="space-y-4 mb-8">
-                {employerBenefits.map((benefit) => (
-                  <div key={benefit} className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                      <Check className="w-4 h-4 text-white" />
+                {employerBenefits.length > 0 ? (
+                  employerBenefits.map((benefit) => (
+                    <div key={benefit.id} className="flex items-center gap-3">
+                      <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-lg text-gray-700">{benefit.title}</span>
                     </div>
-                    <span className="text-lg text-gray-700">{benefit}</span>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p className="text-gray-500">No employer benefits available at this time.</p>
+                )}
               </div>
 
               <Button size="lg" className="bg-[#1d44c3] hover:bg-[#0d2463]">

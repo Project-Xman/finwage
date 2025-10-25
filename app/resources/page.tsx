@@ -6,10 +6,15 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
+import { Suspense } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
+import { SupportResourcesSection } from "@/components/sections/support-resources";
+import { FAQSection } from "@/components/sections/faq";
+import { PressReleaseSection } from "@/components/sections/press";
 
 export const metadata = {
   title: "Resources - FinWage",
@@ -74,25 +79,6 @@ export default function ResourcesPage() {
       name: "Industry News",
       count: 32,
       icon: <BookOpen className="w-6 h-6" />,
-    },
-  ];
-
-  const pressReleases = [
-    {
-      title:
-        "FinWage Raises $25M Series A to Expand Financial Wellness Platform",
-      date: "December 2024",
-      source: "TechCrunch",
-    },
-    {
-      title: "FinWage Named 'Best Workplace Benefit' by HR Tech Awards",
-      date: "November 2024",
-      source: "HR Technology",
-    },
-    {
-      title: "100,000 Workers Now Using FinWage for Instant Wage Access",
-      date: "October 2024",
-      source: "Business Wire",
     },
   ];
 
@@ -284,38 +270,99 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* Press & Awards */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-12 text-center">
-            Press & Awards
-          </h2>
-          <div className="space-y-6 max-w-3xl mx-auto">
-            {pressReleases.map((press, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 hover:shadow-lg transition-all"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      {press.title}
-                    </h3>
-                    <div className="flex items-center gap-3 text-sm text-gray-600">
-                      <span>{press.date}</span>
-                      <span>•</span>
-                      <span className="text-[#1d44c3] font-semibold">
-                        {press.source}
-                      </span>
-                    </div>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Press & Awards - Dynamic from PocketBase */}
+      <Suspense fallback={<PressReleasesSkeleton />}>
+        <PressReleaseSection
+          title="Press & Awards"
+          limit={3}
+          showFeaturedOnly={true}
+        />
+      </Suspense>
+
+      {/* Support Resources - Dynamic from PocketBase */}
+      <Suspense fallback={<SupportResourcesSkeleton />}>
+        <SupportResourcesSection
+          title="Help & Documentation"
+          description="Access guides, tutorials, and documentation"
+          grouped={true}
+        />
+      </Suspense>
+
+      {/* FAQ Section - Dynamic from PocketBase */}
+      <Suspense fallback={<FAQSkeleton />}>
+        <FAQSection
+          title="Common Questions"
+          description="Quick answers to frequently asked questions"
+          showFeaturedOnly={true}
+          limit={6}
+        />
+      </Suspense>
     </main>
+  );
+}
+
+// Loading skeletons
+function SupportResourcesSkeleton() {
+  return (
+    <section className="py-16 md:py-24 bg-white">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="text-center mb-16">
+          <Skeleton className="h-12 w-96 mx-auto mb-4" />
+          <Skeleton className="h-6 w-64 mx-auto" />
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <Card key={i}>
+              <div className="p-6">
+                <Skeleton className="h-12 w-12 rounded-full mb-4" />
+                <Skeleton className="h-6 w-full mb-2" />
+                <Skeleton className="h-4 w-3/4 mb-4" />
+                <Skeleton className="h-4 w-32" />
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQSkeleton() {
+  return (
+    <section className="py-16 md:py-24 bg-gray-50">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="text-center mb-16">
+          <Skeleton className="h-12 w-96 mx-auto mb-4" />
+          <Skeleton className="h-6 w-64 mx-auto" />
+        </div>
+        <div className="max-w-3xl mx-auto space-y-4">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <Skeleton key={i} className="h-16 w-full" />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PressReleasesSkeleton() {
+  return (
+    <section className="py-16 md:py-24 bg-white">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="text-center mb-12">
+          <Skeleton className="h-12 w-96 mx-auto mb-4" />
+        </div>
+        <div className="space-y-6 max-w-3xl mx-auto">
+          {[1, 2, 3].map((i) => (
+            <Card key={i} className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+              <div className="p-6">
+                <Skeleton className="h-6 w-full mb-2" />
+                <Skeleton className="h-4 w-48" />
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

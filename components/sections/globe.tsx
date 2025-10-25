@@ -2,6 +2,8 @@
 import { COBEOptions } from "cobe";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import type { StatsResponse } from "@/types/pocketbase";
+import { Collections } from "@/types/pocketbase";
 
 const World = dynamic(
   () => import("@/components/ui/globe").then((m) => m.Globe),
@@ -10,49 +12,27 @@ const World = dynamic(
   }
 );
 
-
-const stats = [
-  {
-    value: "500M+",
-    description: "API requests per day, peaking at 13,000 requests a second.",
-  },
-  {
-    value: "99.999%",
-    description: "historical uptime for Stripe services.",
-  },
-  {
-    value: "47+",
-    description: "countries with local acquiring.",
-  },
-  {
-    value: "135+",
-    description: "currencies and payment methods supported.",
-  },
-];
-
 function StatCard({
-  value,
-  description,
+  stat,
 }: {
-  value: string;
-  description: string;
+  stat: StatsResponse;
 }) {
   return (
     <div className="flex flex-col gap-2 w-full">
       <div className="relative">
         <div className="absolute bg-white h-6 left-0 top-1 w-px" />
         <div className="text-xl md:text-2xl text-white tracking-tight pl-4">
-          <p className="leading-6 md:leading-8">{value}</p>
+          <p className="leading-6 md:leading-8">{stat.value}</p>
         </div>
       </div>
       <div className="text-xs md:text-sm lg:text-base text-white tracking-wide pl-4 leading-5 md:leading-6">
-        <p>{description}</p>
+        <p>{stat.description || stat.metric}</p>
       </div>
     </div>
   );
 }
 
-export default function Global() {
+export default function Global({ stats }: { stats: StatsResponse[] }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -128,13 +108,22 @@ export default function Global() {
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
-              {stats.map((stat, index) => (
-                <StatCard
-                  key={index}
-                  value={stat.value}
-                  description={stat.description}
-                />
-              ))}
+              {stats.length > 0 ? (
+                stats.map((stat) => (
+                  <StatCard
+                    key={stat.id}
+                    stat={stat}
+                  />
+                ))
+              ) : (
+                // Fallback stats if none are available
+                <>
+                  <StatCard stat={{ id: '1', value: '500M+', description: 'API requests per day', metric: 'API requests', order: 1, label: 'API Requests', collectionId: '', collectionName: Collections.Stats, created: '', updated: '' }} />
+                  <StatCard stat={{ id: '2', value: '99.999%', description: 'historical uptime', metric: 'Uptime', order: 2, label: 'Uptime', collectionId: '', collectionName: Collections.Stats, created: '', updated: '' }} />
+                  <StatCard stat={{ id: '3', value: '47+', description: 'countries with local acquiring', metric: 'Countries', order: 3, label: 'Countries', collectionId: '', collectionName: Collections.Stats, created: '', updated: '' }} />
+                  <StatCard stat={{ id: '4', value: '135+', description: 'currencies and payment methods supported', metric: 'Currencies', order: 4, label: 'Currencies', collectionId: '', collectionName: Collections.Stats, created: '', updated: '' }} />
+                </>
+              )}
             </div>
           </div>
         </div>

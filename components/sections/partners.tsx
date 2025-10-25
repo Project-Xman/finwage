@@ -1,15 +1,10 @@
-const companies = [
-  "Google",
-  "Microsoft",
-  "Amazon",
-  "Netflix",
-  "Uber",
-  "Spotify",
-  "Airbnb",
-  "Tesla",
-];
+import { getFeaturedPartners } from "@/lib/services/partners";
+import { getImageUrl } from "@/lib/utils/pocketbase";
+import Image from "next/image";
 
-export default function Partners() {
+export default async function Partners() {
+  const partners = await getFeaturedPartners(8);
+
   return (
     <div
       className="bg-[#f6f8ff] relative w-full py-16 md:py-24"
@@ -27,13 +22,23 @@ export default function Partners() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 lg:gap-16 items-center justify-items-center">
-          {companies.map((logo) => (
-            <div key={logo} className="flex items-center justify-center">
-              <img
-                src={`https://cdn.magicui.design/companies/${logo}.svg`}
-                alt={`${logo} logo`}
-                className="h-[40px] w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-              />
+          {partners.map((partner) => (
+            <div key={partner.id} className="flex items-center justify-center">
+              {partner.logo ? (
+                <Image
+                  src={getImageUrl(partner, partner.logo, {
+                    fallback: "/placeholder.jpg",
+                  })}
+                  alt={`${partner.name} logo`}
+                  width={160}
+                  height={80}
+                  className="h-[40px] w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                />
+              ) : (
+                <span className="text-lg font-medium text-gray-700">
+                  {partner.name}
+                </span>
+              )}
             </div>
           ))}
         </div>

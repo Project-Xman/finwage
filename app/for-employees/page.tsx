@@ -1,21 +1,18 @@
-import {
-  ArrowRight,
-  Clock,
-  DollarSign,
-  Heart,
-  Shield,
-  TrendingUp,
-  Zap,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { getEmployeeBenefits } from "@/lib/services/benefits";
+import { getTestimonials } from "@/lib/services/testimonials";
+import { getFAQs } from "@/lib/services/faqs";
+import { renderIcon } from "@/lib/utils/icon-mapper";
+import { getImageUrl } from "@/lib/utils/pocketbase";
 
 export const metadata = {
   title: "For Employees - FinWage",
@@ -28,120 +25,18 @@ export const metadata = {
   },
 };
 
-export default function ForEmployeesPage() {
-  const benefits = [
-    {
-      id: "instant-access",
-      icon: <Zap className="w-8 h-8" />,
-      title: "Instant Access",
-      description:
-        "Get your earned wages in minutes, not weeks. No waiting for payday when emergencies happen.",
-    },
-    {
-      id: "zero-fees",
-      icon: <Shield className="w-8 h-8" />,
-      title: "Zero Fees",
-      description:
-        "Completely free for employees. No hidden charges, no interest, no debt traps.",
-    },
-    {
-      id: "stress-free",
-      icon: <Heart className="w-8 h-8" />,
-      title: "Stress-Free",
-      description:
-        "Say goodbye to payday loans and overdraft fees. Access your own money when you need it.",
-    },
-    {
-      id: "build-savings",
-      icon: <TrendingUp className="w-8 h-8" />,
-      title: "Build Savings",
-      description:
-        "Set automatic savings goals and watch your financial wellness grow over time.",
-    },
-    {
-      id: "24-7-available",
-      icon: <Clock className="w-8 h-8" />,
-      title: "24/7 Available",
-      description:
-        "Access your account anytime, anywhere. Financial freedom on your schedule.",
-    },
-    {
-      id: "track-earnings",
-      icon: <DollarSign className="w-8 h-8" />,
-      title: "Track Earnings",
-      description:
-        "See your earned wages in real-time. Always know exactly what you have available.",
-    },
-  ];
+// ISR revalidation configuration (3600 seconds = 1 hour)
+export const revalidate = 3600;
 
-  const testimonials = [
-    {
-      id: "sarah-m",
-      name: "Sarah M.",
-      role: "Retail Associate",
-      image: "/assets/person-1.png",
-      quote:
-        "FinWage saved me from a $35 overdraft fee when my car broke down. Having access to my earned wages gave me peace of mind.",
-      rating: 5,
-    },
-    {
-      id: "james-t",
-      name: "James T.",
-      role: "Warehouse Worker",
-      image: "/assets/person-2.png",
-      quote:
-        "I used to stress about money constantly. Now I can handle unexpected expenses without going into debt. Game changer!",
-      rating: 5,
-    },
-    {
-      id: "maria-l",
-      name: "Maria L.",
-      role: "Healthcare Worker",
-      image: "/assets/person-3.png",
-      quote:
-        "The savings feature helped me build an emergency fund for the first time in my life. I feel so much more secure now.",
-      rating: 5,
-    },
-  ];
+export default async function ForEmployeesPage() {
+  // Fetch data from PocketBase using Promise.all for parallel requests
+  const [benefits, testimonialsResult, faqs] = await Promise.all([
+    getEmployeeBenefits({ perPage: 20 }),
+    getTestimonials({ perPage: 10 }),
+    getFAQs({ perPage: 50, category: 'employee' }),
+  ]);
 
-  const faqs = [
-    {
-      id: "is-finwage-free",
-      question: "Is FinWage really free?",
-      answer:
-        "Yes! FinWage is 100% free for employees. No fees, no interest, no hidden charges. Your employer covers the cost as a benefit.",
-    },
-    {
-      id: "how-quickly-access-money",
-      question: "How quickly can I access my money?",
-      answer:
-        "Once approved, funds are typically deposited to your account within minutes. Most transfers complete in under 5 minutes.",
-    },
-    {
-      id: "is-information-secure",
-      question: "Is my information secure?",
-      answer:
-        "Absolutely. We use bank-level 256-bit encryption and are fully compliant with all data protection regulations. Your information is completely safe.",
-    },
-    {
-      id: "how-much-can-access",
-      question: "How much can I access?",
-      answer:
-        "You can access up to 50% of your earned wages at any time. The exact amount depends on how many hours you've worked since your last payday.",
-    },
-    {
-      id: "when-repay",
-      question: "When do I repay?",
-      answer:
-        "Repayment happens automatically on your next payday. The amount you accessed is simply deducted from your regular paycheck.",
-    },
-    {
-      id: "affect-credit-score",
-      question: "Will this affect my credit score?",
-      answer:
-        "No. FinWage doesn't report to credit bureaus and accessing your earned wages has zero impact on your credit score.",
-    },
-  ];
+  const testimonials = testimonialsResult.items;
 
   return (
     <main className="min-h-screen">
@@ -213,20 +108,28 @@ export default function ForEmployeesPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {benefits.map((benefit) => (
-              <Card
-                key={benefit.id}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
-              >
-                <CardContent className="p-8">
-                  <div className="text-[#1d44c3] mb-4">{benefit.icon}</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-600">{benefit.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+            {benefits.length > 0 ? (
+              benefits.map((benefit) => (
+                <Card
+                  key={benefit.id}
+                  className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
+                >
+                  <CardContent className="p-8">
+                    <div className="text-[#1d44c3] mb-4">
+                      {renderIcon(benefit.icon, "w-8 h-8")}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-gray-600">{benefit.description}</p>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-gray-600">No benefits available at this time.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -244,43 +147,51 @@ export default function ForEmployeesPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial) => (
-              <Card key={testimonial.id} className="shadow-lg hover:shadow-xl transition-all">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden">
-                      <Image
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div>
-                      <div className="font-bold text-gray-900">
-                        {testimonial.name}
+            {testimonials.length > 0 ? (
+              testimonials.map((testimonial) => (
+                <Card key={testimonial.id} className="shadow-lg hover:shadow-xl transition-all">
+                  <CardContent className="p-8">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-200">
+                        <Image
+                          src={getImageUrl(testimonial, testimonial.image || '', {
+                            fallback: '/assets/person-1.png'
+                          })}
+                          alt={testimonial.name}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
-                      <div className="text-sm text-gray-600">
-                        {testimonial.role}
+                      <div>
+                        <div className="font-bold text-gray-900">
+                          {testimonial.name}
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {testimonial.position || 'Employee'}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <span
-                        key={`${testimonial.id}-star-${i}`}
-                        className="text-yellow-400 text-xl"
-                      >
-                        ★
-                      </span>
-                    ))}
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    "{testimonial.quote}"
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(testimonial.rating || 5)].map((_, i) => (
+                        <span
+                          key={`${testimonial.id}-star-${i}`}
+                          className="text-yellow-400 text-xl"
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-gray-700 leading-relaxed">
+                      "{testimonial.quote}"
+                    </p>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-gray-600">No testimonials available at this time.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -298,18 +209,24 @@ export default function ForEmployeesPage() {
           </div>
 
           <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible>
-              {faqs.map((faq, index) => (
-                <AccordionItem key={faq.id} value={`item-${index}`}>
-                  <AccordionTrigger className="text-lg font-bold text-gray-900 hover:text-[#1d44c3]">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 leading-relaxed">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            {faqs.length > 0 ? (
+              <Accordion type="single" collapsible>
+                {faqs.map((faq, index) => (
+                  <AccordionItem key={faq.id} value={`item-${index}`}>
+                    <AccordionTrigger className="text-lg font-bold text-gray-900 hover:text-[#1d44c3]">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-600 leading-relaxed">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-600">No FAQs available at this time.</p>
+              </div>
+            )}
           </div>
 
           <div className="text-center mt-12">

@@ -1,37 +1,12 @@
-"use client";
-
-import { ImagePaths } from "@/lib/assets";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { getCTACards } from "@/lib/services/cta";
+import { renderIcon } from "@/lib/utils/icon-mapper";
+import type { CtaCardsResponse } from "@/types/pocketbase";
 
-interface CardData {
-  icon: string;
-  bgColor: string;
-  title: string;
-  points: string[];
-}
-
-const cards: CardData[] = [
-  {
-    icon: ImagePaths.CHECK_3D,
-    bgColor: "bg-blue-100",
-    title: "Effortless and Safe for Your Business",
-    points: [
-      "Maintain your existing payroll processes—FinWage manages everything compliantly.",
-      "Connects effortlessly with HCM, payroll, banking, and benefits apps.",
-    ],
-  },
-  {
-    icon: ImagePaths.LOCK_3D,
-    bgColor: "bg-green-100",
-    title: "Empowering Your Workforce",
-    points: [
-      "Employees gain greater financial control, with access to up to 100% of their FinWage balance to navigate unexpected financial challenges.",
-      "Start instantly, no prior bank account needed.",
-    ],
-  },
-];
+// Type for CTA cards with properly typed points array
+type CtaCard = CtaCardsResponse<string[]>;
 
 function LetsTalkButton() {
   return (
@@ -60,7 +35,10 @@ function HeroSection() {
   );
 }
 
-function CtaCard({ icon, bgColor, title, points }: CardData) {
+function CtaCardComponent({ icon, bgColor, title, points }: CtaCard) {
+  // Check if icon is an image path (starts with / or http)
+  const isImageIcon = icon.startsWith('/') || icon.startsWith('http');
+
   return (
     <Card className="bg-white rounded-2xl md:rounded-3xl border border-[#d9d8d8] shadow-sm hover:shadow-md transition-shadow duration-200 h-full">
       <CardContent className="p-6 md:p-8 flex flex-col h-full">
@@ -70,13 +48,19 @@ function CtaCard({ icon, bgColor, title, points }: CardData) {
             <div
               className={`size-12 md:size-14 ${bgColor} rounded-lg flex items-center justify-center flex-shrink-0`}
             >
-              <Image
-                alt={`${title} icon`}
-                className="w-full h-full object-cover rounded-lg"
-                width={45}
-                height={45}
-                src={icon}
-              />
+              {isImageIcon ? (
+                <Image
+                  alt={`${title} icon`}
+                  className="w-full h-full object-cover rounded-lg"
+                  width={45}
+                  height={45}
+                  src={icon}
+                />
+              ) : (
+                <div className="text-[#1d44c3]">
+                  {renderIcon(icon, "w-6 h-6 md:w-7 md:h-7")}
+                </div>
+              )}
             </div>
 
             <div className="flex-1">
@@ -89,7 +73,7 @@ function CtaCard({ icon, bgColor, title, points }: CardData) {
 
         {/* Content */}
         <div className="flex-1 space-y-3 md:space-y-4">
-          {points.map((point, index) => (
+          {points && points.map((point: string, index: number) => (
             <p
               key={index}
               className="text-sm md:text-base text-gray-700 leading-relaxed"
@@ -103,38 +87,44 @@ function CtaCard({ icon, bgColor, title, points }: CardData) {
   );
 }
 
-function FeaturesGrid() {
+function FeaturesGrid({ cards }: { cards: CtaCard[] }) {
+  if (cards.length === 0) {
+    return null;
+  }
+
   return (
     <div className="w-full">
       {/* Mobile: Single column (flex-col), MD+: Two column grid */}
       <div className="flex flex-col gap-6 md:grid md:grid-cols-2 md:gap-8 lg:gap-10">
-        {cards.map((card, index) => (
-          <CtaCard key={index} {...card} />
+        {cards.map((card) => (
+          <CtaCardComponent key={card.id} {...card} />
         ))}
       </div>
     </div>
   );
 }
 
-function ContentContainer() {
+function ContentContainer({ cards }: { cards: CtaCard[] }) {
   return (
     <Card className="bg-white rounded-2xl md:rounded-3xl border border-[#ecebeb] shadow-xl mx-4 md:mx-8 lg:mx-16 xl:mx-32 my-8 md:my-16">
       <CardContent className="p-6 md:p-8 lg:p-12 xl:p-16 space-y-8 md:space-y-12 lg:space-y-16">
         <HeroSection />
-        <FeaturesGrid />
+        <FeaturesGrid cards={cards} />
       </CardContent>
     </Card>
   );
 }
 
-export default function Cta() {
+export default async function Cta() {
+  const cards = await getCTACards({ perPage: 10 }) as CtaCard[];
+
   return (
     <div
       className="bg-white w-full py-8 md:py-16 lg:py-24 flex items-center justify-center"
       data-name="CTA"
     >
       <div className="w-full max-w-7xl">
-        <ContentContainer />
+        <ContentContainer cards={cards} />
       </div>
     </div>
   );

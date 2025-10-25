@@ -4,20 +4,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { FaqsResponse, FaqTopicsResponse } from "@/types/pocketbase";
+import { getFaqItems, getFaqTopics } from "@/lib/services/support";
 
-interface FAQSectionProps {
-  getFaqItems: (options?: any) => Promise<{ items: FaqsResponse[] }>;
-  getFaqTopics: (options?: any) => Promise<{ items: FaqTopicsResponse[] }>;
-}
-
-export async function FAQSection({ getFaqItems, getFaqTopics }: FAQSectionProps) {
+export async function FAQSection() {
   // First, get the "Pricing & Fees" category
-  const categoriesResponse = await getFaqTopics({
-    filter: 'name = "Pricing & Fees"'
-  });
+  const categories = await getFaqTopics();
   
-  const pricingCategory = categoriesResponse.items[0];
+  const pricingCategory = categories.find(cat => cat.name === "Pricing & Fees");
   
   if (!pricingCategory) {
     console.error('Pricing & Fees category not found');
@@ -38,13 +31,9 @@ export async function FAQSection({ getFaqItems, getFaqTopics }: FAQSectionProps)
   }
 
   // Fetch all FAQs for the "Pricing & Fees" category
-  const faqsResponse = await getFaqItems({
-    sort: "order",
-    expand: "category",
-    filter: `category = "${pricingCategory.id}"`
+  const faqs = await getFaqItems({
+    category: pricingCategory.id,
   });
-  
-  const faqs = faqsResponse.items;
 
   // Sort by featured first, then by order
   const sortedFAQs = [...faqs].sort((a, b) => {

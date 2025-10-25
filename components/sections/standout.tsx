@@ -1,4 +1,5 @@
 import { ArrowRight, Play } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 const imgManTalking = "https://picsum.photos/600/400";
@@ -35,10 +36,11 @@ export default function StandOut() {
           {/* Right Video Card */}
           <div className="relative w-full h-[300px] md:h-[350px] lg:h-[400px] rounded-3xl overflow-hidden group">
             {/* Background Image */}
-            <img
+            <Image
               src={imgManTalking}
               alt="Team collaboration"
-              className="absolute inset-0 w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
 
             {/* Border */}
@@ -58,40 +60,44 @@ export default function StandOut() {
 
         {/* Decorative Characters - Hidden on mobile */}
         <div className="hidden md:block absolute left-1/2 -bottom-1/5 translate-x-[-200px]">
-          <div className="relative">
-            <img
+          <div className="relative w-[150px] h-[300px]">
+            <Image
               src={imgImagePhotoroom21}
               alt=""
-              className="w-[150px] h-auto object-contain"
+              fill
+              className="object-contain"
             />
           </div>
         </div>
 
         <div className="hidden md:block absolute left-1/2 -bottom-1/5  translate-x-[50px]">
-          <div className="relative">
-            <img
+          <div className="relative w-[130px] h-[300px]">
+            <Image
               src={imgImagePhotoroom31}
               alt=""
-              className="w-[130px] h-auto object-contain"
+              fill
+              className="object-contain"
             />
           </div>
         </div>
 
         {/* Mobile Decorative Characters - At bottom, below grid */}
         <div className="md:hidden absolute -bottom-20 left-1/2 -translate-x-1/2 flex gap-8 items-end z-10">
-          <div className="relative">
-            <img
+          <div className="relative w-[300px] h-[600px]">
+            <Image
               src={imgImagePhotoroom21}
               alt=""
-              className="w-[300px] h-auto object-contain"
+              fill
+              className="object-contain"
             />
           </div>
           <div className="w-1/6"></div>
-          <div className="relative">
-            <img
+          <div className="relative w-[285px] h-[600px]">
+            <Image
               src={imgImagePhotoroom31}
               alt=""
-              className="w-[285px] h-auto object-contain"
+              fill
+              className="object-contain"
             />
           </div>
         </div>

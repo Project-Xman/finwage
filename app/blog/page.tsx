@@ -1,10 +1,19 @@
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllPosts } from "@/data/posts";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { getBlogs, getFeaturedBlogs } from "@/lib/services/blogs";
+import { getCategories } from "@/lib/services/categories";
+import { getImageUrl } from "@/lib/utils/pocketbase";
+import type { BlogsResponse, AuthorsResponse, CategoryResponse } from "@/types/pocketbase";
+
+// Type for blog with expanded relations
+type BlogWithExpand = BlogsResponse<any, {
+  author?: AuthorsResponse;
+  category?: CategoryResponse;
+}>;
 
 export const metadata = {
   title: "Blog - FinWage",
@@ -17,29 +26,32 @@ export const metadata = {
   },
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
-  const featuredPost = posts[0];
-  const recentPosts = posts.slice(1);
+// Revalidate blog listing page every hour (3600 seconds)
+// This enables Incremental Static Regeneration (ISR)
+export const revalidate = 3600;
 
+
+export default async function BlogPage() {
+  // Fetch data in parallel
+  const [blogsResult, featuredBlogsData, categoriesResult] = await Promise.all([
+    getBlogs({ perPage: 20 }),
+    getFeaturedBlogs(1),
+    getCategories({ perPage: 50 }),
+  ]);
+
+  const posts = blogsResult.items as BlogWithExpand[];
+  const featuredPost = (featuredBlogsData[0] || posts[0]) as BlogWithExpand;
+  const recentPosts = posts.filter(p => p.id !== featuredPost?.id);
+  const allCategories = categoriesResult.items;
+
+  // Build category list with counts
   const categories = [
-    { name: "All Posts", count: posts.length },
-    {
-      name: "Financial Wellness",
-      count: posts.filter((p) => p.category === "Financial Wellness").length,
-    },
-    {
-      name: "Employer Benefits",
-      count: posts.filter((p) => p.category === "Employer Benefits").length,
-    },
-    {
-      name: "Industry Trends",
-      count: posts.filter((p) => p.category === "Industry Trends").length,
-    },
-    {
-      name: "Employer Guide",
-      count: posts.filter((p) => p.category === "Employer Guide").length,
-    },
+    { name: "All Posts", count: blogsResult.totalItems, slug: null },
+    ...allCategories.map(cat => ({
+      name: cat.name,
+      count: cat.count || 0,
+      slug: cat.slug,
+    })),
   ];
 
   return (
@@ -88,14 +100,14 @@ export default function BlogPage() {
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="relative h-64 md:h-full min-h-[400px]">
                     <Image
-                      src={featuredPost.image}
+                      src={getImageUrl(featuredPost, featuredPost.featured_image?.[0], { fallback: '/placeholder.jpg' })}
                       alt={featuredPost.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-6 left-6">
                       <span className="bg-[#1d44c3] text-white px-4 py-2 rounded-full text-sm font-semibold">
-                        {featuredPost.category}
+                        {(featuredPost.expand?.category as CategoryResponse)?.name || 'Blog'}
                       </span>
                     </div>
                   </div>
@@ -103,12 +115,16 @@ export default function BlogPage() {
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
-                        {featuredPost.date}
+                        {new Date(featuredPost.published_date).toLocaleDateString('en-US', { 
+                          year: 'numeric', 
+                          month: 'long', 
+                          day: 'numeric' 
+                        })}
                       </span>
                       <span>•</span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
-                        {featuredPost.readTime}
+                        {Math.ceil((featuredPost.content?.length || 0) / 1000)} min read
                       </span>
                     </div>
                     <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 group-hover:text-[#1d44c3] transition-colors">
@@ -119,20 +135,26 @@ export default function BlogPage() {
                     </p>
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-3">
-                        <div className="relative w-12 h-12 rounded-full overflow-hidden bg-gray-200">
-                          <Image
-                            src={featuredPost.author.avatar}
-                            alt={featuredPost.author.name}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
+                        {(featuredPost.expand?.author as AuthorsResponse)?.avatar && (
+                          <div className="relative w-12 h-12 rounded-full overflow-hidden bg-gray-200">
+                            <Image
+                              src={getImageUrl(
+                                featuredPost.expand.author as AuthorsResponse, 
+                                (featuredPost.expand.author as AuthorsResponse).avatar,
+                                { fallback: '/placeholder.jpg' }
+                              )}
+                              alt={(featuredPost.expand?.author as AuthorsResponse)?.name || 'Author'}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        )}
                         <div>
                           <div className="font-semibold text-gray-900">
-                            {featuredPost.author.name}
+                            {(featuredPost.expand?.author as AuthorsResponse)?.name || 'Anonymous'}
                           </div>
                           <div className="text-sm text-gray-500">
-                            {featuredPost.author.role}
+                            {(featuredPost.expand?.author as AuthorsResponse)?.role || 'Author'}
                           </div>
                         </div>
                       </div>
@@ -163,14 +185,14 @@ export default function BlogPage() {
                 <article className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group h-full flex flex-col">
                   <div className="relative h-48">
                     <Image
-                      src={post.image}
+                      src={getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' })}
                       alt={post.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4">
                       <span className="bg-[#1d44c3] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                        {post.category}
+                        {(post.expand?.category as CategoryResponse)?.name || 'Blog'}
                       </span>
                     </div>
                   </div>
@@ -178,12 +200,16 @@ export default function BlogPage() {
                     <div className="flex items-center gap-3 text-sm text-gray-500 mb-3">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
-                        {post.date}
+                        {new Date(post.published_date).toLocaleDateString('en-US', { 
+                          month: 'short', 
+                          day: 'numeric', 
+                          year: 'numeric' 
+                        })}
                       </span>
                       <span>•</span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-3 h-3" />
-                        {post.readTime}
+                        {Math.ceil((post.content?.length || 0) / 1000)} min read
                       </span>
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1d44c3] transition-colors">
@@ -192,16 +218,22 @@ export default function BlogPage() {
                     <p className="text-gray-600 mb-4 flex-1">{post.excerpt}</p>
                     <div className="flex items-center justify-between pt-4 border-t">
                       <div className="flex items-center gap-2">
-                        <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-200">
-                          <Image
-                            src={post.author.avatar}
-                            alt={post.author.name}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
+                        {(post.expand?.author as AuthorsResponse)?.avatar && (
+                          <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-200">
+                            <Image
+                              src={getImageUrl(
+                                post.expand.author as AuthorsResponse, 
+                                (post.expand.author as AuthorsResponse).avatar,
+                                { fallback: '/placeholder.jpg' }
+                              )}
+                              alt={(post.expand?.author as AuthorsResponse)?.name || 'Author'}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        )}
                         <div className="text-sm font-semibold text-gray-700">
-                          {post.author.name}
+                          {(post.expand?.author as AuthorsResponse)?.name || 'Anonymous'}
                         </div>
                       </div>
                       <ArrowRight className="w-4 h-4 text-[#1d44c3] group-hover:translate-x-1 transition-transform" />

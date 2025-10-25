@@ -4,7 +4,7 @@ import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getPricingPlans, getFaqItems, getFaqTopics } from "@/lib/api";
+import { getPricingPlans } from "@/lib/services/pricing";
 import { unstable_cache } from "next/cache";
 import { PricingCardsSkeleton, FAQSkeleton } from "./components/pricing-skeleton";
 import { FAQSection } from "./components/faq-section";
@@ -34,16 +34,8 @@ export async function generateMetadata() {
 // Cached data fetching functions for better performance
 const getCachedPricingPlans = unstable_cache(
   async () => {
-    try {
-      const plans = await getPricingPlans({
-        filter: "active = true",
-        sort: "order",
-      });
-      return plans.items;
-    } catch (error) {
-      console.error("Failed to fetch pricing plans:", error);
-      return [];
-    }
+    const result = await getPricingPlans({ activeOnly: true });
+    return result.items;
   },
   ['pricing-plans'],
   {
@@ -262,7 +254,7 @@ export default function PricingPage() {
 
       {/* Dynamic FAQ Section - streams in from PocketBase */}
       <Suspense fallback={<FAQSkeleton />}>
-        <FAQSection getFaqItems={getFaqItems} getFaqTopics={getFaqTopics} />
+        <FAQSection />
       </Suspense>
 
       {/* Static CTA - renders immediately */}

@@ -3,6 +3,45 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [
 
 ## Getting Started
 
+### Prerequisites
+
+- Node.js 18+ installed
+- PocketBase instance running (for local development)
+
+### Environment Setup
+
+1. Copy the example environment file:
+
+```bash
+cp .env.local.example .env.local
+```
+
+2. Update `.env.local` with your configuration:
+
+```env
+NEXT_PUBLIC_POCKETBASE_URL=http://127.0.0.1:8090
+```
+
+For detailed environment configuration, see [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md).
+
+### Running PocketBase (Local Development)
+
+1. Navigate to the data directory:
+
+```bash
+cd data
+```
+
+2. Start PocketBase:
+
+```bash
+./pocketbase serve
+```
+
+PocketBase will be available at http://127.0.0.1:8090
+
+### Running the Development Server
+
 First, run the development server:
 
 ```bash

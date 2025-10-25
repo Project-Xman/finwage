@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 function Person() {
   return (
     <div
@@ -5,10 +7,11 @@ function Person() {
       data-name="Person"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[24px]">
-        <img
-          alt=""
-          className="w-full h-full object-cover"
+        <Image
+          alt="Employee using financial wellness features"
+          className="object-cover"
           src="/assets/worker-1.png"
+          fill
         />
       </div>
     </div>
@@ -87,10 +90,11 @@ function Person1() {
       data-name="Person"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[24px]">
-        <img
-          alt=""
-          className="w-full h-full object-cover"
+        <Image
+          alt="Employee managing savings goals"
+          className="object-cover"
           src="/assets/worker-2.png"
+          fill
         />
       </div>
     </div>
@@ -128,18 +132,20 @@ function Frame9() {
     <div className="relative w-full md:w-[584px] min-h-[400px] md:h-[500px] flex-shrink-0">
       {/* Mobile: Stack images vertically */}
       <div className="md:hidden flex flex-col gap-4 items-center">
-        <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden">
-          <img
-            alt=""
-            className="w-full h-full object-cover"
+        <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden relative">
+          <Image
+            alt="Employee using financial wellness features"
+            className="object-cover"
             src="/assets/worker-1.png"
+            fill
           />
         </div>
-        <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden">
-          <img
-            alt=""
-            className="w-full h-full object-cover"
+        <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden relative">
+          <Image
+            alt="Employee managing savings goals"
+            className="object-cover"
             src="/assets/worker-2.png"
+            fill
           />
         </div>
       </div>

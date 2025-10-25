@@ -14,12 +14,37 @@ import { notFound } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { getBlogs, getBlogBySlug, getBlogsByCategory } from "@/lib/services/blogs";
+import { getImageUrl } from "@/lib/utils/pocketbase";
+import type { BlogsResponse, AuthorsResponse, CategoryResponse } from "@/types/pocketbase";
 
+// Type for blog with expanded relations
+type BlogWithExpand = BlogsResponse<any, {
+  author?: AuthorsResponse;
+  category?: CategoryResponse;
+}>;
+
+// Revalidate blog detail pages every hour (3600 seconds)
+// This enables Incremental Static Regeneration (ISR)
+export const revalidate = 3600;
+
+// Generate static params for all blog posts at build time
 export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  try {
+    // Fetch all published blogs for static generation
+    // Using a high perPage value to get all blogs in one request
+    // If you have more than 500 blogs, consider implementing pagination
+    const blogsResult = await getBlogs({ perPage: 500 });
+    
+    return blogsResult.items.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.error('Failed to generate static params for blog posts:', error);
+    // Return empty array to prevent build failure
+    // Pages will be generated on-demand (ISR)
+    return [];
+  }
 }
 
 export async function generateMetadata({
@@ -28,7 +53,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getBlogBySlug(slug);
 
   if (!post) {
     return {
@@ -42,7 +67,7 @@ export async function generateMetadata({
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      images: [post.image],
+      images: [getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' })],
     },
   };
 }
@@ -53,13 +78,17 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getBlogBySlug(slug) as BlogWithExpand | null;
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = getRelatedPosts(slug);
+  // Fetch related posts from the same category in parallel with other operations
+  const categoryId = post.category;
+  const relatedPostsAll = await getBlogsByCategory(categoryId, 4) as BlogWithExpand[];
+  // Filter out the current post
+  const relatedPosts = relatedPostsAll.filter(p => p.slug !== slug).slice(0, 3);
 
   return (
     <main className="min-h-screen bg-white">
@@ -82,7 +111,7 @@ export default async function BlogPostPage({
           <div className="max-w-[800px] mx-auto px-4 md:px-6">
             <div className="mb-6">
               <span className="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold">
-                {post.category}
+                {(post.expand?.category as CategoryResponse)?.name || 'Blog'}
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -94,12 +123,16 @@ export default async function BlogPostPage({
             <div className="flex items-center gap-6 text-blue-100">
               <span className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
-                {post.date}
+                {new Date(post.published_date).toLocaleDateString('en-US', { 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric' 
+                })}
               </span>
               <span>•</span>
               <span className="flex items-center gap-2">
                 <Clock className="w-5 h-5" />
-                {post.readTime}
+                {Math.ceil((post.content?.length || 0) / 1000)} min read
               </span>
             </div>
           </div>
@@ -110,19 +143,27 @@ export default async function BlogPostPage({
           <div className="max-w-[800px] mx-auto px-4 md:px-6 py-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-200">
-                  <Image
-                    src={post.author.avatar}
-                    alt={post.author.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                {(post.expand?.author as AuthorsResponse)?.avatar && (
+                  <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-200">
+                    <Image
+                      src={getImageUrl(
+                        post.expand.author as AuthorsResponse, 
+                        (post.expand.author as AuthorsResponse).avatar,
+                        { fallback: '/placeholder.jpg' }
+                      )}
+                      alt={(post.expand?.author as AuthorsResponse)?.name || 'Author'}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
                 <div>
                   <div className="text-lg font-bold text-gray-900">
-                    {post.author.name}
+                    {(post.expand?.author as AuthorsResponse)?.name || 'Anonymous'}
                   </div>
-                  <div className="text-gray-600">{post.author.role}</div>
+                  <div className="text-gray-600">
+                    {(post.expand?.author as AuthorsResponse)?.role || 'Author'}
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -162,7 +203,7 @@ export default async function BlogPostPage({
         {/* Featured Image */}
         <div className="relative h-[400px] md:h-[500px] bg-gray-100">
           <Image
-            src={post.image}
+            src={getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' })}
             alt={post.title}
             fill
             className="object-cover"
@@ -182,23 +223,25 @@ export default async function BlogPostPage({
               prose-a:text-[#1d44c3] prose-a:no-underline hover:prose-a:underline
               prose-strong:text-gray-900 prose-strong:font-bold
               prose-blockquote:border-l-4 prose-blockquote:border-[#1d44c3] prose-blockquote:pl-6 prose-blockquote:italic"
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: Blog content is sourced from trusted static data.
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: Blog content is sourced from trusted PocketBase database.
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
           {/* Tags */}
-          <div className="mt-12 pt-8 border-t">
-            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold hover:bg-[#1d44c3] hover:text-white transition-all cursor-pointer"
-                >
-                  #{tag}
-                </span>
-              ))}
+          {post.tags && Array.isArray(post.tags) && post.tags.length > 0 && (
+            <div className="mt-12 pt-8 border-t">
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag: string) => (
+                  <span
+                    key={tag}
+                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold hover:bg-[#1d44c3] hover:text-white transition-all cursor-pointer"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </article>
 
@@ -215,29 +258,35 @@ export default async function BlogPostPage({
                   <Card className="overflow-hidden shadow-lg hover:shadow-2xl transition-all group">
                     <div className="relative h-48">
                       <Image
-                        src={relatedPost.image}
+                        src={getImageUrl(relatedPost, relatedPost.featured_image?.[0], { fallback: '/placeholder.jpg' })}
                         alt={relatedPost.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute top-4 left-4">
                         <span className="bg-[#1d44c3] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          {relatedPost.category}
+                          {(relatedPost.expand?.category as CategoryResponse)?.name || 'Blog'}
                         </span>
                       </div>
                     </div>
                     <CardContent className="p-6">
                       <div className="flex items-center gap-3 text-sm text-gray-500 mb-3">
-                        <span>{relatedPost.date}</span>
+                        <span>
+                          {new Date(relatedPost.published_date).toLocaleDateString('en-US', { 
+                            month: 'short', 
+                            day: 'numeric', 
+                            year: 'numeric' 
+                          })}
+                        </span>
                         <span>•</span>
-                        <span>{relatedPost.readTime}</span>
+                        <span>{Math.ceil((relatedPost.content?.length || 0) / 1000)} min read</span>
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1d44c3] transition-colors">
                         {relatedPost.title}
                       </h3>
                       <div className="flex items-center justify-between pt-4 border-t">
                         <div className="text-sm font-semibold text-gray-700">
-                          {relatedPost.author.name}
+                          {(relatedPost.expand?.author as AuthorsResponse)?.name || 'Anonymous'}
                         </div>
                         <ArrowRight className="w-4 h-4 text-[#1d44c3] group-hover:translate-x-1 transition-transform" />
                       </div>

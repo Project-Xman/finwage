@@ -1,6 +1,10 @@
 import { ArrowRight, Code, Heart, TrendingUp, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getJobPositions, getFeaturedJobs } from "@/lib/services/careers";
+import { getBenefitsGroupedByCategory } from "@/lib/services/benefits";
+import { getCompanyValues } from "@/lib/services/values";
+import type { JobsResponse } from "@/types/pocketbase";
 
 export const metadata = {
   title: "Careers at FinWage",
@@ -13,120 +17,36 @@ export const metadata = {
   },
 };
 
-export default function CareersPage() {
-  const openPositions = [
-    {
-      title: "Senior Full Stack Engineer",
-      department: "Engineering",
-      location: "Remote / San Francisco",
-      type: "Full-time",
-      description:
-        "Build the future of payroll technology with cutting-edge React and Node.js",
-    },
-    {
-      title: "Product Manager - Financial Wellness",
-      department: "Product",
-      location: "Remote / New York",
-      type: "Full-time",
-      description:
-        "Define the roadmap for employee financial wellness features",
-    },
-    {
-      title: "Enterprise Account Executive",
-      department: "Sales",
-      location: "Remote",
-      type: "Full-time",
-      description:
-        "Help growing companies discover the power of earned wage access",
-    },
-    {
-      title: "Customer Success Manager",
-      department: "Customer Success",
-      location: "Remote / Chicago",
-      type: "Full-time",
-      description: "Ensure our clients get maximum value from FinWage",
-    },
-    {
-      title: "Compliance Analyst",
-      department: "Legal & Compliance",
-      location: "Remote / Boston",
-      type: "Full-time",
-      description:
-        "Navigate regulatory landscape and ensure platform compliance",
-    },
-    {
-      title: "UX Designer",
-      department: "Design",
-      location: "Remote / Austin",
-      type: "Full-time",
-      description: "Create intuitive experiences for employees and employers",
-    },
-  ];
+export default async function CareersPage() {
+  // Fetch open job positions, featured jobs, benefits, and values in parallel
+  const [jobsResult, featuredJobs, benefitsGrouped, values] = await Promise.all([
+    getJobPositions({ status: 'open', perPage: 50 }),
+    getFeaturedJobs(3),
+    getBenefitsGroupedByCategory(),
+    getCompanyValues({ perPage: 10 }),
+  ]);
 
-  const benefits = [
-    {
-      icon: <Heart className="w-8 h-8" />,
-      title: "Health & Wellness",
-      items: [
-        "100% covered medical, dental, vision",
-        "Mental health support",
-        "Fitness stipend",
-        "Wellness programs",
-      ],
-    },
-    {
-      icon: <TrendingUp className="w-8 h-8" />,
-      title: "Financial Growth",
-      items: [
-        "Competitive salary",
-        "Equity options",
-        "401(k) matching",
-        "Performance bonuses",
-      ],
-    },
-    {
-      icon: <Zap className="w-8 h-8" />,
-      title: "Work-Life Balance",
-      items: [
-        "Unlimited PTO",
-        "Flexible hours",
-        "Remote-first culture",
-        "Parental leave",
-      ],
-    },
-    {
-      icon: <Code className="w-8 h-8" />,
-      title: "Professional Growth",
-      items: [
-        "Learning budget",
-        "Conference attendance",
-        "Mentorship programs",
-        "Career development",
-      ],
-    },
-  ];
+  const openPositions = jobsResult.items;
 
-  const values = [
-    {
-      title: "Employee First",
-      description:
-        "Everything we do starts with how it impacts employees' financial wellness",
-    },
-    {
-      title: "Move Fast",
-      description:
-        "We ship quickly, iterate constantly, and learn from every experience",
-    },
-    {
-      title: "Own It",
-      description:
-        "Take ownership, make decisions, and deliver results independently",
-    },
-    {
-      title: "Better Together",
-      description: "Collaborate openly, support each other, and win as a team",
-    },
-  ];
+  // Map icon names to components
+  const iconMap: Record<string, React.ReactNode> = {
+    Heart: <Heart className="w-8 h-8" />,
+    TrendingUp: <TrendingUp className="w-8 h-8" />,
+    Zap: <Zap className="w-8 h-8" />,
+    Code: <Code className="w-8 h-8" />,
+  };
+
+  // Transform benefits data for display
+  const benefits = Object.entries(benefitsGrouped).map(([category, items]) => {
+    // Get icon from first item in category or use default
+    const iconName = items[0]?.icon || 'Heart';
+    return {
+      icon: iconMap[iconName] || <Heart className="w-8 h-8" />,
+      title: category,
+      items: items.map((item) => item.description),
+    };
+  });
+
 
   return (
     <main className="min-h-screen">
@@ -196,41 +116,43 @@ export default function CareersPage() {
       </section>
 
       {/* Benefits */}
-      <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
-              World-Class Benefits
-            </h2>
-            <p className="text-xl text-gray-600">
-              We take care of our team so they can focus on our mission
-            </p>
-          </div>
+      {benefits.length > 0 && (
+        <section className="py-16 md:py-24 bg-gray-50">
+          <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+                World-Class Benefits
+              </h2>
+              <p className="text-xl text-gray-600">
+                We take care of our team so they can focus on our mission
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit) => (
-              <Card key={benefit.title} className="shadow-lg">
-                <CardContent className="p-8">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full text-[#1d44c3] mb-6">
-                    {benefit.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">
-                    {benefit.title}
-                  </h3>
-                  <ul className="space-y-3">
-                    {benefit.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="text-green-500 mt-1">•</span>
-                        <span className="text-gray-600">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {benefits.map((benefit) => (
+                <Card key={benefit.title} className="shadow-lg">
+                  <CardContent className="p-8">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full text-[#1d44c3] mb-6">
+                      {benefit.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">
+                      {benefit.title}
+                    </h3>
+                    <ul className="space-y-3">
+                      {benefit.items.map((item: string, index: number) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <span className="text-green-500 mt-1">•</span>
+                          <span className="text-gray-600">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Open Positions */}
       <section className="py-16 md:py-24 bg-white">
@@ -244,37 +166,94 @@ export default function CareersPage() {
             </p>
           </div>
 
+          {/* Featured Jobs Section */}
+          {featuredJobs.length > 0 && (
+            <div className="mb-12">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                Featured Opportunities
+              </h3>
+              <div className="space-y-6 max-w-4xl mx-auto">
+                {featuredJobs.map((position: JobsResponse) => (
+                  <Card
+                    key={position.id}
+                    className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-[#1d44c3] hover:shadow-2xl transition-all group"
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex flex-wrap items-center gap-3 mb-3">
+                            <span className="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs font-bold uppercase">
+                              ⭐ Featured
+                            </span>
+                            <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#1d44c3] transition-colors">
+                              {position.title}
+                            </h3>
+                            {position.department && (
+                              <span className="bg-[#1d44c3] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                {position.department}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-gray-600 mb-3">{position.description}</p>
+                          <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                            {position.location && <span>📍 {position.location}</span>}
+                            {position.location && position.type && <span>•</span>}
+                            {position.type && <span>💼 {position.type}</span>}
+                          </div>
+                        </div>
+                        <Button className="flex-shrink-0 bg-[#1d44c3] hover:bg-[#0d2463]">
+                          Apply Now
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* All Open Positions */}
           <div className="space-y-6 max-w-4xl mx-auto">
-            {openPositions.map((position) => (
-              <Card
-                key={position.title}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all group"
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <div className="flex flex-wrap items-center gap-3 mb-3">
-                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#1d44c3] transition-colors">
-                          {position.title}
-                        </h3>
-                        <span className="bg-[#1d44c3] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          {position.department}
-                        </span>
+            {openPositions.length > 0 ? (
+              openPositions.map((position: JobsResponse) => (
+                <Card
+                  key={position.id}
+                  className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all group"
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex flex-wrap items-center gap-3 mb-3">
+                          <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#1d44c3] transition-colors">
+                            {position.title}
+                          </h3>
+                          {position.department && (
+                            <span className="bg-[#1d44c3] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                              {position.department}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-gray-600 mb-3">{position.description}</p>
+                        <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                          {position.location && <span>📍 {position.location}</span>}
+                          {position.location && position.type && <span>•</span>}
+                          {position.type && <span>💼 {position.type}</span>}
+                        </div>
                       </div>
-                      <p className="text-gray-600 mb-3">{position.description}</p>
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-500">
-                        <span>📍 {position.location}</span>
-                        <span>•</span>
-                        <span>💼 {position.type}</span>
-                      </div>
+                      <Button className="flex-shrink-0 bg-[#1d44c3] hover:bg-[#0d2463]">
+                        Apply Now
+                      </Button>
                     </div>
-                    <Button className="flex-shrink-0 bg-[#1d44c3] hover:bg-[#0d2463]">
-                      Apply Now
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-xl text-gray-600">
+                  No open positions at the moment. Check back soon!
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="text-center mt-12">

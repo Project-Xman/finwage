@@ -10,8 +10,12 @@ export enum Collections {
 	Blogs = "Blogs",
 	Category = "Category",
 	CompanyMilestones = "Company_Milestones",
+	ComplianceItems = "Compliance_Items",
 	Contacts = "Contacts",
+	CtaCards = "CTA_Cards",
 	EmployeeBenefits = "Employee_Benefits",
+	EmployerBenefits = "Employer_Benefits",
+	EmployerStats = "Employer_Stats",
 	FaqTopics = "Faq_Topics",
 	Faqs = "Faqs",
 	Features = "Features",
@@ -22,6 +26,8 @@ export enum Collections {
 	Partners = "Partners",
 	Press = "Press",
 	PricingPlans = "Pricing_Plans",
+	ProcessSteps = "Process_Steps",
+	SecurityFeatures = "Security_Features",
 	Stats = "Stats",
 	Support = "Support",
 	Testimonials = "Testimonials",
@@ -41,8 +47,8 @@ export type HTMLString = string
 
 type ExpandType<T> = unknown extends T
 	? T extends unknown
-		? { expand?: unknown }
-		: { expand: T }
+	? { expand?: unknown }
+	: { expand: T }
 	: { expand: T }
 
 // System fields
@@ -105,6 +111,67 @@ export type CategoryRecord = {
 	updated?: IsoDateString
 }
 
+export type ComplianceItemsRecord<Tdetails = unknown> = {
+	created?: IsoDateString
+	description: string
+	details: null | Tdetails
+	icon: string
+	id: string
+	order?: number
+	title: string
+	updated?: IsoDateString
+}
+
+export type SecurityFeaturesRecord = {
+	created?: IsoDateString
+	description: string
+	id: string
+	order?: number
+	updated?: IsoDateString
+}
+
+export type EmployerBenefitsRecord = {
+	created?: IsoDateString
+	description: string
+	icon: string
+	id: string
+	order?: number
+	title: string
+	updated?: IsoDateString
+}
+
+export type EmployerStatsRecord = {
+	created?: IsoDateString
+	id: string
+	label: string
+	order?: number
+	updated?: IsoDateString
+	value: string
+}
+
+export type ProcessStepsRecord = {
+	category: string
+	created?: IsoDateString
+	description: string
+	icon: string
+	id: string
+	order?: number
+	step: string
+	title: string
+	updated?: IsoDateString
+}
+
+export type CtaCardsRecord<Tpoints = unknown> = {
+	bgColor: string
+	created?: IsoDateString
+	icon: string
+	id: string
+	order?: number
+	points: null | Tpoints
+	title: string
+	updated?: IsoDateString
+}
+
 export type CompanyMilestonesRecord = {
 	created?: IsoDateString
 	description?: string
@@ -151,6 +218,7 @@ export type FaqTopicsRecord = {
 export type FaqsRecord = {
 	answer: string
 	category?: RecordIdString
+	category_text?: string
 	created?: IsoDateString
 	featured?: boolean
 	id: string
@@ -420,6 +488,12 @@ export type AuthorsResponse<Tsocial_links = unknown, Texpand = unknown> = Requir
 export type BlogsResponse<Ttags = unknown, Texpand = unknown> = Required<BlogsRecord<Ttags>> & BaseSystemFields<Texpand>
 export type CategoryResponse<Texpand = unknown> = Required<CategoryRecord> & BaseSystemFields<Texpand>
 export type CompanyMilestonesResponse<Texpand = unknown> = Required<CompanyMilestonesRecord> & BaseSystemFields<Texpand>
+export type ComplianceItemsResponse<Tdetails = unknown, Texpand = unknown> = Required<ComplianceItemsRecord<Tdetails>> & BaseSystemFields<Texpand>
+export type SecurityFeaturesResponse<Texpand = unknown> = Required<SecurityFeaturesRecord> & BaseSystemFields<Texpand>
+export type EmployerBenefitsResponse<Texpand = unknown> = Required<EmployerBenefitsRecord> & BaseSystemFields<Texpand>
+export type EmployerStatsResponse<Texpand = unknown> = Required<EmployerStatsRecord> & BaseSystemFields<Texpand>
+export type ProcessStepsResponse<Texpand = unknown> = Required<ProcessStepsRecord> & BaseSystemFields<Texpand>
+export type CtaCardsResponse<Tpoints = unknown, Texpand = unknown> = Required<CtaCardsRecord<Tpoints>> & BaseSystemFields<Texpand>
 export type ContactsResponse<Texpand = unknown> = Required<ContactsRecord> & BaseSystemFields<Texpand>
 export type EmployeeBenefitsResponse<Texpand = unknown> = Required<EmployeeBenefitsRecord> & BaseSystemFields<Texpand>
 export type FaqTopicsResponse<Texpand = unknown> = Required<FaqTopicsRecord> & BaseSystemFields<Texpand>
@@ -452,8 +526,12 @@ export type CollectionRecords = {
 	Blogs: BlogsRecord
 	Category: CategoryRecord
 	Company_Milestones: CompanyMilestonesRecord
+	Compliance_Items: ComplianceItemsRecord
 	Contacts: ContactsRecord
+	CTA_Cards: CtaCardsRecord
 	Employee_Benefits: EmployeeBenefitsRecord
+	Employer_Benefits: EmployerBenefitsRecord
+	Employer_Stats: EmployerStatsRecord
 	Faq_Topics: FaqTopicsRecord
 	Faqs: FaqsRecord
 	Features: FeaturesRecord
@@ -464,6 +542,8 @@ export type CollectionRecords = {
 	Partners: PartnersRecord
 	Press: PressRecord
 	Pricing_Plans: PricingPlansRecord
+	Process_Steps: ProcessStepsRecord
+	Security_Features: SecurityFeaturesRecord
 	Stats: StatsRecord
 	Support: SupportRecord
 	Testimonials: TestimonialsRecord
@@ -481,8 +561,12 @@ export type CollectionResponses = {
 	Blogs: BlogsResponse
 	Category: CategoryResponse
 	Company_Milestones: CompanyMilestonesResponse
+	Compliance_Items: ComplianceItemsResponse
 	Contacts: ContactsResponse
+	CTA_Cards: CtaCardsResponse
 	Employee_Benefits: EmployeeBenefitsResponse
+	Employer_Benefits: EmployerBenefitsResponse
+	Employer_Stats: EmployerStatsResponse
 	Faq_Topics: FaqTopicsResponse
 	Faqs: FaqsResponse
 	Features: FeaturesResponse
@@ -493,6 +577,8 @@ export type CollectionResponses = {
 	Partners: PartnersResponse
 	Press: PressResponse
 	Pricing_Plans: PricingPlansResponse
+	Process_Steps: ProcessStepsResponse
+	Security_Features: SecurityFeaturesResponse
 	Stats: StatsResponse
 	Support: SupportResponse
 	Testimonials: TestimonialsResponse
@@ -514,8 +600,12 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'Blogs'): RecordService<BlogsResponse>
 	collection(idOrName: 'Category'): RecordService<CategoryResponse>
 	collection(idOrName: 'Company_Milestones'): RecordService<CompanyMilestonesResponse>
+	collection(idOrName: 'Compliance_Items'): RecordService<ComplianceItemsResponse>
 	collection(idOrName: 'Contacts'): RecordService<ContactsResponse>
+	collection(idOrName: 'CTA_Cards'): RecordService<CtaCardsResponse>
 	collection(idOrName: 'Employee_Benefits'): RecordService<EmployeeBenefitsResponse>
+	collection(idOrName: 'Employer_Benefits'): RecordService<EmployerBenefitsResponse>
+	collection(idOrName: 'Employer_Stats'): RecordService<EmployerStatsResponse>
 	collection(idOrName: 'Faq_Topics'): RecordService<FaqTopicsResponse>
 	collection(idOrName: 'Faqs'): RecordService<FaqsResponse>
 	collection(idOrName: 'Features'): RecordService<FeaturesResponse>
@@ -526,6 +616,8 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'Partners'): RecordService<PartnersResponse>
 	collection(idOrName: 'Press'): RecordService<PressResponse>
 	collection(idOrName: 'Pricing_Plans'): RecordService<PricingPlansResponse>
+	collection(idOrName: 'Process_Steps'): RecordService<ProcessStepsResponse>
+	collection(idOrName: 'Security_Features'): RecordService<SecurityFeaturesResponse>
 	collection(idOrName: 'Stats'): RecordService<StatsResponse>
 	collection(idOrName: 'Support'): RecordService<SupportResponse>
 	collection(idOrName: 'Testimonials'): RecordService<TestimonialsResponse>

@@ -2,6 +2,8 @@ import { Heart, Shield, TrendingUp, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getLeadershipTeam, getCompanyValues, getMilestones } from "@/lib/services/company";
+import { getImageUrl } from "@/lib/utils/pocketbase";
 
 export const metadata = {
   title: "About Us - FinWage",
@@ -14,94 +16,32 @@ export const metadata = {
   },
 };
 
-export default function AboutPage() {
-  const leadership = [
-    {
-      id: "michael-chen",
-      name: "Michael Chen",
-      role: "CEO & Co-Founder",
-      image: "/assets/person-1.png",
-      bio: "Former fintech executive with 15+ years revolutionizing financial services",
-    },
-    {
-      id: "sarah-williams",
-      name: "Sarah Williams",
-      role: "CTO & Co-Founder",
-      image: "/assets/person-2.png",
-      bio: "Tech innovator specializing in secure payment systems and blockchain",
-    },
-    {
-      id: "david-rodriguez",
-      name: "David Rodriguez",
-      role: "Chief Product Officer",
-      image: "/assets/person-3.png",
-      bio: "Product visionary focused on creating seamless user experiences",
-    },
-    {
-      id: "emily-johnson",
-      name: "Emily Johnson",
-      role: "Head of Compliance",
-      image: "/assets/person-4.png",
-      bio: "Regulatory expert ensuring FinWage meets all legal requirements",
-    },
-  ];
+export default async function AboutPage() {
+  // Fetch data from PocketBase in parallel
+  const [leadershipData, valuesData, milestonesData] = await Promise.all([
+    getLeadershipTeam({ perPage: 100 }),
+    getCompanyValues({ perPage: 100 }),
+    getMilestones({ perPage: 100 }),
+  ]);
 
-  const values = [
-    {
-      id: "employee-first",
-      icon: <Heart className="w-8 h-8" />,
-      title: "Employee First",
-      description:
-        "Every decision we make starts with how it impacts the financial wellness of working people",
-    },
-    {
-      id: "trust-security",
-      icon: <Shield className="w-8 h-8" />,
-      title: "Trust & Security",
-      description:
-        "We handle people's money - security and transparency are non-negotiable",
-    },
-    {
-      id: "innovation",
-      icon: <TrendingUp className="w-8 h-8" />,
-      title: "Innovation",
-      description:
-        "Constantly evolving to provide better financial solutions for modern workplaces",
-    },
-  ];
+  const leadership = leadershipData.items;
+  const values = valuesData.items;
+  const milestones = milestonesData.items;
 
-  const milestones = [
-    {
-      id: "2020",
-      year: "2020",
-      event: "FinWage Founded",
-      description: "Started with a mission to eliminate payday stress",
-    },
-    {
-      id: "2021",
-      year: "2021",
-      event: "First 1,000 Companies",
-      description: "Rapid adoption across retail and healthcare",
-    },
-    {
-      id: "2022",
-      year: "2022",
-      event: "Series A Funding",
-      description: "$25M raised to expand platform capabilities",
-    },
-    {
-      id: "2023",
-      year: "2023",
-      event: "100,000+ Employees",
-      description: "Helping over 100K workers access their wages instantly",
-    },
-    {
-      id: "2024",
-      year: "2024",
-      event: "National Expansion",
-      description: "Operating in all 50 states with major enterprise clients",
-    },
-  ];
+  // Icon mapping for values (fallback to default icons)
+  const getValueIcon = (icon?: string) => {
+    switch (icon?.toLowerCase()) {
+      case 'heart':
+        return <Heart className="w-8 h-8" />;
+      case 'shield':
+        return <Shield className="w-8 h-8" />;
+      case 'trending-up':
+      case 'trendingup':
+        return <TrendingUp className="w-8 h-8" />;
+      default:
+        return <Heart className="w-8 h-8" />;
+    }
+  };
 
   return (
     <main className="min-h-screen">
@@ -165,7 +105,7 @@ export default function AboutPage() {
               >
                 <CardContent className="p-8">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
-                    {value.icon}
+                    {getValueIcon(value.icon)}
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
                     {value.title}
@@ -198,7 +138,7 @@ export default function AboutPage() {
               >
                 <div className="relative h-64">
                   <Image
-                    src={leader.image}
+                    src={getImageUrl(leader, leader.image, { fallback: '/assets/person-1.png' })}
                     alt={leader.name}
                     fill
                     className="object-cover"
@@ -232,25 +172,29 @@ export default function AboutPage() {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <div className="space-y-8">
-              {milestones.map((milestone) => (
-                <div key={milestone.id} className="flex gap-6 items-center">
-                  <div className="flex-shrink-0">
-                    <div className="w-20 h-20 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] rounded-full flex items-center justify-center text-white font-bold">
-                      {milestone.year}
+            {milestones.length > 0 ? (
+              <div className="space-y-8">
+                {milestones.map((milestone) => (
+                  <div key={milestone.id} className="flex gap-6 items-center">
+                    <div className="flex-shrink-0">
+                      <div className="w-20 h-20 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] rounded-full flex items-center justify-center text-white font-bold">
+                        {milestone.year}
+                      </div>
                     </div>
+                    <Card className="flex-1 bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+                      <CardContent className="p-6">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                          {milestone.event}
+                        </h3>
+                        <p className="text-gray-600">{milestone.description}</p>
+                      </CardContent>
+                    </Card>
                   </div>
-                  <Card className="flex-1 bg-gradient-to-br from-blue-50 to-purple-50 border-0">
-                    <CardContent className="p-6">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                        {milestone.event}
-                      </h3>
-                      <p className="text-gray-600">{milestone.description}</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-gray-600">No milestones available at this time.</p>
+            )}
           </div>
         </div>
       </section>

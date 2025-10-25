@@ -6,18 +6,15 @@ import {
   MessageSquare,
   Phone,
 } from "lucide-react";
+import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { ContactForm } from "@/components/contact/contact-form";
+import { getContactOptions } from "@/lib/services/contact";
+import { EnquiriesInterestOptions } from "@/types/pocketbase";
+import { FAQSection } from "@/components/sections/faq";
+import { SupportResourcesSection } from "@/components/sections/support-resources";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const metadata = {
   title: "Contact Us - FinWage",
@@ -30,7 +27,9 @@ export const metadata = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  // Fetch contact options from PocketBase
+  const contactOptions = await getContactOptions();
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -49,62 +48,55 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Options */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
-              <CardHeader className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6 mx-auto">
-                  <MessageSquare className="w-8 h-8" />
-                </div>
-                <CardTitle>For Employers</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="mb-6">
-                  Schedule a demo and see how FinWage can transform your workplace
-                </CardDescription>
-                <Button className="bg-[#1d44c3] hover:bg-[#0d2463] w-full">
-                  Schedule Demo
-                </Button>
-              </CardContent>
-            </Card>
+      {contactOptions.length > 0 && (
+        <section className="py-16 md:py-24 bg-white">
+          <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              {contactOptions.slice(0, 3).map((option, index) => {
+                // Determine icon based on type or use default
+                const IconComponent = 
+                  option.type === 'email' ? Mail :
+                  option.type === 'phone' ? Phone :
+                  MessageSquare;
+                
+                // Determine color based on index
+                const colors = [
+                  { bg: 'bg-[#1d44c3]', hover: 'hover:bg-[#0d2463]' },
+                  { bg: 'bg-green-500', hover: 'hover:bg-green-600' },
+                  { bg: 'bg-purple-500', hover: 'hover:bg-purple-600' },
+                ];
+                const color = colors[index] || colors[0];
 
-            <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
-              <CardHeader className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 rounded-full text-white mb-6 mx-auto">
-                  <Phone className="w-8 h-8" />
-                </div>
-                <CardTitle>Employee Support</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="mb-6">
-                  Get help with your account, transactions, or general questions
-                </CardDescription>
-                <Button className="bg-green-500 hover:bg-green-600 w-full">
-                  Get Support
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
-              <CardHeader className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-500 rounded-full text-white mb-6 mx-auto">
-                  <Mail className="w-8 h-8" />
-                </div>
-                <CardTitle>General Inquiries</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="mb-6">
-                  Media, partnerships, or other questions
-                </CardDescription>
-                <Button className="bg-purple-500 hover:bg-purple-600 w-full">
-                  Contact Us
-                </Button>
-              </CardContent>
-            </Card>
+                return (
+                  <Card key={option.id} className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+                    <CardHeader className="text-center">
+                      <div className={`inline-flex items-center justify-center w-16 h-16 ${color.bg} rounded-full text-white mb-6 mx-auto`}>
+                        <IconComponent className="w-8 h-8" />
+                      </div>
+                      <CardTitle>{option.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-center">
+                      <CardDescription className="mb-6">
+                        {option.description}
+                      </CardDescription>
+                      {option.action_url && (
+                        <Button 
+                          className={`${color.bg} ${color.hover} w-full`}
+                          asChild
+                        >
+                          <a href={option.action_url}>
+                            {option.title}
+                          </a>
+                        </Button>
+                      )}
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Demo Request Form */}
       <section className="py-16 md:py-24 bg-gray-50">
@@ -180,182 +172,34 @@ export default function ContactPage() {
 
             <Card className="shadow-2xl">
               <CardHeader>
-                <CardTitle>Demo Request Form</CardTitle>
+                <CardTitle>Contact Form</CardTitle>
               </CardHeader>
               <CardContent>
-                <form className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="contact-first-name">First Name *</Label>
-                      <Input
-                        id="contact-first-name"
-                        type="text"
-                        placeholder="John"
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="contact-last-name">Last Name *</Label>
-                      <Input
-                        id="contact-last-name"
-                        type="text"
-                        placeholder="Doe"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-email">Work Email *</Label>
-                    <Input
-                      id="contact-email"
-                      type="email"
-                      placeholder="john@company.com"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-phone">Phone Number *</Label>
-                    <Input
-                      id="contact-phone"
-                      type="tel"
-                      placeholder="+1 (555) 000-0000"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-company">Company Name *</Label>
-                    <Input
-                      id="contact-company"
-                      type="text"
-                      placeholder="Acme Corporation"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-employee-count">
-                      Number of Employees *
-                    </Label>
-                    <Select>
-                      <SelectTrigger id="contact-employee-count">
-                        <SelectValue placeholder="Select a range" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1-50">1-50</SelectItem>
-                        <SelectItem value="51-200">51-200</SelectItem>
-                        <SelectItem value="201-500">201-500</SelectItem>
-                        <SelectItem value="501-1000">501-1000</SelectItem>
-                        <SelectItem value="1000+">1000+</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-hear-about">
-                      How did you hear about us?
-                    </Label>
-                    <Select>
-                      <SelectTrigger id="contact-hear-about">
-                        <SelectValue placeholder="Select an option" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="search">Search Engine</SelectItem>
-                        <SelectItem value="social">Social Media</SelectItem>
-                        <SelectItem value="referral">Referral</SelectItem>
-                        <SelectItem value="conference">
-                          Conference/Event
-                        </SelectItem>
-                           <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-message">Message (Optional)</Label>
-                    <Textarea
-                      id="contact-message"
-                      placeholder="Tell us about your needs..."
-                      rows={4}
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-[#1d44c3] hover:bg-[#0d2463]"
-                    size="lg"
-                  >
-                    Request Demo
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Button>
-
-                  <p className="text-sm text-gray-500 text-center">
-                    By submitting this form, you agree to our Privacy Policy
-                  </p>
-                </form>
+                <ContactForm defaultInterest={EnquiriesInterestOptions.demo} />
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Employee Support Links */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Employee Support Resources
-            </h2>
-            <p className="text-xl text-gray-600">
-              Quick access to help and information
-            </p>
-          </div>
+      {/* Support Resources - Dynamic from PocketBase */}
+      <Suspense fallback={<SupportResourcesSkeleton />}>
+        <SupportResourcesSection 
+          title="Employee Support Resources"
+          description="Quick access to help and information"
+          grouped={true}
+        />
+      </Suspense>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="text-center">
-              <CardHeader>
-                <CardTitle>Help Center</CardTitle>
-                <CardDescription>Search our knowledge base</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="link">Visit Help Center →</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center">
-              <CardHeader>
-                <CardTitle>Live Chat</CardTitle>
-                <CardDescription>Chat with support team</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="link">Start Chat →</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center">
-              <CardHeader>
-                <CardTitle>FAQ</CardTitle>
-                <CardDescription>Common questions answered</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="link">View FAQs →</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center">
-              <CardHeader>
-                <CardTitle>Email Support</CardTitle>
-                <CardDescription>Send us a message</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="link">support@finwage.com →</Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+      {/* FAQ Section - Dynamic from PocketBase */}
+      <Suspense fallback={<FAQSkeleton />}>
+        <FAQSection 
+          title="Frequently Asked Questions"
+          description="Find answers to common questions about FinWage"
+          showFeaturedOnly={true}
+          limit={8}
+        />
+      </Suspense>
 
       {/* Office Info */}
       <section className="py-16 md:py-24 bg-gray-50">
@@ -402,5 +246,51 @@ export default function ContactPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+// Loading skeletons
+function SupportResourcesSkeleton() {
+  return (
+    <section className="py-16 md:py-24 bg-white">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="text-center mb-16">
+          <Skeleton className="h-12 w-96 mx-auto mb-4" />
+          <Skeleton className="h-6 w-64 mx-auto" />
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <Card key={i}>
+              <CardHeader>
+                <Skeleton className="h-12 w-12 rounded-full mb-4" />
+                <Skeleton className="h-6 w-full mb-2" />
+                <Skeleton className="h-4 w-3/4" />
+              </CardHeader>
+              <CardContent>
+                <Skeleton className="h-4 w-32" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQSkeleton() {
+  return (
+    <section className="py-16 md:py-24 bg-gray-50">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="text-center mb-16">
+          <Skeleton className="h-12 w-96 mx-auto mb-4" />
+          <Skeleton className="h-6 w-64 mx-auto" />
+        </div>
+        <div className="max-w-3xl mx-auto space-y-4">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <Skeleton key={i} className="h-16 w-full" />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

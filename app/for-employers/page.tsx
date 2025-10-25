@@ -1,16 +1,16 @@
 import {
   ArrowRight,
-  Award,
-  Clock,
-  DollarSign,
   Shield,
-  TrendingUp,
   Users,
   Zap,
 } from "lucide-react";
 import ROICalculator from "@/components/roi-calculator";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getEmployerBenefits } from "@/lib/services/benefits";
+import { getEmployerStats } from "@/lib/services/stats";
+import { getIntegrations } from "@/lib/services/integrations";
+import { renderIcon } from "@/lib/utils/icon-mapper";
 
 export const metadata = {
   title: "For Employers - FinWage",
@@ -23,61 +23,17 @@ export const metadata = {
   },
 };
 
-export default function ForEmployersPage() {
-  const benefits = [
-    {
-      icon: <TrendingUp className="w-8 h-8" />,
-      title: "27% Reduction in Turnover",
-      description:
-        "Companies using FinWage see significant improvement in employee retention",
-    },
-    {
-      icon: <DollarSign className="w-8 h-8" />,
-      title: "Save on Recruiting",
-      description:
-        "Reduce hiring costs by $15K+ per position with better retention",
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Attract Top Talent",
-      description:
-        "Stand out as an employer offering modern financial wellness benefits",
-    },
-    {
-      icon: <Clock className="w-8 h-8" />,
-      title: "Zero Admin Time",
-      description:
-        "Fully automated integration with your existing payroll system",
-    },
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Compliance Built-In",
-      description: "We handle all regulatory requirements and data security",
-    },
-    {
-      icon: <Award className="w-8 h-8" />,
-      title: "Boost Productivity",
-      description: "Financially secure employees are 21% more productive",
-    },
-  ];
+export const revalidate = 3600;
 
-  const integrations = [
-    "ADP",
-    "Workday",
-    "Paychex",
-    "Gusto",
-    "BambooHR",
-    "Rippling",
-    "Namely",
-    "Zenefits",
-  ];
+export default async function ForEmployersPage() {
+  // Fetch data from PocketBase in parallel
+  const [benefits, stats, integrationsResult] = await Promise.all([
+    getEmployerBenefits({ perPage: 20 }),
+    getEmployerStats({ perPage: 10 }),
+    getIntegrations({ perPage: 50 }),
+  ]);
 
-  const stats = [
-    { value: "27%", label: "Turnover Reduction" },
-    { value: "$15K+", label: "Savings Per Hire" },
-    { value: "2-3 Days", label: "Implementation Time" },
-    { value: "0 Hours", label: "Admin Work" },
-  ];
+  const integrations = integrationsResult.items;
 
   return (
     <main className="min-h-screen">
@@ -113,16 +69,22 @@ export default function ForEmployersPage() {
             <div className="relative">
               <Card className="bg-white/10 backdrop-blur-lg border-white/20">
                 <CardContent className="p-8">
-                  <div className="grid grid-cols-2 gap-6">
-                    {stats.map((stat, index) => (
-                      <div key={index} className="text-center">
-                        <div className="text-4xl md:text-5xl font-bold mb-2 text-white">
-                          {stat.value}
+                  {stats.length > 0 ? (
+                    <div className="grid grid-cols-2 gap-6">
+                      {stats.map((stat) => (
+                        <div key={stat.id} className="text-center">
+                          <div className="text-4xl md:text-5xl font-bold mb-2 text-white">
+                            {stat.value}
+                          </div>
+                          <div className="text-blue-100">{stat.label}</div>
                         </div>
-                        <div className="text-blue-100">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center text-blue-100">
+                      <p>Statistics coming soon</p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </div>
@@ -144,22 +106,30 @@ export default function ForEmployersPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <Card
-                key={index}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
-              >
-                <CardContent className="p-8">
-                  <div className="text-[#1d44c3] mb-4">{benefit.icon}</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-600">{benefit.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {benefits.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {benefits.map((benefit) => (
+                <Card
+                  key={benefit.id}
+                  className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
+                >
+                  <CardContent className="p-8">
+                    <div className="text-[#1d44c3] mb-4">
+                      {renderIcon(benefit.icon, "w-8 h-8")}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-gray-600">{benefit.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-600">
+              <p>Benefits information coming soon</p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -238,19 +208,27 @@ export default function ForEmployersPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  {integrations.map((integration, index) => (
-                    <div
-                      key={index}
-                      className="bg-gray-50 rounded-lg p-4 text-center font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#1d44c3] transition-colors"
-                    >
-                      {integration}
+                {integrations.length > 0 ? (
+                  <>
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      {integrations.map((integration) => (
+                        <div
+                          key={integration.id}
+                          className="bg-gray-50 rounded-lg p-4 text-center font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#1d44c3] transition-colors"
+                        >
+                          {integration.name}
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                <p className="text-center text-gray-500 text-sm">
-                  + Many more platforms supported
-                </p>
+                    <p className="text-center text-gray-500 text-sm">
+                      + Many more platforms supported
+                    </p>
+                  </>
+                ) : (
+                  <div className="text-center text-gray-500 py-8">
+                    <p>Integration information coming soon</p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
