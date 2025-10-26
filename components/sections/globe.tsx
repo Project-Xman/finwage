@@ -2,7 +2,7 @@
 import { COBEOptions } from "cobe";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import type { StatsResponse } from "@/types/pocketbase";
+import type { StatusResponse } from "@/types/pocketbase";
 import { Collections } from "@/types/pocketbase";
 
 const World = dynamic(
@@ -15,7 +15,7 @@ const World = dynamic(
 function StatCard({
   stat,
 }: {
-  stat: StatsResponse;
+  stat: StatusResponse;
 }) {
   return (
     <div className="flex flex-col gap-2 w-full">
@@ -32,7 +32,7 @@ function StatCard({
   );
 }
 
-export default function Global({ stats }: { stats: StatsResponse[] }) {
+export default function Global({ stats }: { stats: StatusResponse[] }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -118,10 +118,10 @@ export default function Global({ stats }: { stats: StatsResponse[] }) {
               ) : (
                 // Fallback stats if none are available
                 <>
-                  <StatCard stat={{ id: '1', value: '500M+', description: 'API requests per day', metric: 'API requests', order: 1, label: 'API Requests', collectionId: '', collectionName: Collections.Stats, created: '', updated: '' }} />
-                  <StatCard stat={{ id: '2', value: '99.999%', description: 'historical uptime', metric: 'Uptime', order: 2, label: 'Uptime', collectionId: '', collectionName: Collections.Stats, created: '', updated: '' }} />
-                  <StatCard stat={{ id: '3', value: '47+', description: 'countries with local acquiring', metric: 'Countries', order: 3, label: 'Countries', collectionId: '', collectionName: Collections.Stats, created: '', updated: '' }} />
-                  <StatCard stat={{ id: '4', value: '135+', description: 'currencies and payment methods supported', metric: 'Currencies', order: 4, label: 'Currencies', collectionId: '', collectionName: Collections.Stats, created: '', updated: '' }} />
+                  <StatCard stat={{ id: '1', value: '500M+', description: 'API requests per day', metric: 'API requests', order: 1, label: 'API Requests', collectionId: '', collectionName: Collections.Status, created: '', updated: '' }} />
+                  <StatCard stat={{ id: '2', value: '99.999%', description: 'historical uptime', metric: 'Uptime', order: 2, label: 'Uptime', collectionId: '', collectionName: Collections.Status, created: '', updated: '' }} />
+                  <StatCard stat={{ id: '3', value: '47+', description: 'countries with local acquiring', metric: 'Countries', order: 3, label: 'Countries', collectionId: '', collectionName: Collections.Status, created: '', updated: '' }} />
+                  <StatCard stat={{ id: '4', value: '135+', description: 'currencies and payment methods supported', metric: 'Currencies', order: 4, label: 'Currencies', collectionId: '', collectionName: Collections.Status, created: '', updated: '' }} />
                 </>
               )}
             </div>

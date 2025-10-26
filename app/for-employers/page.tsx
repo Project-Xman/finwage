@@ -7,7 +7,7 @@ import {
 import ROICalculator from "@/components/roi-calculator";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getEmployerBenefits } from "@/lib/services/benefits";
+import { getEmployeeBenefits } from "@/lib/services/benefits";
 import { getEmployerStats } from "@/lib/services/stats";
 import { getIntegrations } from "@/lib/services/integrations";
 import { renderIcon } from "@/lib/utils/icon-mapper";
@@ -28,7 +28,7 @@ export const revalidate = 3600;
 export default async function ForEmployersPage() {
   // Fetch data from PocketBase in parallel
   const [benefits, stats, integrationsResult] = await Promise.all([
-    getEmployerBenefits({ perPage: 20 }),
+    getEmployeeBenefits({ perPage: 20 }),
     getEmployerStats({ perPage: 10 }),
     getIntegrations({ perPage: 50 }),
   ]);

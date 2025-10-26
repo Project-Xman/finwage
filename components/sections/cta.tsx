@@ -35,7 +35,7 @@ function HeroSection() {
   );
 }
 
-function CtaCardComponent({ icon, bgColor, title, points }: CtaCard) {
+function CtaCardComponent({ icon, bg_color, title, points }: CtaCard) {
   // Check if icon is an image path (starts with / or http)
   const isImageIcon = icon.startsWith('/') || icon.startsWith('http');
 
@@ -46,7 +46,7 @@ function CtaCardComponent({ icon, bgColor, title, points }: CtaCard) {
         <div className="mb-4 md:mb-6">
           <div className="flex items-center gap-4 md:gap-6">
             <div
-              className={`size-12 md:size-14 ${bgColor} rounded-lg flex items-center justify-center flex-shrink-0`}
+              className={`size-12 md:size-14 ${bg_color} rounded-lg flex items-center justify-center flex-shrink-0`}
             >
               {isImageIcon ? (
                 <Image

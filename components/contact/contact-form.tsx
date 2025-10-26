@@ -7,7 +7,8 @@
  * Handles form state, validation errors, and success messages.
  */
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { useEffect, useRef } from 'react';
 import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -54,7 +55,7 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ defaultInterest = EnquiriesInterestOptions.contact }: ContactFormProps) {
-  const [state, formAction] = useFormState<ContactFormState, FormData>(
+  const [state, formAction] = useActionState<ContactFormState, FormData>(
     submitContactForm,
     { success: false }
   );

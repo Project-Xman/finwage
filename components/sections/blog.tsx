@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import NextLink from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getFeaturedBlogs, getBlogs } from "@/lib/services/blogs";
@@ -14,7 +14,7 @@ function BlogCard({ post }: { post: BlogWithExpand }) {
   const imageUrl = getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' });
 
   return (
-    <Link href={`/blog/${post.slug}`}>
+    <NextLink href={`/blog/${post.slug}`}>
       <Card className="rounded-lg hover:shadow-md transition-shadow border-0">
         <CardContent className="p-0 flex gap-3 h-[104px] items-center">
           <div className="flex-shrink-0 w-32 h-20 rounded-md overflow-hidden">
@@ -36,7 +36,7 @@ function BlogCard({ post }: { post: BlogWithExpand }) {
           </div>
         </CardContent>
       </Card>
-    </Link>
+    </NextLink>
   );
 }
 
@@ -54,14 +54,14 @@ function FeaturedPost({ post }: { post: BlogWithExpand | null }) {
         className="text-[#f64162] hover:text-[#f64162] font-bold inline-flex items-center gap-2 hover:gap-3 transition-all p-0 h-auto"
         asChild
       >
-        <Link href="/blog">
+        <NextLink href="/blog">
           Explore all resources
           <ArrowRight className="w-4 h-4" />
-        </Link>
+        </NextLink>
       </Button>
 
       <div className="space-y-6">
-        <Link href={`/blog/${post.slug}`}>
+        <NextLink href={`/blog/${post.slug}`}>
           <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
             <Image
               src={imageUrl}
@@ -71,14 +71,14 @@ function FeaturedPost({ post }: { post: BlogWithExpand | null }) {
               className="w-full h-auto"
             />
           </div>
-        </Link>
+        </NextLink>
 
         <div className="space-y-4">
-          <Link href={`/blog/${post.slug}`}>
+          <NextLink href={`/blog/${post.slug}`}>
             <h3 className="text-2xl md:text-3xl font-bold text-[#1d44c3] leading-8 hover:text-[#0d2463] transition-colors">
               {post.title}
             </h3>
-          </Link>
+          </NextLink>
           <p className="text-gray-800 leading-6">
             {post.excerpt}
           </p>
@@ -87,10 +87,10 @@ function FeaturedPost({ post }: { post: BlogWithExpand | null }) {
             className="text-[#f64162] hover:text-[#f64162] font-bold inline-flex items-center gap-2 hover:gap-3 transition-all p-0 h-auto"
             asChild
           >
-            <Link href={`/blog/${post.slug}`}>
+            <NextLink href={`/blog/${post.slug}`}>
               Learn more
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </NextLink>
           </Button>
         </div>
       </div>

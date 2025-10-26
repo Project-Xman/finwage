@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import NextLink from "next/link";
 
 export default function GlobalError({
   error,
@@ -52,12 +53,12 @@ export default function GlobalError({
               >
                 Try Again
               </Button>
-              <a
+              <NextLink
                 href="/"
                 className="flex-1 bg-gray-100 text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition-all"
               >
                 Go Home
-              </a>
+              </NextLink>
             </div>
           </div>
         </div>

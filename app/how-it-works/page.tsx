@@ -2,7 +2,7 @@ import { ArrowRight, Building2, Check, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getProcessSteps } from "@/lib/services/process";
-import { getEmployerBenefits } from "@/lib/services/benefits";
+import { getEmployeeBenefits } from "@/lib/services/benefits";
 
 export const metadata = {
   title: "How It Works - FinWage",
@@ -21,7 +21,7 @@ export default async function HowItWorksPage() {
   // Fetch data from PocketBase in parallel
   const [employeeSteps, employerBenefits] = await Promise.all([
     getProcessSteps({ perPage: 10, category: 'employee' }),
-    getEmployerBenefits({ perPage: 20 }),
+    getEmployeeBenefits({ perPage: 20 }),
   ]);
 
   return (

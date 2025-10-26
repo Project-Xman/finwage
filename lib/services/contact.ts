@@ -5,7 +5,7 @@
  * Handles contact options display and enquiry form submissions.
  */
 
-import type { ContactsResponse, EnquiriesResponse } from '@/types/pocketbase';
+import type { ContactOptionsResponse, EnquiriesResponse } from '@/types/pocketbase';
 import { EnquiriesInterestOptions, EnquiriesStatusOptions } from '@/types/pocketbase';
 import {
   getContactOptions as apiFetchContactOptions,
@@ -60,7 +60,7 @@ export interface EnquiryResult {
  * });
  * ```
  */
-export async function getContactOptions(): Promise<ContactsResponse[]> {
+export async function getContactOptions(): Promise<ContactOptionsResponse[]> {
   try {
     const response = await apiFetchContactOptions({
       sort: '-is_featured',

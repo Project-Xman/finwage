@@ -19,8 +19,8 @@ import type {
   CompanyMilestonesResponse,
   JobsResponse,
   EmployeeBenefitsResponse,
-  StatsResponse,
-  ContactsResponse,
+  StatusResponse,
+  ContactOptionsResponse,
   SupportResponse,
   LocationsResponse,
   FaqTopicsResponse,
@@ -29,7 +29,6 @@ import type {
   EnquiriesResponse,
   ComplianceItemsResponse,
   SecurityFeaturesResponse,
-  EmployerBenefitsResponse,
   EmployerStatsResponse,
   ProcessStepsResponse,
   CtaCardsResponse,
@@ -172,7 +171,7 @@ async function fetchRecord<T>(
 export async function getBlogs(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<BlogsResponse>> {
-  return fetchCollection<BlogsResponse>('Blogs', {
+  return fetchCollection<BlogsResponse>('blogs', {
     perPage: options.perPage || 20,
     expand: 'author,category',
     ...options,
@@ -184,7 +183,7 @@ export async function getBlogs(
 
 export const getBlogBySlug = unstable_cache(
   async (slug: string): Promise<BlogsResponse> => {
-    const response = await fetchCollection<BlogsResponse>('Blogs', {
+    const response = await fetchCollection<BlogsResponse>('blogs', {
       filter: `slug = "${slug}" && published = true`,
       perPage: 1,
       expand: 'author,category',
@@ -207,7 +206,7 @@ export const getBlogBySlug = unstable_cache(
 );
 
 export async function getFeaturedBlogs(limit: number = 3): Promise<BlogsResponse[]> {
-  const response = await fetchCollection<BlogsResponse>('Blogs', {
+  const response = await fetchCollection<BlogsResponse>('blogs', {
     filter: 'featured = true && published = true',
     perPage: limit,
     sort: '-published_date',
@@ -224,7 +223,7 @@ export async function getBlogsByCategory(
   categoryId: string,
   limit: number = 10
 ): Promise<BlogsResponse[]> {
-  const response = await fetchCollection<BlogsResponse>('Blogs', {
+  const response = await fetchCollection<BlogsResponse>('blogs', {
     filter: `category = "${categoryId}" && published = true`,
     perPage: limit,
     sort: '-published_date',
@@ -244,7 +243,7 @@ export async function getBlogsByCategory(
 export async function getAuthors(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<AuthorsResponse>> {
-  return fetchCollection<AuthorsResponse>('Authors', {
+  return fetchCollection<AuthorsResponse>('authors', {
     filter: 'active = true',
     ...options,
   }, {
@@ -254,14 +253,14 @@ export async function getAuthors(
 }
 
 export async function getAuthorById(authorId: string): Promise<AuthorsResponse> {
-  return fetchRecord<AuthorsResponse>('Authors', authorId, {}, {
+  return fetchRecord<AuthorsResponse>('authors', authorId, {}, {
     revalidate: CACHE_DURATION.LONG,
     tags: [CACHE_TAGS.AUTHORS, `author-${authorId}`],
   });
 }
 
 export async function getAuthorBySlug(slug: string): Promise<AuthorsResponse> {
-  const response = await fetchCollection<AuthorsResponse>('Authors', {
+  const response = await fetchCollection<AuthorsResponse>('authors', {
     filter: `slug = "${slug}" && active = true`,
     perPage: 1,
   }, {
@@ -283,7 +282,7 @@ export async function getAuthorBySlug(slug: string): Promise<AuthorsResponse> {
 export async function getTestimonials(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<TestimonialsResponse>> {
-  return fetchCollection<TestimonialsResponse>('Testimonials', {
+  return fetchCollection<TestimonialsResponse>('testimonials', {
     sort: options.sort || 'order',
     ...options,
   }, {
@@ -293,7 +292,7 @@ export async function getTestimonials(
 }
 
 export async function getFeaturedTestimonials(limit: number = 6): Promise<TestimonialsResponse[]> {
-  const response = await fetchCollection<TestimonialsResponse>('Testimonials', {
+  const response = await fetchCollection<TestimonialsResponse>('testimonials', {
     filter: 'featured = true',
     perPage: limit,
     sort: 'order',
@@ -312,7 +311,7 @@ export async function getFeaturedTestimonials(limit: number = 6): Promise<Testim
 export async function getPricingPlans(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<PricingPlansResponse>> {
-  return fetchCollection<PricingPlansResponse>('Pricing_Plans', {
+  return fetchCollection<PricingPlansResponse>('pricing_plans', {
     filter: options.filter || 'active = true',
     sort: options.sort || 'order',
     ...options,
@@ -323,7 +322,7 @@ export async function getPricingPlans(
 }
 
 export async function getPopularPlan(): Promise<PricingPlansResponse | null> {
-  const response = await fetchCollection<PricingPlansResponse>('Pricing_Plans', {
+  const response = await fetchCollection<PricingPlansResponse>('pricing_plans', {
     filter: 'is_popular = true && active = true',
     perPage: 1,
   }, {
@@ -341,7 +340,7 @@ export async function getPopularPlan(): Promise<PricingPlansResponse | null> {
 export async function getPartners(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<PartnersResponse>> {
-  return fetchCollection<PartnersResponse>('Partners', {
+  return fetchCollection<PartnersResponse>('partners', {
     filter: options.filter || 'active = true',
     sort: options.sort || 'order',
     ...options,
@@ -352,7 +351,7 @@ export async function getPartners(
 }
 
 export async function getFeaturedPartners(limit: number = 8): Promise<PartnersResponse[]> {
-  const response = await fetchCollection<PartnersResponse>('Partners', {
+  const response = await fetchCollection<PartnersResponse>('partners', {
     filter: 'featured = true && active = true',
     perPage: limit,
     sort: 'order',
@@ -371,7 +370,7 @@ export async function getFeaturedPartners(limit: number = 8): Promise<PartnersRe
 export async function getFeatures(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<FeaturesResponse>> {
-  return fetchCollection<FeaturesResponse>('Features', {
+  return fetchCollection<FeaturesResponse>('features', {
     filter: 'active = true',
     sort: options.sort || 'order',
     ...options,
@@ -382,7 +381,7 @@ export async function getFeatures(
 }
 
 export async function getFeaturesByCategory(category: string): Promise<FeaturesResponse[]> {
-  const response = await fetchCollection<FeaturesResponse>('Features', {
+  const response = await fetchCollection<FeaturesResponse>('features', {
     filter: `category = "${category}" && active = true`,
     sort: 'order',
   }, {
@@ -394,7 +393,7 @@ export async function getFeaturesByCategory(category: string): Promise<FeaturesR
 }
 
 export async function getFeaturedFeatures(limit: number = 6): Promise<FeaturesResponse[]> {
-  const response = await fetchCollection<FeaturesResponse>('Features', {
+  const response = await fetchCollection<FeaturesResponse>('features', {
     filter: 'featured = true && active = true',
     perPage: limit,
     sort: 'order',
@@ -413,7 +412,7 @@ export async function getFeaturedFeatures(limit: number = 6): Promise<FeaturesRe
 export async function getIntegrations(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<IntegrationsResponse>> {
-  return fetchCollection<IntegrationsResponse>('Integrations', {
+  return fetchCollection<IntegrationsResponse>('integrations', {
     filter: options.filter || 'active = true',
     sort: options.sort || 'order',
     ...options,
@@ -424,7 +423,7 @@ export async function getIntegrations(
 }
 
 export async function getIntegrationsByCategory(category: string): Promise<IntegrationsResponse[]> {
-  const response = await fetchCollection<IntegrationsResponse>('Integrations', {
+  const response = await fetchCollection<IntegrationsResponse>('integrations', {
     filter: `category = "${category}" && active = true`,
     sort: 'order',
   }, {
@@ -436,7 +435,7 @@ export async function getIntegrationsByCategory(category: string): Promise<Integ
 }
 
 export async function getFeaturedIntegrations(limit: number = 8): Promise<IntegrationsResponse[]> {
-  const response = await fetchCollection<IntegrationsResponse>('Integrations', {
+  const response = await fetchCollection<IntegrationsResponse>('integrations', {
     filter: 'featured = true && active = true',
     perPage: limit,
     sort: 'order',
@@ -455,7 +454,7 @@ export async function getFeaturedIntegrations(limit: number = 8): Promise<Integr
 export async function getLeadershipTeam(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<LeadershipResponse>> {
-  return fetchCollection<LeadershipResponse>('Leadership', {
+  return fetchCollection<LeadershipResponse>('leadership', {
     sort: options.sort || 'order',
     ...options,
   }, {
@@ -465,7 +464,7 @@ export async function getLeadershipTeam(
 }
 
 export async function getFeaturedLeadership(): Promise<LeadershipResponse[]> {
-  const response = await fetchCollection<LeadershipResponse>('Leadership', {
+  const response = await fetchCollection<LeadershipResponse>('leadership', {
     filter: 'featured = true',
     sort: 'order',
   }, {
@@ -483,7 +482,7 @@ export async function getFeaturedLeadership(): Promise<LeadershipResponse[]> {
 export async function getCompanyValues(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<ValuesResponse>> {
-  return fetchCollection<ValuesResponse>('Values', {
+  return fetchCollection<ValuesResponse>('values', {
     sort: options.sort || 'order',
     ...options,
   }, {
@@ -493,7 +492,7 @@ export async function getCompanyValues(
 }
 
 export async function getFeaturedValues(): Promise<ValuesResponse[]> {
-  const response = await fetchCollection<ValuesResponse>('Values', {
+  const response = await fetchCollection<ValuesResponse>('values', {
     filter: 'featured = true',
     sort: 'order',
   }, {
@@ -511,7 +510,7 @@ export async function getFeaturedValues(): Promise<ValuesResponse[]> {
 export async function getMilestones(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<CompanyMilestonesResponse>> {
-  return fetchCollection<CompanyMilestonesResponse>('Company_Milestones', {
+  return fetchCollection<CompanyMilestonesResponse>('company_milestones', {
     sort: options.sort || '-year',
     ...options,
   }, {
@@ -521,7 +520,7 @@ export async function getMilestones(
 }
 
 export async function getFeaturedMilestones(): Promise<CompanyMilestonesResponse[]> {
-  const response = await fetchCollection<CompanyMilestonesResponse>('Company_Milestones', {
+  const response = await fetchCollection<CompanyMilestonesResponse>('company_milestones', {
     filter: 'featured = true',
     sort: '-year',
   }, {
@@ -539,7 +538,7 @@ export async function getFeaturedMilestones(): Promise<CompanyMilestonesResponse
 export async function getJobPositions(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<JobsResponse>> {
-  return fetchCollection<JobsResponse>('Jobs', {
+  return fetchCollection<JobsResponse>('jobs', {
     filter: options.filter || 'status = "open"',
     sort: options.sort || '-created',
     ...options,
@@ -550,7 +549,7 @@ export async function getJobPositions(
 }
 
 export async function getFeaturedJobs(limit: number = 5): Promise<JobsResponse[]> {
-  const response = await fetchCollection<JobsResponse>('Jobs', {
+  const response = await fetchCollection<JobsResponse>('jobs', {
     filter: 'featured = true && status = "open"',
     perPage: limit,
     sort: '-created',
@@ -563,7 +562,7 @@ export async function getFeaturedJobs(limit: number = 5): Promise<JobsResponse[]
 }
 
 export async function getJobsByDepartment(department: string): Promise<JobsResponse[]> {
-  const response = await fetchCollection<JobsResponse>('Jobs', {
+  const response = await fetchCollection<JobsResponse>('jobs', {
     filter: `department = "${department}" && status = "open"`,
     sort: '-created',
   }, {
@@ -575,7 +574,7 @@ export async function getJobsByDepartment(department: string): Promise<JobsRespo
 }
 
 export async function getJobById(jobId: string): Promise<JobsResponse> {
-  return fetchRecord<JobsResponse>('Jobs', jobId, {}, {
+  return fetchRecord<JobsResponse>('jobs', jobId, {}, {
     revalidate: CACHE_DURATION.SHORT,
     tags: [CACHE_TAGS.JOBS, `job-${jobId}`],
   });
@@ -588,7 +587,7 @@ export async function getJobById(jobId: string): Promise<JobsResponse> {
 export async function getBenefits(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<EmployeeBenefitsResponse>> {
-  return fetchCollection<EmployeeBenefitsResponse>('Employee_Benefits', {
+  return fetchCollection<EmployeeBenefitsResponse>('employee_benefits', {
     sort: options.sort || 'order',
     ...options,
   }, {
@@ -598,7 +597,7 @@ export async function getBenefits(
 }
 
 export async function getBenefitsByCategory(category: string): Promise<EmployeeBenefitsResponse[]> {
-  const response = await fetchCollection<EmployeeBenefitsResponse>('Employee_Benefits', {
+  const response = await fetchCollection<EmployeeBenefitsResponse>('employee_benefits', {
     filter: `category = "${category}"`,
     sort: 'order',
   }, {
@@ -615,8 +614,8 @@ export async function getBenefitsByCategory(category: string): Promise<EmployeeB
 
 export async function getCompanyStats(
   options: ListOptions = {}
-): Promise<PocketBaseListResponse<StatsResponse>> {
-  return fetchCollection<StatsResponse>('Stats', {
+): Promise<PocketBaseListResponse<StatusResponse>> {
+  return fetchCollection<StatusResponse>('status', {
     sort: options.sort || 'order',
     ...options,
   }, {
@@ -631,8 +630,8 @@ export async function getCompanyStats(
 
 export async function getContactOptions(
   options: ListOptions = {}
-): Promise<PocketBaseListResponse<ContactsResponse>> {
-  return fetchCollection<ContactsResponse>('Contacts', {
+): Promise<PocketBaseListResponse<ContactOptionsResponse>> {
+  return fetchCollection<ContactOptionsResponse>('contact_options', {
     sort: options.sort || '-is_featured',
     ...options,
   }, {
@@ -641,8 +640,8 @@ export async function getContactOptions(
   });
 }
 
-export async function getFeaturedContactOptions(): Promise<ContactsResponse[]> {
-  const response = await fetchCollection<ContactsResponse>('Contacts', {
+export async function getFeaturedContactOptions(): Promise<ContactOptionsResponse[]> {
+  const response = await fetchCollection<ContactOptionsResponse>('contact_options', {
     filter: 'is_featured = true',
   }, {
     revalidate: CACHE_DURATION.LONG,
@@ -659,7 +658,7 @@ export async function getFeaturedContactOptions(): Promise<ContactsResponse[]> {
 export async function getSupportResources(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<SupportResponse>> {
-  return fetchCollection<SupportResponse>('Support', {
+  return fetchCollection<SupportResponse>('support', {
     sort: options.sort || 'order',
     ...options,
   }, {
@@ -669,7 +668,7 @@ export async function getSupportResources(
 }
 
 export async function getSupportResourcesByCategory(category: string): Promise<SupportResponse[]> {
-  const response = await fetchCollection<SupportResponse>('Support', {
+  const response = await fetchCollection<SupportResponse>('support', {
     filter: `category = "${category}"`,
     sort: 'order',
   }, {
@@ -687,14 +686,14 @@ export async function getSupportResourcesByCategory(category: string): Promise<S
 export async function getOfficeLocations(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<LocationsResponse>> {
-  return fetchCollection<LocationsResponse>('Locations', options, {
+  return fetchCollection<LocationsResponse>('locations', options, {
     revalidate: CACHE_DURATION.STATIC,
     tags: [CACHE_TAGS.LOCATIONS],
   });
 }
 
 export async function getOfficeLocationsByCity(city: string): Promise<LocationsResponse[]> {
-  const response = await fetchCollection<LocationsResponse>('Locations', {
+  const response = await fetchCollection<LocationsResponse>('locations', {
     filter: `city = "${city}"`,
   }, {
     revalidate: CACHE_DURATION.STATIC,
@@ -711,22 +710,21 @@ export async function getOfficeLocationsByCity(city: string): Promise<LocationsR
 export async function getFaqTopics(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<FaqTopicsResponse>> {
-  return fetchCollection<FaqTopicsResponse>('Faq_Topics', {
+  return fetchCollection<FaqTopicsResponse>('faq_topics', {
     sort: options.sort || 'order',
     ...options,
   }, {
     revalidate: CACHE_DURATION.LONG,
-    tags: [CACHE_TAGS.FAQ, 'faq-topics'],
+    tags: [CACHE_TAGS.FAQ],
   });
 }
 
 export async function getFaqItems(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<FaqsResponse>> {
-  return fetchCollection<FaqsResponse>('Faqs', {
+  return fetchCollection<FaqsResponse>('faqs', {
     sort: options.sort || 'order',
-    expand: options.expand || 'category',
-    filter: options.filter,
+    expand: 'category',
     ...options,
   }, {
     revalidate: CACHE_DURATION.LONG,
@@ -735,7 +733,7 @@ export async function getFaqItems(
 }
 
 export async function getFeaturedFaqItems(limit: number = 6): Promise<FaqsResponse[]> {
-  const response = await fetchCollection<FaqsResponse>('Faqs', {
+  const response = await fetchCollection<FaqsResponse>('faqs', {
     filter: 'featured = true',
     perPage: limit,
     sort: 'order',
@@ -749,7 +747,7 @@ export async function getFeaturedFaqItems(limit: number = 6): Promise<FaqsRespon
 }
 
 export async function getFaqItemsByCategory(categoryId: string): Promise<FaqsResponse[]> {
-  const response = await fetchCollection<FaqsResponse>('Faqs', {
+  const response = await fetchCollection<FaqsResponse>('faqs', {
     filter: `category = "${categoryId}"`,
     sort: 'order',
     expand: 'category',
@@ -768,14 +766,14 @@ export async function getFaqItemsByCategory(categoryId: string): Promise<FaqsRes
 export async function getCategories(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<CategoryResponse>> {
-  return fetchCollection<CategoryResponse>('Category', options, {
+  return fetchCollection<CategoryResponse>('category', options, {
     revalidate: CACHE_DURATION.LONG,
     tags: [CACHE_TAGS.CATEGORIES],
   });
 }
 
 export async function getCategoryBySlug(slug: string): Promise<CategoryResponse> {
-  const response = await fetchCollection<CategoryResponse>('Category', {
+  const response = await fetchCollection<CategoryResponse>('category', {
     filter: `slug = "${slug}"`,
     perPage: 1,
   }, {
@@ -797,7 +795,7 @@ export async function getCategoryBySlug(slug: string): Promise<CategoryResponse>
 export async function getPressReleases(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<PressResponse>> {
-  return fetchCollection<PressResponse>('Press', {
+  return fetchCollection<PressResponse>('press', {
     filter: options.filter || 'published = true',
     sort: options.sort || '-published_date',
     ...options,
@@ -808,7 +806,7 @@ export async function getPressReleases(
 }
 
 export async function getFeaturedPressReleases(limit: number = 5): Promise<PressResponse[]> {
-  const response = await fetchCollection<PressResponse>('Press', {
+  const response = await fetchCollection<PressResponse>('press', {
     filter: 'featured = true && published = true',
     perPage: limit,
     sort: '-published_date',
@@ -827,7 +825,7 @@ export async function getFeaturedPressReleases(limit: number = 5): Promise<Press
 export async function getEnquiries(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<EnquiriesResponse>> {
-  return fetchCollection<EnquiriesResponse>('Enquiries', {
+  return fetchCollection<EnquiriesResponse>('enquiries', {
     sort: options.sort || '-created',
     ...options,
   }, {
@@ -839,7 +837,7 @@ export async function getEnquiries(
 export async function createEnquiry(
   data: Partial<EnquiriesResponse>
 ): Promise<EnquiriesResponse> {
-  const url = `${POCKETBASE_URL}/api/collections/Enquiries/records`;
+  const url = `${POCKETBASE_URL}/api/collections/enquiries/records`;
   
   const response = await fetch(url, {
     method: 'POST',
@@ -853,7 +851,7 @@ export async function createEnquiry(
     throw new PocketBaseError(
       `Failed to create enquiry: ${response.statusText}`,
       response.status,
-      'Enquiries'
+      'enquiries'
     );
   }
 
@@ -867,7 +865,7 @@ export async function createEnquiry(
 export async function getComplianceItems(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<ComplianceItemsResponse>> {
-  return fetchCollection<ComplianceItemsResponse>('Compliance_Items', {
+  return fetchCollection<ComplianceItemsResponse>('compliance_items', {
     sort: options.sort || 'order',
     ...options,
   }, {
@@ -883,7 +881,7 @@ export async function getComplianceItems(
 export async function getSecurityFeatures(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<SecurityFeaturesResponse>> {
-  return fetchCollection<SecurityFeaturesResponse>('Security_Features', {
+  return fetchCollection<SecurityFeaturesResponse>('security_features', {
     sort: options.sort || 'order',
     ...options,
   }, {
@@ -899,28 +897,12 @@ export async function getSecurityFeatures(
 export async function getEmployeeBenefitsMarketing(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<EmployeeBenefitsResponse>> {
-  return fetchCollection<EmployeeBenefitsResponse>('Employee_Benefits', {
+  return fetchCollection<EmployeeBenefitsResponse>('employee_benefits', {
     sort: options.sort || 'order',
     ...options,
   }, {
     revalidate: CACHE_DURATION.LONG,
     tags: [CACHE_TAGS.EMPLOYEE_BENEFITS],
-  });
-}
-
-// ============================================================
-// EMPLOYER BENEFITS API
-// ============================================================
-
-export async function getEmployerBenefits(
-  options: ListOptions = {}
-): Promise<PocketBaseListResponse<EmployerBenefitsResponse>> {
-  return fetchCollection<EmployerBenefitsResponse>('Employer_Benefits', {
-    sort: options.sort || 'order',
-    ...options,
-  }, {
-    revalidate: CACHE_DURATION.LONG,
-    tags: [CACHE_TAGS.EMPLOYER_BENEFITS],
   });
 }
 
@@ -935,7 +917,7 @@ export async function getFAQsMarketing(
     ? `category_text = "${options.category}"` 
     : options.filter;
   
-  return fetchCollection<FaqsResponse>('Faqs', {
+  return fetchCollection<FaqsResponse>('faqs', {
     sort: options.sort || 'order',
     filter,
     perPage: options.perPage || 50,
@@ -957,7 +939,7 @@ export async function getProcessSteps(
     ? `category = "${options.category}"` 
     : options.filter;
   
-  return fetchCollection<ProcessStepsResponse>('Process_Steps', {
+  return fetchCollection<ProcessStepsResponse>('process_steps', {
     sort: options.sort || 'order',
     filter,
     ...options,
@@ -974,7 +956,7 @@ export async function getProcessSteps(
 export async function getEmployerStats(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<EmployerStatsResponse>> {
-  return fetchCollection<EmployerStatsResponse>('Employer_Stats', {
+  return fetchCollection<EmployerStatsResponse>('employer_stats', {
     sort: options.sort || 'order',
     ...options,
   }, {
@@ -990,7 +972,7 @@ export async function getEmployerStats(
 export async function getCTACards(
   options: ListOptions = {}
 ): Promise<PocketBaseListResponse<CtaCardsResponse>> {
-  return fetchCollection<CtaCardsResponse>('CTA_Cards', {
+  return fetchCollection<CtaCardsResponse>('cta_cards', {
     sort: options.sort || 'order',
     ...options,
   }, {

@@ -1,45 +1,28 @@
-# PocketBase with Webhooks Dockerfile
-FROM golang:1.22-alpine AS builder
-
-# Install build dependencies
-RUN apk add --no-cache git ca-certificates
-
-# Set working directory
-WORKDIR /app
-
-# Copy Go modules first
-COPY go.mod* go.sum* ./
-
-# Copy source code so go mod tidy can detect dependencies
-COPY *.go ./
-
-# Let go mod tidy resolve all dependencies from the source files
-RUN go mod tidy && go mod download
-
-# Build the application
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o pocketbase-server .
-
-# Final stage
+# PocketBase Dockerfile
 FROM alpine:latest
 
-# Install runtime dependencies
-RUN apk add --no-cache ca-certificates
+# Install dependencies
+RUN apk add --no-cache \
+    ca-certificates \
+    wget \
+    unzip
 
 # Set working directory
 WORKDIR /pb
 
-# Copy built binary and startup script
-COPY --from=builder /app/pocketbase-server /pb/pocketbase-server
+# Download and install PocketBase
+# Update version number as needed
+ARG POCKETBASE_VERSION=0.31.0
+RUN wget https://github.com/pocketbase/pocketbase/releases/download/v${POCKETBASE_VERSION}/pocketbase_${POCKETBASE_VERSION}_linux_amd64.zip \
+    && unzip pocketbase_${POCKETBASE_VERSION}_linux_amd64.zip \
+    && rm pocketbase_${POCKETBASE_VERSION}_linux_amd64.zip \
+    && chmod +x /pb/pocketbase
 
-# Create directories and make script executable
-RUN mkdir -p /pb/pb_data /pb/pb_migrations
-
-# Copy existing data and migrations if they exist (using wildcards to avoid errors if missing)
-COPY pb_data* /pb/
-COPY pb_migrations* /pb/
+# Create directories for data and migrations
+RUN mkdir -p /pb/pb_data /pb/pb_migrations /pb/pb_hooks
 
 # Expose PocketBase port
 EXPOSE 8090
 
-# Start PocketBase with webhooks
-CMD ["/pb/pocketbase-server", "serve", "--http=0.0.0.0:8090"]
+# Start PocketBase
+CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8090"]

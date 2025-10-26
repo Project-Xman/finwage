@@ -9,6 +9,7 @@ import { ArrowRight, BookOpen, FileText, HelpCircle, Video } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getSupportResources, getSupportResourcesGroupedByCategory } from "@/lib/services/support";
+import NextLink from "next/link";
 
 interface SupportResourcesSectionProps {
   title?: string;
@@ -103,10 +104,10 @@ export async function SupportResourcesSection({
                     className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 p-0 transition-all"
                     asChild
                   >
-                    <a href={resource.url} target="_blank" rel="noopener noreferrer">
+                    <NextLink href={resource.field} target="_blank" rel="noopener noreferrer">
                       View Resource
                       <ArrowRight className="w-4 h-4" />
-                    </a>
+                    </NextLink>
                   </Button>
                 </CardContent>
               </Card>
@@ -172,10 +173,10 @@ export async function SupportResourcesSection({
                         className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 p-0 transition-all"
                         asChild
                       >
-                        <a href={resource.url} target="_blank" rel="noopener noreferrer">
+                        <NextLink href={resource.field} target="_blank" rel="noopener noreferrer">
                           View Resource
                           <ArrowRight className="w-4 h-4" />
-                        </a>
+                        </NextLink>
                       </Button>
                     </CardContent>
                   </Card>

@@ -6,6 +6,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { getFeaturedPressReleases, getPressReleases } from "@/lib/services/press";
+import NextLink from "next/link";
 
 interface PressReleaseSectionProps {
   title?: string;
@@ -55,7 +56,7 @@ export async function PressReleaseSection({
         {pressReleases.length > 0 ? (
           <div className="space-y-6 max-w-3xl mx-auto">
             {pressReleases.map((press) => (
-              <a
+              <NextLink
                 key={press.id}
                 href={press.url || '#'}
                 target={press.url ? '_blank' : undefined}
@@ -79,7 +80,7 @@ export async function PressReleaseSection({
                     <ArrowRight className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" />
                   )}
                 </div>
-              </a>
+              </NextLink>
             ))}
           </div>
         ) : (

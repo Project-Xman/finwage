@@ -15,6 +15,7 @@ import { EnquiriesInterestOptions } from "@/types/pocketbase";
 import { FAQSection } from "@/components/sections/faq";
 import { SupportResourcesSection } from "@/components/sections/support-resources";
 import { Skeleton } from "@/components/ui/skeleton";
+import NextLink from "next/link";
 
 export const metadata = {
   title: "Contact Us - FinWage",
@@ -84,9 +85,9 @@ export default async function ContactPage() {
                           className={`${color.bg} ${color.hover} w-full`}
                           asChild
                         >
-                          <a href={option.action_url}>
+                          <NextLink href={option.action_url}>
                             {option.title}
-                          </a>
+                          </NextLink>
                         </Button>
                       )}
                     </CardContent>
@@ -160,12 +161,12 @@ export default async function ContactPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 mb-3">Call us directly at:</p>
-                  <a
+                  <NextLink
                     href="tel:1-800-FINWAGE"
                     className="text-2xl font-bold text-[#1d44c3] hover:underline"
                   >
                     1-800-FINWAGE
-                  </a>
+                  </NextLink>
                 </CardContent>
               </Card>
             </div>

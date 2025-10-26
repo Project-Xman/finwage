@@ -7,11 +7,9 @@
 
 import type {
   EmployeeBenefitsResponse,
-  EmployerBenefitsResponse,
 } from '@/types/pocketbase';
 import {
   getEmployeeBenefitsMarketing as apiFetchEmployeeBenefits,
-  getEmployerBenefits as apiFetchEmployerBenefits,
 } from '@/lib/api';
 
 // ============================================================
@@ -62,45 +60,6 @@ export async function getEmployeeBenefits(
     return response.items;
   } catch (error) {
     console.error('Failed to fetch employee benefits:', error);
-    // Return empty array on error to allow graceful degradation
-    return [];
-  }
-}
-
-/**
- * Fetch all employer benefits with pagination support
- * 
- * @param options - Pagination and sorting options
- * @returns Array of employer benefits
- * 
- * @example
- * ```ts
- * // Get all employer benefits
- * const benefits = await getEmployerBenefits();
- * 
- * // Get with custom page size
- * const benefits = await getEmployerBenefits({ perPage: 20 });
- * ```
- */
-export async function getEmployerBenefits(
-  options: BenefitsListOptions = {}
-): Promise<EmployerBenefitsResponse[]> {
-  try {
-    const {
-      page = 1,
-      perPage = 20,
-      sort = 'order',
-    } = options;
-
-    const response = await apiFetchEmployerBenefits({
-      page,
-      perPage,
-      sort,
-    });
-
-    return response.items;
-  } catch (error) {
-    console.error('Failed to fetch employer benefits:', error);
     // Return empty array on error to allow graceful degradation
     return [];
   }

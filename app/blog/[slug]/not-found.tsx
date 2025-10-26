@@ -1,5 +1,5 @@
 import { ArrowLeft, Home, Search } from "lucide-react";
-import Link from "next/link";
+import NextLink from "next/link";
 
 export default function BlogPostNotFound() {
   return (
@@ -16,46 +16,46 @@ export default function BlogPostNotFound() {
             Sorry, we couldn't find the blog post you're looking for. It may have been moved or removed.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Link
+            <NextLink
               href="/blog"
               className="bg-[#1d44c3] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#0d2463] transition-all inline-flex items-center justify-center gap-2"
             >
               <ArrowLeft className="w-5 h-5" />
               Back to Blog
-            </Link>
-            <Link
+            </NextLink>
+            <NextLink
               href="/"
               className="bg-gray-100 text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-200 transition-all inline-flex items-center justify-center gap-2"
             >
               <Home className="w-5 h-5" />
               Go Home
-            </Link>
+            </NextLink>
           </div>
           <div className="border-t border-gray-200 pt-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               Popular Blog Categories
             </h3>
             <div className="flex flex-wrap gap-3 justify-center">
-              <Link
+              <NextLink
                 href="/blog"
                 className="text-[#1d44c3] hover:text-[#0d2463] hover:underline font-semibold transition-colors"
               >
                 All Posts
-              </Link>
+              </NextLink>
               <span className="text-gray-300">•</span>
-              <Link
+              <NextLink
                 href="/blog"
                 className="text-[#1d44c3] hover:text-[#0d2463] hover:underline font-semibold transition-colors"
               >
                 Latest Articles
-              </Link>
+              </NextLink>
               <span className="text-gray-300">•</span>
-              <Link
+              <NextLink
                 href="/blog"
                 className="text-[#1d44c3] hover:text-[#0d2463] hover:underline font-semibold transition-colors"
               >
                 Featured Posts
-              </Link>
+              </NextLink>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
+import NextLink from "next/link";
 
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
@@ -231,19 +232,19 @@ export default function CookieConsent() {
               <p className="text-sm text-gray-600 mb-6">
                 For more information about how we handle your data, please read
                 our{" "}
-                <a
+                <NextLink
                   href="/privacy-policy"
                   className="text-[#1d44c3] hover:underline font-medium"
                 >
                   Privacy Policy
-                </a>{" "}
+                </NextLink>{" "}
                 and{" "}
-                <a
+                <NextLink
                   href="/cookie-policy"
                   className="text-[#1d44c3] hover:underline font-medium"
                 >
                   Cookie Policy
-                </a>
+                </NextLink>
                 .
               </p>
 

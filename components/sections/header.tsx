@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import NextLink from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ImagePaths } from "@/lib/assets";
@@ -63,7 +63,7 @@ export default function Header() {
           {/* Left Group: Logo + Navigation */}
           <div className="flex items-center flex-1 md:flex-initial justify-center md:justify-start">
             {/* Logo */}
-            <Link
+            <NextLink
               href="/"
               className="flex items-center gap-2 font-bold text-lg flex-shrink-0"
             >
@@ -75,7 +75,7 @@ export default function Header() {
                   className="object-contain"
                 />
               </div>
-            </Link>
+            </NextLink>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center ml-8 gap-8">
@@ -90,20 +90,20 @@ export default function Header() {
                       <DropdownMenuContent align="start" className="w-48">
                         {item.dropdownItems?.map((dropdownItem) => (
                           <DropdownMenuItem key={dropdownItem.label} asChild>
-                            <Link href={dropdownItem.href}>
+                            <NextLink href={dropdownItem.href}>
                               {dropdownItem.label}
-                            </Link>
+                            </NextLink>
                           </DropdownMenuItem>
                         ))}
                       </DropdownMenuContent>
                     </DropdownMenu>
                   ) : (
-                    <Link
+                    <NextLink
                       href={item.href}
                       className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
                     >
                       {item.label}
-                    </Link>
+                    </NextLink>
                   )}
                 </div>
               ))}
@@ -121,14 +121,14 @@ export default function Header() {
               className="text-sm font-medium"
               asChild
             >
-              <Link href="/login">Log in</Link>
+              <NextLink href="/login">Log in</NextLink>
             </Button>
             <Button
               size="sm"
               className="bg-[#1d44c3] text-white hover:shadow-lg transition-shadow rounded-full h-10 px-6"
               asChild
             >
-              <Link href="/contact">Contact Us</Link>
+              <NextLink href="/contact">Contact Us</NextLink>
             </Button>
           </div>
 
@@ -159,14 +159,14 @@ export default function Header() {
               className="text-sm font-medium"
               asChild
             >
-              <Link href="/login">Log in</Link>
+              <NextLink href="/login">Log in</NextLink>
             </Button>
             <Button
               size="sm"
               className="bg-gradient-to-r from-primary to-blue-600 text-white hover:shadow-lg transition-shadow"
               asChild
             >
-              <Link href="/contact">Contact Us</Link>
+              <NextLink href="/contact">Contact Us</NextLink>
             </Button>
             <Button
               variant={"ghost"}
@@ -187,13 +187,13 @@ export default function Header() {
         {isMenuOpen && (
           <nav className="md:hidden border-t border-border/40 py-4 space-y-3">
             {navigationItems.map((item) => (
-              <Link
+              <NextLink
                 key={item.label}
                 href={item.href}
                 className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
               >
                 {item.label}
-              </Link>
+              </NextLink>
             ))}
             <div className="pt-2 space-y-2 flex flex-col">
               <button className="w-full p-2 flex items-center justify-center gap-2 hover:bg-muted rounded-md transition-colors border border-border">
@@ -208,7 +208,7 @@ export default function Header() {
                 className="w-full bg-gradient-to-r from-primary to-blue-600 text-white"
                 asChild
               >
-                <Link href="/contact">Contact Us</Link>
+                <NextLink href="/contact">Contact Us</NextLink>
               </Button>
             </div>
           </nav>
@@ -218,13 +218,13 @@ export default function Header() {
         {isMenuOpen && (
           <nav className="hidden md:block lg:hidden border-t border-border/40 py-4 space-y-3">
             {navigationItems.map((item) => (
-              <Link
+              <NextLink
                 key={item.label}
                 href={item.href}
                 className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
               >
                 {item.label}
-              </Link>
+              </NextLink>
             ))}
           </nav>
         )}

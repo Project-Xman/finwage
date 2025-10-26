@@ -27,7 +27,7 @@ import { CACHE_TAGS } from '@/lib/utils/cache-config';
  */
 export async function revalidateTags(tags: string[]): Promise<void> {
   for (const tag of tags) {
-    revalidateTag(tag);
+    revalidateTag(tag,"default");
   }
 }
 
@@ -42,7 +42,7 @@ export async function revalidateTags(tags: string[]): Promise<void> {
  * ```
  */
 export async function revalidateSingleTag(tag: string): Promise<void> {
-  revalidateTag(tag);
+  revalidateTag(tag,"default");
 }
 
 // ============================================================

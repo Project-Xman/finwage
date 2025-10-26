@@ -1,6 +1,6 @@
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import NextLink from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -95,7 +95,7 @@ export default async function BlogPage() {
             <h2 className="text-sm font-bold text-[#1d44c3] uppercase tracking-wider mb-4">
               Featured Post
             </h2>
-            <Link href={`/blog/${featuredPost.slug}`}>
+            <NextLink href={`/blog/${featuredPost.slug}`}>
               <Card className="bg-white overflow-hidden shadow-xl hover:shadow-2xl transition-all group">
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="relative h-64 md:h-full min-h-[400px]">
@@ -168,7 +168,7 @@ export default async function BlogPage() {
                   </CardContent>
                 </div>
               </Card>
-            </Link>
+            </NextLink>
           </div>
         </section>
       )}
@@ -181,7 +181,7 @@ export default async function BlogPage() {
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {recentPosts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`}>
+              <NextLink key={post.slug} href={`/blog/${post.slug}`}>
                 <article className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group h-full flex flex-col">
                   <div className="relative h-48">
                     <Image
@@ -240,7 +240,7 @@ export default async function BlogPage() {
                     </div>
                   </div>
                 </article>
-              </Link>
+              </NextLink>
             ))}
           </div>
         </div>

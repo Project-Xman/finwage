@@ -1,5 +1,5 @@
 import { ArrowRight, Home, Search } from "lucide-react";
-import Link from "next/link";
+import NextLink from "next/link";
 
 export default function NotFound() {
   const popularPages = [
@@ -30,20 +30,20 @@ export default function NotFound() {
             Sorry, we couldn't find the page you're looking for.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Link
+            <NextLink
               href="/"
               className="bg-[#1d44c3] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#0d2463] transition-all inline-flex items-center justify-center gap-2"
             >
               <Home className="w-5 h-5" />
               Go to Homepage
-            </Link>
-            <Link
+            </NextLink>
+            <NextLink
               href="/contact"
               className="bg-gray-100 text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-200 transition-all inline-flex items-center justify-center gap-2"
             >
               Contact Support
               <ArrowRight className="w-5 h-5" />
-            </Link>
+            </NextLink>
           </div>
           <div className="border-t border-gray-200 pt-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
@@ -51,13 +51,13 @@ export default function NotFound() {
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {popularPages.map((page) => (
-                <Link
+                <NextLink
                   key={page.href}
                   href={page.href}
                   className="text-[#1d44c3] hover:text-[#0d2463] hover:underline font-semibold transition-colors"
                 >
                   {page.name}
-                </Link>
+                </NextLink>
               ))}
             </div>
           </div>

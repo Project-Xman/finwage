@@ -9,7 +9,7 @@ import {
   Twitter,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import NextLink from "next/link";
 import { notFound } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -95,13 +95,13 @@ export default async function BlogPostPage({
       {/* Back Button */}
       <div className="bg-gray-50 border-b">
         <div className="max-w-[1280px] mx-auto px-4 md:px-6 py-4">
-          <Link
+          <NextLink
             href="/blog"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-[#1d44c3] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Blog
-          </Link>
+          </NextLink>
         </div>
       </div>
 
@@ -254,7 +254,7 @@ export default async function BlogPostPage({
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               {relatedPosts.map((relatedPost) => (
-                <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`}>
+                <NextLink key={relatedPost.slug} href={`/blog/${relatedPost.slug}`}>
                   <Card className="overflow-hidden shadow-lg hover:shadow-2xl transition-all group">
                     <div className="relative h-48">
                       <Image
@@ -292,7 +292,7 @@ export default async function BlogPostPage({
                       </div>
                     </CardContent>
                   </Card>
-                </Link>
+                </NextLink>
               ))}
             </div>
           </div>
@@ -309,16 +309,16 @@ export default async function BlogPostPage({
             See how FinWage can help your employees achieve financial wellness.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/demo">
+            <NextLink href="/demo">
               <Button size="lg" className="bg-white text-[#1d44c3] hover:bg-gray-100">
                 Schedule a Demo
               </Button>
-            </Link>
-            <Link href="/contact">
+            </NextLink>
+            <NextLink href="/contact">
               <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-[#1d44c3]">
                 Contact Us
               </Button>
-            </Link>
+            </NextLink>
           </div>
         </div>
       </section>

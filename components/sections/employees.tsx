@@ -1,4 +1,5 @@
 import Image from "next/image";
+import NextLink from "next/link";
 
 function Person() {
   return (
@@ -161,21 +162,21 @@ function Frame9() {
   );
 }
 
-function Link() {
+function LinkComponent() {
   return (
     <div
       className="font-semibold relative shrink-0 text-[#f64162] w-full md:w-auto"
       data-name="Link"
     >
-      <a
-        href="#"
+      <NextLink
+        href="/for-employees"
         className="inline-flex items-center gap-2 hover:opacity-80 transition-opacity"
       >
         <span className="text-[15.6px] leading-[24px]">
           See how it works for employees
         </span>
         <span className="text-[16px] leading-[24px]">{`>`}</span>
-      </a>
+      </NextLink>
     </div>
   );
 }
@@ -190,7 +191,7 @@ function Frame10() {
         FinWage enables employees to confidently manage and optimize their
         earnings, fostering financial wellness.
       </p>
-      <Link />
+      <LinkComponent />
     </div>
   );
 }

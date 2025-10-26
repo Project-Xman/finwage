@@ -30,6 +30,7 @@ services:
     volumes:
       - ./data/pb_data:/pb/pb_data
       - ./data/pb_migrations:/pb/pb_migrations
+      - ./data/pb_hooks:/pb/pb_hooks
     environment:
       - PB_ENCRYPTION_KEY=${PB_ENCRYPTION_KEY:-your-secret-key-change-this}
       - WEBHOOK_SECRET=${WEBHOOK_SECRET:-webhook-secret-change-this}

@@ -3,6 +3,7 @@
 import { AlertTriangle, Home, RefreshCw } from "lucide-react";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import NextLink from "next/link";
 
 export default function CareersError({
   error,
@@ -58,24 +59,24 @@ export default function CareersError({
             Try Again
           </Button>
 
-          <a
+          <NextLink
             href="/"
             className="flex-1 bg-gray-100 text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition-all inline-flex items-center justify-center gap-2"
           >
             <Home className="w-5 h-5" />
             Go Home
-          </a>
+          </NextLink>
         </div>
 
         {/* Support Link */}
         <p className="text-sm text-gray-500 mt-6">
           Need help?{" "}
-          <a
+          <NextLink
             href="/contact"
             className="text-[#1d44c3] hover:underline font-semibold"
           >
             Contact Support
-          </a>
+          </NextLink>
         </p>
       </div>
     </div>

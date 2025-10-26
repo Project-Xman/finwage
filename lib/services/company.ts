@@ -9,7 +9,7 @@ import type {
   LeadershipResponse,
   ValuesResponse,
   CompanyMilestonesResponse,
-  StatsResponse,
+  StatusResponse,
 } from '@/types/pocketbase';
 import {
   getLeadershipTeam as apiFetchLeadershipTeam,
@@ -56,7 +56,7 @@ export interface MilestonesListResult {
 }
 
 export interface StatsListResult {
-  items: StatsResponse[];
+  items: StatusResponse[];
   totalPages: number;
   totalItems: number;
   page: number;
@@ -357,7 +357,7 @@ export async function getCompanyStats(
  * const allStats = await getAllCompanyStats();
  * ```
  */
-export async function getAllCompanyStats(): Promise<StatsResponse[]> {
+export async function getAllCompanyStats(): Promise<StatusResponse[]> {
   try {
     const response = await apiFetchCompanyStats({
       perPage: 100, // Get all stats

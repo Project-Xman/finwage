@@ -1,7 +1,7 @@
 "use client";
 
 import { ImagePaths } from "@/lib/assets";
-import Link from "next/link";
+import NextLink from "next/link";
 import Image from "next/image";
 
 export default function Footer() {
@@ -30,7 +30,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <Link
+            <NextLink
               href="/"
               className="flex items-center gap-2 font-bold text-lg flex-shrink-0"
             >
@@ -42,7 +42,7 @@ export default function Footer() {
                   className="object-contain"
                 />
               </div>
-            </Link>
+            </NextLink>
             <p className="text-gray-300 text-sm leading-relaxed mb-6">
               FinWage is a financial technology company that provides on-demand
               pay solutions to help employees access their earned wages while
@@ -56,12 +56,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.label}>
-                  <Link
+                  <NextLink
                     href={link.href}
                     className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
                   >
                     {link.label}
-                  </Link>
+                  </NextLink>
                 </li>
               ))}
             </ul>
@@ -73,12 +73,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {productLinks.map((link) => (
                 <li key={link.label}>
-                  <Link
+                  <NextLink
                     href={link.href}
                     className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
                   >
                     {link.label}
-                  </Link>
+                  </NextLink>
                 </li>
               ))}
             </ul>
@@ -90,12 +90,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {supportLinks.map((link) => (
                 <li key={link.label}>
-                  <Link
+                  <NextLink
                     href={link.href}
                     className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
                   >
                     {link.label}
-                  </Link>
+                  </NextLink>
                 </li>
               ))}
             </ul>
@@ -109,24 +109,24 @@ export default function Footer() {
               © 2025 FinWage. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              <Link
+              <NextLink
                 href="/compliance"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
                 Compliance
-              </Link>
-              <Link
+              </NextLink>
+              <NextLink
                 href="/resources"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
                 Resources
-              </Link>
-              <Link
+              </NextLink>
+              <NextLink
                 href="/contact"
                 className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
               >
                 Contact
-              </Link>
+              </NextLink>
             </div>
           </div>
         </div>

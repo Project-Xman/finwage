@@ -3,6 +3,7 @@
 import { AlertTriangle, ArrowLeft, Home, RefreshCw } from "lucide-react";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import NextLink from "next/link";
 
 export default function BlogPostError({
   error,
@@ -58,31 +59,31 @@ export default function BlogPostError({
             Try Again
           </Button>
 
-          <a
+          <NextLink
             href="/blog"
             className="flex-1 bg-gray-100 text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition-all inline-flex items-center justify-center gap-2"
           >
             <ArrowLeft className="w-5 h-5" />
             All Posts
-          </a>
+          </NextLink>
         </div>
 
         {/* Additional Links */}
         <div className="flex justify-center gap-4 mt-6">
-          <a
+          <NextLink
             href="/"
             className="text-sm text-gray-500 hover:text-[#1d44c3] transition-colors inline-flex items-center gap-1"
           >
             <Home className="w-4 h-4" />
             Home
-          </a>
+          </NextLink>
           <span className="text-gray-300">|</span>
-          <a
+          <NextLink
             href="/contact"
             className="text-sm text-gray-500 hover:text-[#1d44c3] transition-colors"
           >
             Contact Support
-          </a>
+          </NextLink>
         </div>
       </div>
     </div>
