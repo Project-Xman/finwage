@@ -56,6 +56,7 @@ type Webhook struct {
 
 func attachWebhooks(app *pocketbase.PocketBase) {
 	migrations.Register(func(db dbx.Builder) error {
+		app.Logger().Info("Creating webhooks collection...")
 		return daos.New(db).SaveCollection(&models.Collection{
 			Name:   webhooksCollection,
 			Type:   models.CollectionTypeBase,
@@ -89,6 +90,7 @@ func attachWebhooks(app *pocketbase.PocketBase) {
 			),
 		})
 	}, func(db dbx.Builder) error {
+		app.Logger().Info("Rolling back webhooks collection...")
 		dao := daos.New(db)
 
 		collection, err := dao.FindCollectionByNameOrId(webhooksCollection)

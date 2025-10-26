@@ -1,5 +1,5 @@
 # PocketBase with Webhooks Dockerfile
-FROM golang:1.21-alpine AS builder
+FROM golang:1.22-alpine AS builder
 
 # Install build dependencies
 RUN apk add --no-cache git ca-certificates
@@ -7,12 +7,14 @@ RUN apk add --no-cache git ca-certificates
 # Set working directory
 WORKDIR /app
 
-# Copy Go modules
-COPY go.mod go.sum ./
-RUN go mod download
+# Copy Go modules first
+COPY go.mod* go.sum* ./
 
-# Copy source code
+# Copy source code so go mod tidy can detect dependencies
 COPY *.go ./
+
+# Let go mod tidy resolve all dependencies from the source files
+RUN go mod tidy && go mod download
 
 # Build the application
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o pocketbase-server .
@@ -26,15 +28,15 @@ RUN apk add --no-cache ca-certificates
 # Set working directory
 WORKDIR /pb
 
-# Copy built binary
+# Copy built binary and startup script
 COPY --from=builder /app/pocketbase-server /pb/pocketbase-server
 
-# Create directories for data and migrations
+# Create directories and make script executable
 RUN mkdir -p /pb/pb_data /pb/pb_migrations
 
-# Copy existing data and migrations if they exist
-COPY pb_data/ /pb/pb_data/
-COPY pb_migrations/ /pb/pb_migrations/
+# Copy existing data and migrations if they exist (using wildcards to avoid errors if missing)
+COPY pb_data* /pb/
+COPY pb_migrations* /pb/
 
 # Expose PocketBase port
 EXPOSE 8090
