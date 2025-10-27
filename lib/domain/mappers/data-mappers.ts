@@ -11,6 +11,7 @@
  */
 
 import type { BlogsResponse, AuthorsResponse, CategoryResponse } from '@/types/pocketbase';
+import { Collections } from '@/types/pocketbase';
 import type { Blog, Author, Category } from '../models/entities';
 
 /**
@@ -18,7 +19,8 @@ import type { Blog, Author, Category } from '../models/entities';
  */
 export interface IMapper<TSource, TTarget> {
   toModel(source: TSource): TTarget;
-  toResponse(model: TTarget): TSource;
+  // toResponse is optional - not always needed for read-only operations
+  toResponse?(model: TTarget): TSource;
 }
 
 /**
@@ -38,21 +40,22 @@ export class BlogMapper implements IMapper<BlogsResponse, Blog> {
       published: response.published || false,
       publishedDate: response.published_date ? new Date(response.published_date) : null,
       featuredImage: response.featured_image || null,
-      metaTitle: response.meta_title || null,
-      metaDescription: response.meta_description || null,
-      readingTime: response.reading_time || 0,
-      viewCount: response.view_count || 0,
+      metaTitle: null, // Not in current schema
+      metaDescription: null, // Not in current schema
+      readingTime: 0, // Calculated field - can be added later
+      viewCount: response.views || 0,
       authorId: response.author || '',
       categoryId: response.category || '',
-      created: new Date(response.created),
-      updated: new Date(response.updated),
+      created: new Date(response.created || new Date()),
+      updated: new Date(response.updated || new Date()),
     };
   }
 
   /**
-   * Convert domain model to PocketBase response format
+   * Convert domain model to PocketBase response format (partial implementation)
+   * Note: Some optional fields may be missing - use with caution
    */
-  toResponse(model: Blog): BlogsResponse {
+  toResponse(model: Blog): Partial<BlogsResponse> {
     return {
       id: model.id,
       title: model.title,
@@ -62,16 +65,11 @@ export class BlogMapper implements IMapper<BlogsResponse, Blog> {
       published: model.published,
       published_date: model.publishedDate?.toISOString() || '',
       featured_image: model.featuredImage || '',
-      meta_title: model.metaTitle || '',
-      meta_description: model.metaDescription || '',
-      reading_time: model.readingTime,
-      view_count: model.viewCount,
+      views: model.viewCount,
       author: model.authorId,
       category: model.categoryId,
       created: model.created.toISOString(),
       updated: model.updated.toISOString(),
-      collectionId: '',
-      collectionName: 'blogs',
     };
   }
 
@@ -102,6 +100,8 @@ export class BlogMapper implements IMapper<BlogsResponse, Blog> {
  */
 export class AuthorMapper implements IMapper<AuthorsResponse, Author> {
   toModel(response: AuthorsResponse): Author {
+    const socialLink = response.social_link as Record<string, string> | null | undefined;
+    
     return {
       id: response.id,
       name: response.name || '',
@@ -109,31 +109,32 @@ export class AuthorMapper implements IMapper<AuthorsResponse, Author> {
       bio: response.bio || null,
       avatar: response.avatar || null,
       socialLinks: {
-        twitter: response.twitter || undefined,
-        linkedin: response.linkedin || undefined,
-        github: response.github || undefined,
-        website: response.website || undefined,
+        twitter: socialLink?.twitter || undefined,
+        linkedin: socialLink?.linkedin || undefined,
+        github: socialLink?.github || undefined,
+        website: socialLink?.website || undefined,
       },
-      created: new Date(response.created),
-      updated: new Date(response.updated),
+      created: new Date(response.created || new Date()),
+      updated: new Date(response.updated || new Date()),
     };
   }
 
-  toResponse(model: Author): AuthorsResponse {
+  toResponse(model: Author): Partial<AuthorsResponse> {
     return {
       id: model.id,
       name: model.name,
       email: model.email,
       bio: model.bio || '',
       avatar: model.avatar || '',
-      twitter: model.socialLinks.twitter || '',
-      linkedin: model.socialLinks.linkedin || '',
-      github: model.socialLinks.github || '',
-      website: model.socialLinks.website || '',
+      slug: model.name.toLowerCase().replace(/\s+/g, '-'),
+      social_link: {
+        twitter: model.socialLinks.twitter || '',
+        linkedin: model.socialLinks.linkedin || '',
+        github: model.socialLinks.github || '',
+        website: model.socialLinks.website || '',
+      },
       created: model.created.toISOString(),
       updated: model.updated.toISOString(),
-      collectionId: '',
-      collectionName: 'authors',
     };
   }
 }
@@ -150,12 +151,12 @@ export class CategoryMapper implements IMapper<CategoryResponse, Category> {
       description: response.description || null,
       color: response.color || '#000000',
       icon: response.icon || null,
-      created: new Date(response.created),
-      updated: new Date(response.updated),
+      created: new Date(response.created || new Date()),
+      updated: new Date(response.updated || new Date()),
     };
   }
 
-  toResponse(model: Category): CategoryResponse {
+  toResponse(model: Category): Partial<CategoryResponse> {
     return {
       id: model.id,
       name: model.name,
@@ -165,8 +166,6 @@ export class CategoryMapper implements IMapper<CategoryResponse, Category> {
       icon: model.icon || '',
       created: model.created.toISOString(),
       updated: model.updated.toISOString(),
-      collectionId: '',
-      collectionName: 'category',
     };
   }
 }

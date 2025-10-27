@@ -26,7 +26,7 @@ export abstract class BaseValidator<T> implements IValidator<T> {
 
     return {
       success: false,
-      errors: result.error.errors.map((err) => ({
+      errors: result.error.issues.map((err) => ({
         field: err.path.join('.'),
         message: err.message,
         code: err.code,
