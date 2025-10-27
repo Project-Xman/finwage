@@ -61,6 +61,25 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically
 optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Features
+
+### Blog SEO Optimization
+
+The blog system includes comprehensive SEO metadata support for Next.js 15 static generation:
+
+- **Custom SEO titles and descriptions** for each blog post
+- **Open Graph metadata** for social media sharing
+- **Twitter Card support** for enhanced Twitter shares
+- **Canonical URL support** for cross-posted content
+- **Keyword meta tags** for search engine optimization
+
+Blog posts are statically generated at build time with full SEO metadata embedded in the HTML for optimal search engine indexing and social media sharing.
+
+For detailed information, see:
+- [Blog SEO Configuration Guide](docs/BLOG-SEO.md)
+- [Blog SEO Examples](docs/BLOG-SEO-EXAMPLE.md)
+- [Static Generation Guide](docs/STATIC-GENERATION.md)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

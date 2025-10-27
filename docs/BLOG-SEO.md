@@ -113,6 +113,15 @@ export async function generateMetadata({
     ? getImageUrl(post, post.og_image, { fallback: '/placeholder.jpg' })
     : getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' });
 
+  // Prepare authors array, filtering out undefined values
+  const authorName = (post.expand?.author as AuthorsResponse)?.name;
+  const authors = authorName ? [authorName] : undefined;
+
+  // Prepare tags array, filtering out empty/null values
+  const tags = Array.isArray(post.tags) 
+    ? post.tags.filter((tag): tag is string => Boolean(tag)) 
+    : undefined;
+
   return {
     title: seoTitle,
     description: seoDescription,
@@ -126,8 +135,8 @@ export async function generateMetadata({
       images: [ogImageUrl],
       type: 'article',
       publishedTime: post.published_date,
-      authors: [(post.expand?.author as AuthorsResponse)?.name],
-      tags: Array.isArray(post.tags) ? post.tags : undefined,
+      authors,
+      tags,
     },
     twitter: {
       card: 'summary_large_image',
