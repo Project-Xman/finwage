@@ -13,20 +13,40 @@
 import type { BlogsResponse, AuthorsResponse, CategoryResponse } from '@/types/pocketbase';
 import { Collections } from '@/types/pocketbase';
 import type { Blog, Author, Category } from '../models/entities';
+import { Slug } from '../models/value-objects';
 
 /**
- * Base mapper interface
+ * Base mapper interface for read-only operations
  */
-export interface IMapper<TSource, TTarget> {
+export interface IReadMapper<TSource, TTarget> {
   toModel(source: TSource): TTarget;
-  // toResponse is optional - not always needed for read-only operations
-  toResponse?(model: TTarget): TSource;
+}
+
+/**
+ * Bidirectional mapper interface for read/write operations
+ */
+export interface IBidirectionalMapper<TSource, TTarget> extends IReadMapper<TSource, TTarget> {
+  toResponse(model: TTarget): Partial<TSource>;
+}
+
+/**
+ * Utility function to safely parse date or throw error
+ */
+function parseDateOrThrow(dateString: string | undefined, fieldName: string): Date {
+  if (!dateString) {
+    throw new Error(`Missing required date field: ${fieldName}`);
+  }
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) {
+    throw new Error(`Invalid date format for field: ${fieldName}`);
+  }
+  return date;
 }
 
 /**
  * Blog mapper - converts between PocketBase response and domain model
  */
-export class BlogMapper implements IMapper<BlogsResponse, Blog> {
+export class BlogMapper implements IBidirectionalMapper<BlogsResponse, Blog> {
   /**
    * Convert PocketBase blog response to domain model
    */
@@ -40,14 +60,14 @@ export class BlogMapper implements IMapper<BlogsResponse, Blog> {
       published: response.published || false,
       publishedDate: response.published_date ? new Date(response.published_date) : null,
       featuredImage: response.featured_image || null,
-      metaTitle: null, // Not in current schema
-      metaDescription: null, // Not in current schema
-      readingTime: 0, // Calculated field - can be added later
+      metaTitle: null, // Not in current schema - can be added later
+      metaDescription: null, // Not in current schema - can be added later
+      readingTime: 0, // Calculated field - can be implemented separately
       viewCount: response.views || 0,
       authorId: response.author || '',
       categoryId: response.category || '',
-      created: new Date(response.created || new Date()),
-      updated: new Date(response.updated || new Date()),
+      created: parseDateOrThrow(response.created, 'created'),
+      updated: parseDateOrThrow(response.updated, 'updated'),
     };
   }
 
@@ -98,7 +118,7 @@ export class BlogMapper implements IMapper<BlogsResponse, Blog> {
 /**
  * Author mapper
  */
-export class AuthorMapper implements IMapper<AuthorsResponse, Author> {
+export class AuthorMapper implements IBidirectionalMapper<AuthorsResponse, Author> {
   toModel(response: AuthorsResponse): Author {
     const socialLink = response.social_link as Record<string, string> | null | undefined;
     
@@ -114,8 +134,8 @@ export class AuthorMapper implements IMapper<AuthorsResponse, Author> {
         github: socialLink?.github || undefined,
         website: socialLink?.website || undefined,
       },
-      created: new Date(response.created || new Date()),
-      updated: new Date(response.updated || new Date()),
+      created: parseDateOrThrow(response.created, 'created'),
+      updated: parseDateOrThrow(response.updated, 'updated'),
     };
   }
 
@@ -126,7 +146,7 @@ export class AuthorMapper implements IMapper<AuthorsResponse, Author> {
       email: model.email,
       bio: model.bio || '',
       avatar: model.avatar || '',
-      slug: model.name.toLowerCase().replace(/\s+/g, '-'),
+      slug: Slug.create(model.name).toString(),
       social_link: {
         twitter: model.socialLinks.twitter || '',
         linkedin: model.socialLinks.linkedin || '',
@@ -142,7 +162,7 @@ export class AuthorMapper implements IMapper<AuthorsResponse, Author> {
 /**
  * Category mapper
  */
-export class CategoryMapper implements IMapper<CategoryResponse, Category> {
+export class CategoryMapper implements IBidirectionalMapper<CategoryResponse, Category> {
   toModel(response: CategoryResponse): Category {
     return {
       id: response.id,
@@ -151,8 +171,8 @@ export class CategoryMapper implements IMapper<CategoryResponse, Category> {
       description: response.description || null,
       color: response.color || '#000000',
       icon: response.icon || null,
-      created: new Date(response.created || new Date()),
-      updated: new Date(response.updated || new Date()),
+      created: parseDateOrThrow(response.created, 'created'),
+      updated: parseDateOrThrow(response.updated, 'updated'),
     };
   }
 
@@ -177,24 +197,24 @@ export class CategoryMapper implements IMapper<CategoryResponse, Category> {
  * the appropriate mapper for a given type.
  */
 export class MapperFactory {
-  private static mappers: Map<string, IMapper<unknown, unknown>> = new Map();
+  private static mappers: Map<string, IReadMapper<unknown, unknown>> = new Map();
 
   /**
    * Register a mapper
    */
   static register<TSource, TTarget>(
     key: string,
-    mapper: IMapper<TSource, TTarget>,
+    mapper: IReadMapper<TSource, TTarget>,
   ): void {
-    this.mappers.set(key, mapper as IMapper<unknown, unknown>);
+    this.mappers.set(key, mapper as IReadMapper<unknown, unknown>);
   }
 
   /**
    * Get a registered mapper
    */
-  static get<TSource, TTarget>(key: string): IMapper<TSource, TTarget> | null {
+  static get<TSource, TTarget>(key: string): IReadMapper<TSource, TTarget> | null {
     const mapper = this.mappers.get(key);
-    return mapper ? (mapper as IMapper<TSource, TTarget>) : null;
+    return mapper ? (mapper as IReadMapper<TSource, TTarget>) : null;
   }
 }
 
