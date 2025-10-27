@@ -1,32 +1,51 @@
 // app/pricing/page.tsx
-import { Suspense } from "react";
-import { Check, X } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { getPricingPlans } from "@/lib/services/pricing";
+
+import { Check } from "lucide-react";
 import { unstable_cache } from "next/cache";
-import { PricingCardsSkeleton, FAQSkeleton } from "./components/pricing-skeleton";
-import { FAQSection } from "./components/faq-section";
+import { Suspense } from "react";
 import { InteractivePricingElements } from "@/components/pricing/interactive-elements";
-import { PricingPlansResponse } from "@/types/pocketbase";
 import { PricingCard } from "@/components/pricing/pricing-card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { getPricingPlans } from "@/lib/services/pricing";
+import type { PricingPlansResponse } from "@/types/pocketbase";
+import { FAQSection } from "./components/faq-section";
+import {
+  FAQSkeleton,
+  PricingCardsSkeleton,
+} from "./components/pricing-skeleton";
 
 // Metadata generation
 export async function generateMetadata() {
   return {
     title: "Pricing - FinWage",
-    description: "Transparent pricing for every business size. Choose the plan that fits your organization. Free for employees.",
-    keywords: ["pricing", "plans", "enterprise", "fintech pricing", "payroll pricing"],
+    description:
+      "Transparent pricing for every business size. Choose the plan that fits your organization. Free for employees.",
+    keywords: [
+      "pricing",
+      "plans",
+      "enterprise",
+      "fintech pricing",
+      "payroll pricing",
+    ],
     openGraph: {
       title: "Pricing - FinWage",
-      description: "Transparent pricing for every business size. Free for employees.",
+      description:
+        "Transparent pricing for every business size. Free for employees.",
       type: "website",
       images: ["/og-pricing.jpg"],
     },
     twitter: {
       card: "summary_large_image",
       title: "Pricing - FinWage",
-      description: "Transparent pricing for every business size. Free for employees.",
+      description:
+        "Transparent pricing for every business size. Free for employees.",
     },
   };
 }
@@ -37,11 +56,11 @@ const getCachedPricingPlans = unstable_cache(
     const result = await getPricingPlans({ activeOnly: true });
     return result.items;
   },
-  ['pricing-plans'],
+  ["pricing-plans"],
   {
     revalidate: 3600, // Revalidate every hour
-    tags: ['pricing'],
-  }
+    tags: ["pricing"],
+  },
 );
 
 // Utility function to get employee range
@@ -73,10 +92,12 @@ function transformPricingPlan(plan: PricingPlansResponse): TransformedPlan {
     description: plan.description || "",
     employees: getEmployeeRange(plan),
     features: Array.isArray(plan.features)
-      ? plan.features.map((f: any) => (typeof f === "string" ? f : f.text || f))
+      ? plan.features.map((f: string | { text?: string }) => (typeof f === "string" ? f : f.text || String(f)))
       : [],
     notIncluded: Array.isArray(plan.limitations)
-      ? plan.limitations.map((l: any) => (typeof l === "string" ? l : l.text || l))
+      ? plan.limitations.map((l: string | { text?: string }) =>
+          typeof l === "string" ? l : l.text || String(l),
+        )
       : [],
     recommended: plan.is_popular || false,
   };
@@ -90,7 +111,9 @@ async function PricingCards() {
   if (transformedPlans.length === 0) {
     return (
       <div className="col-span-3 text-center py-12">
-        <p className="text-gray-600 mb-4">No pricing plans available at the moment.</p>
+        <p className="text-gray-600 mb-4">
+          No pricing plans available at the moment.
+        </p>
         <InteractivePricingElements type="contact" />
       </div>
     );
@@ -116,7 +139,10 @@ function HeroSection() {
         <p className="text-xl md:text-2xl text-blue-100 mb-4">
           Choose the plan that fits your organization
         </p>
-        <Badge variant="default" className="bg-pink-500 hover:bg-pink-600 text-white text-base px-6 py-2">
+        <Badge
+          variant="default"
+          className="bg-pink-500 hover:bg-pink-600 text-white text-base px-6 py-2"
+        >
           <Check className="w-5 h-5 mr-2 inline" />
           100% Free for Employees
         </Badge>
@@ -141,9 +167,13 @@ function EmployeeBenefitSection() {
             <div className="inline-flex items-center justify-center w-20 h-20 bg-green-500 rounded-full mb-6 mx-auto">
               <Check className="w-10 h-10 text-white" />
             </div>
-            <CardTitle className="text-3xl md:text-5xl">Always Free for Employees</CardTitle>
+            <CardTitle className="text-3xl md:text-5xl">
+              Always Free for Employees
+            </CardTitle>
             <CardDescription className="text-xl text-gray-600 max-w-2xl mx-auto mt-4">
-              Your employees never pay a penny. No fees, no interest, no hidden charges. FinWage is a benefit you provide, paid for by your organization.
+              Your employees never pay a penny. No fees, no interest, no hidden
+              charges. FinWage is a benefit you provide, paid for by your
+              organization.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -151,7 +181,9 @@ function EmployeeBenefitSection() {
               {benefits.map((item, i) => (
                 <Card key={i}>
                   <CardHeader className="text-center">
-                    <div className="text-3xl font-bold text-green-600">{item.value}</div>
+                    <div className="text-3xl font-bold text-green-600">
+                      {item.value}
+                    </div>
                     <CardDescription>{item.label}</CardDescription>
                   </CardHeader>
                 </Card>
@@ -169,9 +201,12 @@ function CTASection() {
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6 text-center">
-        <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to Get Started?</h2>
+        <h2 className="text-3xl md:text-5xl font-bold mb-6">
+          Ready to Get Started?
+        </h2>
         <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-          Schedule a demo to see FinWage in action and get a custom quote for your organization
+          Schedule a demo to see FinWage in action and get a custom quote for
+          your organization
         </p>
         <InteractivePricingElements type="demo" />
       </div>
@@ -197,7 +232,8 @@ export default function PricingPage() {
 
           <div className="mt-12 text-center">
             <p className="text-gray-600 mb-4">
-              Need a custom solution? We can build a plan that fits your exact needs.
+              Need a custom solution? We can build a plan that fits your exact
+              needs.
             </p>
             <InteractivePricingElements type="contact" />
           </div>

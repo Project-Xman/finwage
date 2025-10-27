@@ -1,11 +1,17 @@
 "use client";
 
-import { BellIcon, ArrowRight } from "lucide-react";
+import { ArrowRight, BellIcon } from "lucide-react";
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
-function HeroImageContainer({ className, hideWhiteArc = false }: { className?: string; hideWhiteArc?: boolean }) {
+function HeroImageContainer({
+  className,
+  hideWhiteArc = false,
+}: {
+  className?: string;
+  hideWhiteArc?: boolean;
+}) {
   return (
     <div className={`${className} relative`} data-name="Hero Image Container">
       {/* Circular Container for the Hero Image */}
@@ -134,7 +140,7 @@ export default function Hero() {
             />
             {/* Blue Overlay */}
             <div className="absolute inset-0 bg-blue-900 opacity-50"></div>
-            
+
             {/* Play Icon Button - Centered */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px]">
               <Image
@@ -145,7 +151,7 @@ export default function Hero() {
                 sizes="100px"
               />
             </div>
-            
+
             {/* FinWage Notification Card */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-2xl p-3 shadow-lg border border-gray-200 max-w-[280px] flex items-start gap-2">
               <div className="bg-red-500 rounded-md p-1.5">
@@ -200,7 +206,7 @@ export default function Hero() {
             </p>
             <p>wages while saving employers time and money</p>
           </div>
-          
+
           {/* Button - Below text content */}
           <div className="scale-[0.8] md:scale-[0.85] lg:scale-100 origin-left">
             <DemoButton />

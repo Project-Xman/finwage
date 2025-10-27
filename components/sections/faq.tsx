@@ -1,6 +1,6 @@
 /**
  * General FAQ Section Component
- * 
+ *
  * Displays FAQs grouped by category with accordion UI.
  * Can be used on any page to show relevant FAQs.
  */
@@ -12,7 +12,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import { getFaqItemsGroupedByTopic, getFeaturedFaqItems } from "@/lib/services/support";
+import {
+  getFaqItemsGroupedByTopic,
+  getFeaturedFaqItems,
+} from "@/lib/services/support";
 
 interface FAQSectionProps {
   title?: string;
@@ -38,11 +41,14 @@ export async function FAQSection({
   } else if (categoryFilter) {
     // Show FAQs for a specific category
     groupedFaqs = await getFaqItemsGroupedByTopic();
-    
+
     // Filter to only the requested category
     const filteredGroups: typeof groupedFaqs = {};
     Object.entries(groupedFaqs).forEach(([categoryId, data]) => {
-      if (data.topic.name === categoryFilter || data.topic.id === categoryFilter) {
+      if (
+        data.topic.name === categoryFilter ||
+        data.topic.id === categoryFilter
+      ) {
         filteredGroups[categoryId] = data;
       }
     });
@@ -59,7 +65,9 @@ export async function FAQSection({
         <section className="py-16 md:py-24 bg-gray-50">
           <div className="max-w-[1280px] mx-auto px-4 md:px-6">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900">{title}</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
+                {title}
+              </h2>
               {description && (
                 <p className="text-lg text-gray-600 mt-4">{description}</p>
               )}
@@ -78,7 +86,9 @@ export async function FAQSection({
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900">{title}</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
+              {title}
+            </h2>
             {description && (
               <p className="text-lg text-gray-600 mt-4">{description}</p>
             )}
@@ -115,7 +125,9 @@ export async function FAQSection({
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900">{title}</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
+              {title}
+            </h2>
             {description && (
               <p className="text-lg text-gray-600 mt-4">{description}</p>
             )}
@@ -134,12 +146,14 @@ export async function FAQSection({
     <section className="py-16 md:py-24 bg-gray-50">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900">{title}</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
+            {title}
+          </h2>
           {description && (
             <p className="text-lg text-gray-600 mt-4">{description}</p>
           )}
         </div>
-        
+
         <div className="max-w-4xl mx-auto space-y-12">
           {Object.entries(groupedFaqs).map(([categoryId, { topic, items }]) => (
             <div key={categoryId}>

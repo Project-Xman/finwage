@@ -19,8 +19,8 @@ function ImplementationCard() {
             The FinWage Solution seamlessly and securely integrates with your
             existing payroll, time management, and banking systems. Our
             dedicated implementation team ensures minimal impact on payroll
-            operations while delivering a smooth setup process. From there,
-            our collaborative experts guide you through every step—technical
+            operations while delivering a smooth setup process. From there, our
+            collaborative experts guide you through every step—technical
             integration, customized launch planning, employee activation,
             onboarding, training, marketing, and ongoing support—to ensure
             confident and widespread employee adoption.

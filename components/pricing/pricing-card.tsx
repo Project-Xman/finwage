@@ -1,11 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { Check, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
 import { ContactModal } from "@/components/shared/contact-modal";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { EnquiriesInterestOptions } from "@/types/pocketbase";
 
 interface PricingCardProps {
@@ -36,10 +42,16 @@ export function PricingCard({ plan }: PricingCardProps) {
         )}
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">{plan.name}</CardTitle>
-          <div className="text-4xl font-bold text-[#1d44c3] my-4">{plan.price}</div>
-          <CardDescription className="text-base">{plan.description}</CardDescription>
+          <div className="text-4xl font-bold text-[#1d44c3] my-4">
+            {plan.price}
+          </div>
+          <CardDescription className="text-base">
+            {plan.description}
+          </CardDescription>
           {plan.employees && (
-            <p className="text-sm font-semibold text-foreground mt-2">{plan.employees}</p>
+            <p className="text-sm font-semibold text-foreground mt-2">
+              {plan.employees}
+            </p>
           )}
         </CardHeader>
         <CardContent className="space-y-6">
@@ -56,13 +68,19 @@ export function PricingCard({ plan }: PricingCardProps) {
 
           <div className="space-y-4">
             {plan.features.map((feature, idx) => (
-              <div key={`${plan.id}-feature-${idx}`} className="flex items-start gap-3">
+              <div
+                key={`${plan.id}-feature-${idx}`}
+                className="flex items-start gap-3"
+              >
                 <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
                 <span className="text-sm text-foreground">{feature}</span>
               </div>
             ))}
             {plan.notIncluded.map((feature, idx) => (
-              <div key={`${plan.id}-not-${idx}`} className="flex items-start gap-3 opacity-50">
+              <div
+                key={`${plan.id}-not-${idx}`}
+                className="flex items-start gap-3 opacity-50"
+              >
                 <X className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-0.5" />
                 <span className="text-sm text-muted-foreground">{feature}</span>
               </div>

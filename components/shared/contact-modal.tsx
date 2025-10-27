@@ -1,10 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -15,13 +22,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { createEnquiry } from "@/lib/api";
 import { EnquiriesInterestOptions } from "@/types/pocketbase";
 
@@ -73,17 +73,17 @@ export function ContactModal({
   async function onSubmit(data: ContactFormValues) {
     try {
       setIsSubmitting(true);
-      
+
       // Convert phone string to number if provided
       const enquiryData: Parameters<typeof createEnquiry>[0] = {
         ...data,
         phone: data.phone ? Number(data.phone) : undefined,
       };
-      
+
       await createEnquiry(enquiryData);
-      
+
       setSubmitSuccess(true);
-      
+
       // Reset form and close after delay
       setTimeout(() => {
         form.reset();
@@ -104,13 +104,13 @@ export function ContactModal({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>
-            {description}
-          </DialogDescription>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {submitSuccess ? (
           <div className="py-8 text-center">
-            <div className="text-green-500 font-semibold text-lg mb-2">Message sent!</div>
+            <div className="text-green-500 font-semibold text-lg mb-2">
+              Message sent!
+            </div>
             <div className="text-gray-600">We'll get back to you soon.</div>
           </div>
         ) : (
@@ -129,7 +129,7 @@ export function ContactModal({
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="email"
@@ -143,7 +143,7 @@ export function ContactModal({
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="company"
@@ -157,7 +157,7 @@ export function ContactModal({
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="phone"
@@ -171,7 +171,7 @@ export function ContactModal({
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="message"
@@ -179,19 +179,19 @@ export function ContactModal({
                   <FormItem>
                     <FormLabel>Message (optional)</FormLabel>
                     <FormControl>
-                      <Textarea 
-                        placeholder="Tell us more about your needs..." 
-                        className="resize-none" 
-                        {...field} 
+                      <Textarea
+                        placeholder="Tell us more about your needs..."
+                        className="resize-none"
+                        {...field}
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              
+
               <input type="hidden" {...form.register("interest")} />
-              
+
               <div className="flex justify-end space-x-2">
                 <Button
                   type="button"

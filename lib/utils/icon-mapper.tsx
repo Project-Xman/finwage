@@ -1,19 +1,19 @@
 import {
-  Shield,
-  Lock,
-  FileText,
-  Globe,
+  ArrowRight,
   Award,
-  Zap,
-  Heart,
-  TrendingUp,
+  Building2,
+  Check,
   Clock,
   DollarSign,
-  Users,
-  Check,
-  Building2,
-  ArrowRight,
+  FileText,
+  Globe,
+  Heart,
+  Lock,
   type LucideIcon,
+  Shield,
+  TrendingUp,
+  Users,
+  Zap,
 } from "lucide-react";
 
 /**
@@ -44,7 +44,7 @@ const iconMap: Record<string, LucideIcon> = {
  */
 export function getIconComponent(
   iconName: string,
-  defaultIcon: LucideIcon = Heart
+  defaultIcon: LucideIcon = Heart,
 ): LucideIcon {
   return iconMap[iconName] || defaultIcon;
 }
@@ -59,7 +59,7 @@ export function getIconComponent(
 export function renderIcon(
   iconName: string,
   className: string = "w-8 h-8",
-  defaultIcon?: LucideIcon
+  defaultIcon?: LucideIcon,
 ): React.ReactNode {
   const IconComponent = getIconComponent(iconName, defaultIcon);
   return <IconComponent className={className} />;

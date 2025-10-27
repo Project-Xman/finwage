@@ -1,17 +1,17 @@
 /**
  * Blog Service Layer
- * 
+ *
  * Provides data fetching functions for blog-related content.
  * Implements clean separation between data fetching and UI logic.
  */
 
-import type { BlogsResponse } from '@/types/pocketbase';
 import {
-  getBlogs as apiFetchBlogs,
   getBlogBySlug as apiFetchBlogBySlug,
-  getFeaturedBlogs as apiFetchFeaturedBlogs,
+  getBlogs as apiFetchBlogs,
   getBlogsByCategory as apiFetchBlogsByCategory,
-} from '@/lib/api';
+  getFeaturedBlogs as apiFetchFeaturedBlogs,
+} from "@/lib/api";
+import type { BlogsResponse } from "@/types/pocketbase";
 
 // ============================================================
 // TYPES
@@ -38,35 +38,35 @@ export interface BlogListResult {
 
 /**
  * Fetch all published blogs with pagination support
- * 
+ *
  * @param options - Pagination and filtering options
  * @returns Paginated list of blog posts with metadata
- * 
+ *
  * @example
  * ```ts
  * // Get first page with default pagination
  * const blogs = await getBlogs();
- * 
+ *
  * // Get specific page with custom page size
  * const blogs = await getBlogs({ page: 2, perPage: 10 });
- * 
+ *
  * // Filter by category
  * const blogs = await getBlogs({ category: 'tech' });
  * ```
  */
 export async function getBlogs(
-  options: BlogListOptions = {}
+  options: BlogListOptions = {},
 ): Promise<BlogListResult> {
   try {
     const {
       page = 1,
       perPage = 20,
       category,
-      sort = '-published_date',
+      sort = "-published_date",
     } = options;
 
     // Build filter for published blogs
-    let filter = 'published = true';
+    let filter = "published = true";
     if (category) {
       filter += ` && category = "${category}"`;
     }
@@ -86,7 +86,7 @@ export async function getBlogs(
       perPage: response.perPage,
     };
   } catch (error) {
-    console.error('Failed to fetch blogs:', error);
+    console.error("Failed to fetch blogs:", error);
     // Return empty result on error to allow graceful degradation
     return {
       items: [],
@@ -100,10 +100,10 @@ export async function getBlogs(
 
 /**
  * Fetch a single blog post by slug with author and category expansion
- * 
+ *
  * @param slug - The blog post slug
  * @returns Blog post with expanded author and category data, or null if not found
- * 
+ *
  * @example
  * ```ts
  * const blog = await getBlogBySlug('my-first-post');
@@ -115,7 +115,7 @@ export async function getBlogs(
  * ```
  */
 export async function getBlogBySlug(
-  slug: string
+  slug: string,
 ): Promise<BlogsResponse | null> {
   try {
     const blog = await apiFetchBlogBySlug(slug);
@@ -128,50 +128,50 @@ export async function getBlogBySlug(
 
 /**
  * Fetch featured blogs for homepage display
- * 
+ *
  * @param limit - Maximum number of featured blogs to return (default: 3)
  * @returns Array of featured blog posts
- * 
+ *
  * @example
  * ```ts
  * // Get 3 featured blogs for homepage
  * const featuredBlogs = await getFeaturedBlogs();
- * 
+ *
  * // Get more featured blogs
  * const featuredBlogs = await getFeaturedBlogs(6);
  * ```
  */
 export async function getFeaturedBlogs(
-  limit: number = 3
+  limit: number = 3,
 ): Promise<BlogsResponse[]> {
   try {
     const blogs = await apiFetchFeaturedBlogs(limit);
     return blogs;
   } catch (error) {
-    console.error('Failed to fetch featured blogs:', error);
+    console.error("Failed to fetch featured blogs:", error);
     return [];
   }
 }
 
 /**
  * Fetch blogs filtered by category
- * 
+ *
  * @param categoryId - The category ID to filter by
  * @param limit - Maximum number of blogs to return (default: 10)
  * @returns Array of blog posts in the specified category
- * 
+ *
  * @example
  * ```ts
  * // Get blogs in a specific category
  * const techBlogs = await getBlogsByCategory('category-id-123');
- * 
+ *
  * // Get more blogs from category
  * const techBlogs = await getBlogsByCategory('category-id-123', 20);
  * ```
  */
 export async function getBlogsByCategory(
   categoryId: string,
-  limit: number = 10
+  limit: number = 10,
 ): Promise<BlogsResponse[]> {
   try {
     const blogs = await apiFetchBlogsByCategory(categoryId, limit);

@@ -6,24 +6,38 @@ import {
   MessageSquare,
   Phone,
 } from "lucide-react";
+import NextLink from "next/link";
 import { Suspense } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ContactForm } from "@/components/contact/contact-form";
-import { getContactOptions } from "@/lib/services/contact";
-import { EnquiriesInterestOptions } from "@/types/pocketbase";
 import { FAQSection } from "@/components/sections/faq";
 import { SupportResourcesSection } from "@/components/sections/support-resources";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import NextLink from "next/link";
+import { getContactOptions } from "@/lib/services/contact";
+import { EnquiriesInterestOptions } from "@/types/pocketbase";
 
 export const metadata = {
   title: "Contact Us - FinWage",
-  description: "Get in touch with FinWage. Schedule a demo, request support, or send us your questions. We're here to help.",
-  keywords: ["contact", "support", "demo", "customer service", "finwage contact"],
+  description:
+    "Get in touch with FinWage. Schedule a demo, request support, or send us your questions. We're here to help.",
+  keywords: [
+    "contact",
+    "support",
+    "demo",
+    "customer service",
+    "finwage contact",
+  ],
   openGraph: {
     title: "Contact Us - FinWage",
-    description: "Get in touch with FinWage. Schedule a demo or request support.",
+    description:
+      "Get in touch with FinWage. Schedule a demo or request support.",
     type: "website",
   },
 };
@@ -55,23 +69,30 @@ export default async function ContactPage() {
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               {contactOptions.slice(0, 3).map((option, index) => {
                 // Determine icon based on type or use default
-                const IconComponent = 
-                  option.type === 'email' ? Mail :
-                  option.type === 'phone' ? Phone :
-                  MessageSquare;
-                
+                const IconComponent =
+                  option.type === "email"
+                    ? Mail
+                    : option.type === "phone"
+                      ? Phone
+                      : MessageSquare;
+
                 // Determine color based on index
                 const colors = [
-                  { bg: 'bg-[#1d44c3]', hover: 'hover:bg-[#0d2463]' },
-                  { bg: 'bg-green-500', hover: 'hover:bg-green-600' },
-                  { bg: 'bg-purple-500', hover: 'hover:bg-purple-600' },
+                  { bg: "bg-[#1d44c3]", hover: "hover:bg-[#0d2463]" },
+                  { bg: "bg-green-500", hover: "hover:bg-green-600" },
+                  { bg: "bg-purple-500", hover: "hover:bg-purple-600" },
                 ];
                 const color = colors[index] || colors[0];
 
                 return (
-                  <Card key={option.id} className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+                  <Card
+                    key={option.id}
+                    className="bg-gradient-to-br from-blue-50 to-purple-50 border-0"
+                  >
                     <CardHeader className="text-center">
-                      <div className={`inline-flex items-center justify-center w-16 h-16 ${color.bg} rounded-full text-white mb-6 mx-auto`}>
+                      <div
+                        className={`inline-flex items-center justify-center w-16 h-16 ${color.bg} rounded-full text-white mb-6 mx-auto`}
+                      >
                         <IconComponent className="w-8 h-8" />
                       </div>
                       <CardTitle>{option.title}</CardTitle>
@@ -81,7 +102,7 @@ export default async function ContactPage() {
                         {option.description}
                       </CardDescription>
                       {option.action_url && (
-                        <Button 
+                        <Button
                           className={`${color.bg} ${color.hover} w-full`}
                           asChild
                         >
@@ -108,7 +129,9 @@ export default async function ContactPage() {
                 Request a Demo
               </h2>
               <p className="text-xl text-gray-600 mb-8">
-                See FinWage in action and learn how we can help your organization. Our team will walk you through the platform and answer all your questions.
+                See FinWage in action and learn how we can help your
+                organization. Our team will walk you through the platform and
+                answer all your questions.
               </p>
 
               <div className="space-y-6">
@@ -185,7 +208,7 @@ export default async function ContactPage() {
 
       {/* Support Resources - Dynamic from PocketBase */}
       <Suspense fallback={<SupportResourcesSkeleton />}>
-        <SupportResourcesSection 
+        <SupportResourcesSection
           title="Employee Support Resources"
           description="Quick access to help and information"
           grouped={true}
@@ -194,7 +217,7 @@ export default async function ContactPage() {
 
       {/* FAQ Section - Dynamic from PocketBase */}
       <Suspense fallback={<FAQSkeleton />}>
-        <FAQSection 
+        <FAQSection
           title="Frequently Asked Questions"
           description="Find answers to common questions about FinWage"
           showFeaturedOnly={true}

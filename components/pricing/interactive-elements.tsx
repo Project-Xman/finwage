@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { ContactModal } from "@/components/shared/contact-modal";
+import { Button } from "@/components/ui/button";
 import { EnquiriesInterestOptions } from "@/types/pocketbase";
-
 
 export function InteractivePricingElements({ type = "both" }) {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -13,8 +12,8 @@ export function InteractivePricingElements({ type = "both" }) {
   return (
     <>
       {type === "contact" && (
-        <Button 
-          variant="link" 
+        <Button
+          variant="link"
           className="text-[#1d44c3]"
           onClick={() => setIsContactModalOpen(true)}
         >
@@ -23,8 +22,8 @@ export function InteractivePricingElements({ type = "both" }) {
       )}
 
       {type === "demo" && (
-        <Button 
-          size="lg" 
+        <Button
+          size="lg"
           className="bg-white text-[#1d44c3] hover:bg-gray-100"
           onClick={() => setIsDemoModalOpen(true)}
         >
@@ -34,8 +33,8 @@ export function InteractivePricingElements({ type = "both" }) {
 
       {type === "both" && (
         <>
-          <Button 
-            variant="link" 
+          <Button
+            variant="link"
             className="text-[#1d44c3]"
             onClick={() => setIsContactModalOpen(true)}
           >

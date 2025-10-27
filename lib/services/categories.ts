@@ -1,15 +1,15 @@
 /**
  * Categories Service Layer
- * 
+ *
  * Provides data fetching functions for blog category content.
  * Implements clean separation between data fetching and UI logic.
  */
 
-import type { CategoryResponse } from '@/types/pocketbase';
 import {
   getCategories as apiFetchCategories,
   getCategoryBySlug as apiFetchCategoryBySlug,
-} from '@/lib/api';
+} from "@/lib/api";
+import type { CategoryResponse } from "@/types/pocketbase";
 
 // ============================================================
 // TYPES
@@ -35,31 +35,27 @@ export interface CategoryListResult {
 
 /**
  * Fetch all blog categories
- * 
+ *
  * @param options - Pagination and sorting options
  * @returns Paginated list of categories
- * 
+ *
  * @example
  * ```ts
  * // Get all categories with default pagination
  * const categories = await getCategories();
- * 
+ *
  * // Get specific page
  * const categories = await getCategories({ page: 1, perPage: 50 });
- * 
+ *
  * // Sort by name
  * const categories = await getCategories({ sort: 'name' });
  * ```
  */
 export async function getCategories(
-  options: CategoryListOptions = {}
+  options: CategoryListOptions = {},
 ): Promise<CategoryListResult> {
   try {
-    const {
-      page = 1,
-      perPage = 50,
-      sort = 'name',
-    } = options;
+    const { page = 1, perPage = 50, sort = "name" } = options;
 
     const response = await apiFetchCategories({
       page,
@@ -75,7 +71,7 @@ export async function getCategories(
       perPage: response.perPage,
     };
   } catch (error) {
-    console.error('Failed to fetch categories:', error);
+    console.error("Failed to fetch categories:", error);
     // Return empty result on error to allow graceful degradation
     return {
       items: [],
@@ -89,10 +85,10 @@ export async function getCategories(
 
 /**
  * Fetch a single category by slug
- * 
+ *
  * @param slug - The category slug
  * @returns Category data, or null if not found
- * 
+ *
  * @example
  * ```ts
  * const category = await getCategoryBySlug('technology');
@@ -104,7 +100,7 @@ export async function getCategories(
  * ```
  */
 export async function getCategoryBySlug(
-  slug: string
+  slug: string,
 ): Promise<CategoryResponse | null> {
   try {
     const category = await apiFetchCategoryBySlug(slug);

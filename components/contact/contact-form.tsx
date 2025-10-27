@@ -1,30 +1,32 @@
-'use client';
+"use client";
 
 /**
  * Contact Form Component
- * 
+ *
  * Client component for contact form with Server Action integration.
  * Handles form state, validation errors, and success messages.
  */
 
-import { useActionState } from 'react';
-import { useFormStatus } from 'react-dom';
-import { useEffect, useRef } from 'react';
-import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { AlertCircle, ArrowRight, CheckCircle2 } from "lucide-react";
+import { useActionState, useEffect, useRef } from "react";
+import { useFormStatus } from "react-dom";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { submitContactForm, type ContactFormState } from '@/lib/actions/contact';
-import { EnquiriesInterestOptions } from '@/types/pocketbase';
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  type ContactFormState,
+  submitContactForm,
+} from "@/lib/actions/contact";
+import { EnquiriesInterestOptions } from "@/types/pocketbase";
 
 // ============================================================
 // SUBMIT BUTTON COMPONENT
@@ -40,7 +42,7 @@ function SubmitButton() {
       size="lg"
       disabled={pending}
     >
-      {pending ? 'Sending...' : 'Send Message'}
+      {pending ? "Sending..." : "Send Message"}
       {!pending && <ArrowRight className="w-5 h-5 ml-2" />}
     </Button>
   );
@@ -54,10 +56,12 @@ interface ContactFormProps {
   defaultInterest?: EnquiriesInterestOptions;
 }
 
-export function ContactForm({ defaultInterest = EnquiriesInterestOptions.contact }: ContactFormProps) {
+export function ContactForm({
+  defaultInterest = EnquiriesInterestOptions.contact,
+}: ContactFormProps) {
   const [state, formAction] = useActionState<ContactFormState, FormData>(
     submitContactForm,
-    { success: false }
+    { success: false },
   );
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -84,9 +88,7 @@ export function ContactForm({ defaultInterest = EnquiriesInterestOptions.contact
       {!state.success && state.errors?._form && (
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
-          <AlertDescription>
-            {state.errors._form.join(', ')}
-          </AlertDescription>
+          <AlertDescription>{state.errors._form.join(", ")}</AlertDescription>
         </Alert>
       )}
 
@@ -101,12 +103,12 @@ export function ContactForm({ defaultInterest = EnquiriesInterestOptions.contact
           type="text"
           placeholder="John Doe"
           required
-          aria-invalid={state.errors?.name ? 'true' : 'false'}
-          aria-describedby={state.errors?.name ? 'name-error' : undefined}
+          aria-invalid={state.errors?.name ? "true" : "false"}
+          aria-describedby={state.errors?.name ? "name-error" : undefined}
         />
         {state.errors?.name && (
           <p id="name-error" className="text-sm text-red-600">
-            {state.errors.name.join(', ')}
+            {state.errors.name.join(", ")}
           </p>
         )}
       </div>
@@ -122,12 +124,12 @@ export function ContactForm({ defaultInterest = EnquiriesInterestOptions.contact
           type="email"
           placeholder="john@example.com"
           required
-          aria-invalid={state.errors?.email ? 'true' : 'false'}
-          aria-describedby={state.errors?.email ? 'email-error' : undefined}
+          aria-invalid={state.errors?.email ? "true" : "false"}
+          aria-describedby={state.errors?.email ? "email-error" : undefined}
         />
         {state.errors?.email && (
           <p id="email-error" className="text-sm text-red-600">
-            {state.errors.email.join(', ')}
+            {state.errors.email.join(", ")}
           </p>
         )}
       </div>
@@ -140,12 +142,12 @@ export function ContactForm({ defaultInterest = EnquiriesInterestOptions.contact
           name="company"
           type="text"
           placeholder="Acme Corporation"
-          aria-invalid={state.errors?.company ? 'true' : 'false'}
-          aria-describedby={state.errors?.company ? 'company-error' : undefined}
+          aria-invalid={state.errors?.company ? "true" : "false"}
+          aria-describedby={state.errors?.company ? "company-error" : undefined}
         />
         {state.errors?.company && (
           <p id="company-error" className="text-sm text-red-600">
-            {state.errors.company.join(', ')}
+            {state.errors.company.join(", ")}
           </p>
         )}
       </div>
@@ -158,12 +160,12 @@ export function ContactForm({ defaultInterest = EnquiriesInterestOptions.contact
           name="phone"
           type="tel"
           placeholder="+1 (555) 000-0000"
-          aria-invalid={state.errors?.phone ? 'true' : 'false'}
-          aria-describedby={state.errors?.phone ? 'phone-error' : undefined}
+          aria-invalid={state.errors?.phone ? "true" : "false"}
+          aria-describedby={state.errors?.phone ? "phone-error" : undefined}
         />
         {state.errors?.phone && (
           <p id="phone-error" className="text-sm text-red-600">
-            {state.errors.phone.join(', ')}
+            {state.errors.phone.join(", ")}
           </p>
         )}
       </div>
@@ -194,7 +196,7 @@ export function ContactForm({ defaultInterest = EnquiriesInterestOptions.contact
         </Select>
         {state.errors?.interest && (
           <p id="interest-error" className="text-sm text-red-600">
-            {state.errors.interest.join(', ')}
+            {state.errors.interest.join(", ")}
           </p>
         )}
       </div>
@@ -210,12 +212,12 @@ export function ContactForm({ defaultInterest = EnquiriesInterestOptions.contact
           placeholder="Tell us about your needs..."
           rows={5}
           required
-          aria-invalid={state.errors?.message ? 'true' : 'false'}
-          aria-describedby={state.errors?.message ? 'message-error' : undefined}
+          aria-invalid={state.errors?.message ? "true" : "false"}
+          aria-describedby={state.errors?.message ? "message-error" : undefined}
         />
         {state.errors?.message && (
           <p id="message-error" className="text-sm text-red-600">
-            {state.errors.message.join(', ')}
+            {state.errors.message.join(", ")}
           </p>
         )}
       </div>

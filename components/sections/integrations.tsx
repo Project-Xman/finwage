@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { getFeaturedIntegrations } from "@/lib/services/integrations";
 import { getImageUrl } from "@/lib/utils/pocketbase";
-import Image from "next/image";
 import IntegrationDemo from "./integrations-demo";
 
 export default async function Integrations() {

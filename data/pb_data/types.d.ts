@@ -1286,7 +1286,7 @@ type _TygojaAny = any
  * cause other issues.
  */
 namespace os {
- interface readdirMode extends Number{}
+ interface readdirMode extends number{}
  interface File {
   /**
    * Readdir reads the contents of the directory associated with file and
@@ -1387,8 +1387,7 @@ namespace os {
  /**
   * Auxiliary information if the File describes a directory
   */
- interface dirInfo {
- }
+ type dirInfo = {}
  interface expand {
   /**
    * Expand replaces ${var} or $var in the string based on the mapping function.
@@ -1530,8 +1529,8 @@ namespace os {
   (err: Error): boolean
  }
  interface syscallErrorType extends syscall.Errno{}
- interface processMode extends Number{}
- interface processStatus extends Number{}
+ interface processMode extends number{}
+ interface processStatus extends number{}
  /**
   * Process stores the information about a process created by [StartProcess].
   */
@@ -1708,8 +1707,7 @@ namespace os {
  /**
   * ProcessState stores information about a process, as reported by Wait.
   */
- interface ProcessState {
- }
+ type ProcessState = {}
  interface ProcessState {
   /**
    * Pid returns the process id of the exited process.
@@ -1793,8 +1791,7 @@ namespace os {
   * noReadFrom can be embedded alongside another type to
   * hide the ReadFrom method of that other type.
   */
- interface noReadFrom {
- }
+ type noReadFrom = {}
  interface noReadFrom {
   /**
    * ReadFrom hides another ReadFrom method.
@@ -1838,8 +1835,7 @@ namespace os {
   * noWriteTo can be embedded alongside another type to
   * hide the WriteTo method of that other type.
   */
- interface noWriteTo {
- }
+ type noWriteTo = {}
  interface noWriteTo {
   /**
    * WriteTo hides another WriteTo method.
@@ -2111,7 +2107,7 @@ namespace os {
    */
   (dir: string): fs.FS
  }
- interface dirFS extends String{}
+ interface dirFS extends string{}
  interface dirFS {
   open(name: string): fs.File
  }
@@ -2237,8 +2233,7 @@ namespace os {
   * can overwrite this data, which could cause the finalizer
   * to close the wrong file descriptor.
   */
- interface file {
- }
+ type file = {}
  interface File {
   /**
    * Fd returns the integer Unix file descriptor referencing the open file.
@@ -2273,7 +2268,7 @@ namespace os {
  /**
   * newFileKind describes the kind of file to newFile.
   */
- interface newFileKind extends Number{}
+ interface newFileKind extends number{}
  interface truncate {
   /**
    * Truncate changes the size of the named file.
@@ -2305,8 +2300,7 @@ namespace os {
    */
   (oldname: string, newname: string): void
  }
- interface unixDirent {
- }
+ type unixDirent = {}
  interface unixDirent {
   name(): string
  }
@@ -2424,8 +2418,7 @@ namespace os {
  /**
   * rawConn implements syscall.RawConn.
   */
- interface rawConn {
- }
+ type rawConn = {}
  interface rawConn {
   control(f: (_arg0: number) => void): void
  }
@@ -2480,8 +2473,7 @@ namespace os {
   *     On these platforms, a Root references a directory name, not a file descriptor.
   * ```
   */
- interface Root {
- }
+ type Root = {}
  interface openRoot {
   /**
    * OpenRoot opens the named directory.
@@ -2595,8 +2587,7 @@ namespace os {
   * root implementation for platforms with a function to open a file
   * relative to a directory.
   */
- interface root {
- }
+ type root = {}
  interface root {
   close(): void
  }
@@ -2607,11 +2598,11 @@ namespace os {
   * errSymlink reports that a file being operated on is actually a symlink,
   * and the target of that symlink.
   */
- interface errSymlink extends String{}
+ interface errSymlink extends string{}
  interface errSymlink {
   error(): string
  }
- interface sysfdType extends Number{}
+ interface sysfdType extends number{}
  interface stat {
   /**
    * Stat returns a [FileInfo] describing the named file.
@@ -2718,8 +2709,7 @@ namespace os {
  /**
   * A fileStat is the implementation of FileInfo returned by Stat and Lstat.
   */
- interface fileStat {
- }
+ type fileStat = {}
  interface fileStat {
   size(): number
  }
@@ -2996,7 +2986,7 @@ namespace filepath {
   * [fs.FileInfo] describing the directory, and err set to the error from
   * Readdirnames.
   */
- interface WalkFunc {(path: string, info: fs.FileInfo, err: Error): void }
+ type WalkFunc = (path: string, info: fs.FileInfo, err: Error) => void
  interface walkDir {
   /**
    * WalkDir walks the file tree rooted at root, calling fn for each file or
@@ -3242,8 +3232,7 @@ namespace dbx {
  /**
   * BaseBuilder provides a basic implementation of the Builder interface.
   */
- interface BaseBuilder {
- }
+ type BaseBuilder = {}
  interface newBaseBuilder {
   /**
    * NewBaseBuilder creates a new BaseBuilder instance.
@@ -3859,8 +3848,8 @@ namespace dbx {
   * is provided, it will be treated as the log message. If multiple parameters
   * are provided, they will be passed to fmt.Sprintf() to generate the log message.
   */
- interface LogFunc {(format: string, ...a: {
-  }[]): void }
+ type LogFunc = (format: string, ...a: {
+  }[]) => void
  /**
   * PerfFunc is called when a query finishes execution.
   * The query execution time is passed to this function so that the DB performance
@@ -3868,23 +3857,23 @@ namespace dbx {
   * SQL statement takes to execute, while the "execute" parameter indicates whether
   * the SQL statement is executed or queried (usually SELECT statements).
   */
- interface PerfFunc {(ns: number, sql: string, execute: boolean): void }
+ type PerfFunc = (ns: number, sql: string, execute: boolean) => void
  /**
   * QueryLogFunc is called each time when performing a SQL query.
   * The "t" parameter gives the time that the SQL statement takes to execute,
   * while rows and err are the result of the query.
   */
- interface QueryLogFunc {(ctx: context.Context, t: time.Duration, sql: string, rows: sql.Rows, err: Error): void }
+ type QueryLogFunc = (ctx: context.Context, t: time.Duration, sql: string, rows: sql.Rows, err: Error) => void
  /**
   * ExecLogFunc is called each time when a SQL statement is executed.
   * The "t" parameter gives the time that the SQL statement takes to execute,
   * while result and err refer to the result of the execution.
   */
- interface ExecLogFunc {(ctx: context.Context, t: time.Duration, sql: string, result: sql.Result, err: Error): void }
+ type ExecLogFunc = (ctx: context.Context, t: time.Duration, sql: string, result: sql.Result, err: Error) => void
  /**
   * BuilderFunc creates a Builder instance using the given DB instance and Executor.
   */
- interface BuilderFunc {(_arg0: DB, _arg1: Executor): Builder }
+ type BuilderFunc = (_arg0: DB, _arg1: Executor) => Builder
  /**
   * DB enhances sql.DB by providing a set of DB-agnostic query building methods.
   * DB allows easier query building and population of data into Go variables.
@@ -4171,8 +4160,7 @@ namespace dbx {
  /**
   * Exp represents an expression with a SQL fragment and a list of optional binding parameters.
   */
- interface Exp {
- }
+ type Exp = {}
  interface Exp {
   /**
    * Build converts an expression into a SQL fragment.
@@ -4188,8 +4176,7 @@ namespace dbx {
  /**
   * NotExp represents an expression that should prefix "NOT" to a specified expression.
   */
- interface NotExp {
- }
+ type NotExp = {}
  interface NotExp {
   /**
    * Build converts an expression into a SQL fragment.
@@ -4199,8 +4186,7 @@ namespace dbx {
  /**
   * AndOrExp represents an expression that concatenates multiple expressions using either "AND" or "OR".
   */
- interface AndOrExp {
- }
+ type AndOrExp = {}
  interface AndOrExp {
   /**
    * Build converts an expression into a SQL fragment.
@@ -4210,8 +4196,7 @@ namespace dbx {
  /**
   * InExp represents an "IN" or "NOT IN" expression.
   */
- interface InExp {
- }
+ type InExp = {}
  interface InExp {
   /**
    * Build converts an expression into a SQL fragment.
@@ -4251,8 +4236,7 @@ namespace dbx {
  /**
   * ExistsExp represents an EXISTS or NOT EXISTS expression.
   */
- interface ExistsExp {
- }
+ type ExistsExp = {}
  interface ExistsExp {
   /**
    * Build converts an expression into a SQL fragment.
@@ -4262,8 +4246,7 @@ namespace dbx {
  /**
   * BetweenExp represents a BETWEEN or a NOT BETWEEN expression.
   */
- interface BetweenExp {
- }
+ type BetweenExp = {}
  interface BetweenExp {
   /**
    * Build converts an expression into a SQL fragment.
@@ -4279,8 +4262,7 @@ namespace dbx {
  /**
   * EncloseExp represents a parenthesis enclosed expression.
   */
- interface EncloseExp {
- }
+ type EncloseExp = {}
  interface EncloseExp {
   /**
    * Build converts an expression into a SQL fragment.
@@ -4297,12 +4279,9 @@ namespace dbx {
  /**
   * ModelQuery represents a query associated with a struct model.
   */
- interface ModelQuery {
- }
- interface newModelQuery {
-  (model: {
-   }, fieldMapFunc: FieldMapFunc, db: DB, builder: Builder): (ModelQuery)
- }
+ type ModelQuery = {}
+ type newModelQuery = (model: {
+   }, fieldMapFunc: FieldMapFunc, db: DB, builder: Builder) => (ModelQuery)
  interface ModelQuery {
   /**
    * Context returns the context associated with the query.
@@ -4354,19 +4333,19 @@ namespace dbx {
  /**
   * ExecHookFunc executes before op allowing custom handling like auto fail/retry.
   */
- interface ExecHookFunc {(q: Query, op: () => void): void }
+ type ExecHookFunc = (q: Query, op: () => void) => void
  /**
   * OneHookFunc executes right before the query populate the row result from One() call (aka. op).
   */
- interface OneHookFunc {(q: Query, a: {
+ type OneHookFunc = (q: Query, a: {
   }, op: (b: {
-  }) => void): void }
+  }) => void) => void
  /**
   * AllHookFunc executes right before the query populate the row result from All() call (aka. op).
   */
- interface AllHookFunc {(q: Query, sliceA: {
+ type AllHookFunc = (q: Query, sliceA: {
   }, op: (sliceB: {
-  }) => void): void }
+  }) => void) => void
  /**
   * Params represents a list of parameter values to be bound to a SQL statement.
   * The map keys are the parameter names while the map values are the corresponding parameter values.
@@ -4601,8 +4580,7 @@ namespace dbx {
  /**
   * BaseQueryBuilder provides a basic implementation of QueryBuilder.
   */
- interface BaseQueryBuilder {
- }
+ type BaseQueryBuilder = {}
  interface newBaseQueryBuilder {
   /**
    * NewBaseQueryBuilder creates a new BaseQueryBuilder instance.
@@ -4678,7 +4656,7 @@ namespace dbx {
  /**
   * VarTypeError indicates a variable type error when trying to populating a variable with DB result.
   */
- interface VarTypeError extends String{}
+ interface VarTypeError extends string{}
  interface VarTypeError {
   /**
    * Error returns the error message.
@@ -4727,7 +4705,7 @@ namespace dbx {
  /**
   * BuildHookFunc defines a callback function that is executed on Query creation.
   */
- interface BuildHookFunc {(q: Query): void }
+ type BuildHookFunc = (q: Query) => void
  /**
   * SelectQuery represents a DB-agnostic SELECT query.
   * It can be built into a DB-specific query by calling the Build() method.
@@ -5059,21 +5037,18 @@ namespace dbx {
  /**
   * FieldMapFunc converts a struct field name into a DB column name.
   */
- interface FieldMapFunc {(_arg0: string): string }
+ type FieldMapFunc = (_arg0: string) => string
  /**
   * TableMapFunc converts a sample struct into a DB table name.
   */
- interface TableMapFunc {(a: {
-  }): string }
- interface structInfo {
- }
+ type TableMapFunc = (a: {
+  }) => string
+ type structInfo = {}
  type _sNCuncf = structInfo
  interface structValue extends _sNCuncf {
  }
- interface fieldInfo {
- }
- interface structInfoMapKey {
- }
+ type fieldInfo = {}
+ type structInfoMapKey = {}
  /**
   * PostScanner is an optional interface used by ScanStruct.
   */
@@ -5164,8 +5139,7 @@ namespace template {
   * 
   * Use the Registry.Load* methods to load templates into the registry.
   */
- interface Registry {
- }
+ type Registry = {}
  interface Registry {
   /**
    * AddFuncs registers new global template functions.
@@ -5218,8 +5192,7 @@ namespace template {
  /**
   * Renderer defines a single parsed template.
   */
- interface Renderer {
- }
+ type Renderer = {}
  interface Renderer {
   /**
    * Render executes the template with the specified data as the dot object
@@ -5480,15 +5453,14 @@ namespace filesystem {
  /**
   * openFuncAsReader defines a FileReader from a bare Open function.
   */
- interface openFuncAsReader {(): io.ReadSeekCloser }
+ type openFuncAsReader = () => io.ReadSeekCloser
  interface openFuncAsReader {
   /**
    * Open implements the [filesystem.FileReader] interface.
    */
   open(): io.ReadSeekCloser
  }
- interface System {
- }
+ type System = {}
  interface newS3 {
   /**
    * NewS3 initializes an S3 filesystem instance.
@@ -7566,7 +7538,7 @@ namespace core {
  /**
   * DBConnectFunc defines a database connection initialization function.
   */
- interface DBConnectFunc {(dbPath: string): (dbx.DB) }
+ type DBConnectFunc = (dbPath: string) => (dbx.DB)
  /**
   * BaseAppConfig defines a BaseApp configuration option
   */
@@ -7584,8 +7556,7 @@ namespace core {
  /**
   * BaseApp implements CoreApp and defines the base PocketBase app structure.
   */
- interface BaseApp {
- }
+ type BaseApp = {}
  interface newBaseApp {
   /**
    * NewBaseApp creates and returns a new BaseApp instance
@@ -8579,8 +8550,7 @@ namespace core {
  /**
   * collectionBaseOptions defines the options for the "base" type collection.
   */
- interface collectionBaseOptions {
- }
+ type collectionBaseOptions = {}
  /**
   * collectionViewOptions defines the options for the "view" type collection.
   */
@@ -8715,8 +8685,7 @@ namespace core {
    */
   syncRecordTableSchema(newCollection: Collection, oldCollection: Collection): void
  }
- interface collectionValidator {
- }
+ type collectionValidator = {}
  interface optionsValidator {
   [key:string]: any;
  }
@@ -8882,8 +8851,7 @@ namespace core {
  /**
   * note: expects both builder to use the same driver
   */
- interface dualDBBuilder {
- }
+ type dualDBBuilder = {}
  interface dualDBBuilder {
   /**
    * Select implements the [dbx.Builder.Select] interface method.
@@ -9048,9 +9016,7 @@ namespace core {
    */
   newQuery(str: string): (dbx.Query)
  }
- interface defaultDBConnect {
-  (dbPath: string): (dbx.DB)
- }
+ type defaultDBConnect = (dbPath: string) => (dbx.DB)
  /**
   * Model defines an interface with common methods that all db models should have.
   * 
@@ -9203,8 +9169,7 @@ namespace core {
  /**
   * TxAppInfo represents an active transaction context associated to an existing app instance.
   */
- interface TxAppInfo {
- }
+ type TxAppInfo = {}
  interface TxAppInfo {
   /**
    * OnComplete registers the provided callback that will be invoked
@@ -9694,7 +9659,7 @@ namespace core {
  /**
   * FieldFactoryFunc defines a simple function to construct a specific Field instance.
   */
- interface FieldFactoryFunc {(): Field }
+ type FieldFactoryFunc = () => Field
  /**
   * Field defines a common interface that all Collection fields should implement.
   */
@@ -9766,7 +9731,7 @@ namespace core {
    */
   calculateMaxBodySize(): number
  }
- interface SetterFunc {(record: Record, raw: any): void }
+ type SetterFunc = (record: Record, raw: any) => void
  /**
   * SetterFinder defines a field interface for registering custom field value setters.
   */
@@ -9784,7 +9749,7 @@ namespace core {
    */
   findSetter(key: string): SetterFunc
  }
- interface GetterFunc {(record: Record): any }
+ type GetterFunc = (record: Record) => any
  /**
   * GetterFinder defines a field interface for registering custom field value getters.
   */
@@ -12248,8 +12213,7 @@ namespace core {
  /**
   * MigrationsList defines a list with migration definitions
   */
- interface MigrationsList {
- }
+ type MigrationsList = {}
  interface MigrationsList {
   /**
    * Item returns a single migration from the list by its index.
@@ -12291,8 +12255,7 @@ namespace core {
  /**
   * MigrationsRunner defines a simple struct for managing the execution of db migrations.
   */
- interface MigrationsRunner {
- }
+ type MigrationsRunner = {}
  interface newMigrationsRunner {
   /**
    * NewMigrationsRunner creates and initializes a new db migrations MigrationsRunner instance.
@@ -12484,8 +12447,7 @@ namespace core {
   * 	...
   * ```
   */
- interface RecordFieldResolver {
- }
+ type RecordFieldResolver = {}
  interface RecordFieldResolver {
   /**
    * AllowedFields returns a copy of the resolver's allowed fields.
@@ -12557,13 +12519,11 @@ namespace core {
  /**
   * join defines the specification for a single SQL JOIN clause.
   */
- interface join {
- }
+ type join = {}
  /**
   * multiMatchSubquery defines a record multi-match subquery expression.
   */
- interface multiMatchSubquery {
- }
+ type multiMatchSubquery = {}
  interface multiMatchSubquery {
   /**
    * Build converts the expression into a SQL fragment.
@@ -12572,8 +12532,7 @@ namespace core {
    */
   build(db: dbx.DB, params: dbx.Params): string
  }
- interface runner {
- }
+ type runner = {}
  type _soopLWc = BaseModel
  interface Record extends _soopLWc {
  }
@@ -13223,7 +13182,7 @@ namespace core {
  /**
   * ExpandFetchFunc defines the function that is used to fetch the expanded relation records.
   */
- interface ExpandFetchFunc {(relCollection: Collection, relIds: Array<string>): Array<(Record | undefined)> }
+ type ExpandFetchFunc = (relCollection: Collection, relIds: Array<string>) => Array<(Record | undefined)>
  interface BaseApp {
   /**
    * ExpandRecord expands the relations of a single Record model.
@@ -13661,12 +13620,9 @@ namespace core {
    */
   findRecordByViewFile(viewCollectionModelOrIdentifier: any, fileFieldName: string, filename: string): (Record)
  }
- interface queryField {
- }
- interface identifier {
- }
- interface identifiersParser {
- }
+ type queryField = {}
+ type identifier = {}
+ type identifiersParser = {}
 }
 
 /**
@@ -13761,8 +13717,7 @@ namespace forms {
    */
   submit(): string
  }
- interface RecordUpsert {
- }
+ type RecordUpsert = {}
  interface newRecordUpsert {
   /**
    * NewRecordUpsert creates a new [RecordUpsert] form from the provided [CoreApp] and [core.Record] instances
@@ -14008,8 +13963,8 @@ namespace apis {
    */
   (fsys: fs.FS, indexFallback: boolean): (_arg0: core.RequestEvent) => void
  }
- interface HandleFunc {(e: core.RequestEvent): void }
- interface BatchActionHandlerFunc {(app: CoreApp, ir: core.InternalRequest, params: _TygojaDict, next: (data: any) => void): HandleFunc }
+ type HandleFunc = (e: core.RequestEvent) => void
+ type BatchActionHandlerFunc = (app: CoreApp, ir: core.InternalRequest, params: _TygojaDict, next: (data: any) => void) => HandleFunc
  interface BatchRequestResult {
   body: any
   status: number
@@ -14017,13 +13972,11 @@ namespace apis {
  interface batchRequestsForm {
   requests: Array<(core.InternalRequest | undefined)>
  }
- interface batchProcessor {
- }
+ type batchProcessor = {}
  interface batchProcessor {
   process(batch: Array<(core.InternalRequest | undefined)>, timeout: time.Duration): void
  }
- interface BatchResponseError {
- }
+ type BatchResponseError = {}
  interface BatchResponseError {
   error(): string
  }
@@ -14040,8 +13993,7 @@ namespace apis {
   collections: Array<_TygojaDict>
   deleteMissing: boolean
  }
- interface fileApi {
- }
+ type fileApi = {}
  interface defaultInstallerFunc {
   /**
    * DefaultInstallerFunc is the default PocketBase installer function.
@@ -14481,8 +14433,7 @@ namespace apis {
    */
   (e: core.RequestEvent, records: Array<(core.Record | undefined)>, ...defaultExpands: string[]): void
  }
- interface iterator<T> {
- }
+ type iterator<T> = {}
  /**
   * ServeConfig defines a configuration struct for apis.Serve().
   */
@@ -14531,8 +14482,7 @@ namespace apis {
    */
   (app: CoreApp, config: ServeConfig): void
  }
- interface serverErrorLogWriter {
- }
+ type serverErrorLogWriter = {}
  interface serverErrorLogWriter {
   write(p: string|Array<number>): number
  }
@@ -14621,8 +14571,7 @@ namespace pocketbase {
  /**
   * coloredWriter is a small wrapper struct to construct a [color.Color] writter.
   */
- interface coloredWriter {
- }
+ type coloredWriter = {}
  interface coloredWriter {
   /**
    * Write writes the p bytes using the colored writer.
@@ -14657,8 +14606,7 @@ namespace sync {
   * 
   * [the Go memory model]: https://go.dev/ref/mem
   */
- interface Mutex {
- }
+ type Mutex = {}
  interface Mutex {
   /**
    * Lock locks m.
@@ -14713,8 +14661,7 @@ namespace sync {
   * 
   * [the Go memory model]: https://go.dev/ref/mem
   */
- interface RWMutex {
- }
+ type RWMutex = {}
  interface RWMutex {
   /**
    * RLock locks rw for reading.
@@ -14872,8 +14819,7 @@ namespace bytes {
   * Unlike a [Buffer], a Reader is read-only and supports seeking.
   * The zero value for Reader operates like a Reader of an empty slice.
   */
- interface Reader {
- }
+ type Reader = {}
  interface Reader {
   /**
    * Len returns the number of bytes of the unread portion of the
@@ -15084,7 +15030,7 @@ namespace syscall {
   * 	if errors.Is(err, fs.ErrNotExist) ...
   * ```
   */
- interface Errno extends Number{}
+ interface Errno extends number{}
  interface Errno {
   error(): string
  }
@@ -15276,8 +15222,7 @@ namespace time {
   * correctly handles the case when only one of its arguments has a monotonic
   * clock reading.
   */
- interface Time {
- }
+ type Time = {}
  interface Time {
   /**
    * IsZero reports whether t represents the zero time instant,
@@ -15396,7 +15341,7 @@ namespace time {
   * as an int64 nanosecond count. The representation limits the
   * largest representable duration to approximately 290 years.
   */
- interface Duration extends Number{}
+ interface Duration extends number{}
  interface Duration {
   /**
    * String returns a string representing the duration in the form "72h3m0.5s".
@@ -15959,7 +15904,7 @@ namespace fs {
   * to another portably. Not all bits apply to all systems.
   * The only required bit is [ModeDir] for directories.
   */
- interface FileMode extends Number{}
+ interface FileMode extends number{}
  interface FileMode {
   string(): string
  }
@@ -16060,7 +16005,7 @@ namespace fs {
   *     for that directory to report the error.
   * ```
   */
- interface WalkDirFunc {(path: string, d: DirEntry, err: Error): void }
+ type WalkDirFunc = (path: string, d: DirEntry, err: Error) => void
 }
 
 /**
@@ -17427,8 +17372,7 @@ namespace blob {
   * Reader reads bytes from a blob.
   * It implements io.ReadSeekCloser, and must be closed after reads are finished.
   */
- interface Reader {
- }
+ type Reader = {}
  interface Reader {
   /**
    * Read implements io.Reader (https://golang.org/pkg/io/#Reader).
@@ -17636,7 +17580,7 @@ namespace syntax {
  /**
   * Flags control the behavior of the parser and record information about regexp context.
   */
- interface Flags extends Number{}
+ interface Flags extends number{}
 }
 
 /**
@@ -18779,8 +18723,7 @@ namespace types {
   * DateTime represents a [time.Time] instance in UTC that is wrapped
   * and serialized using the app default date layout.
   */
- interface DateTime {
- }
+ type DateTime = {}
  interface DateTime {
   /**
    * Time returns the internal [time.Time] instance.
@@ -19261,8 +19204,7 @@ namespace sql {
   * connection is returned to [DB]'s idle connection pool. The pool size
   * can be controlled with [DB.SetMaxIdleConns].
   */
- interface DB {
- }
+ type DB = {}
  interface DB {
   /**
    * PingContext verifies a connection to the database is still alive,
@@ -19485,8 +19427,7 @@ namespace sql {
   * the transaction's [Tx.Prepare] or [Tx.Stmt] methods are closed
   * by the call to [Tx.Commit] or [Tx.Rollback].
   */
- interface Tx {
- }
+ type Tx = {}
  interface Tx {
   /**
    * Commit commits the transaction.
@@ -19642,8 +19583,7 @@ namespace sql {
   * [DB]. When the Stmt needs to execute on a new underlying connection, it will
   * prepare itself on the new connection automatically.
   */
- interface Stmt {
- }
+ type Stmt = {}
  interface Stmt {
   /**
    * ExecContext executes a prepared statement with the given arguments and
@@ -19720,8 +19660,7 @@ namespace sql {
   * Rows is the result of a query. Its cursor starts before the first row
   * of the result set. Use [Rows.Next] to advance from row to row.
   */
- interface Rows {
- }
+ type Rows = {}
  interface Rows {
   /**
    * Next prepares the next result row for reading with the [Rows.Scan] method. It
@@ -19869,8 +19808,7 @@ namespace store {
  /**
   * Store defines a concurrent safe in memory key-value data store.
   */
- interface Store<K,T> {
- }
+ type Store<K,T> = {}
  interface Store<K, T> {
   /**
    * Reset clears the store and replaces the store data with a
@@ -20037,8 +19975,7 @@ namespace subscriptions {
  /**
   * Broker defines a struct for managing subscriptions clients.
   */
- interface Broker {
- }
+ type Broker = {}
  interface Broker {
   /**
    * Clients returns a shallow copy of all registered clients indexed
@@ -20191,8 +20128,7 @@ namespace cron {
  /**
   * Cron is a crontab-like struct for tasks/jobs scheduling.
   */
- interface Cron {
- }
+ type Cron = {}
  interface Cron {
   /**
    * SetInterval changes the current cron tick interval
@@ -20287,8 +20223,7 @@ namespace hook {
   * 	}
   * ```
   */
- interface Event {
- }
+ type Event = {}
  interface Event {
   /**
    * Next calls the next hook handler.
@@ -20348,8 +20283,7 @@ namespace hook {
   * 	h.Trigger(&CustomEvent{ SomeField: 123 })
   * ```
   */
- interface Hook<T> {
- }
+ type Hook<T> = {}
  interface Hook<T> {
   /**
    * Bind registers the provided handler to the current hooks queue.
@@ -21428,8 +21362,7 @@ namespace slog {
   * To create a new Logger, call [New] or a Logger method
   * that begins "With".
   */
- interface Logger {
- }
+ type Logger = {}
  interface Logger {
   /**
    * Handler returns l's Handler.
@@ -21590,7 +21523,7 @@ namespace syscall {
   * A Signal is a number describing a process signal.
   * It implements the [os.Signal] interface.
   */
- interface Signal extends Number{}
+ interface Signal extends number{}
  interface Signal {
   signal(): void
  }
@@ -21603,7 +21536,7 @@ namespace time {
  /**
   * A Month specifies a month of the year (January = 1, ...).
   */
- interface Month extends Number{}
+ interface Month extends number{}
  interface Month {
   /**
    * String returns the English name of the month ("January", "February", ...).
@@ -21613,7 +21546,7 @@ namespace time {
  /**
   * A Weekday specifies a day of the week (Sunday = 0, ...).
   */
- interface Weekday extends Number{}
+ interface Weekday extends number{}
  interface Weekday {
   /**
    * String returns the English name of the day ("Sunday", "Monday", ...).
@@ -21630,8 +21563,7 @@ namespace time {
   * calculations involving intervals that may cross daylight savings time
   * boundaries.
   */
- interface Location {
- }
+ type Location = {}
  interface Location {
   /**
    * String returns a descriptive name for the time zone information,
@@ -21913,8 +21845,7 @@ namespace bufio {
   * alternatively the zero value of a Reader may be used after calling [Reset]
   * on it.
   */
- interface Reader {
- }
+ type Reader = {}
  interface Reader {
   /**
    * Size returns the size of the underlying buffer in bytes.
@@ -22083,8 +22014,7 @@ namespace bufio {
   * [Writer.Flush] method to guarantee all data has been forwarded to
   * the underlying [io.Writer].
   */
- interface Writer {
- }
+ type Writer = {}
  interface Writer {
   /**
    * Size returns the size of the underlying buffer in bytes.
@@ -22171,7 +22101,7 @@ namespace bufio {
 }
 
 namespace cobra {
- interface PositionalArgs {(cmd: Command, args: Array<string>): void }
+ type PositionalArgs = (cmd: Command, args: Array<string>) => void
  // @ts-ignore
  import flag = pflag
  /**
@@ -22229,11 +22159,11 @@ namespace cobra {
   * 
   * Note: Go type alias is used to provide a more descriptive name in the documentation, but any string can be used.
   */
- interface Completion extends String{}
+ interface Completion extends string{}
  /**
   * CompletionFunc is a function that provides completion results.
   */
- interface CompletionFunc {(cmd: Command, args: Array<string>, toComplete: string): [Array<Completion>, ShellCompDirective] }
+ type CompletionFunc = (cmd: Command, args: Array<string>, toComplete: string) => [Array<Completion>, ShellCompDirective]
 }
 
 /**
@@ -22350,8 +22280,7 @@ namespace multipart {
   * Reader's underlying parser consumes its input as needed. Seeking
   * isn't supported.
   */
- interface Reader {
- }
+ type Reader = {}
  interface Reader {
   /**
    * NextPart returns the next part in the multipart or an error.
@@ -22510,8 +22439,7 @@ namespace http {
   *   - UnencryptedHTTP2 is the HTTP/2 protocol over an unsecured TCP connection.
   * ```
   */
- interface Protocols {
- }
+ type Protocols = {}
  interface Protocols {
   /**
    * HTTP1 reports whether p includes HTTP/1.
@@ -22784,7 +22712,7 @@ namespace http {
   * A ConnState represents the state of a client connection to a server.
   * It's used by the optional [Server.ConnState] hook.
   */
- interface ConnState extends Number{}
+ interface ConnState extends number{}
  interface ConnState {
   string(): string
  }
@@ -22890,7 +22818,7 @@ namespace sql {
  /**
   * IsolationLevel is the transaction isolation level used in [TxOptions].
   */
- interface IsolationLevel extends Number{}
+ interface IsolationLevel extends number{}
  interface IsolationLevel {
   /**
    * String returns the name of the transaction isolation level.
@@ -22928,8 +22856,7 @@ namespace sql {
   * After a call to [Conn.Close], all operations on the
   * connection fail with [ErrConnDone].
   */
- interface Conn {
- }
+ type Conn = {}
  interface Conn {
   /**
    * PingContext verifies the connection to the database is still alive.
@@ -23012,8 +22939,7 @@ namespace sql {
  /**
   * ColumnType contains the name and type of a column.
   */
- interface ColumnType {
- }
+ type ColumnType = {}
  interface ColumnType {
   /**
    * Name returns the name or alias of the column.
@@ -23066,8 +22992,7 @@ namespace sql {
  /**
   * Row is the result of calling [DB.QueryRow] to select a single row.
   */
- interface Row {
- }
+ type Row = {}
  interface Row {
   /**
    * Scan copies the columns from the matched row into the values
@@ -23380,7 +23305,7 @@ namespace slog {
   * A Level is the importance or severity of a log event.
   * The higher the level, the more important or severe the event.
   */
- interface Level extends Number{}
+ interface Level extends number{}
  interface Level {
   /**
    * String returns a name for the level.
@@ -23456,8 +23381,7 @@ namespace cron {
  /**
   * Job defines a single registered cron job.
   */
- interface Job {
- }
+ type Job = {}
  interface Job {
   /**
    * Id returns the cron job id.
@@ -23492,8 +23416,7 @@ namespace url {
   * to have a username set (potentially empty, as allowed by RFC 2396),
   * and optionally a password.
   */
- interface Userinfo {
- }
+ type Userinfo = {}
  interface Userinfo {
   /**
    * Username returns the username.
@@ -23522,7 +23445,7 @@ namespace cobra {
   * ShellCompDirective is a bit map representing the different behaviors the shell
   * can be instructed to have once completions have been provided.
   */
- interface ShellCompDirective extends Number{}
+ interface ShellCompDirective extends number{}
 }
 
 namespace multipart {
@@ -23573,7 +23496,7 @@ namespace http {
   * 
   * See https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00 for details.
   */
- interface SameSite extends Number{}
+ interface SameSite extends number{}
  // @ts-ignore
  import mathrand = rand
  // @ts-ignore
@@ -23698,8 +23621,7 @@ namespace slog {
   * it can represent most small values without an allocation.
   * The zero Value corresponds to nil.
   */
- interface Value {
- }
+ type Value = {}
  interface Value {
   /**
    * Kind returns v's Kind.
@@ -23807,7 +23729,7 @@ namespace slog {
  /**
   * Kind is the kind of a [Value].
   */
- interface Kind extends Number{}
+ interface Kind extends number{}
  interface Kind {
   string(): string
  }

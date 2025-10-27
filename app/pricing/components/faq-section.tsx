@@ -9,16 +9,20 @@ import { getFaqItems, getFaqTopics } from "@/lib/services/support";
 export async function FAQSection() {
   // First, get the "Pricing & Fees" category
   const categories = await getFaqTopics();
-  
-  const pricingCategory = categories.find(cat => cat.name === "Pricing & Fees");
-  
+
+  const pricingCategory = categories.find(
+    (cat) => cat.name === "Pricing & Fees",
+  );
+
   if (!pricingCategory) {
-    console.error('Pricing & Fees category not found');
+    console.error("Pricing & Fees category not found");
     return (
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900">Pricing FAQ</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
+              Pricing FAQ
+            </h2>
           </div>
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-gray-600">
@@ -49,7 +53,9 @@ export async function FAQSection() {
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900">Pricing FAQ</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
+              Pricing FAQ
+            </h2>
           </div>
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-gray-600">
@@ -65,7 +71,9 @@ export async function FAQSection() {
     <section className="py-16 md:py-24 bg-gray-50">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900">Pricing FAQ</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
+            Pricing FAQ
+          </h2>
           <p className="text-lg text-gray-600 mt-4">
             Common questions about our pricing and fees
           </p>

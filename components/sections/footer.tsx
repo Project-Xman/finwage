@@ -1,11 +1,10 @@
 "use client";
 
-import { ImagePaths } from "@/lib/assets";
-import NextLink from "next/link";
 import Image from "next/image";
+import NextLink from "next/link";
+import { ImagePaths } from "@/lib/assets";
 
 export default function Footer() {
-
   const companyLinks = [
     { label: "About Us", href: "/about" },
     { label: "Careers", href: "/careers" },

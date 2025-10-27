@@ -65,36 +65,36 @@ function HeroImageContainer({ className }: { className?: string }) {
         />
       </div>
 
-       {/* Peace of Mind Card */}
-          <div className="absolute right-[-23.6%] bottom-[21px] w-[34.68%] h-[139px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[12px] rounded-lg bg-[rgba(255,255,255,0.95)] border border-gray-200 overflow-hidden">
-            <div className="absolute top-[calc(50%_-_23.7px)] left-[20.8px] rounded-[12px] w-[48px] h-[48px] overflow-hidden flex items-center justify-center">
-              <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-blue-600"
-                >
-                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                </svg>
-              </div>
-            </div>
-            <div className="absolute top-[27px] left-[85px] leading-[28px] uppercase flex items-center w-[168px] h-[15px] text-[17.3px] text-[#1d44c3] font-bold">
-              Peace of Mind
-            </div>
-            <div className="absolute top-[53px] left-[85px] text-[13.3px] leading-[22.75px] text-[#374151] flex items-center w-[277px] h-[59px] font-inter">
-              <p className="m-0">
-                Take control of your finances, pay bills on time, and reduce
-                financial stress.
-              </p>
-            </div>
+      {/* Peace of Mind Card */}
+      <div className="absolute right-[-23.6%] bottom-[21px] w-[34.68%] h-[139px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[12px] rounded-lg bg-[rgba(255,255,255,0.95)] border border-gray-200 overflow-hidden">
+        <div className="absolute top-[calc(50%_-_23.7px)] left-[20.8px] rounded-[12px] w-[48px] h-[48px] overflow-hidden flex items-center justify-center">
+          <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-blue-600"
+            >
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
           </div>
+        </div>
+        <div className="absolute top-[27px] left-[85px] leading-[28px] uppercase flex items-center w-[168px] h-[15px] text-[17.3px] text-[#1d44c3] font-bold">
+          Peace of Mind
+        </div>
+        <div className="absolute top-[53px] left-[85px] text-[13.3px] leading-[22.75px] text-[#374151] flex items-center w-[277px] h-[59px] font-inter">
+          <p className="m-0">
+            Take control of your finances, pay bills on time, and reduce
+            financial stress.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -209,19 +209,16 @@ const CycleSection: NextPage = () => {
               </div>
             </div>
 
-           
-
-
             {/* Pink Arc Overlay (Right side) */}
-                    <div className="absolute right-0 bottom-[100px] w-[120px] lg:w-[170px] h-[200px] lg:h-[300px]">
-                      <Image
-                        fill
-                        src="/assets/pink-arc.png"
-                        alt=""
-                        className="object-contain"
-                        sizes="170px"
-                      />
-                    </div>
+            <div className="absolute right-0 bottom-[100px] w-[120px] lg:w-[170px] h-[200px] lg:h-[300px]">
+              <Image
+                fill
+                src="/assets/pink-arc.png"
+                alt=""
+                className="object-contain"
+                sizes="170px"
+              />
+            </div>
           </div>
         </div>
       </div>

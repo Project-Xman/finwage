@@ -1,9 +1,9 @@
 "use client";
 
 import { AlertTriangle, Home, RefreshCw } from "lucide-react";
+import NextLink from "next/link";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import NextLink from "next/link";
 
 export default function BlogError({
   error,
@@ -31,7 +31,8 @@ export default function BlogError({
         </h1>
 
         <p className="text-gray-600 mb-6">
-          We're having trouble loading the blog content. This might be a temporary issue.
+          We're having trouble loading the blog content. This might be a
+          temporary issue.
         </p>
 
         {/* Error Details (Development Only) */}

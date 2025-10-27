@@ -1,16 +1,22 @@
 /**
  * Contact Service Layer
- * 
+ *
  * Provides data fetching and mutation functions for contact-related content.
  * Handles contact options display and enquiry form submissions.
  */
 
-import type { ContactOptionsResponse, EnquiriesResponse } from '@/types/pocketbase';
-import { EnquiriesInterestOptions, EnquiriesStatusOptions } from '@/types/pocketbase';
 import {
-  getContactOptions as apiFetchContactOptions,
   createEnquiry as apiCreateEnquiry,
-} from '@/lib/api';
+  getContactOptions as apiFetchContactOptions,
+} from "@/lib/api";
+import type {
+  ContactOptionsResponse,
+  EnquiriesResponse,
+} from "@/types/pocketbase";
+import {
+  EnquiriesInterestOptions,
+  EnquiriesStatusOptions,
+} from "@/types/pocketbase";
 
 // ============================================================
 // TYPES
@@ -47,11 +53,11 @@ export interface EnquiryResult {
 
 /**
  * Fetch all contact options for display on contact page
- * 
+ *
  * Returns various ways users can contact the company (email, phone, chat, etc.)
- * 
+ *
  * @returns Array of contact options sorted by featured status
- * 
+ *
  * @example
  * ```ts
  * const contactOptions = await getContactOptions();
@@ -63,25 +69,25 @@ export interface EnquiryResult {
 export async function getContactOptions(): Promise<ContactOptionsResponse[]> {
   try {
     const response = await apiFetchContactOptions({
-      sort: '-is_featured',
+      sort: "-is_featured",
     });
 
     return response.items;
   } catch (error) {
-    console.error('Failed to fetch contact options:', error);
+    console.error("Failed to fetch contact options:", error);
     return [];
   }
 }
 
 /**
  * Create a new enquiry from contact form submission
- * 
+ *
  * Validates and submits contact form data to PocketBase.
  * This function should be called from Server Actions for security.
- * 
+ *
  * @param data - Enquiry data from contact form
  * @returns Result object with success status and data or error
- * 
+ *
  * @example
  * ```ts
  * // In a Server Action
@@ -92,7 +98,7 @@ export async function getContactOptions(): Promise<ContactOptionsResponse[]> {
  *   interest: 'demo',
  *   company: 'Acme Corp'
  * });
- * 
+ *
  * if (result.success) {
  *   console.log('Enquiry created:', result.data?.id);
  * } else {
@@ -100,15 +106,13 @@ export async function getContactOptions(): Promise<ContactOptionsResponse[]> {
  * }
  * ```
  */
-export async function createEnquiry(
-  data: EnquiryData
-): Promise<EnquiryResult> {
+export async function createEnquiry(data: EnquiryData): Promise<EnquiryResult> {
   try {
     // Validate required fields
     if (!data.name || !data.email || !data.message) {
       return {
         success: false,
-        error: 'Name, email, and message are required fields',
+        error: "Name, email, and message are required fields",
       };
     }
 
@@ -117,7 +121,7 @@ export async function createEnquiry(
     if (!emailRegex.test(data.email)) {
       return {
         success: false,
-        error: 'Invalid email format',
+        error: "Invalid email format",
       };
     }
 
@@ -125,14 +129,14 @@ export async function createEnquiry(
     if (data.message.length < 10) {
       return {
         success: false,
-        error: 'Message must be at least 10 characters long',
+        error: "Message must be at least 10 characters long",
       };
     }
 
     if (data.message.length > 1000) {
       return {
         success: false,
-        error: 'Message must not exceed 1000 characters',
+        error: "Message must not exceed 1000 characters",
       };
     }
 
@@ -152,10 +156,10 @@ export async function createEnquiry(
       data: enquiry,
     };
   } catch (error) {
-    console.error('Failed to create enquiry:', error);
-    
+    console.error("Failed to create enquiry:", error);
+
     // Extract error message if available
-    let errorMessage = 'Failed to submit enquiry. Please try again later.';
+    let errorMessage = "Failed to submit enquiry. Please try again later.";
     if (error instanceof Error) {
       errorMessage = error.message;
     }

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 
 export default function ROICalculator() {
@@ -25,15 +25,22 @@ export default function ROICalculator() {
   const monthlyImplementationCost = Math.round(employees * 2); // Example: $2 per employee per month
   const annualImplementationCost = monthlyImplementationCost * 12;
   const netAnnualSavings = totalAnnualSavings - annualImplementationCost;
-  const roiPercentage = Math.round((netAnnualSavings / annualImplementationCost) * 100);
-  const paybackPeriodMonths = Math.round((annualImplementationCost / (totalAnnualSavings / 12)) * 10) / 10;
+  const roiPercentage = Math.round(
+    (netAnnualSavings / annualImplementationCost) * 100,
+  );
+  const paybackPeriodMonths =
+    Math.round((annualImplementationCost / (totalAnnualSavings / 12)) * 10) /
+    10;
 
   return (
     <div className="max-w-3xl mx-auto">
       <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8">
         <div className="grid md:grid-cols-3 gap-6 text-left mb-8">
           <div>
-            <Label htmlFor="num-employees" className="block text-sm font-semibold mb-2">
+            <Label
+              htmlFor="num-employees"
+              className="block text-sm font-semibold mb-2"
+            >
               Number of Employees
             </Label>
             <Input
@@ -42,12 +49,17 @@ export default function ROICalculator() {
               min="1"
               max="100000"
               value={employees}
-              onChange={(e) => setEmployees(Math.max(1, parseInt(e.target.value) || 0))}
+              onChange={(e) =>
+                setEmployees(Math.max(1, parseInt(e.target.value) || 0))
+              }
               className="w-full"
             />
           </div>
           <div>
-            <Label htmlFor="turnover-rate" className="block text-sm font-semibold mb-2">
+            <Label
+              htmlFor="turnover-rate"
+              className="block text-sm font-semibold mb-2"
+            >
               Current Turnover Rate (%)
             </Label>
             <Input
@@ -56,12 +68,19 @@ export default function ROICalculator() {
               min="0"
               max="100"
               value={turnoverRate}
-              onChange={(e) => setTurnoverRate(Math.max(0, Math.min(100, parseInt(e.target.value) || 0)))}
+              onChange={(e) =>
+                setTurnoverRate(
+                  Math.max(0, Math.min(100, parseInt(e.target.value) || 0)),
+                )
+              }
               className="w-full"
             />
           </div>
           <div>
-            <Label htmlFor="cost-per-hire" className="block text-sm font-semibold mb-2">
+            <Label
+              htmlFor="cost-per-hire"
+              className="block text-sm font-semibold mb-2"
+            >
               Avg. Cost Per Hire ($)
             </Label>
             <Input
@@ -70,7 +89,9 @@ export default function ROICalculator() {
               min="0"
               max="100000"
               value={costPerHire}
-              onChange={(e) => setCostPerHire(Math.max(0, parseInt(e.target.value) || 0))}
+              onChange={(e) =>
+                setCostPerHire(Math.max(0, parseInt(e.target.value) || 0))
+              }
               className="w-full"
             />
           </div>
@@ -113,23 +134,33 @@ export default function ROICalculator() {
               </div>
               <div className="flex justify-between">
                 <span>Total Replacement Cost:</span>
-                <span className="font-semibold">${totalReplacementCost.toLocaleString()}</span>
+                <span className="font-semibold">
+                  ${totalReplacementCost.toLocaleString()}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span>Estimated Retention Savings (27%):</span>
-                <span className="font-semibold text-green-300">+${retentionImprovement.toLocaleString()}</span>
+                <span className="font-semibold text-green-300">
+                  +${retentionImprovement.toLocaleString()}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span>Productivity Gain (21%):</span>
-                <span className="font-semibold text-green-300">+${productivityGain.toLocaleString()}</span>
+                <span className="font-semibold text-green-300">
+                  +${productivityGain.toLocaleString()}
+                </span>
               </div>
               <div className="flex justify-between pt-3 border-t border-white/20">
                 <span>Annual FinWage Cost:</span>
-                <span className="font-semibold">-${annualImplementationCost.toLocaleString()}</span>
+                <span className="font-semibold">
+                  -${annualImplementationCost.toLocaleString()}
+                </span>
               </div>
               <div className="flex justify-between text-lg font-bold pt-3 border-t border-white/20">
                 <span>Net Annual Savings:</span>
-                <span className="text-green-300">${netAnnualSavings.toLocaleString()}</span>
+                <span className="text-green-300">
+                  ${netAnnualSavings.toLocaleString()}
+                </span>
               </div>
             </div>
           </div>

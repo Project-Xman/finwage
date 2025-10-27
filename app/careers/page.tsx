@@ -1,30 +1,41 @@
 import { ArrowRight, Code, Heart, TrendingUp, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getJobPositions, getFeaturedJobs } from "@/lib/services/careers";
 import { getBenefitsGroupedByCategory } from "@/lib/services/benefits";
+import { getFeaturedJobs, getJobPositions } from "@/lib/services/careers";
 import { getCompanyValues } from "@/lib/services/values";
 import type { JobsResponse } from "@/types/pocketbase";
 
 export const metadata = {
   title: "Careers at FinWage",
-  description: "Join FinWage and help transform financial wellness for millions of workers. Explore open positions, benefits, and our company culture.",
-  keywords: ["careers", "jobs", "fintech jobs", "financial wellness", "open positions", "hiring"],
+  description:
+    "Join FinWage and help transform financial wellness for millions of workers. Explore open positions, benefits, and our company culture.",
+  keywords: [
+    "careers",
+    "jobs",
+    "fintech jobs",
+    "financial wellness",
+    "open positions",
+    "hiring",
+  ],
   openGraph: {
     title: "Careers at FinWage",
-    description: "Join our mission to transform financial wellness for millions of workers.",
+    description:
+      "Join our mission to transform financial wellness for millions of workers.",
     type: "website",
   },
 };
 
 export default async function CareersPage() {
   // Fetch open job positions, featured jobs, benefits, and values in parallel
-  const [jobsResult, featuredJobs, benefitsGrouped, values] = await Promise.all([
-    getJobPositions({ status: 'open', perPage: 50 }),
-    getFeaturedJobs(3),
-    getBenefitsGroupedByCategory(),
-    getCompanyValues({ perPage: 10 }),
-  ]);
+  const [jobsResult, featuredJobs, benefitsGrouped, values] = await Promise.all(
+    [
+      getJobPositions({ status: "open", perPage: 50 }),
+      getFeaturedJobs(3),
+      getBenefitsGroupedByCategory(),
+      getCompanyValues({ perPage: 10 }),
+    ],
+  );
 
   const openPositions = jobsResult.items;
 
@@ -39,14 +50,13 @@ export default async function CareersPage() {
   // Transform benefits data for display
   const benefits = Object.entries(benefitsGrouped).map(([category, items]) => {
     // Get icon from first item in category or use default
-    const iconName = items[0]?.icon || 'Heart';
+    const iconName = items[0]?.icon || "Heart";
     return {
       icon: iconMap[iconName] || <Heart className="w-8 h-8" />,
       title: category,
       items: items.map((item) => item.description),
     };
   });
-
 
   return (
     <main className="min-h-screen">
@@ -194,10 +204,16 @@ export default async function CareersPage() {
                               </span>
                             )}
                           </div>
-                          <p className="text-gray-600 mb-3">{position.description}</p>
+                          <p className="text-gray-600 mb-3">
+                            {position.description}
+                          </p>
                           <div className="flex flex-wrap gap-4 text-sm text-gray-500">
-                            {position.location && <span>📍 {position.location}</span>}
-                            {position.location && position.type && <span>•</span>}
+                            {position.location && (
+                              <span>📍 {position.location}</span>
+                            )}
+                            {position.location && position.type && (
+                              <span>•</span>
+                            )}
                             {position.type && <span>💼 {position.type}</span>}
                           </div>
                         </div>
@@ -233,9 +249,13 @@ export default async function CareersPage() {
                             </span>
                           )}
                         </div>
-                        <p className="text-gray-600 mb-3">{position.description}</p>
+                        <p className="text-gray-600 mb-3">
+                          {position.description}
+                        </p>
                         <div className="flex flex-wrap gap-4 text-sm text-gray-500">
-                          {position.location && <span>📍 {position.location}</span>}
+                          {position.location && (
+                            <span>📍 {position.location}</span>
+                          )}
                           {position.location && position.type && <span>•</span>}
                           {position.type && <span>💼 {position.type}</span>}
                         </div>
@@ -261,7 +281,10 @@ export default async function CareersPage() {
               Don't see the right role? We're always looking for talented
               people.
             </p>
-            <Button variant="link" className="text-[#1d44c3] font-semibold text-base hover:underline">
+            <Button
+              variant="link"
+              className="text-[#1d44c3] font-semibold text-base hover:underline"
+            >
               Send Us Your Resume →
             </Button>
           </div>

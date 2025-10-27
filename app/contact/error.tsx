@@ -1,9 +1,9 @@
 "use client";
 
 import { AlertTriangle, Home, RefreshCw } from "lucide-react";
+import NextLink from "next/link";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import NextLink from "next/link";
 
 export default function ContactError({
   error,
@@ -31,7 +31,8 @@ export default function ContactError({
         </h1>
 
         <p className="text-gray-600 mb-6">
-          We're having trouble loading the contact form. Please try again or reach out to us directly.
+          We're having trouble loading the contact form. Please try again or
+          reach out to us directly.
         </p>
 
         {/* Error Details (Development Only) */}
@@ -74,7 +75,8 @@ export default function ContactError({
             <strong>Alternative ways to reach us:</strong>
           </p>
           <p className="text-sm text-gray-600">
-            Email: support@example.com<br />
+            Email: support@example.com
+            <br />
             Phone: 1-800-EXAMPLE
           </p>
         </div>

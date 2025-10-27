@@ -1,9 +1,9 @@
 "use client";
 
 import { AlertTriangle, Home, RefreshCw } from "lucide-react";
+import NextLink from "next/link";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import NextLink from "next/link";
 
 export default function PricingError({
   error,
@@ -31,7 +31,8 @@ export default function PricingError({
         </h1>
 
         <p className="text-gray-600 mb-6">
-          We're having trouble loading our pricing information. Please try again in a moment.
+          We're having trouble loading our pricing information. Please try again
+          in a moment.
         </p>
 
         {/* Error Details (Development Only) */}

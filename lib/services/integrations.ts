@@ -1,16 +1,16 @@
 /**
  * Integrations Service Layer
- * 
+ *
  * Provides data fetching functions for platform integrations.
  * Implements clean separation between data fetching and UI logic.
  */
 
-import type { IntegrationsResponse } from '@/types/pocketbase';
 import {
-  getIntegrations as apiFetchIntegrations,
   getFeaturedIntegrations as apiFetchFeaturedIntegrations,
+  getIntegrations as apiFetchIntegrations,
   getIntegrationsByCategory as apiFetchIntegrationsByCategory,
-} from '@/lib/api';
+} from "@/lib/api";
+import type { IntegrationsResponse } from "@/types/pocketbase";
 
 // ============================================================
 // TYPES
@@ -37,35 +37,30 @@ export interface IntegrationListResult {
 
 /**
  * Fetch all active integrations with pagination support
- * 
+ *
  * @param options - Pagination and filtering options
  * @returns Paginated list of integrations with metadata
- * 
+ *
  * @example
  * ```ts
  * // Get all integrations with default pagination
  * const integrations = await getIntegrations();
- * 
+ *
  * // Get specific page with custom page size
  * const integrations = await getIntegrations({ page: 2, perPage: 10 });
- * 
+ *
  * // Filter by category
  * const integrations = await getIntegrations({ category: 'payroll' });
  * ```
  */
 export async function getIntegrations(
-  options: IntegrationListOptions = {}
+  options: IntegrationListOptions = {},
 ): Promise<IntegrationListResult> {
   try {
-    const {
-      page = 1,
-      perPage = 20,
-      category,
-      sort = 'order',
-    } = options;
+    const { page = 1, perPage = 20, category, sort = "order" } = options;
 
     // Build filter for active integrations
-    let filter = 'active = true';
+    let filter = "active = true";
     if (category) {
       filter += ` && category = "${category}"`;
     }
@@ -85,7 +80,7 @@ export async function getIntegrations(
       perPage: response.perPage,
     };
   } catch (error) {
-    console.error('Failed to fetch integrations:', error);
+    console.error("Failed to fetch integrations:", error);
     // Return empty result on error to allow graceful degradation
     return {
       items: [],
@@ -99,54 +94,57 @@ export async function getIntegrations(
 
 /**
  * Fetch featured integrations for homepage or prominent display
- * 
+ *
  * @param limit - Maximum number of featured integrations to return (default: 8)
  * @returns Array of featured integrations
- * 
+ *
  * @example
  * ```ts
  * // Get 8 featured integrations for homepage
  * const featuredIntegrations = await getFeaturedIntegrations();
- * 
+ *
  * // Get more featured integrations
  * const featuredIntegrations = await getFeaturedIntegrations(12);
  * ```
  */
 export async function getFeaturedIntegrations(
-  limit: number = 8
+  limit: number = 8,
 ): Promise<IntegrationsResponse[]> {
   try {
     const integrations = await apiFetchFeaturedIntegrations(limit);
     return integrations;
   } catch (error) {
-    console.error('Failed to fetch featured integrations:', error);
+    console.error("Failed to fetch featured integrations:", error);
     return [];
   }
 }
 
 /**
  * Fetch integrations filtered by category
- * 
+ *
  * @param category - The category to filter by
  * @returns Array of integrations in the specified category
- * 
+ *
  * @example
  * ```ts
  * // Get integrations in a specific category
  * const payrollIntegrations = await getIntegrationsByCategory('payroll');
- * 
+ *
  * // Get HR integrations
  * const hrIntegrations = await getIntegrationsByCategory('hr');
  * ```
  */
 export async function getIntegrationsByCategory(
-  category: string
+  category: string,
 ): Promise<IntegrationsResponse[]> {
   try {
     const integrations = await apiFetchIntegrationsByCategory(category);
     return integrations;
   } catch (error) {
-    console.error(`Failed to fetch integrations by category: ${category}`, error);
+    console.error(
+      `Failed to fetch integrations by category: ${category}`,
+      error,
+    );
     return [];
   }
 }

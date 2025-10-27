@@ -1,8 +1,8 @@
+import * as LucideIcons from "lucide-react";
+import Image from "next/image";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { getFeaturedFeatures } from "@/lib/services/features";
 import { getImageUrl } from "@/lib/utils/pocketbase";
-import Image from "next/image";
-import * as LucideIcons from "lucide-react";
 
 export default async function Features() {
   const features = await getFeaturedFeatures(4);
@@ -28,9 +28,10 @@ export default async function Features() {
               : null;
 
             // Determine grid layout based on index
-            const className = index % 3 === 0
-              ? "col-span-3 lg:col-span-1"
-              : "col-span-3 lg:col-span-2";
+            const className =
+              index % 3 === 0
+                ? "col-span-3 lg:col-span-1"
+                : "col-span-3 lg:col-span-2";
 
             return (
               <BentoCard

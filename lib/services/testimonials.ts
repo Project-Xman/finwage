@@ -1,15 +1,15 @@
 /**
  * Testimonials Service Layer
- * 
+ *
  * Provides data fetching functions for customer testimonials.
  * Implements clean separation between data fetching and UI logic.
  */
 
-import type { TestimonialsResponse } from '@/types/pocketbase';
 import {
-  getTestimonials as apiFetchTestimonials,
   getFeaturedTestimonials as apiFetchFeaturedTestimonials,
-} from '@/lib/api';
+  getTestimonials as apiFetchTestimonials,
+} from "@/lib/api";
+import type { TestimonialsResponse } from "@/types/pocketbase";
 
 // ============================================================
 // TYPES
@@ -36,32 +36,27 @@ export interface TestimonialListResult {
 
 /**
  * Fetch all testimonials with pagination support
- * 
+ *
  * @param options - Pagination and filtering options
  * @returns Paginated list of testimonials with metadata
- * 
+ *
  * @example
  * ```ts
  * // Get all testimonials with default pagination
  * const testimonials = await getTestimonials();
- * 
+ *
  * // Get specific page with custom page size
  * const testimonials = await getTestimonials({ page: 2, perPage: 10 });
- * 
+ *
  * // Filter by verified testimonials only
  * const testimonials = await getTestimonials({ verified: true });
  * ```
  */
 export async function getTestimonials(
-  options: TestimonialListOptions = {}
+  options: TestimonialListOptions = {},
 ): Promise<TestimonialListResult> {
   try {
-    const {
-      page = 1,
-      perPage = 20,
-      sort = 'order',
-      verified,
-    } = options;
+    const { page = 1, perPage = 20, sort = "order", verified } = options;
 
     // Build filter for verified testimonials if specified
     let filter: string | undefined;
@@ -84,7 +79,7 @@ export async function getTestimonials(
       perPage: response.perPage,
     };
   } catch (error) {
-    console.error('Failed to fetch testimonials:', error);
+    console.error("Failed to fetch testimonials:", error);
     // Return empty result on error to allow graceful degradation
     return {
       items: [],
@@ -98,27 +93,27 @@ export async function getTestimonials(
 
 /**
  * Fetch featured testimonials for homepage and marketing sections
- * 
+ *
  * @param limit - Maximum number of featured testimonials to return (default: 6)
  * @returns Array of featured testimonials sorted by order
- * 
+ *
  * @example
  * ```ts
  * // Get 6 featured testimonials for homepage
  * const featuredTestimonials = await getFeaturedTestimonials();
- * 
+ *
  * // Get more featured testimonials
  * const featuredTestimonials = await getFeaturedTestimonials(12);
  * ```
  */
 export async function getFeaturedTestimonials(
-  limit: number = 6
+  limit: number = 6,
 ): Promise<TestimonialsResponse[]> {
   try {
     const testimonials = await apiFetchFeaturedTestimonials(limit);
     return testimonials;
   } catch (error) {
-    console.error('Failed to fetch featured testimonials:', error);
+    console.error("Failed to fetch featured testimonials:", error);
     return [];
   }
 }

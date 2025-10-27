@@ -1,19 +1,24 @@
-import {
-  Award,
-  CheckCircle,
-  FileText,
-  Lock,
-  Shield,
-} from "lucide-react";
+import { Award, CheckCircle, FileText, Lock, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getComplianceItems, getSecurityFeatures } from "@/lib/services/compliance";
+import {
+  getComplianceItems,
+  getSecurityFeatures,
+} from "@/lib/services/compliance";
 import { renderIcon } from "@/lib/utils/icon-mapper";
 
 export const metadata = {
   title: "Compliance & Security - FinWage",
-  description: "FinWage is fully compliant with all federal and state regulations. SOC 2 certified, AML compliant, and GDPR compliant.",
-  keywords: ["compliance", "security", "SOC 2", "AML", "GDPR", "data protection"],
+  description:
+    "FinWage is fully compliant with all federal and state regulations. SOC 2 certified, AML compliant, and GDPR compliant.",
+  keywords: [
+    "compliance",
+    "security",
+    "SOC 2",
+    "AML",
+    "GDPR",
+    "data protection",
+  ],
   openGraph: {
     title: "Compliance & Security - FinWage",
     description: "Bank-level security and full regulatory compliance.",
@@ -81,12 +86,13 @@ export default async function CompliancePage() {
                     </h3>
                     <p className="text-gray-600 mb-6">{item.description}</p>
                     <ul className="space-y-3">
-                      {Array.isArray(item.details) && item.details.map((detail: string, index: number) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                          <span className="text-gray-700">{detail}</span>
-                        </li>
-                      ))}
+                      {Array.isArray(item.details) &&
+                        item.details.map((detail: string, index: number) => (
+                          <li key={index} className="flex items-start gap-3">
+                            <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="text-gray-700">{detail}</span>
+                          </li>
+                        ))}
                     </ul>
                   </CardContent>
                 </Card>
@@ -94,7 +100,8 @@ export default async function CompliancePage() {
             ) : (
               <div className="col-span-2 text-center py-12">
                 <p className="text-gray-600 text-lg">
-                  Compliance information is currently being updated. Please check back soon.
+                  Compliance information is currently being updated. Please
+                  check back soon.
                 </p>
               </div>
             )}
@@ -155,7 +162,9 @@ export default async function CompliancePage() {
                       <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                         <CheckCircle className="w-4 h-4 text-white" />
                       </div>
-                      <span className="text-gray-700">{feature.description}</span>
+                      <span className="text-gray-700">
+                        {feature.description}
+                      </span>
                     </div>
                   ))
                 ) : (

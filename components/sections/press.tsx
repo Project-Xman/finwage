@@ -1,12 +1,15 @@
 /**
  * Press Releases Section Component
- * 
+ *
  * Displays press releases and media coverage with proper caching
  */
 
 import { ArrowRight } from "lucide-react";
-import { getFeaturedPressReleases, getPressReleases } from "@/lib/services/press";
 import NextLink from "next/link";
+import {
+  getFeaturedPressReleases,
+  getPressReleases,
+} from "@/lib/services/press";
 
 interface PressReleaseSectionProps {
   title?: string;
@@ -32,11 +35,11 @@ export async function PressReleaseSection({
   const pressReleases = pressReleasesData.map((press) => ({
     id: press.id,
     title: press.title,
-    date: new Date(press.published_date).toLocaleDateString('en-US', {
-      month: 'long',
-      year: 'numeric',
+    date: new Date(press.published_date).toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric",
     }),
-    source: press.source || 'FinWage',
+    source: press.source || "FinWage",
     url: press.url,
     content: press.content,
   }));
@@ -58,9 +61,9 @@ export async function PressReleaseSection({
             {pressReleases.map((press) => (
               <NextLink
                 key={press.id}
-                href={press.url || '#'}
-                target={press.url ? '_blank' : undefined}
-                rel={press.url ? 'noopener noreferrer' : undefined}
+                href={press.url || "#"}
+                target={press.url ? "_blank" : undefined}
+                rel={press.url ? "noopener noreferrer" : undefined}
                 className="block bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 hover:shadow-lg transition-all cursor-pointer"
               >
                 <div className="flex items-start justify-between gap-4">
