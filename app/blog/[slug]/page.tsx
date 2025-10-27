@@ -61,13 +61,34 @@ export async function generateMetadata({
     };
   }
 
+  // Use SEO fields if available, otherwise fallback to default fields
+  const seoTitle = post.seo_title || `${post.title} - FinWage Blog`;
+  const seoDescription = post.seo_description || post.excerpt;
+  const ogImageUrl = post.og_image 
+    ? getImageUrl(post, post.og_image, { fallback: '/placeholder.jpg' })
+    : getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' });
+
   return {
-    title: `${post.title} - FinWage Blog`,
-    description: post.excerpt,
+    title: seoTitle,
+    description: seoDescription,
+    keywords: post.seo_keywords,
+    alternates: post.canonical_url ? {
+      canonical: post.canonical_url,
+    } : undefined,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: [getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' })],
+      title: post.seo_title || post.title,
+      description: seoDescription,
+      images: [ogImageUrl],
+      type: 'article',
+      publishedTime: post.published_date,
+      authors: [(post.expand?.author as AuthorsResponse)?.name],
+      tags: Array.isArray(post.tags) ? post.tags : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.seo_title || post.title,
+      description: seoDescription,
+      images: [ogImageUrl],
     },
   };
 }
