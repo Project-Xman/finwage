@@ -61,13 +61,43 @@ export async function generateMetadata({
     };
   }
 
+  // Use SEO fields if available, otherwise fallback to default fields
+  const seoTitle = post.seo_title || `${post.title} - FinWage Blog`;
+  const seoDescription = post.seo_description || post.excerpt;
+  const ogImageUrl = post.og_image 
+    ? getImageUrl(post, post.og_image, { fallback: '/placeholder.jpg' })
+    : getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' });
+
+  // Prepare authors array, filtering out undefined values
+  const authorName = (post.expand?.author as AuthorsResponse)?.name;
+  const authors = authorName ? [authorName] : undefined;
+
+  // Prepare tags array, filtering out empty/null values
+  const tags = Array.isArray(post.tags) 
+    ? post.tags.filter((tag): tag is string => Boolean(tag)) 
+    : undefined;
+
   return {
-    title: `${post.title} - FinWage Blog`,
-    description: post.excerpt,
+    title: seoTitle,
+    description: seoDescription,
+    keywords: post.seo_keywords,
+    alternates: post.canonical_url ? {
+      canonical: post.canonical_url,
+    } : undefined,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: [getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' })],
+      title: post.seo_title || post.title,
+      description: seoDescription,
+      images: [ogImageUrl],
+      type: 'article',
+      publishedTime: post.published_date,
+      authors,
+      tags,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.seo_title || post.title,
+      description: seoDescription,
+      images: [ogImageUrl],
     },
   };
 }
