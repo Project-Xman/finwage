@@ -1,7 +1,7 @@
-import { ImagePaths } from "@/lib/assets";
 import type { NextPage } from "next";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
+import { ImagePaths } from "@/lib/assets";
 
 // Define your images here (replace with actual paths)
 // const imgWork = "/assets/work.png"; // or import from figma:asset if needed

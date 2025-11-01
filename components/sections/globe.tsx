@@ -1,5 +1,5 @@
 "use client";
-import { COBEOptions } from "cobe";
+import type { COBEOptions } from "cobe";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import type { StatusResponse } from "@/types/pocketbase";
@@ -9,14 +9,10 @@ const World = dynamic(
   () => import("@/components/ui/globe").then((m) => m.Globe),
   {
     ssr: false,
-  }
+  },
 );
 
-function StatCard({
-  stat,
-}: {
-  stat: StatusResponse;
-}) {
+function StatCard({ stat }: { stat: StatusResponse }) {
   return (
     <div className="flex flex-col gap-2 w-full">
       <div className="relative">
@@ -87,7 +83,10 @@ export default function Global({ stats }: { stats: StatusResponse[] }) {
                 willChange: "transform",
               }}
             >
-              <World className="opacity-80 !max-w-none w-full h-full" config={GLOBE_CONFIG} />
+              <World
+                className="opacity-80 !max-w-none w-full h-full"
+                config={GLOBE_CONFIG}
+              />
             </div>
           </div>
 
@@ -109,19 +108,66 @@ export default function Global({ stats }: { stats: StatusResponse[] }) {
             {/* Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
               {stats.length > 0 ? (
-                stats.map((stat) => (
-                  <StatCard
-                    key={stat.id}
-                    stat={stat}
-                  />
-                ))
+                stats.map((stat) => <StatCard key={stat.id} stat={stat} />)
               ) : (
                 // Fallback stats if none are available
                 <>
-                  <StatCard stat={{ id: '1', value: '500M+', description: 'API requests per day', metric: 'API requests', order: 1, label: 'API Requests', collectionId: '', collectionName: Collections.Status, created: '', updated: '' }} />
-                  <StatCard stat={{ id: '2', value: '99.999%', description: 'historical uptime', metric: 'Uptime', order: 2, label: 'Uptime', collectionId: '', collectionName: Collections.Status, created: '', updated: '' }} />
-                  <StatCard stat={{ id: '3', value: '47+', description: 'countries with local acquiring', metric: 'Countries', order: 3, label: 'Countries', collectionId: '', collectionName: Collections.Status, created: '', updated: '' }} />
-                  <StatCard stat={{ id: '4', value: '135+', description: 'currencies and payment methods supported', metric: 'Currencies', order: 4, label: 'Currencies', collectionId: '', collectionName: Collections.Status, created: '', updated: '' }} />
+                  <StatCard
+                    stat={{
+                      id: "1",
+                      value: "500M+",
+                      description: "API requests per day",
+                      metric: "API requests",
+                      order: 1,
+                      label: "API Requests",
+                      collectionId: "",
+                      collectionName: Collections.Status,
+                      created: "",
+                      updated: "",
+                    }}
+                  />
+                  <StatCard
+                    stat={{
+                      id: "2",
+                      value: "99.999%",
+                      description: "historical uptime",
+                      metric: "Uptime",
+                      order: 2,
+                      label: "Uptime",
+                      collectionId: "",
+                      collectionName: Collections.Status,
+                      created: "",
+                      updated: "",
+                    }}
+                  />
+                  <StatCard
+                    stat={{
+                      id: "3",
+                      value: "47+",
+                      description: "countries with local acquiring",
+                      metric: "Countries",
+                      order: 3,
+                      label: "Countries",
+                      collectionId: "",
+                      collectionName: Collections.Status,
+                      created: "",
+                      updated: "",
+                    }}
+                  />
+                  <StatCard
+                    stat={{
+                      id: "4",
+                      value: "135+",
+                      description: "currencies and payment methods supported",
+                      metric: "Currencies",
+                      order: 4,
+                      label: "Currencies",
+                      collectionId: "",
+                      collectionName: Collections.Status,
+                      created: "",
+                      updated: "",
+                    }}
+                  />
                 </>
               )}
             </div>

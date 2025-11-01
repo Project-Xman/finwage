@@ -1,9 +1,9 @@
 "use client";
 
 import { AlertTriangle, ArrowLeft, Home, RefreshCw } from "lucide-react";
+import NextLink from "next/link";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import NextLink from "next/link";
 
 export default function BlogPostError({
   error,
@@ -31,7 +31,8 @@ export default function BlogPostError({
         </h1>
 
         <p className="text-gray-600 mb-6">
-          We're having trouble loading this blog post. The article might have been moved or removed.
+          We're having trouble loading this blog post. The article might have
+          been moved or removed.
         </p>
 
         {/* Error Details (Development Only) */}

@@ -1,7 +1,14 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, X } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { getPricingPlans } from "@/lib/services/pricing";
 import type { PricingPlansResponse } from "@/types/pocketbase";
 
@@ -34,7 +41,10 @@ function transformPricingPlan(plan: PricingPlansResponse): TransformedPlan {
   return {
     title: plan.name || "",
     subtitle: plan.description || "",
-    price: plan.price !== undefined && plan.price !== null ? plan.price.toString() : "Custom",
+    price:
+      plan.price !== undefined && plan.price !== null
+        ? plan.price.toString()
+        : "Custom",
     period: "per month",
     buttonText: plan.is_enterprise ? "Contact Sales" : "Get Started",
     features: [...featuresArray, ...limitationsArray],
@@ -63,14 +73,18 @@ export default async function Pricing() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
           {pricingPlans.length === 0 ? (
             <div className="col-span-3 text-center py-12">
-              <p className="text-gray-600">No pricing plans available at the moment.</p>
+              <p className="text-gray-600">
+                No pricing plans available at the moment.
+              </p>
             </div>
           ) : (
             pricingPlans.map((plan, index) => (
               <Card
                 key={index}
                 className={`relative w-full max-w-sm mx-auto rounded-[20px] ${
-                  plan.isPopular ? "lg:scale-105 border-2 border-[#f64162]" : "border-2 border-gray-100"
+                  plan.isPopular
+                    ? "lg:scale-105 border-2 border-[#f64162]"
+                    : "border-2 border-gray-100"
                 } hover:border-[#1d44c3] transition-all shadow-lg`}
               >
                 {/* Popular Label */}
@@ -95,13 +109,19 @@ export default async function Pricing() {
                   {/* Price */}
                   <div className="flex justify-center items-start gap-1">
                     {plan.price === "Custom" ? (
-                      <span className="text-3xl font-semibold text-black">{plan.price}</span>
+                      <span className="text-3xl font-semibold text-black">
+                        {plan.price}
+                      </span>
                     ) : (
                       <>
-                        <span className="text-5xl font-semibold text-black">{plan.price}</span>
+                        <span className="text-5xl font-semibold text-black">
+                          {plan.price}
+                        </span>
                         <div className="flex flex-col items-start ml-2">
                           <span className="text-2xl font-bold">$</span>
-                          <span className="text-sm text-gray-600">{plan.period}</span>
+                          <span className="text-sm text-gray-600">
+                            {plan.period}
+                          </span>
                         </div>
                       </>
                     )}
@@ -126,9 +146,11 @@ export default async function Pricing() {
                           <X className="w-5 h-5 mt-0.5 flex-shrink-0 text-gray-300" />
                         )}
                         {/* Description */}
-                        <p className={`text-sm font-medium ${
-                          feature.enabled ? "text-black" : "text-gray-400"
-                        }`}>
+                        <p
+                          className={`text-sm font-medium ${
+                            feature.enabled ? "text-black" : "text-gray-400"
+                          }`}
+                        >
                           {feature.text}
                         </p>
                       </div>

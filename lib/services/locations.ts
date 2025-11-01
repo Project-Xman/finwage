@@ -1,15 +1,15 @@
 /**
  * Office Locations Service Layer
- * 
+ *
  * Provides data fetching functions for office location information.
  * Implements clean separation between data fetching and UI logic.
  */
 
-import type { LocationsResponse } from '@/types/pocketbase';
 import {
   getOfficeLocations as apiFetchOfficeLocations,
   getOfficeLocationsByCity as apiFetchOfficeLocationsByCity,
-} from '@/lib/api';
+} from "@/lib/api";
+import type { LocationsResponse } from "@/types/pocketbase";
 
 // ============================================================
 // TYPES
@@ -38,24 +38,24 @@ export interface LocationListResult {
 
 /**
  * Fetch all office locations
- * 
+ *
  * @param options - Filtering and pagination options
  * @returns Paginated list of office locations
- * 
+ *
  * @example
  * ```ts
  * // Get all office locations
  * const locations = await getOfficeLocations();
- * 
+ *
  * // Get locations with pagination
  * const locations = await getOfficeLocations({ page: 1, perPage: 10 });
- * 
+ *
  * // Filter by country
  * const usLocations = await getOfficeLocations({ country: 'United States' });
  * ```
  */
 export async function getOfficeLocations(
-  options: LocationListOptions = {}
+  options: LocationListOptions = {},
 ): Promise<LocationListResult> {
   try {
     const {
@@ -64,27 +64,27 @@ export async function getOfficeLocations(
       city,
       country,
       state,
-      sort = 'name',
+      sort = "name",
     } = options;
 
     // Build filter based on provided options
     let filter: string | undefined;
     const filters: string[] = [];
-    
+
     if (city) {
       filters.push(`city = "${city}"`);
     }
-    
+
     if (country) {
       filters.push(`country = "${country}"`);
     }
-    
+
     if (state) {
       filters.push(`state = "${state}"`);
     }
-    
+
     if (filters.length > 0) {
-      filter = filters.join(' && ');
+      filter = filters.join(" && ");
     }
 
     const response = await apiFetchOfficeLocations({
@@ -102,7 +102,7 @@ export async function getOfficeLocations(
       perPage: response.perPage,
     };
   } catch (error) {
-    console.error('Failed to fetch office locations:', error);
+    console.error("Failed to fetch office locations:", error);
     // Return empty result on error to allow graceful degradation
     return {
       items: [],
@@ -116,21 +116,21 @@ export async function getOfficeLocations(
 
 /**
  * Fetch office locations filtered by city
- * 
+ *
  * @param city - The city name to filter by
  * @returns Array of office locations in the specified city
- * 
+ *
  * @example
  * ```ts
  * // Get all offices in New York
  * const nyOffices = await getOfficeLocationsByCity('New York');
- * 
+ *
  * // Get all offices in San Francisco
  * const sfOffices = await getOfficeLocationsByCity('San Francisco');
  * ```
  */
 export async function getOfficeLocationsByCity(
-  city: string
+  city: string,
 ): Promise<LocationsResponse[]> {
   try {
     const locations = await apiFetchOfficeLocationsByCity(city);
@@ -143,27 +143,30 @@ export async function getOfficeLocationsByCity(
 
 /**
  * Fetch office locations filtered by country
- * 
+ *
  * @param country - The country name to filter by
  * @returns Array of office locations in the specified country
- * 
+ *
  * @example
  * ```ts
  * // Get all offices in the United States
  * const usOffices = await getOfficeLocationsByCountry('United States');
- * 
+ *
  * // Get all offices in the United Kingdom
  * const ukOffices = await getOfficeLocationsByCountry('United Kingdom');
  * ```
  */
 export async function getOfficeLocationsByCountry(
-  country: string
+  country: string,
 ): Promise<LocationsResponse[]> {
   try {
     const response = await getOfficeLocations({ country, perPage: 100 });
     return response.items;
   } catch (error) {
-    console.error(`Failed to fetch office locations by country: ${country}`, error);
+    console.error(
+      `Failed to fetch office locations by country: ${country}`,
+      error,
+    );
     return [];
   }
 }
@@ -171,9 +174,9 @@ export async function getOfficeLocationsByCountry(
 /**
  * Get unique list of cities with offices
  * Useful for building location filter UI
- * 
+ *
  * @returns Array of unique city names
- * 
+ *
  * @example
  * ```ts
  * const cities = await getOfficeCities();
@@ -184,16 +187,16 @@ export async function getOfficeCities(): Promise<string[]> {
   try {
     const response = await getOfficeLocations({ perPage: 100 });
     const cities = new Set<string>();
-    
-    response.items.forEach(location => {
+
+    response.items.forEach((location) => {
       if (location.city) {
         cities.add(location.city);
       }
     });
-    
+
     return Array.from(cities).sort();
   } catch (error) {
-    console.error('Failed to fetch office cities:', error);
+    console.error("Failed to fetch office cities:", error);
     return [];
   }
 }
@@ -201,9 +204,9 @@ export async function getOfficeCities(): Promise<string[]> {
 /**
  * Get unique list of countries with offices
  * Useful for building location filter UI
- * 
+ *
  * @returns Array of unique country names
- * 
+ *
  * @example
  * ```ts
  * const countries = await getOfficeCountries();
@@ -214,25 +217,25 @@ export async function getOfficeCountries(): Promise<string[]> {
   try {
     const response = await getOfficeLocations({ perPage: 100 });
     const countries = new Set<string>();
-    
-    response.items.forEach(location => {
+
+    response.items.forEach((location) => {
       if (location.country) {
         countries.add(location.country);
       }
     });
-    
+
     return Array.from(countries).sort();
   } catch (error) {
-    console.error('Failed to fetch office countries:', error);
+    console.error("Failed to fetch office countries:", error);
     return [];
   }
 }
 
 /**
  * Group office locations by country for organized display
- * 
+ *
  * @returns Object with countries as keys and arrays of locations as values
- * 
+ *
  * @example
  * ```ts
  * const groupedLocations = await getLocationsGroupedByCountry();
@@ -243,32 +246,34 @@ export async function getOfficeCountries(): Promise<string[]> {
  * // }
  * ```
  */
-export async function getLocationsGroupedByCountry(): Promise<Record<string, LocationsResponse[]>> {
+export async function getLocationsGroupedByCountry(): Promise<
+  Record<string, LocationsResponse[]>
+> {
   try {
     const response = await getOfficeLocations({ perPage: 100 });
     const grouped: Record<string, LocationsResponse[]> = {};
-    
-    response.items.forEach(location => {
-      const country = location.country || 'Other';
+
+    response.items.forEach((location) => {
+      const country = location.country || "Other";
       if (!grouped[country]) {
         grouped[country] = [];
       }
       grouped[country].push(location);
     });
-    
+
     return grouped;
   } catch (error) {
-    console.error('Failed to group locations by country:', error);
+    console.error("Failed to group locations by country:", error);
     return {};
   }
 }
 
 /**
  * Get a single office location by ID
- * 
+ *
  * @param locationId - The location ID
  * @returns Office location details, or null if not found
- * 
+ *
  * @example
  * ```ts
  * const location = await getOfficeLocationById('location-id-123');
@@ -280,14 +285,17 @@ export async function getLocationsGroupedByCountry(): Promise<Record<string, Loc
  * ```
  */
 export async function getOfficeLocationById(
-  locationId: string
+  locationId: string,
 ): Promise<LocationsResponse | null> {
   try {
     const response = await getOfficeLocations({ perPage: 100 });
-    const location = response.items.find(loc => loc.id === locationId);
+    const location = response.items.find((loc) => loc.id === locationId);
     return location || null;
   } catch (error) {
-    console.error(`Failed to fetch office location by ID: ${locationId}`, error);
+    console.error(
+      `Failed to fetch office location by ID: ${locationId}`,
+      error,
+    );
     return null;
   }
 }

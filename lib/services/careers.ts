@@ -1,17 +1,17 @@
 /**
  * Careers Service Layer
- * 
+ *
  * Provides data fetching functions for job positions and career-related content.
  * Implements clean separation between data fetching and UI logic.
  */
 
-import type { JobsResponse } from '@/types/pocketbase';
 import {
-  getJobPositions as apiFetchJobPositions,
   getFeaturedJobs as apiFetchFeaturedJobs,
-  getJobsByDepartment as apiFetchJobsByDepartment,
   getJobById as apiFetchJobById,
-} from '@/lib/api';
+  getJobPositions as apiFetchJobPositions,
+  getJobsByDepartment as apiFetchJobsByDepartment,
+} from "@/lib/api";
+import type { JobsResponse } from "@/types/pocketbase";
 
 // ============================================================
 // TYPES
@@ -41,47 +41,47 @@ export interface JobListResult {
 
 /**
  * Fetch job positions with status filtering
- * 
+ *
  * @param options - Filtering and pagination options
  * @returns Paginated list of job positions
- * 
+ *
  * @example
  * ```ts
  * // Get all open positions
  * const jobs = await getJobPositions();
- * 
+ *
  * // Filter by department
  * const engineeringJobs = await getJobPositions({ department: 'Engineering' });
- * 
+ *
  * // Filter by status
  * const closedJobs = await getJobPositions({ status: 'closed' });
  * ```
  */
 export async function getJobPositions(
-  options: JobListOptions = {}
+  options: JobListOptions = {},
 ): Promise<JobListResult> {
   try {
     const {
       page = 1,
       perPage = 20,
-      status = 'open',
+      status = "open",
       department,
       location,
       type,
-      sort = '-created',
+      sort = "-created",
     } = options;
 
     // Build filter for job positions
     let filter = `status = "${status}"`;
-    
+
     if (department) {
       filter += ` && department = "${department}"`;
     }
-    
+
     if (location) {
       filter += ` && location = "${location}"`;
     }
-    
+
     if (type) {
       filter += ` && type = "${type}"`;
     }
@@ -101,7 +101,7 @@ export async function getJobPositions(
       perPage: response.perPage,
     };
   } catch (error) {
-    console.error('Failed to fetch job positions:', error);
+    console.error("Failed to fetch job positions:", error);
     // Return empty result on error to allow graceful degradation
     return {
       items: [],
@@ -115,50 +115,50 @@ export async function getJobPositions(
 
 /**
  * Fetch featured jobs for prominent display
- * 
+ *
  * @param limit - Maximum number of featured jobs to return (default: 5)
  * @returns Array of featured job positions
- * 
+ *
  * @example
  * ```ts
  * // Get featured jobs for careers page
  * const featuredJobs = await getFeaturedJobs();
- * 
+ *
  * // Get more featured jobs
  * const featuredJobs = await getFeaturedJobs(10);
  * ```
  */
 export async function getFeaturedJobs(
-  limit: number = 5
+  limit: number = 5,
 ): Promise<JobsResponse[]> {
   try {
     const jobs = await apiFetchFeaturedJobs(limit);
     return jobs;
   } catch (error) {
-    console.error('Failed to fetch featured jobs:', error);
+    console.error("Failed to fetch featured jobs:", error);
     return [];
   }
 }
 
 /**
  * Fetch jobs filtered by department
- * 
+ *
  * @param department - The department name to filter by
  * @param options - Additional filtering options
  * @returns Array of job positions in the specified department
- * 
+ *
  * @example
  * ```ts
  * // Get all engineering jobs
  * const engineeringJobs = await getJobsByDepartment('Engineering');
- * 
+ *
  * // Get sales jobs with custom options
  * const salesJobs = await getJobsByDepartment('Sales', { status: 'open' });
  * ```
  */
 export async function getJobsByDepartment(
   department: string,
-  options: Omit<JobListOptions, 'department'> = {}
+  options: Omit<JobListOptions, "department"> = {},
 ): Promise<JobsResponse[]> {
   try {
     const jobs = await apiFetchJobsByDepartment(department);
@@ -171,10 +171,10 @@ export async function getJobsByDepartment(
 
 /**
  * Fetch a single job position by ID
- * 
+ *
  * @param jobId - The job position ID
  * @returns Job position details, or null if not found
- * 
+ *
  * @example
  * ```ts
  * const job = await getJobById('job-id-123');
@@ -185,9 +185,7 @@ export async function getJobsByDepartment(
  * }
  * ```
  */
-export async function getJobById(
-  jobId: string
-): Promise<JobsResponse | null> {
+export async function getJobById(jobId: string): Promise<JobsResponse | null> {
   try {
     const job = await apiFetchJobById(jobId);
     return job;
@@ -200,9 +198,9 @@ export async function getJobById(
 /**
  * Get unique list of departments from open job positions
  * Useful for building department filter UI
- * 
+ *
  * @returns Array of unique department names
- * 
+ *
  * @example
  * ```ts
  * const departments = await getDepartments();
@@ -213,16 +211,16 @@ export async function getDepartments(): Promise<string[]> {
   try {
     const response = await getJobPositions({ perPage: 100 });
     const departments = new Set<string>();
-    
-    response.items.forEach(job => {
+
+    response.items.forEach((job) => {
       if (job.department) {
         departments.add(job.department);
       }
     });
-    
+
     return Array.from(departments).sort();
   } catch (error) {
-    console.error('Failed to fetch departments:', error);
+    console.error("Failed to fetch departments:", error);
     return [];
   }
 }
@@ -230,9 +228,9 @@ export async function getDepartments(): Promise<string[]> {
 /**
  * Get unique list of job types from open positions
  * Useful for building job type filter UI
- * 
+ *
  * @returns Array of unique job types
- * 
+ *
  * @example
  * ```ts
  * const types = await getJobTypes();
@@ -243,16 +241,16 @@ export async function getJobTypes(): Promise<string[]> {
   try {
     const response = await getJobPositions({ perPage: 100 });
     const types = new Set<string>();
-    
-    response.items.forEach(job => {
+
+    response.items.forEach((job) => {
       if (job.type) {
         types.add(job.type);
       }
     });
-    
+
     return Array.from(types).sort();
   } catch (error) {
-    console.error('Failed to fetch job types:', error);
+    console.error("Failed to fetch job types:", error);
     return [];
   }
 }
@@ -260,9 +258,9 @@ export async function getJobTypes(): Promise<string[]> {
 /**
  * Get unique list of locations from open positions
  * Useful for building location filter UI
- * 
+ *
  * @returns Array of unique locations
- * 
+ *
  * @example
  * ```ts
  * const locations = await getJobLocations();
@@ -273,16 +271,16 @@ export async function getJobLocations(): Promise<string[]> {
   try {
     const response = await getJobPositions({ perPage: 100 });
     const locations = new Set<string>();
-    
-    response.items.forEach(job => {
+
+    response.items.forEach((job) => {
       if (job.location) {
         locations.add(job.location);
       }
     });
-    
+
     return Array.from(locations).sort();
   } catch (error) {
-    console.error('Failed to fetch job locations:', error);
+    console.error("Failed to fetch job locations:", error);
     return [];
   }
 }

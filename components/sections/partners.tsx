@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { getFeaturedPartners } from "@/lib/services/partners";
 import { getImageUrl } from "@/lib/utils/pocketbase";
-import Image from "next/image";
 
 export default async function Partners() {
   const partners = await getFeaturedPartners(8);

@@ -1,15 +1,15 @@
 /**
  * Values Service Layer
- * 
+ *
  * Provides data fetching functions for company values content.
  * Implements clean separation between data fetching and UI logic.
  */
 
-import type { ValuesResponse } from '@/types/pocketbase';
 import {
   getCompanyValues as apiFetchCompanyValues,
   getFeaturedValues as apiFetchFeaturedValues,
-} from '@/lib/api';
+} from "@/lib/api";
+import type { ValuesResponse } from "@/types/pocketbase";
 
 // ============================================================
 // TYPES
@@ -27,28 +27,24 @@ export interface ValuesListOptions {
 
 /**
  * Fetch all company values with pagination support
- * 
+ *
  * @param options - Pagination and sorting options
  * @returns Array of company values
- * 
+ *
  * @example
  * ```ts
  * // Get all values
  * const values = await getCompanyValues();
- * 
+ *
  * // Get with custom page size
  * const values = await getCompanyValues({ perPage: 10 });
  * ```
  */
 export async function getCompanyValues(
-  options: ValuesListOptions = {}
+  options: ValuesListOptions = {},
 ): Promise<ValuesResponse[]> {
   try {
-    const {
-      page = 1,
-      perPage = 20,
-      sort = 'order',
-    } = options;
+    const { page = 1, perPage = 20, sort = "order" } = options;
 
     const response = await apiFetchCompanyValues({
       page,
@@ -58,7 +54,7 @@ export async function getCompanyValues(
 
     return response.items;
   } catch (error) {
-    console.error('Failed to fetch company values:', error);
+    console.error("Failed to fetch company values:", error);
     // Return empty array on error to allow graceful degradation
     return [];
   }
@@ -66,9 +62,9 @@ export async function getCompanyValues(
 
 /**
  * Fetch featured company values for prominent display
- * 
+ *
  * @returns Array of featured company values
- * 
+ *
  * @example
  * ```ts
  * // Get featured values for careers page
@@ -80,7 +76,7 @@ export async function getFeaturedValues(): Promise<ValuesResponse[]> {
     const values = await apiFetchFeaturedValues();
     return values;
   } catch (error) {
-    console.error('Failed to fetch featured values:', error);
+    console.error("Failed to fetch featured values:", error);
     return [];
   }
 }

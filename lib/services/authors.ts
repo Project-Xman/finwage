@@ -1,15 +1,15 @@
 /**
  * Authors Service Layer
- * 
+ *
  * Provides data fetching functions for author-related content.
  * Implements clean separation between data fetching and UI logic.
  */
 
-import type { AuthorsResponse } from '@/types/pocketbase';
 import {
-  getAuthors as apiFetchAuthors,
   getAuthorBySlug as apiFetchAuthorBySlug,
-} from '@/lib/api';
+  getAuthors as apiFetchAuthors,
+} from "@/lib/api";
+import type { AuthorsResponse } from "@/types/pocketbase";
 
 // ============================================================
 // TYPES
@@ -35,31 +35,27 @@ export interface AuthorListResult {
 
 /**
  * Fetch all active authors
- * 
+ *
  * @param options - Pagination and sorting options
  * @returns Paginated list of authors
- * 
+ *
  * @example
  * ```ts
  * // Get all authors with default pagination
  * const authors = await getAuthors();
- * 
+ *
  * // Get specific page
  * const authors = await getAuthors({ page: 2, perPage: 10 });
- * 
+ *
  * // Sort by name
  * const authors = await getAuthors({ sort: 'name' });
  * ```
  */
 export async function getAuthors(
-  options: AuthorListOptions = {}
+  options: AuthorListOptions = {},
 ): Promise<AuthorListResult> {
   try {
-    const {
-      page = 1,
-      perPage = 20,
-      sort = 'name',
-    } = options;
+    const { page = 1, perPage = 20, sort = "name" } = options;
 
     const response = await apiFetchAuthors({
       page,
@@ -75,7 +71,7 @@ export async function getAuthors(
       perPage: response.perPage,
     };
   } catch (error) {
-    console.error('Failed to fetch authors:', error);
+    console.error("Failed to fetch authors:", error);
     // Return empty result on error to allow graceful degradation
     return {
       items: [],
@@ -89,10 +85,10 @@ export async function getAuthors(
 
 /**
  * Fetch a single author by slug
- * 
+ *
  * @param slug - The author slug
  * @returns Author data, or null if not found
- * 
+ *
  * @example
  * ```ts
  * const author = await getAuthorBySlug('john-doe');
@@ -104,7 +100,7 @@ export async function getAuthors(
  * ```
  */
 export async function getAuthorBySlug(
-  slug: string
+  slug: string,
 ): Promise<AuthorsResponse | null> {
   try {
     const author = await apiFetchAuthorBySlug(slug);

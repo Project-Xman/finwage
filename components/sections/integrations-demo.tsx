@@ -1,9 +1,10 @@
 "use client";
 
-import React, { forwardRef, useRef } from "react";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import type React from "react";
+import { forwardRef, useRef } from "react";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
+import { cn } from "@/lib/utils";
 import { getImageUrl } from "@/lib/utils/pocketbase";
 import type { IntegrationsResponse } from "@/types/pocketbase";
 
@@ -30,10 +31,12 @@ interface IntegrationDemoProps {
   integrations: IntegrationsResponse[];
 }
 
-export default function IntegrationDemo({ integrations }: IntegrationDemoProps) {
+export default function IntegrationDemo({
+  integrations,
+}: IntegrationDemoProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const centerRef = useRef<HTMLDivElement>(null);
-  
+
   // Create refs for each integration
   const integrationRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -66,7 +69,9 @@ export default function IntegrationDemo({ integrations }: IntegrationDemoProps) 
                   className="object-contain"
                 />
               ) : (
-                <span className="text-xs font-medium">{integration.name.slice(0, 2)}</span>
+                <span className="text-xs font-medium">
+                  {integration.name.slice(0, 2)}
+                </span>
               )}
             </Circle>
           ))}
@@ -91,7 +96,9 @@ export default function IntegrationDemo({ integrations }: IntegrationDemoProps) 
                   className="object-contain"
                 />
               ) : (
-                <span className="text-xs font-medium">{integration.name.slice(0, 2)}</span>
+                <span className="text-xs font-medium">
+                  {integration.name.slice(0, 2)}
+                </span>
               )}
             </Circle>
           ))}
@@ -130,7 +137,9 @@ export default function IntegrationDemo({ integrations }: IntegrationDemoProps) 
                   className="object-contain"
                 />
               ) : (
-                <span className="text-xs font-medium">{integration.name.slice(0, 2)}</span>
+                <span className="text-xs font-medium">
+                  {integration.name.slice(0, 2)}
+                </span>
               )}
             </Circle>
           ))}
@@ -155,7 +164,9 @@ export default function IntegrationDemo({ integrations }: IntegrationDemoProps) 
                   className="object-contain"
                 />
               ) : (
-                <span className="text-xs font-medium">{integration.name.slice(0, 2)}</span>
+                <span className="text-xs font-medium">
+                  {integration.name.slice(0, 2)}
+                </span>
               )}
             </Circle>
           ))}
@@ -165,7 +176,7 @@ export default function IntegrationDemo({ integrations }: IntegrationDemoProps) 
       {/* Animated beams connecting integrations to center */}
       {integrationRefs.current.map((ref, idx) => {
         if (!ref || !centerRef.current) return null;
-        
+
         const isTopRow = idx < 2;
         const isBottomRow = idx >= 4;
         const isLeftSide = idx === 2;

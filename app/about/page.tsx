@@ -1,17 +1,29 @@
-import { Heart, Shield, TrendingUp, ArrowRight } from "lucide-react";
+import { Heart, Shield, TrendingUp } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getLeadershipTeam, getCompanyValues, getMilestones } from "@/lib/services/company";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  getCompanyValues,
+  getLeadershipTeam,
+  getMilestones,
+} from "@/lib/services/company";
 import { getImageUrl } from "@/lib/utils/pocketbase";
 
 export const metadata = {
   title: "About Us - FinWage",
-  description: "Learn about FinWage's mission to transform financial wellness for millions of workers. Meet our leadership team and discover our journey.",
-  keywords: ["about FinWage", "company mission", "financial wellness", "earned wage access", "leadership team"],
+  description:
+    "Learn about FinWage's mission to transform financial wellness for millions of workers. Meet our leadership team and discover our journey.",
+  keywords: [
+    "about FinWage",
+    "company mission",
+    "financial wellness",
+    "earned wage access",
+    "leadership team",
+  ],
   openGraph: {
     title: "About Us - FinWage",
-    description: "Learn about FinWage's mission to transform financial wellness for millions of workers.",
+    description:
+      "Learn about FinWage's mission to transform financial wellness for millions of workers.",
     type: "website",
   },
 };
@@ -31,12 +43,12 @@ export default async function AboutPage() {
   // Icon mapping for values (fallback to default icons)
   const getValueIcon = (icon?: string) => {
     switch (icon?.toLowerCase()) {
-      case 'heart':
+      case "heart":
         return <Heart className="w-8 h-8" />;
-      case 'shield':
+      case "shield":
         return <Shield className="w-8 h-8" />;
-      case 'trending-up':
-      case 'trendingup':
+      case "trending-up":
+      case "trendingup":
         return <TrendingUp className="w-8 h-8" />;
       default:
         return <Heart className="w-8 h-8" />;
@@ -138,7 +150,9 @@ export default async function AboutPage() {
               >
                 <div className="relative h-64">
                   <Image
-                    src={getImageUrl(leader, leader.image, { fallback: '/assets/person-1.png' })}
+                    src={getImageUrl(leader, leader.image, {
+                      fallback: "/assets/person-1.png",
+                    })}
                     alt={leader.name}
                     fill
                     className="object-cover"
@@ -193,7 +207,9 @@ export default async function AboutPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-center text-gray-600">No milestones available at this time.</p>
+              <p className="text-center text-gray-600">
+                No milestones available at this time.
+              </p>
             )}
           </div>
         </div>
@@ -280,7 +296,11 @@ export default async function AboutPage() {
             <Button size="lg" className="bg-[#1d44c3] hover:bg-[#0d2463]">
               For Employers
             </Button>
-            <Button size="lg" variant="ghost" className="border-2 border-[#1d44c3] text-[#1d44c3]">
+            <Button
+              size="lg"
+              variant="ghost"
+              className="border-2 border-[#1d44c3] text-[#1d44c3]"
+            >
               For Employees
             </Button>
           </div>

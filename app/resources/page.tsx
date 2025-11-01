@@ -6,23 +6,31 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
-import { Suspense } from "react";
 import Image from "next/image";
+import { Suspense } from "react";
+import { FAQSection } from "@/components/sections/faq";
+import { PressReleaseSection } from "@/components/sections/press";
+import { SupportResourcesSection } from "@/components/sections/support-resources";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SupportResourcesSection } from "@/components/sections/support-resources";
-import { FAQSection } from "@/components/sections/faq";
-import { PressReleaseSection } from "@/components/sections/press";
 
 export const metadata = {
   title: "Resources - FinWage",
-  description: "Access guides, case studies, webinars, and tools to help you get the most out of FinWage and achieve financial wellness.",
-  keywords: ["resources", "guides", "case studies", "webinars", "financial wellness tools"],
+  description:
+    "Access guides, case studies, webinars, and tools to help you get the most out of FinWage and achieve financial wellness.",
+  keywords: [
+    "resources",
+    "guides",
+    "case studies",
+    "webinars",
+    "financial wellness tools",
+  ],
   openGraph: {
     title: "Resources - FinWage",
-    description: "Access guides, case studies, and tools for financial wellness.",
+    description:
+      "Access guides, case studies, and tools for financial wellness.",
     type: "website",
   },
 };
@@ -137,7 +145,10 @@ export default function ResourcesPage() {
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {categories.map((category, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all group cursor-pointer">
+              <Card
+                key={index}
+                className="hover:shadow-xl transition-all group cursor-pointer"
+              >
                 <CardContent className="p-6 text-center">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full text-[#1d44c3] mb-3 group-hover:bg-[#1d44c3] group-hover:text-white transition-all">
                     {category.icon}
@@ -190,7 +201,10 @@ export default function ResourcesPage() {
                     {article.title}
                   </h3>
                   <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                  <Button variant="link" className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 p-0">
+                  <Button
+                    variant="link"
+                    className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 p-0"
+                  >
                     Read More
                     <ArrowRight className="w-4 h-4" />
                   </Button>
@@ -354,7 +368,10 @@ function PressReleasesSkeleton() {
         </div>
         <div className="space-y-6 max-w-3xl mx-auto">
           {[1, 2, 3].map((i) => (
-            <Card key={i} className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+            <Card
+              key={i}
+              className="bg-gradient-to-br from-blue-50 to-purple-50 border-0"
+            >
               <div className="p-6">
                 <Skeleton className="h-6 w-full mb-2" />
                 <Skeleton className="h-4 w-48" />

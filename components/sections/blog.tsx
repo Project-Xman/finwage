@@ -1,17 +1,19 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import NextLink from "next/link";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { getFeaturedBlogs, getBlogs } from "@/lib/services/blogs";
+import { Card, CardContent } from "@/components/ui/card";
+import { getBlogs, getFeaturedBlogs } from "@/lib/services/blogs";
 import { getImageUrl } from "@/lib/utils/pocketbase";
 import type { BlogsResponse, CategoryResponse } from "@/types/pocketbase";
 
 type BlogWithExpand = BlogsResponse<unknown, { category?: CategoryResponse }>;
 
 function BlogCard({ post }: { post: BlogWithExpand }) {
-  const categoryName = post.expand?.category?.name || 'BLOG';
-  const imageUrl = getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' });
+  const categoryName = post.expand?.category?.name || "BLOG";
+  const imageUrl = getImageUrl(post, post.featured_image?.[0], {
+    fallback: "/placeholder.jpg",
+  });
 
   return (
     <NextLink href={`/blog/${post.slug}`}>
@@ -45,7 +47,9 @@ function FeaturedPost({ post }: { post: BlogWithExpand | null }) {
     return null;
   }
 
-  const imageUrl = getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' });
+  const imageUrl = getImageUrl(post, post.featured_image?.[0], {
+    fallback: "/placeholder.jpg",
+  });
 
   return (
     <div className="space-y-6">
@@ -79,9 +83,7 @@ function FeaturedPost({ post }: { post: BlogWithExpand | null }) {
               {post.title}
             </h3>
           </NextLink>
-          <p className="text-gray-800 leading-6">
-            {post.excerpt}
-          </p>
+          <p className="text-gray-800 leading-6">{post.excerpt}</p>
           <Button
             variant="ghost"
             className="text-[#f64162] hover:text-[#f64162] font-bold inline-flex items-center gap-2 hover:gap-3 transition-all p-0 h-auto"

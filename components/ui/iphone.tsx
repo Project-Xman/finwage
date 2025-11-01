@@ -1,5 +1,5 @@
-import type { HTMLAttributes } from "react";
 import Image from "next/image";
+import type { HTMLAttributes } from "react";
 
 const PHONE_WIDTH = 433;
 const PHONE_HEIGHT = 882;

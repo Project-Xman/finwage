@@ -1,26 +1,34 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { getEmployeeBenefits } from "@/lib/services/benefits";
-import { getTestimonials } from "@/lib/services/testimonials";
 import { getFAQs } from "@/lib/services/faqs";
+import { getTestimonials } from "@/lib/services/testimonials";
 import { renderIcon } from "@/lib/utils/icon-mapper";
 import { getImageUrl } from "@/lib/utils/pocketbase";
 
 export const metadata = {
   title: "For Employees - FinWage",
-  description: "Get instant access to your earned wages with FinWage. Zero fees, no interest, completely free financial wellness tool.",
-  keywords: ["employee benefits", "wage access", "instant pay", "financial wellness", "earned wage access"],
+  description:
+    "Get instant access to your earned wages with FinWage. Zero fees, no interest, completely free financial wellness tool.",
+  keywords: [
+    "employee benefits",
+    "wage access",
+    "instant pay",
+    "financial wellness",
+    "earned wage access",
+  ],
   openGraph: {
     title: "For Employees - FinWage",
-    description: "Get instant access to your earned wages. Zero fees, no interest.",
+    description:
+      "Get instant access to your earned wages. Zero fees, no interest.",
     type: "website",
   },
 };
@@ -33,7 +41,7 @@ export default async function ForEmployeesPage() {
   const [benefits, testimonialsResult, faqs] = await Promise.all([
     getEmployeeBenefits({ perPage: 20 }),
     getTestimonials({ perPage: 10 }),
-    getFAQs({ perPage: 50, category: 'employee' }),
+    getFAQs({ perPage: 50, category: "employee" }),
   ]);
 
   const testimonials = testimonialsResult.items;
@@ -127,7 +135,9 @@ export default async function ForEmployeesPage() {
               ))
             ) : (
               <div className="col-span-full text-center py-12">
-                <p className="text-gray-600">No benefits available at this time.</p>
+                <p className="text-gray-600">
+                  No benefits available at this time.
+                </p>
               </div>
             )}
           </div>
@@ -149,14 +159,21 @@ export default async function ForEmployeesPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.length > 0 ? (
               testimonials.map((testimonial) => (
-                <Card key={testimonial.id} className="shadow-lg hover:shadow-xl transition-all">
+                <Card
+                  key={testimonial.id}
+                  className="shadow-lg hover:shadow-xl transition-all"
+                >
                   <CardContent className="p-8">
                     <div className="flex items-center gap-4 mb-6">
                       <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-200">
                         <Image
-                          src={getImageUrl(testimonial, testimonial.image || '', {
-                            fallback: '/assets/person-1.png'
-                          })}
+                          src={getImageUrl(
+                            testimonial,
+                            testimonial.image || "",
+                            {
+                              fallback: "/assets/person-1.png",
+                            },
+                          )}
                           alt={testimonial.name}
                           fill
                           className="object-cover"
@@ -167,7 +184,7 @@ export default async function ForEmployeesPage() {
                           {testimonial.name}
                         </div>
                         <div className="text-sm text-gray-600">
-                          {testimonial.position || 'Employee'}
+                          {testimonial.position || "Employee"}
                         </div>
                       </div>
                     </div>
@@ -189,7 +206,9 @@ export default async function ForEmployeesPage() {
               ))
             ) : (
               <div className="col-span-full text-center py-12">
-                <p className="text-gray-600">No testimonials available at this time.</p>
+                <p className="text-gray-600">
+                  No testimonials available at this time.
+                </p>
               </div>
             )}
           </div>

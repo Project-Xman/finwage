@@ -1,25 +1,25 @@
 /**
  * Company Service Layer
- * 
+ *
  * Provides data fetching functions for company-related content including
  * leadership team, company values, milestones, and statistics.
  */
 
-import type {
-  LeadershipResponse,
-  ValuesResponse,
-  CompanyMilestonesResponse,
-  StatusResponse,
-} from '@/types/pocketbase';
 import {
-  getLeadershipTeam as apiFetchLeadershipTeam,
-  getFeaturedLeadership as apiFetchFeaturedLeadership,
-  getCompanyValues as apiFetchCompanyValues,
-  getFeaturedValues as apiFetchFeaturedValues,
-  getMilestones as apiFetchMilestones,
-  getFeaturedMilestones as apiFetchFeaturedMilestones,
   getCompanyStats as apiFetchCompanyStats,
-} from '@/lib/api';
+  getCompanyValues as apiFetchCompanyValues,
+  getFeaturedLeadership as apiFetchFeaturedLeadership,
+  getFeaturedMilestones as apiFetchFeaturedMilestones,
+  getFeaturedValues as apiFetchFeaturedValues,
+  getLeadershipTeam as apiFetchLeadershipTeam,
+  getMilestones as apiFetchMilestones,
+} from "@/lib/api";
+import type {
+  CompanyMilestonesResponse,
+  LeadershipResponse,
+  StatusResponse,
+  ValuesResponse,
+} from "@/types/pocketbase";
 
 // ============================================================
 // TYPES
@@ -69,28 +69,24 @@ export interface StatsListResult {
 
 /**
  * Fetch leadership team members
- * 
+ *
  * @param options - Pagination and sorting options
  * @returns Paginated list of leadership team members
- * 
+ *
  * @example
  * ```ts
  * // Get all leadership team members
  * const leadership = await getLeadershipTeam();
- * 
+ *
  * // Get with custom sorting
  * const leadership = await getLeadershipTeam({ sort: 'name' });
  * ```
  */
 export async function getLeadershipTeam(
-  options: CompanyListOptions = {}
+  options: CompanyListOptions = {},
 ): Promise<LeadershipListResult> {
   try {
-    const {
-      page = 1,
-      perPage = 20,
-      sort = 'order',
-    } = options;
+    const { page = 1, perPage = 20, sort = "order" } = options;
 
     const response = await apiFetchLeadershipTeam({
       page,
@@ -106,7 +102,7 @@ export async function getLeadershipTeam(
       perPage: response.perPage,
     };
   } catch (error) {
-    console.error('Failed to fetch leadership team:', error);
+    console.error("Failed to fetch leadership team:", error);
     // Return empty result on error to allow graceful degradation
     return {
       items: [],
@@ -120,9 +116,9 @@ export async function getLeadershipTeam(
 
 /**
  * Fetch featured leadership team members
- * 
+ *
  * @returns Array of featured leadership team members
- * 
+ *
  * @example
  * ```ts
  * // Get featured leadership for about page
@@ -134,7 +130,7 @@ export async function getFeaturedLeadership(): Promise<LeadershipResponse[]> {
     const leadership = await apiFetchFeaturedLeadership();
     return leadership;
   } catch (error) {
-    console.error('Failed to fetch featured leadership:', error);
+    console.error("Failed to fetch featured leadership:", error);
     return [];
   }
 }
@@ -145,28 +141,24 @@ export async function getFeaturedLeadership(): Promise<LeadershipResponse[]> {
 
 /**
  * Fetch company values
- * 
+ *
  * @param options - Pagination and sorting options
  * @returns Paginated list of company values
- * 
+ *
  * @example
  * ```ts
  * // Get all company values
  * const values = await getCompanyValues();
- * 
+ *
  * // Get with custom pagination
  * const values = await getCompanyValues({ perPage: 10 });
  * ```
  */
 export async function getCompanyValues(
-  options: CompanyListOptions = {}
+  options: CompanyListOptions = {},
 ): Promise<ValuesListResult> {
   try {
-    const {
-      page = 1,
-      perPage = 20,
-      sort = 'order',
-    } = options;
+    const { page = 1, perPage = 20, sort = "order" } = options;
 
     const response = await apiFetchCompanyValues({
       page,
@@ -182,7 +174,7 @@ export async function getCompanyValues(
       perPage: response.perPage,
     };
   } catch (error) {
-    console.error('Failed to fetch company values:', error);
+    console.error("Failed to fetch company values:", error);
     // Return empty result on error to allow graceful degradation
     return {
       items: [],
@@ -196,9 +188,9 @@ export async function getCompanyValues(
 
 /**
  * Fetch featured company values
- * 
+ *
  * @returns Array of featured company values
- * 
+ *
  * @example
  * ```ts
  * // Get featured values for homepage
@@ -210,7 +202,7 @@ export async function getFeaturedValues(): Promise<ValuesResponse[]> {
     const values = await apiFetchFeaturedValues();
     return values;
   } catch (error) {
-    console.error('Failed to fetch featured values:', error);
+    console.error("Failed to fetch featured values:", error);
     return [];
   }
 }
@@ -221,28 +213,24 @@ export async function getFeaturedValues(): Promise<ValuesResponse[]> {
 
 /**
  * Fetch company milestones
- * 
+ *
  * @param options - Pagination and sorting options
  * @returns Paginated list of company milestones sorted by year (descending by default)
- * 
+ *
  * @example
  * ```ts
  * // Get all milestones (newest first)
  * const milestones = await getMilestones();
- * 
+ *
  * // Get milestones in ascending order
  * const milestones = await getMilestones({ sort: 'year' });
  * ```
  */
 export async function getMilestones(
-  options: CompanyListOptions = {}
+  options: CompanyListOptions = {},
 ): Promise<MilestonesListResult> {
   try {
-    const {
-      page = 1,
-      perPage = 20,
-      sort = '-year',
-    } = options;
+    const { page = 1, perPage = 20, sort = "-year" } = options;
 
     const response = await apiFetchMilestones({
       page,
@@ -258,7 +246,7 @@ export async function getMilestones(
       perPage: response.perPage,
     };
   } catch (error) {
-    console.error('Failed to fetch company milestones:', error);
+    console.error("Failed to fetch company milestones:", error);
     // Return empty result on error to allow graceful degradation
     return {
       items: [],
@@ -272,21 +260,23 @@ export async function getMilestones(
 
 /**
  * Fetch featured company milestones
- * 
+ *
  * @returns Array of featured company milestones
- * 
+ *
  * @example
  * ```ts
  * // Get featured milestones for about page
  * const featuredMilestones = await getFeaturedMilestones();
  * ```
  */
-export async function getFeaturedMilestones(): Promise<CompanyMilestonesResponse[]> {
+export async function getFeaturedMilestones(): Promise<
+  CompanyMilestonesResponse[]
+> {
   try {
     const milestones = await apiFetchFeaturedMilestones();
     return milestones;
   } catch (error) {
-    console.error('Failed to fetch featured milestones:', error);
+    console.error("Failed to fetch featured milestones:", error);
     return [];
   }
 }
@@ -297,28 +287,24 @@ export async function getFeaturedMilestones(): Promise<CompanyMilestonesResponse
 
 /**
  * Fetch company statistics
- * 
+ *
  * @param options - Pagination and sorting options
  * @returns Paginated list of company statistics
- * 
+ *
  * @example
  * ```ts
  * // Get all company stats
  * const stats = await getCompanyStats();
- * 
+ *
  * // Get stats with custom sorting
  * const stats = await getCompanyStats({ sort: 'label' });
  * ```
  */
 export async function getCompanyStats(
-  options: CompanyListOptions = {}
+  options: CompanyListOptions = {},
 ): Promise<StatsListResult> {
   try {
-    const {
-      page = 1,
-      perPage = 20,
-      sort = 'order',
-    } = options;
+    const { page = 1, perPage = 20, sort = "order" } = options;
 
     const response = await apiFetchCompanyStats({
       page,
@@ -334,7 +320,7 @@ export async function getCompanyStats(
       perPage: response.perPage,
     };
   } catch (error) {
-    console.error('Failed to fetch company stats:', error);
+    console.error("Failed to fetch company stats:", error);
     // Return empty result on error to allow graceful degradation
     return {
       items: [],
@@ -348,9 +334,9 @@ export async function getCompanyStats(
 
 /**
  * Fetch all company statistics (convenience function)
- * 
+ *
  * @returns Array of all company statistics
- * 
+ *
  * @example
  * ```ts
  * // Get all stats for homepage display
@@ -361,11 +347,11 @@ export async function getAllCompanyStats(): Promise<StatusResponse[]> {
   try {
     const response = await apiFetchCompanyStats({
       perPage: 100, // Get all stats
-      sort: 'order',
+      sort: "order",
     });
     return response.items;
   } catch (error) {
-    console.error('Failed to fetch all company stats:', error);
+    console.error("Failed to fetch all company stats:", error);
     return [];
   }
 }

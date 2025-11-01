@@ -1,24 +1,27 @@
-import {
-  ArrowRight,
-  Shield,
-  Users,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, Shield, Users, Zap } from "lucide-react";
 import ROICalculator from "@/components/roi-calculator";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getEmployeeBenefits } from "@/lib/services/benefits";
-import { getEmployerStats } from "@/lib/services/stats";
 import { getIntegrations } from "@/lib/services/integrations";
+import { getEmployerStats } from "@/lib/services/stats";
 import { renderIcon } from "@/lib/utils/icon-mapper";
 
 export const metadata = {
   title: "For Employers - FinWage",
-  description: "Reduce turnover by 27% and attract top talent. FinWage helps employers offer earned wage access benefits that improve retention and productivity.",
-  keywords: ["employer benefits", "payroll solutions", "employee retention", "earned wage access", "HR solutions"],
+  description:
+    "Reduce turnover by 27% and attract top talent. FinWage helps employers offer earned wage access benefits that improve retention and productivity.",
+  keywords: [
+    "employer benefits",
+    "payroll solutions",
+    "employee retention",
+    "earned wage access",
+    "HR solutions",
+  ],
   openGraph: {
     title: "For Employers - FinWage",
-    description: "Reduce turnover by 27% and attract top talent with earned wage access.",
+    description:
+      "Reduce turnover by 27% and attract top talent with earned wage access.",
     type: "website",
   },
 };
@@ -192,10 +195,7 @@ export default async function ForEmployersPage() {
                 </div>
               </div>
 
-              <Button
-                size="lg"
-                className="bg-[#1d44c3] hover:bg-[#0d2463]"
-              >
+              <Button size="lg" className="bg-[#1d44c3] hover:bg-[#0d2463]">
                 View Integration Details
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
@@ -264,10 +264,7 @@ export default async function ForEmployersPage() {
             Schedule a demo with our team and see how FinWage can transform your
             workplace in just 30 minutes.
           </p>
-          <Button
-            size="lg"
-            className="bg-[#1d44c3] hover:bg-[#0d2463]"
-          >
+          <Button size="lg" className="bg-[#1d44c3] hover:bg-[#0d2463]">
             Schedule Your Demo
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>

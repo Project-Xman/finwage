@@ -1,7 +1,7 @@
-import React from "react";
 import Image from "next/image";
-import { Safari } from "../ui/safari";
+import React from "react";
 import { Iphone } from "../ui/iphone";
+import { Safari } from "../ui/safari";
 
 const imgBackgroundImage = "/assets/platform-image.png";
 const imgScreenshot20251015At114207Pm1 = "/assets/web-dashboard.png";

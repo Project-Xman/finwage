@@ -1,8 +1,8 @@
 "use client";
 
+import NextLink from "next/link";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import NextLink from "next/link";
 
 export default function GlobalError({
   error,

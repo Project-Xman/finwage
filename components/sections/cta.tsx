@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { getCTACards } from "@/lib/services/cta";
 import { renderIcon } from "@/lib/utils/icon-mapper";
 import type { CtaCardsResponse } from "@/types/pocketbase";
@@ -37,7 +37,7 @@ function HeroSection() {
 
 function CtaCardComponent({ icon, bg_color, title, points }: CtaCard) {
   // Check if icon is an image path (starts with / or http)
-  const isImageIcon = icon.startsWith('/') || icon.startsWith('http');
+  const isImageIcon = icon.startsWith("/") || icon.startsWith("http");
 
   return (
     <Card className="bg-white rounded-2xl md:rounded-3xl border border-[#d9d8d8] shadow-sm hover:shadow-md transition-shadow duration-200 h-full">
@@ -73,14 +73,15 @@ function CtaCardComponent({ icon, bg_color, title, points }: CtaCard) {
 
         {/* Content */}
         <div className="flex-1 space-y-3 md:space-y-4">
-          {points && points.map((point: string, index: number) => (
-            <p
-              key={index}
-              className="text-sm md:text-base text-gray-700 leading-relaxed"
-            >
-              {point}
-            </p>
-          ))}
+          {points &&
+            points.map((point: string, index: number) => (
+              <p
+                key={index}
+                className="text-sm md:text-base text-gray-700 leading-relaxed"
+              >
+                {point}
+              </p>
+            ))}
         </div>
       </CardContent>
     </Card>
@@ -116,7 +117,7 @@ function ContentContainer({ cards }: { cards: CtaCard[] }) {
 }
 
 export default async function Cta() {
-  const cards = await getCTACards({ perPage: 10 }) as CtaCard[];
+  const cards = (await getCTACards({ perPage: 10 })) as CtaCard[];
 
   return (
     <div

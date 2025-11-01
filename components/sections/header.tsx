@@ -1,17 +1,17 @@
 "use client";
 
-import NextLink from "next/link";
+import { ChevronDown, Menu, Search, X } from "lucide-react";
 import Image from "next/image";
+import NextLink from "next/link";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ImagePaths } from "@/lib/assets";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, Menu, Search, X } from "lucide-react";
-import { useState } from "react";
+import { ImagePaths } from "@/lib/assets";
 
 // Navigation data
 const navigationItems = [

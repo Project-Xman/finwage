@@ -1,9 +1,9 @@
 /**
  * PocketBase Webhook Handler
- * 
+ *
  * This API route handles webhooks from PocketBase to trigger cache revalidation
  * when content is created, updated, or deleted.
- * 
+ *
  * Setup in PocketBase:
  * 1. Go to Settings > Webhooks
  * 2. Add webhook URL: https://your-domain.com/api/webhooks/pocketbase
@@ -12,15 +12,15 @@
  * 5. Add webhook secret to environment variables
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import { handlePocketBaseWebhook } from '@/lib/utils/revalidation';
+import { type NextRequest, NextResponse } from "next/server";
+import { handlePocketBaseWebhook } from "@/lib/utils/revalidation";
 
 // ============================================================
 // TYPES
 // ============================================================
 
 interface PocketBaseWebhookPayload {
-  action: 'create' | 'update' | 'delete';
+  action: "create" | "update" | "delete";
   collection: string;
   record: {
     id: string;
@@ -28,17 +28,17 @@ interface PocketBaseWebhookPayload {
     published?: boolean;
     active?: boolean;
     featured?: boolean;
-    [key: string]: any;
+    [key: string]: unknown;
   };
   auth?: {
     id: string;
     email: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
   admin?: {
     id: string;
     email: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
 }
 
@@ -48,21 +48,18 @@ interface PocketBaseWebhookPayload {
 
 /**
  * POST handler for PocketBase webhooks
- * 
+ *
  * Validates webhook signature and triggers appropriate cache revalidation
  */
 export async function POST(request: NextRequest) {
   try {
     // Verify webhook secret for security
-    const webhookSecret = request.headers.get('x-webhook-secret');
+    const webhookSecret = request.headers.get("x-webhook-secret");
     const expectedSecret = process.env.POCKETBASE_WEBHOOK_SECRET;
 
     if (expectedSecret && webhookSecret !== expectedSecret) {
-      console.error('[Webhook] Invalid webhook secret');
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      console.error("[Webhook] Invalid webhook secret");
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     // Parse webhook payload
@@ -70,17 +67,24 @@ export async function POST(request: NextRequest) {
     const { action, collection, record, auth, admin } = payload;
 
     // Enhanced logging with context
-    console.log(`[Webhook] ${action.toUpperCase()} on ${collection}:${record.id}`, {
-      recordSlug: record.slug,
-      published: record.published,
-      active: record.active,
-      featured: record.featured,
-      user: auth?.email || admin?.email || 'system',
-      timestamp: new Date().toISOString(),
-    });
+    console.log(
+      `[Webhook] ${action.toUpperCase()} on ${collection}:${record.id}`,
+      {
+        recordSlug: record.slug,
+        published: record.published,
+        active: record.active,
+        featured: record.featured,
+        user: auth?.email || admin?.email || "system",
+        timestamp: new Date().toISOString(),
+      },
+    );
 
     // Handle revalidation based on collection and record data
-    const revalidationResult = await handlePocketBaseWebhook(collection, record, action);
+    const revalidationResult = await handlePocketBaseWebhook(
+      collection,
+      record,
+      action,
+    );
 
     // Return detailed success response
     return NextResponse.json({
@@ -94,20 +98,20 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
-    console.error('[Webhook] Processing error:', {
-      error: error instanceof Error ? error.message : 'Unknown error',
+    console.error("[Webhook] Processing error:", {
+      error: error instanceof Error ? error.message : "Unknown error",
       stack: error instanceof Error ? error.stack : undefined,
       timestamp: new Date().toISOString(),
     });
-    
+
     return NextResponse.json(
       {
         success: false,
-        error: 'Failed to process webhook',
-        message: error instanceof Error ? error.message : 'Unknown error',
+        error: "Failed to process webhook",
+        message: error instanceof Error ? error.message : "Unknown error",
         timestamp: new Date().toISOString(),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -117,8 +121,8 @@ export async function POST(request: NextRequest) {
  */
 export async function GET() {
   return NextResponse.json({
-    status: 'ok',
-    message: 'PocketBase webhook endpoint is active',
+    status: "ok",
+    message: "PocketBase webhook endpoint is active",
     timestamp: new Date().toISOString(),
   });
 }
@@ -129,9 +133,9 @@ export async function GET() {
 
 /**
  * Route segment config
- * 
+ *
  * - runtime: nodejs (required for revalidation APIs)
  * - dynamic: force-dynamic (always execute fresh)
  */
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";

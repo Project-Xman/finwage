@@ -13,7 +13,8 @@ export default function BlogPostNotFound() {
             Blog Post Not Found
           </h2>
           <p className="text-lg text-gray-600 mb-8">
-            Sorry, we couldn't find the blog post you're looking for. It may have been moved or removed.
+            Sorry, we couldn't find the blog post you're looking for. It may
+            have been moved or removed.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <NextLink

@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Checkbox } from "@/components/ui/checkbox";
 import NextLink from "next/link";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Switch } from "@/components/ui/switch";
 
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
@@ -163,10 +163,7 @@ export default function CookieConsent() {
                     </ul>
                   </div>
                   <div className="ml-4">
-                    <Checkbox
-                      name="analytics"
-                      defaultChecked
-                    />
+                    <Checkbox name="analytics" defaultChecked />
                   </div>
                 </div>
               </div>
@@ -190,10 +187,7 @@ export default function CookieConsent() {
                     </ul>
                   </div>
                   <div className="ml-4">
-                    <Checkbox
-                      name="marketing"
-                      defaultChecked
-                    />
+                    <Checkbox name="marketing" defaultChecked />
                   </div>
                 </div>
               </div>

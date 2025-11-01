@@ -1,16 +1,23 @@
 import { ArrowRight, Building2, Check, Users, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getProcessSteps } from "@/lib/services/process";
 import { getEmployeeBenefits } from "@/lib/services/benefits";
+import { getProcessSteps } from "@/lib/services/process";
 
 export const metadata = {
   title: "How It Works - FinWage",
-  description: "Learn how FinWage works for both employees and employers. Simple setup, instant access to earned wages, and seamless integration.",
-  keywords: ["how it works", "earned wage access process", "payroll integration", "fintech platform"],
+  description:
+    "Learn how FinWage works for both employees and employers. Simple setup, instant access to earned wages, and seamless integration.",
+  keywords: [
+    "how it works",
+    "earned wage access process",
+    "payroll integration",
+    "fintech platform",
+  ],
   openGraph: {
     title: "How It Works - FinWage",
-    description: "Learn how FinWage provides instant access to earned wages for employees.",
+    description:
+      "Learn how FinWage provides instant access to earned wages for employees.",
     type: "website",
   },
 };
@@ -20,7 +27,7 @@ export const revalidate = 3600;
 export default async function HowItWorksPage() {
   // Fetch data from PocketBase in parallel
   const [employeeSteps, employerBenefits] = await Promise.all([
-    getProcessSteps({ perPage: 10, category: 'employee' }),
+    getProcessSteps({ perPage: 10, category: "employee" }),
     getEmployeeBenefits({ perPage: 20 }),
   ]);
 
@@ -84,7 +91,9 @@ export default async function HowItWorksPage() {
               ))
             ) : (
               <div className="col-span-3 text-center py-12">
-                <p className="text-gray-500">No process steps available at this time.</p>
+                <p className="text-gray-500">
+                  No process steps available at this time.
+                </p>
               </div>
             )}
           </div>
@@ -115,11 +124,15 @@ export default async function HowItWorksPage() {
                       <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                         <Check className="w-4 h-4 text-white" />
                       </div>
-                      <span className="text-lg text-gray-700">{benefit.title}</span>
+                      <span className="text-lg text-gray-700">
+                        {benefit.title}
+                      </span>
                     </div>
                   ))
                 ) : (
-                  <p className="text-gray-500">No employer benefits available at this time.</p>
+                  <p className="text-gray-500">
+                    No employer benefits available at this time.
+                  </p>
                 )}
               </div>
 
@@ -220,10 +233,17 @@ export default async function HowItWorksPage() {
             employees
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-[#1d44c3] hover:bg-gray-100">
+            <Button
+              size="lg"
+              className="bg-white text-[#1d44c3] hover:bg-gray-100"
+            >
               Get Started Now
             </Button>
-            <Button size="lg" variant="ghost" className="border-2 border-white text-white hover:bg-white/10">
+            <Button
+              size="lg"
+              variant="ghost"
+              className="border-2 border-white text-white hover:bg-white/10"
+            >
               Watch Demo
             </Button>
           </div>

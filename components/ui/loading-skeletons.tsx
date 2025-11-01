@@ -1,6 +1,6 @@
 /**
  * Loading Skeleton Components
- * 
+ *
  * Reusable skeleton components for loading states across the application.
  * These provide visual feedback while content is being fetched.
  */

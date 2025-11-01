@@ -7,21 +7,36 @@ import { Input } from "@/components/ui/input";
 import { getBlogs, getFeaturedBlogs } from "@/lib/services/blogs";
 import { getCategories } from "@/lib/services/categories";
 import { getImageUrl } from "@/lib/utils/pocketbase";
-import type { BlogsResponse, AuthorsResponse, CategoryResponse } from "@/types/pocketbase";
+import type {
+  AuthorsResponse,
+  BlogsResponse,
+  CategoryResponse,
+} from "@/types/pocketbase";
 
 // Type for blog with expanded relations
-type BlogWithExpand = BlogsResponse<any, {
-  author?: AuthorsResponse;
-  category?: CategoryResponse;
-}>;
+type BlogWithExpand = BlogsResponse<
+  Record<string, unknown>,
+  {
+    author?: AuthorsResponse;
+    category?: CategoryResponse;
+  }
+>;
 
 export const metadata = {
   title: "Blog - FinWage",
-  description: "Expert insights on financial wellness, earned wage access, and the future of payroll.",
-  keywords: ["blog", "financial wellness", "earned wage access", "payroll", "fintech insights"],
+  description:
+    "Expert insights on financial wellness, earned wage access, and the future of payroll.",
+  keywords: [
+    "blog",
+    "financial wellness",
+    "earned wage access",
+    "payroll",
+    "fintech insights",
+  ],
   openGraph: {
     title: "Blog - FinWage",
-    description: "Expert insights on financial wellness, earned wage access, and the future of payroll.",
+    description:
+      "Expert insights on financial wellness, earned wage access, and the future of payroll.",
     type: "website",
   },
 };
@@ -29,7 +44,6 @@ export const metadata = {
 // Revalidate blog listing page every hour (3600 seconds)
 // This enables Incremental Static Regeneration (ISR)
 export const revalidate = 3600;
-
 
 export default async function BlogPage() {
   // Fetch data in parallel
@@ -41,13 +55,13 @@ export default async function BlogPage() {
 
   const posts = blogsResult.items as BlogWithExpand[];
   const featuredPost = (featuredBlogsData[0] || posts[0]) as BlogWithExpand;
-  const recentPosts = posts.filter(p => p.id !== featuredPost?.id);
+  const recentPosts = posts.filter((p) => p.id !== featuredPost?.id);
   const allCategories = categoriesResult.items;
 
   // Build category list with counts
   const categories = [
     { name: "All Posts", count: blogsResult.totalItems, slug: null },
-    ...allCategories.map(cat => ({
+    ...allCategories.map((cat) => ({
       name: cat.name,
       count: cat.count || 0,
       slug: cat.slug,
@@ -100,14 +114,19 @@ export default async function BlogPage() {
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="relative h-64 md:h-full min-h-[400px]">
                     <Image
-                      src={getImageUrl(featuredPost, featuredPost.featured_image?.[0], { fallback: '/placeholder.jpg' })}
+                      src={getImageUrl(
+                        featuredPost,
+                        featuredPost.featured_image?.[0],
+                        { fallback: "/placeholder.jpg" },
+                      )}
                       alt={featuredPost.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-6 left-6">
                       <span className="bg-[#1d44c3] text-white px-4 py-2 rounded-full text-sm font-semibold">
-                        {(featuredPost.expand?.category as CategoryResponse)?.name || 'Blog'}
+                        {(featuredPost.expand?.category as CategoryResponse)
+                          ?.name || "Blog"}
                       </span>
                     </div>
                   </div>
@@ -115,16 +134,19 @@ export default async function BlogPage() {
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
-                        {new Date(featuredPost.published_date).toLocaleDateString('en-US', { 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric' 
+                        {new Date(
+                          featuredPost.published_date,
+                        ).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
                         })}
                       </span>
                       <span>•</span>
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
-                        {Math.ceil((featuredPost.content?.length || 0) / 1000)} min read
+                        {Math.ceil((featuredPost.content?.length || 0) / 1000)}{" "}
+                        min read
                       </span>
                     </div>
                     <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 group-hover:text-[#1d44c3] transition-colors">
@@ -135,15 +157,20 @@ export default async function BlogPage() {
                     </p>
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-3">
-                        {(featuredPost.expand?.author as AuthorsResponse)?.avatar && (
+                        {(featuredPost.expand?.author as AuthorsResponse)
+                          ?.avatar && (
                           <div className="relative w-12 h-12 rounded-full overflow-hidden bg-gray-200">
                             <Image
                               src={getImageUrl(
-                                featuredPost.expand.author as AuthorsResponse, 
-                                (featuredPost.expand.author as AuthorsResponse).avatar,
-                                { fallback: '/placeholder.jpg' }
+                                featuredPost.expand.author as AuthorsResponse,
+                                (featuredPost.expand.author as AuthorsResponse)
+                                  .avatar,
+                                { fallback: "/placeholder.jpg" },
                               )}
-                              alt={(featuredPost.expand?.author as AuthorsResponse)?.name || 'Author'}
+                              alt={
+                                (featuredPost.expand?.author as AuthorsResponse)
+                                  ?.name || "Author"
+                              }
                               fill
                               className="object-cover"
                             />
@@ -151,15 +178,20 @@ export default async function BlogPage() {
                         )}
                         <div>
                           <div className="font-semibold text-gray-900">
-                            {(featuredPost.expand?.author as AuthorsResponse)?.name || 'Anonymous'}
+                            {(featuredPost.expand?.author as AuthorsResponse)
+                              ?.name || "Anonymous"}
                           </div>
                           <div className="text-sm text-gray-500">
-                            {(featuredPost.expand?.author as AuthorsResponse)?.role || 'Author'}
+                            {(featuredPost.expand?.author as AuthorsResponse)
+                              ?.role || "Author"}
                           </div>
                         </div>
                       </div>
                       <div className="ml-auto">
-                        <Button variant="link" className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3">
+                        <Button
+                          variant="link"
+                          className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3"
+                        >
                           Read More
                           <ArrowRight className="w-5 h-5" />
                         </Button>
@@ -185,14 +217,17 @@ export default async function BlogPage() {
                 <article className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group h-full flex flex-col">
                   <div className="relative h-48">
                     <Image
-                      src={getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' })}
+                      src={getImageUrl(post, post.featured_image?.[0], {
+                        fallback: "/placeholder.jpg",
+                      })}
                       alt={post.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4">
                       <span className="bg-[#1d44c3] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                        {(post.expand?.category as CategoryResponse)?.name || 'Blog'}
+                        {(post.expand?.category as CategoryResponse)?.name ||
+                          "Blog"}
                       </span>
                     </div>
                   </div>
@@ -200,11 +235,14 @@ export default async function BlogPage() {
                     <div className="flex items-center gap-3 text-sm text-gray-500 mb-3">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
-                        {new Date(post.published_date).toLocaleDateString('en-US', { 
-                          month: 'short', 
-                          day: 'numeric', 
-                          year: 'numeric' 
-                        })}
+                        {new Date(post.published_date).toLocaleDateString(
+                          "en-US",
+                          {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                          },
+                        )}
                       </span>
                       <span>•</span>
                       <span className="flex items-center gap-1">
@@ -222,18 +260,22 @@ export default async function BlogPage() {
                           <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-200">
                             <Image
                               src={getImageUrl(
-                                post.expand.author as AuthorsResponse, 
+                                post.expand.author as AuthorsResponse,
                                 (post.expand.author as AuthorsResponse).avatar,
-                                { fallback: '/placeholder.jpg' }
+                                { fallback: "/placeholder.jpg" },
                               )}
-                              alt={(post.expand?.author as AuthorsResponse)?.name || 'Author'}
+                              alt={
+                                (post.expand?.author as AuthorsResponse)
+                                  ?.name || "Author"
+                              }
                               fill
                               className="object-cover"
                             />
                           </div>
                         )}
                         <div className="text-sm font-semibold text-gray-700">
-                          {(post.expand?.author as AuthorsResponse)?.name || 'Anonymous'}
+                          {(post.expand?.author as AuthorsResponse)?.name ||
+                            "Anonymous"}
                         </div>
                       </div>
                       <ArrowRight className="w-4 h-4 text-[#1d44c3] group-hover:translate-x-1 transition-transform" />
