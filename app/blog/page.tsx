@@ -41,9 +41,9 @@ export const metadata = {
   },
 };
 
-// Revalidate blog listing page every hour (3600 seconds)
-// This enables Incremental Static Regeneration (ISR)
-export const revalidate = 3600;
+// Revalidate blog list page every month (2,678,400 seconds)
+// This enables Incremental Static Regeneration (ISR) for better performance
+export const revalidate = 2678400;
 
 export default async function BlogPage() {
   // Fetch data in parallel

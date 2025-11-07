@@ -26,7 +26,9 @@ export const metadata = {
   },
 };
 
-export const revalidate = 3600;
+// Revalidate for-employers page every month (2,678,400 seconds)
+// This enables Incremental Static Regeneration (ISR)
+export const revalidate = 2678400;
 
 export default async function ForEmployersPage() {
   // Fetch data from PocketBase in parallel

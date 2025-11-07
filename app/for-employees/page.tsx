@@ -33,8 +33,9 @@ export const metadata = {
   },
 };
 
-// ISR revalidation configuration (3600 seconds = 1 hour)
-export const revalidate = 3600;
+// Revalidate for-employees page every month (2,678,400 seconds)
+// This enables Incremental Static Regeneration (ISR)
+export const revalidate = 2678400;
 
 export default async function ForEmployeesPage() {
   // Fetch data from PocketBase using Promise.all for parallel requests

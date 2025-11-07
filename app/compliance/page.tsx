@@ -26,7 +26,9 @@ export const metadata = {
   },
 };
 
-export const revalidate = 3600;
+// Revalidate compliance page every month (2,678,400 seconds)
+// This enables Incremental Static Regeneration (ISR)
+export const revalidate = 2678400;
 
 export default async function CompliancePage() {
   const [complianceResult, securityFeatures] = await Promise.all([

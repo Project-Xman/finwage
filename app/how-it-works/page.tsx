@@ -22,7 +22,9 @@ export const metadata = {
   },
 };
 
-export const revalidate = 3600;
+// Revalidate how-it-works page every month (2,678,400 seconds)
+// This enables Incremental Static Regeneration (ISR)
+export const revalidate = 2678400;
 
 export default async function HowItWorksPage() {
   // Fetch data from PocketBase in parallel

@@ -35,9 +35,9 @@ type BlogWithExpand = BlogsResponse<
   }
 >;
 
-// Revalidate blog detail pages every hour (3600 seconds)
+// Revalidate blog detail pages every month (2,678,400 seconds)
 // This enables Incremental Static Regeneration (ISR)
-export const revalidate = 3600;
+export const revalidate = 2678400;
 
 // Generate static params for all blog posts at build time
 export async function generateStaticParams() {
