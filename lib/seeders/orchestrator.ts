@@ -53,7 +53,7 @@ export class SeederOrchestrator {
       
       try {
         // Inject dependencies for dependent seeders
-        if (this.isDependent Seeder(seeder)) {
+        if (this.isDependentSeeder(seeder)) {
           this.injectDependencies(seeder as DependentSeeder);
         }
         

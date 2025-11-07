@@ -64,7 +64,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getBlogBySlug(slug);
+  const post = (await getBlogBySlug(slug)) as BlogWithExpand | null;
 
   if (!post) {
     return {
@@ -80,7 +80,7 @@ export async function generateMetadata({
     : getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' });
 
   // Prepare authors array, filtering out undefined values
-  const authorName = (post.expand?.author as AuthorsResponse)?.name;
+  const authorName = post.expand?.author?.name;
   const authors = authorName ? [authorName] : undefined;
 
   // Prepare tags array, filtering out empty/null values
@@ -96,13 +96,6 @@ export async function generateMetadata({
       canonical: post.canonical_url,
     } : undefined,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: [
-        getImageUrl(post, post.featured_image?.[0], {
-          fallback: "/placeholder.jpg",
-        }),
-      ],
       title: post.seo_title || post.title,
       description: seoDescription,
       images: [ogImageUrl],

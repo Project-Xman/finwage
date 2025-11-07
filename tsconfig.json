@@ -32,5 +32,5 @@
     "**/*.mts",
     ".next\\dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "data/seed.old.ts", "data/seed.ts"]
 }

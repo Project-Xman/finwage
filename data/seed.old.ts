@@ -102,7 +102,7 @@ async function seedData() {
     }
     
     const financialWellnessCategoryId = categoryRecords[0]?.id;
-    const ewaCategory Id = categoryRecords[1]?.id;
+    const ewaCategoryId = categoryRecords[1]?.id;
     const benefitsCategoryId = categoryRecords[2]?.id;
 
     // ============================================================
