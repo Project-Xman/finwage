@@ -132,22 +132,6 @@ export type AuthorsRecord<Tsocial_link = unknown> = {
 };
 
 export type BlogsRecord<Ttags = unknown> = {
-  author?: RecordIdString;
-  category?: RecordIdString;
-  content?: HTMLString;
-  created?: IsoDateString;
-  excerpt?: string;
-  featured?: boolean;
-  featured_image?: string;
-  id: string;
-  published?: boolean;
-  published_date?: IsoDateString;
-  slug: string;
-  tags?: null | Ttags;
-  title: string;
-  updated?: IsoDateString;
-  views?: number;
-};
 	author?: RecordIdString
 	category?: RecordIdString
 	content?: HTMLString
