@@ -893,7 +893,7 @@ export async function getFaqTopics(
 ): Promise<PocketBaseListResponse<FaqTopicsResponse>> {
 
   const filter = options.category
-    ? `category.name = "${options.category}"`
+    ? `name = "${options.category}"`
     : options.filter;
 
 
