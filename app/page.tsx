@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import Blogs from "@/components/sections/blog";
 import Cta from "@/components/sections/cta";
-import CycleSection from "@/components/sections/cycle";
 import Employees from "@/components/sections/employees";
 import Features from "@/components/sections/features";
 import Globe from "@/components/sections/globe";
@@ -104,7 +103,6 @@ export default async function Home() {
       </Suspense>
 
       {/* Static CTA - render immediately */}
-            <CycleSection />
       <Cta />
     </main>
   );
