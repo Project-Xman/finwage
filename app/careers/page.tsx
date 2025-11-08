@@ -37,7 +37,16 @@ export default async function CareersPage() {
     ],
   );
 
-  const openPositions = jobsResult.items;
+  // Filter out featured jobs from open positions to avoid duplication
+  const featuredJobIds = new Set(featuredJobs.map((job) => job.id));
+  const openPositions = jobsResult.items.filter(
+    (job) => !featuredJobIds.has(job.id),
+  );
+
+  console.log("Open Positions:", openPositions);
+  console.log("Featured Jobs:", featuredJobs);
+  console.log("Benefits Grouped:", benefitsGrouped);
+  console.log("Company Values:", values);
 
   // Map icon names to components
   const iconMap: Record<string, React.ReactNode> = {
@@ -267,13 +276,13 @@ export default async function CareersPage() {
                   </CardContent>
                 </Card>
               ))
-            ) : (
+            ) : featuredJobs.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-xl text-gray-600">
                   No open positions at the moment. Check back soon!
                 </p>
               </div>
-            )}
+            ) : null}
           </div>
 
           <div className="text-center mt-12">

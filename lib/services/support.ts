@@ -18,6 +18,7 @@ import type {
   FaqTopicsResponse,
   SupportResponse,
 } from "@/types/pocketbase";
+import { ProcessListOptions } from "./process";
 
 // ============================================================
 // TYPES
@@ -151,10 +152,14 @@ export async function getSupportResourcesGroupedByCategory(): Promise<
  * });
  * ```
  */
-export async function getFaqTopics(): Promise<FaqTopicsResponse[]> {
+export async function getFaqTopics(options: ProcessListOptions = {},): Promise<FaqTopicsResponse[]> {
+
+  const { category } = options;
+
   try {
     const response = await apiFetchFaqTopics({
       sort: "order",
+      category,
     });
 
     return response.items;

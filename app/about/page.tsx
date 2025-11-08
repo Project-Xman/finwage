@@ -40,6 +40,10 @@ export default async function AboutPage() {
   const values = valuesData.items;
   const milestones = milestonesData.items;
 
+  console.log("Leadership Data:", leadership);
+  console.log("Values Data:", values);
+  console.log("Milestones Data:", milestones);
+
   // Icon mapping for values (fallback to default icons)
   const getValueIcon = (icon?: string) => {
     switch (icon?.toLowerCase()) {

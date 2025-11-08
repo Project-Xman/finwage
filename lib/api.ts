@@ -889,12 +889,19 @@ export async function getOfficeLocationsByCity(
 // ============================================================
 
 export async function getFaqTopics(
-  options: ListOptions = {},
+  options: ListOptions & { category?: string } = {},
 ): Promise<PocketBaseListResponse<FaqTopicsResponse>> {
+
+  const filter = options.category
+    ? `category.name = "${options.category}"`
+    : options.filter;
+
+
   return fetchCollection<FaqTopicsResponse>(
     "faq_topics",
     {
       sort: options.sort || "order",
+      filter,
       ...options,
     },
     {
@@ -1147,7 +1154,7 @@ export async function getFAQsMarketing(
   options: ListOptions & { category?: string } = {},
 ): Promise<PocketBaseListResponse<FaqsResponse>> {
   const filter = options.category
-    ? `category_text = "${options.category}"`
+    ? `category.name = "${options.category}"`
     : options.filter;
 
   return fetchCollection<FaqsResponse>(
@@ -1176,7 +1183,7 @@ export async function getProcessSteps(
   options: ListOptions & { category?: string } = {},
 ): Promise<PocketBaseListResponse<ProcessStepsResponse>> {
   const filter = options.category
-    ? `category = "${options.category}"`
+    ? `category.name = "${options.category}"`
     : options.filter;
 
   return fetchCollection<ProcessStepsResponse>(
@@ -1184,6 +1191,7 @@ export async function getProcessSteps(
     {
       sort: options.sort || "order",
       filter,
+      perPage: options.perPage || 10,
       ...options,
     },
     {

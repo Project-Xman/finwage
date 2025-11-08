@@ -40,6 +40,8 @@ export default async function ForEmployersPage() {
 
   const integrations = integrationsResult.items;
 
+  console.log("Employer Stats fetched:", stats);
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}

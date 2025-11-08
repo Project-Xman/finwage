@@ -270,7 +270,6 @@ export type FaqTopicsRecord = {
 export type FaqsRecord = {
   answer: string;
   category?: RecordIdString;
-  category_text?: string;
   created?: IsoDateString;
   featured?: boolean;
   id: string;

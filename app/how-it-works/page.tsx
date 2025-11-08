@@ -33,6 +33,9 @@ export default async function HowItWorksPage() {
     getEmployeeBenefits({ perPage: 20 }),
   ]);
 
+  console.log("Employee Steps fetched:", employeeSteps);
+  console.log("Employer Benefits fetched:", employerBenefits);
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}

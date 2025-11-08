@@ -62,7 +62,9 @@ export function PlatformImages() {
 
       {/* Desktop: iPhone positioned over Safari */}
       <div className="hidden md:block absolute bottom-0 -right-20 w-[36%] lg:w-[21.5%] z-30 drop-shadow-2xl">
-        <Iphone src={imgImageContainer} />
+        <div className="w-[252px] sm:w-[288px]">
+          <Iphone src={imgImageContainer} />
+        </div>
       </div>
     </div>
   );

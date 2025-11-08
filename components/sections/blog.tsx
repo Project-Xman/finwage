@@ -53,17 +53,6 @@ function FeaturedPost({ post }: { post: BlogWithExpand | null }) {
 
   return (
     <div className="space-y-6">
-      <Button
-        variant="ghost"
-        className="text-[#f64162] hover:text-[#f64162] font-bold inline-flex items-center gap-2 hover:gap-3 transition-all p-0 h-auto"
-        asChild
-      >
-        <NextLink href="/blog">
-          Explore all resources
-          <ArrowRight className="w-4 h-4" />
-        </NextLink>
-      </Button>
-
       <div className="space-y-6">
         <NextLink href={`/blog/${post.slug}`}>
           <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
@@ -121,8 +110,8 @@ function LatestPosts({ posts }: { posts: BlogWithExpand[] }) {
 export default async function Blogs() {
   // Fetch featured blog and latest blogs in parallel
   const [featuredBlogs, latestBlogs] = await Promise.all([
-    getFeaturedBlogs(1),
-    getBlogs({ perPage: 5 }),
+    getFeaturedBlogs(2),
+    getBlogs({ perPage: 6 }),
   ]);
 
   const featuredPost = (featuredBlogs[0] as BlogWithExpand) || null;
@@ -145,7 +134,21 @@ export default async function Blogs() {
 
         {/* Grid Layout - 1 column on mobile, 2 columns on md+ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-          <FeaturedPost post={featuredPost} />
+            <div className="flex flex-col gap-3 ">
+            <Button
+              variant="ghost"
+              className="text-[#f64162] hover:text-[#f64162] font-bold inline-flex self-start gap-2 hover:gap-3 transition-all p-0 h-auto"
+              asChild
+            >
+              <NextLink href="/blog">
+              Explore all resources
+              <ArrowRight className="w-4 h-4" />
+              </NextLink>
+            </Button>
+            {featuredBlogs.map((post) => (
+              <FeaturedPost key={post.id} post={post as BlogWithExpand} />
+            ))}
+            </div>
           <LatestPosts posts={latestPosts} />
         </div>
       </div>

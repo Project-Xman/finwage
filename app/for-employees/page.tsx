@@ -47,6 +47,8 @@ export default async function ForEmployeesPage() {
 
   const testimonials = testimonialsResult.items;
 
+  console.log("For Employees Page - FAQs fetched:", faqs);
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
