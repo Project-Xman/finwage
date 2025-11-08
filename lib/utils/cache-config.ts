@@ -80,6 +80,7 @@ export const CACHE_TAGS = {
   SUPPORT: "support",
   FAQ: "faq",
   CONTACTS: "contacts",
+  RESOURCES: "resources",
 
   // User Data
   ENQUIRIES: "enquiries",

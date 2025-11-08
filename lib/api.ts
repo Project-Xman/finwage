@@ -27,6 +27,9 @@ import type {
   PressResponse,
   PricingPlansResponse,
   ProcessStepsResponse,
+  ResourceArticlesResponse,
+  ResourceCategoriesResponse,
+  ResourceDownloadsResponse,
   SecurityFeaturesResponse,
   StatusResponse,
   SupportResponse,
@@ -1242,6 +1245,195 @@ export async function getCTACards(
       tags: [CACHE_TAGS.CTA_CARDS],
     },
   );
+}
+
+// ============================================================
+// RESOURCE ARTICLES & CATEGORIES
+// ============================================================
+
+/**
+ * Get Resource Articles
+ * Fetch resource articles with filtering and sorting
+ */
+export async function getResourceArticles(
+  options: ListOptions = {},
+): Promise<PocketBaseListResponse<ResourceArticlesResponse>> {
+  return fetchCollection<ResourceArticlesResponse>(
+    "resource_articles",
+    {
+      ...options,
+      sort: options.sort || "-published_date",
+      filter: options.filter || "published = true",
+      expand: options.expand || "category",
+    },
+    {
+      revalidate: CACHE_DURATION.SHORT,
+      tags: [CACHE_TAGS.RESOURCES],
+    },
+  );
+}
+
+/**
+ * Get Featured Resource Articles
+ * Fetch only featured resource articles
+ */
+export async function getFeaturedResourceArticles(
+  limit: number = 3,
+): Promise<ResourceArticlesResponse[]> {
+  const response = await fetchCollection<ResourceArticlesResponse>(
+    "resource_articles",
+    {
+      filter: "published = true && featured = true",
+      sort: "order,-published_date",
+      perPage: limit,
+      expand: "category",
+    },
+    {
+      revalidate: CACHE_DURATION.MEDIUM,
+      tags: [CACHE_TAGS.RESOURCES],
+    },
+  );
+
+  return response.items;
+}
+
+/**
+ * Get Resource Article by Slug
+ */
+export async function getResourceArticleBySlug(
+  slug: string,
+): Promise<ResourceArticlesResponse | null> {
+  try {
+    const response = await fetchCollection<ResourceArticlesResponse>(
+      "resource_articles",
+      {
+        filter: `slug = "${slug}" && published = true`,
+        expand: "category",
+      },
+      {
+        revalidate: CACHE_DURATION.MEDIUM,
+        tags: [CACHE_TAGS.RESOURCES, `resource-${slug}`],
+      },
+    );
+
+    return response.items[0] || null;
+  } catch (error) {
+    console.error("Error fetching resource article:", error);
+    return null;
+  }
+}
+
+/**
+ * Get Resource Categories
+ * Fetch resource categories for filtering
+ */
+export async function getResourceCategories(
+  options: ListOptions = {},
+): Promise<PocketBaseListResponse<ResourceCategoriesResponse>> {
+  return fetchCollection<ResourceCategoriesResponse>(
+    "resource_categories",
+    {
+      ...options,
+      sort: options.sort || "order",
+      filter: options.filter || "active = true",
+    },
+    {
+      revalidate: CACHE_DURATION.LONG,
+      tags: [CACHE_TAGS.RESOURCES],
+    },
+  );
+}
+
+/**
+ * Get Resource Category by Slug
+ */
+export async function getResourceCategoryBySlug(
+  slug: string,
+): Promise<ResourceCategoriesResponse | null> {
+  try {
+    const response = await fetchCollection<ResourceCategoriesResponse>(
+      "resource_categories",
+      {
+        filter: `slug = "${slug}" && active = true`,
+      },
+      {
+        revalidate: CACHE_DURATION.LONG,
+        tags: [CACHE_TAGS.RESOURCES],
+      },
+    );
+
+    return response.items[0] || null;
+  } catch (error) {
+    console.error("Error fetching resource category:", error);
+    return null;
+  }
+}
+
+/**
+ * Get Resource Articles by Category
+ */
+export async function getResourceArticlesByCategory(
+  categoryId: string,
+  limit?: number,
+): Promise<ResourceArticlesResponse[]> {
+  const response = await fetchCollection<ResourceArticlesResponse>(
+    "resource_articles",
+    {
+      filter: `category = "${categoryId}" && published = true`,
+      sort: "-published_date",
+      perPage: limit || 50,
+      expand: "category",
+    },
+    {
+      revalidate: CACHE_DURATION.MEDIUM,
+      tags: [CACHE_TAGS.RESOURCES],
+    },
+  );
+
+  return response.items;
+}
+
+/**
+ * Get Resource Downloads
+ * Fetch downloadable resources (guides, whitepapers, etc.)
+ */
+export async function getResourceDownloads(
+  options: ListOptions = {},
+): Promise<PocketBaseListResponse<ResourceDownloadsResponse>> {
+  return fetchCollection<ResourceDownloadsResponse>(
+    "resource_downloads",
+    {
+      ...options,
+      sort: options.sort || "order",
+      filter: options.filter || "active = true",
+    },
+    {
+      revalidate: CACHE_DURATION.MEDIUM,
+      tags: [CACHE_TAGS.RESOURCES],
+    },
+  );
+}
+
+/**
+ * Get Featured Resource Downloads
+ */
+export async function getFeaturedResourceDownloads(
+  limit: number = 1,
+): Promise<ResourceDownloadsResponse[]> {
+  const response = await fetchCollection<ResourceDownloadsResponse>(
+    "resource_downloads",
+    {
+      filter: "active = true && featured = true",
+      sort: "order",
+      perPage: limit,
+    },
+    {
+      revalidate: CACHE_DURATION.MEDIUM,
+      tags: [CACHE_TAGS.RESOURCES],
+    },
+  );
+
+  return response.items;
 }
 
 // ============================================================

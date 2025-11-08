@@ -32,6 +32,9 @@ export enum Collections {
   Press = "press",
   PricingPlans = "pricing_plans",
   ProcessSteps = "process_steps",
+  ResourceArticles = "resource_articles",
+  ResourceCategories = "resource_categories",
+  ResourceDownloads = "resource_downloads",
   SecurityFeatures = "security_features",
   Status = "status",
   Support = "support",
@@ -409,6 +412,57 @@ export type ProcessStepsRecord = {
   updated?: IsoDateString;
 };
 
+export type ResourceArticlesRecord = {
+  category?: RecordIdString;
+  created?: IsoDateString;
+  excerpt?: string;
+  featured?: boolean;
+  id: string;
+  image?: string;
+  order?: number;
+  published?: boolean;
+  published_date?: IsoDateString;
+  read_time?: string;
+  slug: string;
+  title: string;
+  updated?: IsoDateString;
+};
+
+export type ResourceCategoriesRecord = {
+  active?: boolean;
+  article_count?: number;
+  created?: IsoDateString;
+  description?: string;
+  icon?: string;
+  id: string;
+  name: string;
+  order?: number;
+  slug: string;
+  updated?: IsoDateString;
+};
+
+export enum ResourceDownloadsTypeOptions {
+  guide = "guide",
+  whitepaper = "whitepaper",
+  ebook = "ebook",
+  report = "report",
+  template = "template",
+}
+
+export type ResourceDownloadsRecord = {
+  active?: boolean;
+  created?: IsoDateString;
+  description?: string;
+  featured?: boolean;
+  file?: string;
+  file_url?: string;
+  id: string;
+  order?: number;
+  title: string;
+  type?: ResourceDownloadsTypeOptions;
+  updated?: IsoDateString;
+};
+
 export type SecurityFeaturesRecord = {
   created?: IsoDateString;
   description: string;
@@ -565,6 +619,12 @@ export type PricingPlansResponse<
   BaseSystemFields<Texpand>;
 export type ProcessStepsResponse<Texpand = unknown> =
   Required<ProcessStepsRecord> & BaseSystemFields<Texpand>;
+export type ResourceArticlesResponse<Texpand = unknown> =
+  Required<ResourceArticlesRecord> & BaseSystemFields<Texpand>;
+export type ResourceCategoriesResponse<Texpand = unknown> =
+  Required<ResourceCategoriesRecord> & BaseSystemFields<Texpand>;
+export type ResourceDownloadsResponse<Texpand = unknown> =
+  Required<ResourceDownloadsRecord> & BaseSystemFields<Texpand>;
 export type SecurityFeaturesResponse<Texpand = unknown> =
   Required<SecurityFeaturesRecord> & BaseSystemFields<Texpand>;
 export type StatusResponse<Texpand = unknown> = Required<StatusRecord> &
@@ -611,6 +671,9 @@ export type CollectionRecords = {
   press: PressRecord;
   pricing_plans: PricingPlansRecord;
   process_steps: ProcessStepsRecord;
+  resource_articles: ResourceArticlesRecord;
+  resource_categories: ResourceCategoriesRecord;
+  resource_downloads: ResourceDownloadsRecord;
   security_features: SecurityFeaturesRecord;
   status: StatusRecord;
   support: SupportRecord;
@@ -647,6 +710,9 @@ export type CollectionResponses = {
   press: PressResponse;
   pricing_plans: PricingPlansResponse;
   process_steps: ProcessStepsResponse;
+  resource_articles: ResourceArticlesResponse;
+  resource_categories: ResourceCategoriesResponse;
+  resource_downloads: ResourceDownloadsResponse;
   security_features: SecurityFeaturesResponse;
   status: StatusResponse;
   support: SupportResponse;
@@ -694,6 +760,15 @@ export type TypedPocketBase = PocketBase & {
   collection(idOrName: "press"): RecordService<PressResponse>;
   collection(idOrName: "pricing_plans"): RecordService<PricingPlansResponse>;
   collection(idOrName: "process_steps"): RecordService<ProcessStepsResponse>;
+  collection(
+    idOrName: "resource_articles",
+  ): RecordService<ResourceArticlesResponse>;
+  collection(
+    idOrName: "resource_categories",
+  ): RecordService<ResourceCategoriesResponse>;
+  collection(
+    idOrName: "resource_downloads",
+  ): RecordService<ResourceDownloadsResponse>;
   collection(
     idOrName: "security_features",
   ): RecordService<SecurityFeaturesResponse>;
