@@ -110,7 +110,7 @@ export default function SplitSection() {
                 alt="Frame 119"
                 width={560}
                 height={420}
-                className="w-full h-auto"
+                className="w-full h-auto top-0"
               />
 
               {/* Notification card - Only for desktop image */}

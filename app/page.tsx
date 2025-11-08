@@ -59,10 +59,9 @@ export default async function Home() {
     <main className="min-h-screen">
       {/* Critical above-the-fold content - render immediately */}
       <Hero />
-       {/* <SplitSection /> */}
       <PlatformSection />
       <You />
-      <CycleSection />
+      {/* <CycleSection /> */}
 
       {/* Partners section - stream in */}
       <Suspense fallback={<PartnersSkeleton />}>
@@ -74,9 +73,9 @@ export default async function Home() {
       <StandOut />
 
       {/* Integrations section - stream in */}
-      <Suspense fallback={<SectionSkeleton />}>
+      {/* <Suspense fallback={<SectionSkeleton />}>
         <Integrations />
-      </Suspense>
+      </Suspense> */}
 
       {/* Pricing section - stream in */}
       <Suspense fallback={<SectionSkeleton />}>
