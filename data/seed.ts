@@ -85,7 +85,7 @@ async function seedData() {
         slug: "technology",
         description: "All things tech-related.",
         color: "#007bff",
-        icon: "fa-laptop",
+        icon_svg: "fa-laptop",
         count: "0",
       },
       {
@@ -93,7 +93,7 @@ async function seedData() {
         slug: "business",
         description: "Business and management topics.",
         color: "#28a745",
-        icon: "fa-briefcase",
+        icon_svg: "fa-briefcase",
         count: "0",
       },
       {
@@ -101,7 +101,7 @@ async function seedData() {
         slug: "development",
         description: "Software development insights.",
         color: "#ffc107",
-        icon: "fa-code",
+        icon_svg: "fa-code",
         count: "0",
       },
     await authenticateAdmin();
@@ -118,7 +118,7 @@ async function seedData() {
         slug: 'financial-wellness',
         description: 'Tips and insights on achieving financial wellness in the workplace.',
         color: '#1d44c3',
-        icon: 'fa-wallet',
+        icon_svg: 'fa-wallet',
         count: '0'
       },
       {
@@ -126,7 +126,7 @@ async function seedData() {
         slug: 'earned-wage-access',
         description: 'Everything about on-demand pay and earned wage access solutions.',
         color: '#0d2463',
-        icon: 'fa-money-bill-wave',
+        icon_svg: 'fa-money-bill-wave',
         count: '0'
       },
       {
@@ -134,7 +134,7 @@ async function seedData() {
         slug: 'employee-benefits',
         description: 'Modern employee benefits and compensation strategies.',
         color: '#28a745',
-        icon: 'fa-gift',
+        icon_svg: 'fa-gift',
         count: '0'
       }
     ];
@@ -406,14 +406,14 @@ async function seedData() {
     console.log("Seeding compliance items...");
     const complianceItems = [
       {
-        icon: "fa-shield",
+        icon_svg: "fa-shield",
         title: "GDPR Compliant",
         description: "Full compliance with EU data protection.",
         details: { standard: "GDPR", certified: true },
         order: 1,
       },
       {
-        icon: "fa-lock",
+        icon_svg: "fa-lock",
         title: "SOC 2 Certified",
         description: "Security and availability standards met.",
         details: { standard: "SOC 2", certified: true },
@@ -428,7 +428,7 @@ async function seedData() {
     console.log('\n🔒 Seeding Compliance Items...');
     const complianceItems = [
       {
-        icon: 'fa-shield-alt',
+        icon_svg: 'fa-shield-alt',
         title: 'CFPB Compliant',
         description: 'Fully compliant with Consumer Financial Protection Bureau regulations.',
         details: { 
@@ -439,7 +439,7 @@ async function seedData() {
         order: 1
       },
       {
-        icon: 'fa-lock',
+        icon_svg: 'fa-lock',
         title: 'SOC 2 Type II Certified',
         description: 'Industry-leading security and compliance standards for data protection.',
         details: { 
@@ -450,7 +450,7 @@ async function seedData() {
         order: 2
       },
       {
-        icon: 'fa-check-circle',
+        icon_svg: 'fa-check-circle',
         title: 'GDPR Compliant',
         description: 'Full compliance with EU data protection and privacy regulations.',
         details: { 
@@ -472,7 +472,7 @@ async function seedData() {
       {
         title: "Email Us",
         description: "Send a message directly.",
-        icon: "fa-envelope",
+        icon_svg: "fa-envelope",
         type: "email",
         action_url: "mailto:info@example.com",
         is_featured: true,
@@ -480,7 +480,7 @@ async function seedData() {
       {
         title: "Schedule a Call",
         description: "Book a demo.",
-        icon: "fa-calendar",
+        icon_svg: "fa-calendar",
         type: "call",
         action_url: "https://cal.com/example",
         is_featured: false,
@@ -496,7 +496,7 @@ async function seedData() {
       { 
         title: 'Schedule a Demo', 
         description: 'See FinWage in action with a personalized demo for your organization.',
-        icon: 'fa-calendar-check', 
+        icon_svg: 'fa-calendar-check', 
         type: 'demo', 
         action_url: 'https://finwage.com/demo',
         is_featured: true 
@@ -504,7 +504,7 @@ async function seedData() {
       { 
         title: 'Talk to Sales', 
         description: 'Get pricing and implementation details from our sales team.',
-        icon: 'fa-phone', 
+        icon_svg: 'fa-phone', 
         type: 'sales', 
         action_url: 'mailto:sales@finwage.com',
         is_featured: true 
@@ -512,7 +512,7 @@ async function seedData() {
       { 
         title: 'Support Center', 
         description: 'Find answers to common questions in our help center.',
-        icon: 'fa-life-ring', 
+        icon_svg: 'fa-life-ring', 
         type: 'support', 
         action_url: 'https://support.finwage.com',
         is_featured: false 
@@ -527,14 +527,14 @@ async function seedData() {
     console.log("Seeding CTA cards...");
     const ctaCards = [
       {
-        icon: "fa-rocket",
+        icon_svg: "fa-rocket",
         bg_color: "#007bff",
         title: "Get Started Today",
         points: ["Easy setup", "Free trial", "24/7 support"],
         order: 1,
       },
       {
-        icon: "fa-star",
+        icon_svg: "fa-star",
         bg_color: "#28a745",
         title: "Upgrade Your Plan",
         points: [
@@ -553,7 +553,7 @@ async function seedData() {
     console.log('\n🎯 Seeding CTA Cards...');
     const ctaCards = [
       {
-        icon: 'fa-rocket',
+        icon_svg: 'fa-rocket',
         bg_color: '#1d44c3',
         title: 'For Employers',
         points: [
@@ -565,7 +565,7 @@ async function seedData() {
         order: 1
       },
       {
-        icon: 'fa-users',
+        icon_svg: 'fa-users',
         bg_color: '#0d2463',
         title: 'For Employees',
         points: [
@@ -577,7 +577,7 @@ async function seedData() {
         order: 2
       },
       {
-        icon: 'fa-chart-line',
+        icon_svg: 'fa-chart-line',
         bg_color: '#28a745',
         title: 'See the Impact',
         points: [
@@ -600,14 +600,14 @@ async function seedData() {
       {
         title: "Health Insurance",
         description: "Comprehensive coverage.",
-        icon: "fa-heart",
+        icon_svg: "fa-heart",
         category: businessCategoryId,
         order: 1,
       },
       {
         title: "Remote Work",
         description: "Work from anywhere.",
-        icon: "fa-home",
+        icon_svg: "fa-home",
         category: devCategoryId,
         order: 2,
       },
@@ -622,21 +622,21 @@ async function seedData() {
       { 
         title: 'Instant Wage Access', 
         description: 'Access your earned wages on-demand, anytime you need them.',
-        icon: 'fa-bolt', 
+        icon_svg: 'fa-bolt', 
         category: benefitsCategoryId,
         order: 1 
       },
       { 
         title: 'Financial Wellness Tools', 
         description: 'Budgeting tools, savings tips, and financial education resources.',
-        icon: 'fa-chart-pie', 
+        icon_svg: 'fa-chart-pie', 
         category: financialWellnessCategoryId,
         order: 2 
       },
       { 
         title: 'No Hidden Fees', 
         description: 'Transparent pricing with no surprise charges or interest rates.',
-        icon: 'fa-hand-holding-usd', 
+        icon_svg: 'fa-hand-holding-usd', 
         category: ewaCategoryId,
         order: 3 
       }
@@ -797,7 +797,7 @@ async function seedData() {
         title: "Fast Performance",
         slug: "fast-performance",
         description: "Lightning quick.",
-        icon: "fa-bolt",
+        icon_svg: "fa-bolt",
         category: devCategoryId,
         order: 1,
         featured: true,
@@ -807,7 +807,7 @@ async function seedData() {
         title: "Secure Data",
         slug: "secure-data",
         description: "Top-notch security.",
-        icon: "fa-shield",
+        icon_svg: "fa-shield",
         category: techCategoryId,
         order: 2,
         featured: false,
@@ -825,7 +825,7 @@ async function seedData() {
         title: 'Instant Access', 
         slug: 'instant-access',
         description: 'Get your earned wages in seconds, not days. Available 24/7 through our mobile app.',
-        icon: 'fa-bolt', 
+        icon_svg: 'fa-bolt', 
         category: ewaCategoryId,
         order: 1, 
         featured: true, 
@@ -835,7 +835,7 @@ async function seedData() {
         title: 'Bank-Level Security', 
         slug: 'bank-security',
         description: 'Your financial data is protected with 256-bit encryption and SOC 2 Type II certification.',
-        icon: 'fa-shield-alt', 
+        icon_svg: 'fa-shield-alt', 
         category: financialWellnessCategoryId,
         order: 2, 
         featured: true, 
@@ -845,7 +845,7 @@ async function seedData() {
         title: 'No Credit Check', 
         slug: 'no-credit-check',
         description: 'Access your earned wages with no credit check required. Your wages, your choice.',
-        icon: 'fa-check-circle', 
+        icon_svg: 'fa-check-circle', 
         category: benefitsCategoryId,
         order: 3, 
         featured: false, 
@@ -1351,7 +1351,7 @@ async function seedData() {
         step: "1",
         title: "Consultation",
         description: "Discuss needs.",
-        icon: "fa-handshake",
+        icon_svg: "fa-handshake",
         category: businessCategoryId,
         order: 1,
       },
@@ -1359,7 +1359,7 @@ async function seedData() {
         step: "2",
         title: "Development",
         description: "Build solution.",
-        icon: "fa-code",
+        icon_svg: "fa-code",
         category: devCategoryId,
         order: 2,
       },
@@ -1375,7 +1375,7 @@ async function seedData() {
         step: '1', 
         title: 'Connect Your Payroll', 
         description: 'Simple integration with your existing payroll system in minutes.',
-        icon: 'fa-plug', 
+        icon_svg: 'fa-plug', 
         category: benefitsCategoryId,
         order: 1 
       },
@@ -1383,7 +1383,7 @@ async function seedData() {
         step: '2', 
         title: 'Employees Download App', 
         description: 'Your team downloads the FinWage app and verifies their identity.',
-        icon: 'fa-mobile-alt', 
+        icon_svg: 'fa-mobile-alt', 
         category: ewaCategoryId,
         order: 2 
       },
@@ -1391,7 +1391,7 @@ async function seedData() {
         step: '3', 
         title: 'Access Earned Wages', 
         description: 'Employees can instantly access their earned wages anytime they need.',
-        icon: 'fa-hand-holding-usd', 
+        icon_svg: 'fa-hand-holding-usd', 
         category: financialWellnessCategoryId,
         order: 3 
       }
@@ -1600,14 +1600,14 @@ async function seedData() {
       {
         title: "Innovation",
         description: "Drive change.",
-        icon: "fa-lightbulb",
+        icon_svg: "fa-lightbulb",
         order: 1,
         featured: true,
       },
       {
         title: "Integrity",
         description: "Do the right thing.",
-        icon: "fa-balance-scale",
+        icon_svg: "fa-balance-scale",
         order: 2,
         featured: false,
       },
@@ -1622,21 +1622,21 @@ async function seedData() {
       { 
         title: 'Employee First', 
         description: 'We put employees at the center of everything we do. Their financial wellness is our mission.',
-        icon: 'fa-users', 
+        icon_svg: 'fa-users', 
         order: 1, 
         featured: true 
       },
       { 
         title: 'Transparency', 
         description: 'No hidden fees, no surprises. We believe in complete transparency in all our operations.',
-        icon: 'fa-eye', 
+        icon_svg: 'fa-eye', 
         order: 2, 
         featured: true 
       },
       { 
         title: 'Innovation', 
         description: 'We continuously innovate to provide the best financial wellness solutions for modern workplaces.',
-        icon: 'fa-lightbulb', 
+        icon_svg: 'fa-lightbulb', 
         order: 3, 
         featured: false 
       }

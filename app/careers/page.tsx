@@ -5,6 +5,7 @@ import { getBenefitsGroupedByCategory } from "@/lib/services/benefits";
 import { getFeaturedJobs, getJobPositions } from "@/lib/services/careers";
 import { getCompanyValues } from "@/lib/services/values";
 import type { JobsResponse } from "@/types/pocketbase";
+import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 
 export const metadata = {
   title: "Careers at FinWage",
@@ -48,20 +49,16 @@ export default async function CareersPage() {
   console.log("Benefits Grouped:", benefitsGrouped);
   console.log("Company Values:", values);
 
-  // Map icon names to components
-  const iconMap: Record<string, React.ReactNode> = {
-    Heart: <Heart className="w-8 h-8" />,
-    TrendingUp: <TrendingUp className="w-8 h-8" />,
-    Zap: <Zap className="w-8 h-8" />,
-    Code: <Code className="w-8 h-8" />,
-  };
-
   // Transform benefits data for display
   const benefits = Object.entries(benefitsGrouped).map(([category, items]) => {
-    // Get icon from first item in category or use default
-    const iconName = items[0]?.icon || "Heart";
+    // Get icon SVG from first item in category
+    const iconSvg = items[0]?.icon_svg;
     return {
-      icon: iconMap[iconName] || <Heart className="w-8 h-8" />,
+      icon: iconSvg ? (
+        <SvgIcon svgString={iconSvg} className="w-8 h-8" />
+      ) : (
+        <Heart className="w-8 h-8\" />
+      ),
       title: category,
       items: items.map((item) => item.description),
     };

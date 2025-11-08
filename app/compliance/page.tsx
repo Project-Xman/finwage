@@ -5,7 +5,7 @@ import {
   getComplianceItems,
   getSecurityFeatures,
 } from "@/lib/services/compliance";
-import { renderIcon } from "@/lib/utils/icon-mapper";
+import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 
 export const metadata = {
   title: "Compliance & Security - FinWage",
@@ -81,7 +81,7 @@ export default async function CompliancePage() {
                 >
                   <CardContent className="p-8">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
-                      {renderIcon(item.icon, "w-8 h-8")}
+                      <SvgIcon svgString={item.icon_svg} className="w-8 h-8" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">
                       {item.title}

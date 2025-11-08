@@ -14,12 +14,7 @@ export async function FAQSection() {
   );
 
 
-
-  const pricingCategory = categories.find(
-    (cat) => cat.name === "Pricing & Fees",
-  );
-
-  if (!pricingCategory) {
+  if (!categories || categories.length === 0) {
     console.error("Pricing & Fees category not found");
     return (
       <section className="py-16 md:py-24 bg-gray-50">
@@ -41,7 +36,7 @@ export async function FAQSection() {
 
   // Fetch all FAQs for the "Pricing & Fees" category
   const faqs = await getFaqItems({
-    category: pricingCategory.id,
+    category: "Pricing & Fees",
   });
 
   // Sort by featured first, then by order
