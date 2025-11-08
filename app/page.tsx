@@ -22,6 +22,7 @@ import {
   TestimonialsSkeleton,
 } from "@/components/ui/loading-skeletons";
 import { getAllCompanyStats } from "@/lib/services/company";
+import SplitSection from "@/components/sections/split";
 
 export const metadata = {
   title: "FinWage - Earned Wage Access for Financial Wellness",
@@ -57,7 +58,8 @@ export default async function Home() {
   return (
     <main className="min-h-screen">
       {/* Critical above-the-fold content - render immediately */}
-      <Hero />
+      {/* <Hero /> */}
+       <SplitSection />
       <PlatformSection />
       <You />
       <CycleSection />

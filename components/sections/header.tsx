@@ -83,7 +83,7 @@ export default function Header() {
                 <div key={item.label}>
                   {item.hasDropdown ? (
                     <DropdownMenu>
-                      <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+                      <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors whitespace-nowrap">
                         {item.label}
                         <ChevronDown className="w-4 h-4" />
                       </DropdownMenuTrigger>
@@ -100,7 +100,7 @@ export default function Header() {
                   ) : (
                     <NextLink
                       href={item.href}
-                      className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                      className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors whitespace-nowrap"
                     >
                       {item.label}
                     </NextLink>
@@ -112,20 +112,20 @@ export default function Header() {
 
           {/* Desktop Right Group: Search + Login + Demo */}
           <div className="hidden lg:flex items-center gap-3">
-            <button className="p-2 hover:bg-muted rounded-md transition-colors">
+            <button className="p-2 hover:bg-muted rounded-md transition-colors whitespace-nowrap">
               <Search className="w-4 h-4 text-foreground/80 hover:text-foreground" />
             </button>
             <Button
               variant="ghost"
               size="sm"
-              className="text-sm font-medium"
+              className="text-sm font-medium whitespace-nowrap"
               asChild
             >
               <NextLink href="/login">Log in</NextLink>
             </Button>
             <Button
               size="sm"
-              className="bg-[#1d44c3] text-white hover:shadow-lg transition-shadow rounded-full h-10 px-6"
+              className="bg-[#1d44c3] text-white hover:shadow-lg transition-shadow rounded-full h-10 px-6 whitespace-nowrap"
               asChild
             >
               <NextLink href="/contact">Contact Us</NextLink>
@@ -156,14 +156,14 @@ export default function Header() {
             <Button
               variant="ghost"
               size="sm"
-              className="text-sm font-medium"
+              className="text-sm font-medium whitespace-nowrap"
               asChild
             >
               <NextLink href="/login">Log in</NextLink>
             </Button>
             <Button
               size="sm"
-              className="bg-gradient-to-r from-primary to-blue-600 text-white hover:shadow-lg transition-shadow"
+              className="bg-gradient-to-r from-primary to-blue-600 text-white hover:shadow-lg transition-shadow whitespace-nowrap"
               asChild
             >
               <NextLink href="/contact">Contact Us</NextLink>
@@ -190,7 +190,7 @@ export default function Header() {
               <NextLink
                 key={item.label}
                 href={item.href}
-                className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors whitespace-nowrap"
               >
                 {item.label}
               </NextLink>
@@ -198,14 +198,14 @@ export default function Header() {
             <div className="pt-2 space-y-2 flex flex-col">
               <button className="w-full p-2 flex items-center justify-center gap-2 hover:bg-muted rounded-md transition-colors border border-border">
                 <Search className="w-4 h-4" />
-                <span className="text-sm font-medium">Search</span>
+                <span className="text-sm font-medium whitespace-nowrap">Search</span>
               </button>
-              <Button variant="outline" size="sm" className="w-full">
+              <Button variant="outline" size="sm" className="w-full whitespace-nowrap">
                 Log in
               </Button>
               <Button
                 size="sm"
-                className="w-full bg-gradient-to-r from-primary to-blue-600 text-white"
+                className="w-full bg-gradient-to-r from-primary to-blue-600 text-white whitespace-nowrap"
                 asChild
               >
                 <NextLink href="/contact">Contact Us</NextLink>
@@ -221,7 +221,7 @@ export default function Header() {
               <NextLink
                 key={item.label}
                 href={item.href}
-                className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors whitespace-nowrap"
               >
                 {item.label}
               </NextLink>
