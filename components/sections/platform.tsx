@@ -44,9 +44,9 @@ function PlatformContent() {
 
 function PlatformImages() {
   return (
-    <div className="relative w-full max-w-6xl">
+    <div className="relative w-full max-w-6xl lg:max-w-4xl">
       {/* Desktop Safari Browser */}
-      <div className="hidden md:block">
+      <div className="hidden md:block drop-shadow-2xl">
         <Safari
           imageSrc={imgScreenshot20251015At114207Pm1}
           url="dashboard.finwage.com"
@@ -54,14 +54,14 @@ function PlatformImages() {
       </div>
 
       {/* Mobile: Show only iPhone */}
-      <div className="md:hidden flex justify-center">
+      <div className="md:hidden flex justify-center drop-shadow-2xl">
         <div className="w-[280px] sm:w-[320px]">
           <Iphone src={imgImageContainer} />
         </div>
       </div>
 
       {/* Desktop: iPhone positioned over Safari */}
-      <div className="hidden md:block absolute bottom-0 right-0 w-[52%] lg:w-[40%] z-30">
+      <div className="hidden md:block absolute bottom-0 right-0 w-[40%] lg:w-[35%] z-30 drop-shadow-2xl">
         <Iphone src={imgImageContainer} />
       </div>
     </div>
@@ -86,7 +86,7 @@ export default function PlatformSection() {
       </div>
 
       {/* Big Pink Arc */}
-      <div className="absolute right-[-2%] top-0 w-[40%] md:w-[50%] h-[40%] md:h-[50%] z-0 opacity-30 md:opacity-100">
+      <div className="absolute right-[-2%] -top-10 w-[40%] md:w-[50%] h-[40%] md:h-[50%] z-0 opacity-30 md:opacity-100">
         <Image
           fill
           alt="Pink Arc"

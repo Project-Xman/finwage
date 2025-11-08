@@ -46,7 +46,7 @@ const You: NextPage = () => {
       </div>
 
       {/* Desktop Layout - Modern Cycle */}
-      <div className="hidden md:flex flex-col items-center justify-center relative">
+      <div className="hidden md:flex flex-col items-center justify-center relative pb-48">
         <h2 className="text-3xl md:text-4xl font-bold text-[#1d44c3] mb-12 md:mb-16 text-center">
           The FinWage Cycle
         </h2>

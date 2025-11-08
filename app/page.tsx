@@ -104,6 +104,7 @@ export default async function Home() {
       </Suspense>
 
       {/* Static CTA - render immediately */}
+            <CycleSection />
       <Cta />
     </main>
   );
