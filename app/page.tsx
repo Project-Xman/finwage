@@ -58,8 +58,8 @@ export default async function Home() {
   return (
     <main className="min-h-screen">
       {/* Critical above-the-fold content - render immediately */}
-      {/* <Hero /> */}
-       <SplitSection />
+      <Hero />
+       {/* <SplitSection /> */}
       <PlatformSection />
       <You />
       <CycleSection />
