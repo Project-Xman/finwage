@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/loading-skeletons";
 import { getAllCompanyStats } from "@/lib/services/company";
 import SplitSection from "@/components/sections/split";
+import CycleSection from "@/components/sections/cycle";
 
 export const metadata = {
   title: "FinWage - Earned Wage Access for Financial Wellness",
@@ -58,6 +59,7 @@ export default async function Home() {
     <main className="min-h-screen">
       {/* Critical above-the-fold content - render immediately */}
       <Hero />
+      {/* <SplitSection /> */}
       <PlatformSection />
       <You />
       {/* <CycleSection /> */}
@@ -72,9 +74,9 @@ export default async function Home() {
       <StandOut />
 
       {/* Integrations section - stream in */}
-      {/* <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<SectionSkeleton />}>
         <Integrations />
-      </Suspense> */}
+      </Suspense>
 
       {/* Pricing section - stream in */}
       <Suspense fallback={<SectionSkeleton />}>

@@ -42,7 +42,7 @@ function PlatformContent() {
   );
 }
 
-function PlatformImages() {
+export function PlatformImages() {
   return (
     <div className="relative w-full max-w-6xl lg:max-w-4xl">
       {/* Desktop Safari Browser */}
@@ -55,13 +55,13 @@ function PlatformImages() {
 
       {/* Mobile: Show only iPhone */}
       <div className="md:hidden flex justify-center drop-shadow-2xl">
-        <div className="w-[280px] sm:w-[320px]">
+        <div className="w-[252px] sm:w-[288px]">
           <Iphone src={imgImageContainer} />
         </div>
       </div>
 
       {/* Desktop: iPhone positioned over Safari */}
-      <div className="hidden md:block absolute bottom-0 right-0 w-[40%] lg:w-[35%] z-30 drop-shadow-2xl">
+      <div className="hidden md:block absolute bottom-0 -right-20 w-[36%] lg:w-[21.5%] z-30 drop-shadow-2xl">
         <Iphone src={imgImageContainer} />
       </div>
     </div>
@@ -71,7 +71,7 @@ function PlatformImages() {
 export default function PlatformSection() {
   return (
     <div
-      className="bg-[#f74b6b] relative min-h-screen w-full overflow-hidden py-12 md:py-20 px-4 sm:px-6 md:px-16 lg:px-24"
+      className="bg-[#f74b6b] relative min-h-screen w-full overflow-hidden px-4 sm:px-6 md:px-16 lg:px-24"
       data-name="Platform Section"
     >
       {/* Background Circle - Hidden on mobile */}
@@ -96,15 +96,15 @@ export default function PlatformSection() {
       </div>
 
       {/* Blue Arc - Fixed positioning */}
-      <div className="absolute bottom-20 left-0 w-[180px] h-[380px] md:w-[220px] md:h-[455px] z-10">
-        <Image
-          fill
-          alt="Blue Arc"
-          className="object-cover object-bottom-left"
-          src="/assets/blue-arc.png"
-          sizes="220px"
-        />
-      </div>
+      <div className="absolute -left-10 bottom-[100px] md:bottom-[20px] lg:bottom-[120px] w-[110px] md:w-[150px] lg:w-[170px] h-[180px] md:h-[240px] lg:h-[300px]">
+                <Image
+                  fill
+                  src="/assets/blue-arc.png"
+                  alt=""
+                  className="object-contain"
+                  sizes="170px"
+                />
+              </div>
 
       {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col">

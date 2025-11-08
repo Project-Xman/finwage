@@ -35,6 +35,7 @@ export function getFileUrl(record: BaseSystemFields, filename: string): string {
 
   const baseUrl = getPocketBaseUrl();
   const { collectionName, id } = record;
+  console.log(`${baseUrl}/api/files/${collectionName}/${id}/${filename}`);
 
   return `${baseUrl}/api/files/${collectionName}/${id}/${filename}`;
 }

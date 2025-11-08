@@ -34,10 +34,10 @@ const navigationItems = [
     name: "Pricing",
     link: "/pricing",
   },
-  {
-    name: "Resources",
-    link: "/resources",
-  },
+  // {
+  //   name: "Resources",
+  //   link: "/resources",
+  // },
   {
     name: "About",
     link: "/about",

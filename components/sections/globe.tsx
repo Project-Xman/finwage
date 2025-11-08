@@ -94,7 +94,7 @@ export default function Global({ stats }: { stats: StatusResponse[] }) {
           <div className="flex flex-col gap-8 md:gap-10 lg:gap-12 xl:gap-16 order-2 lg:order-1">
             {/* Header Section */}
             <div className="flex flex-col gap-4 md:gap-6 lg:gap-8">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-tight max-w-xl">
+              <h1 className="text-2xl pt-15 md:pt-0 sm:text-3xl md:text-4xl lg:text-5xl font-bold md:font-normal text-white leading-tight max-w-xl">
                 Global Recognition for Financial Innovation
               </h1>
               <p className="text-sm sm:text-base md:text-lg text-white leading-6 md:leading-7 max-w-md tracking-wide">

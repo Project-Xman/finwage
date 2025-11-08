@@ -195,7 +195,7 @@ function DesktopView({ cards }: { cards: CtaCard[] }) {
         <HeroImageContainer className="w-[1000px] h-[930px]" />
 
         {/* Right Content Section */}
-        <div className="w-[400px] flex flex-col gap-6">
+        <div className="w-[400px] pt-15 flex flex-col gap-6">
           <FeaturesGrid cards={cards} />
 
           {/* Bottom CTA Section */}

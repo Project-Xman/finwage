@@ -5,6 +5,7 @@ import IntegrationDemo from "./integrations-demo";
 
 export default async function Integrations() {
   const integrations = await getFeaturedIntegrations(8);
+  console.log("Integrations fetched:", integrations);
 
   return (
     <section className="bg-white w-full py-12 md:py-24 lg:py-32">
@@ -26,7 +27,7 @@ export default async function Integrations() {
             {integrations.map((integration) => (
               <div
                 key={integration.id}
-                className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden"
               >
                 {integration.logo ? (
                   <Image
@@ -36,7 +37,7 @@ export default async function Integrations() {
                     alt={integration.name}
                     width={120}
                     height={60}
-                    className="object-contain"
+                    className="object-contain max-w-full max-h-full"
                   />
                 ) : (
                   <span className="text-lg font-medium text-gray-700">

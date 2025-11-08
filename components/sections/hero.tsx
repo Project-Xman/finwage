@@ -196,7 +196,7 @@ export default function Hero() {
       {/* Desktop Layout */}
       <div className="hidden md:block relative h-[500px] lg:h-[850px]">
         {/* Main Image Container */}
-        <HeroImageContainer className="absolute bg-white h-[1021.191px] left-[-180px] md:left-[-160px] lg:left-[-131px] overflow-clip top-[-100px] md:top-[-140px] lg:top-[-177px] w-[1046.915px] scale-[0.45] md:scale-[0.55] lg:scale-100 origin-top-left" />
+        <HeroImageContainer className="absolute bg-white h-[919.072px] left-[-162px] md:left-[-144px] lg:left-[-117.9px] overflow-clip top-[-90px] md:top-[-126px] lg:top-[-159.3px] w-[942.224px] scale-[0.405] md:scale-[0.495] lg:scale-90 origin-top-left" />
 
         {/* Text Content and Button */}
         <div className="absolute left-[300px] md:left-[420px] lg:left-[912px] top-[40px] md:top-[60px] lg:top-[97px] right-[40px] md:right-[60px] lg:right-auto lg:w-[583px] max-w-[420px] md:max-w-[340px] lg:max-w-none">
