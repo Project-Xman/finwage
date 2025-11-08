@@ -1,6 +1,6 @@
 /**
  * Data Repository Interface (DIP - Dependency Inversion Principle)
- * 
+ *
  * This interface defines the contract for data access operations.
  * By depending on this abstraction rather than concrete implementations,
  * we can easily swap data sources (e.g., PocketBase, REST API, GraphQL)
@@ -39,7 +39,7 @@ export interface Result<T, E = Error> {
 
 /**
  * Base repository interface for CRUD operations
- * 
+ *
  * @template T - The entity type
  * @template ID - The identifier type (usually string)
  */
@@ -52,7 +52,9 @@ export interface IDataRepository<T, ID = string> {
   /**
    * Retrieve all entities with optional pagination
    */
-  findAll(options?: PaginationOptions): Promise<Result<PaginatedResponse<T>, Error>>;
+  findAll(
+    options?: PaginationOptions,
+  ): Promise<Result<PaginatedResponse<T>, Error>>;
 
   /**
    * Create a new entity

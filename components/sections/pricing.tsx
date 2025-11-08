@@ -1,4 +1,5 @@
 import { CheckCircle2, X } from "lucide-react";
+import { PricingActionButton } from "@/components/pricing/pricing-action-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -128,9 +129,10 @@ export default async function Pricing() {
                   </div>
 
                   {/* CTA Button */}
-                  <Button className="w-full bg-[#1d44c3] text-white hover:bg-[#153399] transition-colors h-12 font-semibold">
-                    {plan.buttonText}
-                  </Button>
+                  <PricingActionButton
+                    isEnterprise={plan.price === "Custom"}
+                    planName={plan.title}
+                  />
 
                   {/* Features */}
                   <div className="space-y-4 pt-4 border-t">

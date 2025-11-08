@@ -1,3 +1,4 @@
+import { ca } from "date-fns/locale";
 import {
   Accordion,
   AccordionContent,
@@ -5,15 +6,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { getFaqItems, getFaqTopics } from "@/lib/services/support";
-import { ca } from "date-fns/locale";
 
 export async function FAQSection() {
   // First, get the "Pricing & Fees" category
-  const categories = await getFaqTopics(
-    { category: "Pricing & Fees" },
-  );
-
-
+  const categories = await getFaqTopics({ category: "Pricing & Fees" });
 
   const pricingCategory = categories.find(
     (cat) => cat.name === "Pricing & Fees",

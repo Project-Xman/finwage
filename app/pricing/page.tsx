@@ -92,7 +92,9 @@ function transformPricingPlan(plan: PricingPlansResponse): TransformedPlan {
     description: plan.description || "",
     employees: getEmployeeRange(plan),
     features: Array.isArray(plan.features)
-      ? plan.features.map((f: string | { text?: string }) => (typeof f === "string" ? f : f.text || String(f)))
+      ? plan.features.map((f: string | { text?: string }) =>
+          typeof f === "string" ? f : f.text || String(f),
+        )
       : [],
     notIncluded: Array.isArray(plan.limitations)
       ? plan.limitations.map((l: string | { text?: string }) =>

@@ -1,6 +1,6 @@
 /**
  * Seed Data Type Definitions
- * 
+ *
  * Provides strong typing for all seed data structures across collections.
  * Follows Interface Segregation Principle - each interface represents one collection's seed data.
  */
@@ -18,13 +18,13 @@ export interface ISeeder {
    * Unique identifier for the seeder
    */
   readonly name: string;
-  
+
   /**
    * Execute the seeding operation
    * @returns Array of created record IDs
    */
   seed(): Promise<string[]>;
-  
+
   /**
    * Rollback/cleanup seeded data (optional)
    */
@@ -314,14 +314,14 @@ export interface SeederDependency {
  * Maps collection names to their dependencies
  */
 export const SEEDER_DEPENDENCIES: Record<string, string[]> = {
-  'categories': [],
-  'authors': [],
-  'blogs': ['categories', 'authors'],
-  'employee_benefits': ['categories'],
-  'faqs': ['categories'],
-  'features': ['categories'],
-  'integrations': ['categories'],
-  'partners': ['categories'],
-  'process_steps': ['categories'],
-  'support': ['categories'],
+  categories: [],
+  authors: [],
+  blogs: ["categories", "authors"],
+  employee_benefits: ["categories"],
+  faqs: ["categories"],
+  features: ["categories"],
+  integrations: ["categories"],
+  partners: ["categories"],
+  process_steps: ["categories"],
+  support: ["categories"],
 };

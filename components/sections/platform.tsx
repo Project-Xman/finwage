@@ -99,14 +99,14 @@ export default function PlatformSection() {
 
       {/* Blue Arc - Fixed positioning */}
       <div className="absolute -left-10 bottom-[100px] md:bottom-[20px] lg:bottom-[120px] w-[110px] md:w-[150px] lg:w-[170px] h-[180px] md:h-[240px] lg:h-[300px]">
-                <Image
-                  fill
-                  src="/assets/blue-arc.png"
-                  alt=""
-                  className="object-contain"
-                  sizes="170px"
-                />
-              </div>
+        <Image
+          fill
+          src="/assets/blue-arc.png"
+          alt=""
+          className="object-contain"
+          sizes="170px"
+        />
+      </div>
 
       {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col">

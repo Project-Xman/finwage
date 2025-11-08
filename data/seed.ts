@@ -2,6 +2,7 @@
 const POCKETBASE_URL = "http://localhost:8090";
 const SEEDER_EMAIL = "admin@projectx.com";
 const SEEDER_PASSWORD = "Admin@12345";
+
 import PocketBase from 'pocketbase';
 
 // ============================================================
@@ -339,9 +340,8 @@ async function seedData() {
       }
     ];
     
-    for (const blog of blogs) {
+    for (const blog of blogs) 
       await pb.collection("blogs").create(blog);
-    }
 
     // Seed company_milestones
     console.log("Seeding company milestones...");
@@ -398,9 +398,8 @@ async function seedData() {
       }
     ];
     
-    for (const milestone of milestones) {
+    for (const milestone of milestones) 
       await pb.collection("company_milestones").create(milestone);
-    }
 
     // Seed compliance_items
     console.log("Seeding compliance items...");
@@ -462,9 +461,8 @@ async function seedData() {
       }
     ];
     
-    for (const item of complianceItems) {
+    for (const item of complianceItems) 
       await pb.collection("compliance_items").create(item);
-    }
 
     // Seed contact_options
     console.log("Seeding contact options...");
@@ -519,9 +517,8 @@ async function seedData() {
       }
     ];
     
-    for (const option of contactOptions) {
+    for (const option of contactOptions) 
       await pb.collection("contact_options").create(option);
-    }
 
     // Seed cta_cards
     console.log("Seeding CTA cards...");
@@ -590,9 +587,8 @@ async function seedData() {
       }
     ];
     
-    for (const card of ctaCards) {
+    for (const card of ctaCards) 
       await pb.collection("cta_cards").create(card);
-    }
 
     // Seed employee_benefits (depends on category)
     console.log("Seeding employee benefits...");
@@ -642,9 +638,8 @@ async function seedData() {
       }
     ];
     
-    for (const benefit of benefits) {
+    for (const benefit of benefits) 
       await pb.collection("employee_benefits").create(benefit);
-    }
 
     // Seed employer_stats
     console.log("Seeding employer stats...");
@@ -665,9 +660,8 @@ async function seedData() {
       { value: '$0', label: 'Implementation Cost', order: 3 }
     ];
     
-    for (const stat of stats) {
+    for (const stat of stats) 
       await pb.collection("employer_stats").create(stat);
-    }
 
     // Seed enquiries (public create)
     console.log("Seeding enquiries...");
@@ -729,9 +723,8 @@ async function seedData() {
       }
     ];
     
-    for (const topic of faqTopics) {
+    for (const topic of faqTopics) 
       await pb.collection("faq_topics").create(topic);
-    }
 
     // Seed faqs (depends on category)
     console.log("Seeding FAQs...");
@@ -786,9 +779,8 @@ async function seedData() {
       }
     ];
     
-    for (const faq of faqs) {
+    for (const faq of faqs) 
       await pb.collection("faqs").create(faq);
-    }
 
     // Seed features (depends on category)
     console.log("Seeding features...");
@@ -853,9 +845,8 @@ async function seedData() {
       }
     ];
     
-    for (const feature of features) {
+    for (const feature of features) 
       await pb.collection("features").create(feature);
-    }
 
     // Seed integrations (depends on category)
     console.log("Seeding integrations...");
@@ -920,9 +911,8 @@ async function seedData() {
       }
     ];
     
-    for (const integration of integrations) {
+    for (const integration of integrations) 
       await pb.collection("integrations").create(integration);
-    }
 
     // Seed jobs
     console.log("Seeding jobs...");
@@ -981,9 +971,8 @@ async function seedData() {
       }
     ];
     
-    for (const job of jobs) {
+    for (const job of jobs) 
       await pb.collection("jobs").create(job);
-    }
 
     // Seed leadership
     console.log("Seeding leadership...");
@@ -1051,9 +1040,8 @@ async function seedData() {
       }
     ];
     
-    for (const leader of leadership) {
+    for (const leader of leadership) 
       await pb.collection("leadership").create(leader);
-    }
 
     // Seed locations
     console.log("Seeding locations...");
@@ -1112,9 +1100,8 @@ async function seedData() {
       }
     ];
     
-    for (const location of locations) {
+    for (const location of locations) 
       await pb.collection("locations").create(location);
-    }
 
     // Seed partners (depends on category)
     console.log("Seeding partners...");
@@ -1169,9 +1156,8 @@ async function seedData() {
       }
     ];
     
-    for (const partner of partners) {
+    for (const partner of partners) 
       await pb.collection("partners").create(partner);
-    }
 
     // Seed press
     console.log("Seeding press...");
@@ -1222,9 +1208,8 @@ async function seedData() {
       }
     ];
     
-    for (const item of press) {
+    for (const item of press) 
       await pb.collection("press").create(item);
-    }
 
     // Seed pricing_plans
     console.log("Seeding pricing plans...");
@@ -1340,9 +1325,8 @@ async function seedData() {
       }
     ];
     
-    for (const plan of plans) {
+    for (const plan of plans) 
       await pb.collection("pricing_plans").create(plan);
-    }
 
     // Seed process_steps (depends on category)
     console.log("Seeding process steps...");
@@ -1397,9 +1381,8 @@ async function seedData() {
       }
     ];
     
-    for (const step of steps) {
+    for (const step of steps) 
       await pb.collection("process_steps").create(step);
-    }
 
     // Seed security_features
     console.log("Seeding security features...");
@@ -1419,9 +1402,8 @@ async function seedData() {
       { description: 'Multi-factor authentication for enhanced security', order: 3 }
     ];
     
-    for (const feature of secFeatures) {
+    for (const feature of secFeatures) 
       await pb.collection("security_features").create(feature);
-    }
 
     // Seed status
     console.log("Seeding status...");
@@ -1471,9 +1453,8 @@ async function seedData() {
       }
     ];
     
-    for (const status of statuses) {
+    for (const status of statuses) 
       await pb.collection("status").create(status);
-    }
 
     // Seed support (depends on category)
     console.log("Seeding support...");
@@ -1523,9 +1504,8 @@ async function seedData() {
       }
     ];
     
-    for (const item of support) {
+    for (const item of support) 
       await pb.collection("support").create(item);
-    }
 
     // Seed testimonials
     console.log("Seeding testimonials...");
@@ -1590,9 +1570,8 @@ async function seedData() {
       }
     ];
     
-    for (const testimonial of testimonials) {
+    for (const testimonial of testimonials) 
       await pb.collection("testimonials").create(testimonial);
-    }
 
     // Seed values
     console.log("Seeding values...");
@@ -1642,9 +1621,8 @@ async function seedData() {
       }
     ];
     
-    for (const value of values) {
+    for (const value of values) 
       await pb.collection("values").create(value);
-    }
 
     console.log("Seeding completed successfully!");
   } catch (error) {

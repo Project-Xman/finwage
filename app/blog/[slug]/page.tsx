@@ -12,6 +12,7 @@ import Image from "next/image";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
 
+import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -75,37 +76,41 @@ export async function generateMetadata({
   // Use SEO fields if available, otherwise fallback to default fields
   const seoTitle = post.seo_title || `${post.title} - FinWage Blog`;
   const seoDescription = post.seo_description || post.excerpt;
-  const ogImageUrl = post.og_image 
-    ? getImageUrl(post, post.og_image, { fallback: '/placeholder.jpg' })
-    : getImageUrl(post, post.featured_image?.[0], { fallback: '/placeholder.jpg' });
+  const ogImageUrl = post.og_image
+    ? getImageUrl(post, post.og_image, { fallback: "/placeholder.jpg" })
+    : getImageUrl(post, post.featured_image?.[0], {
+        fallback: "/placeholder.jpg",
+      });
 
   // Prepare authors array, filtering out undefined values
   const authorName = post.expand?.author?.name;
   const authors = authorName ? [authorName] : undefined;
 
   // Prepare tags array, filtering out empty/null values
-  const tags = Array.isArray(post.tags) 
-    ? post.tags.filter((tag): tag is string => Boolean(tag)) 
+  const tags = Array.isArray(post.tags)
+    ? post.tags.filter((tag): tag is string => Boolean(tag))
     : undefined;
 
   return {
     title: seoTitle,
     description: seoDescription,
     keywords: post.seo_keywords,
-    alternates: post.canonical_url ? {
-      canonical: post.canonical_url,
-    } : undefined,
+    alternates: post.canonical_url
+      ? {
+          canonical: post.canonical_url,
+        }
+      : undefined,
     openGraph: {
       title: post.seo_title || post.title,
       description: seoDescription,
       images: [ogImageUrl],
-      type: 'article',
+      type: "article",
       publishedTime: post.published_date,
       authors,
       tags,
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: post.seo_title || post.title,
       description: seoDescription,
       images: [ogImageUrl],
@@ -375,23 +380,21 @@ export default async function BlogPostPage({
             See how FinWage can help your employees achieve financial wellness.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <NextLink href="/demo">
-              <Button
-                size="lg"
-                className="bg-white text-[#1d44c3] hover:bg-gray-100"
-              >
-                Schedule a Demo
-              </Button>
-            </NextLink>
-            <NextLink href="/contact">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-[#1d44c3]"
-              >
-                Contact Us
-              </Button>
-            </NextLink>
+            <EnquiryButton
+              type="demo"
+              size="lg"
+              className="bg-white text-[#1d44c3] hover:bg-gray-100"
+            >
+              Schedule a Demo
+            </EnquiryButton>
+            <EnquiryButton
+              type="contact"
+              size="lg"
+              variant="outline"
+              className="border-2 border-white text-white hover:bg-white hover:text-[#1d44c3]"
+            >
+              Contact Us
+            </EnquiryButton>
           </div>
         </div>
       </section>

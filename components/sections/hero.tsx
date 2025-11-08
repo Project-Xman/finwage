@@ -2,6 +2,7 @@
 
 import { ArrowRight, BellIcon } from "lucide-react";
 import Image from "next/image";
+import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -13,7 +14,10 @@ function HeroImageContainer({
   hideWhiteArc?: boolean;
 }) {
   return (
-    <div className={`${className} relative overflow-visible`} data-name="Hero Image Container">
+    <div
+      className={`${className} relative overflow-visible`}
+      data-name="Hero Image Container"
+    >
       {/* Circular Container for the Hero Image */}
       <div
         className="absolute rounded-full overflow-visible"
@@ -110,24 +114,21 @@ function HeroImageContainer({
 // Function for the "Get a Demo" Link/Button
 function DemoButton() {
   return (
-    <Button
+    <EnquiryButton
+      type="demo"
       size="lg"
       className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-lg transition-shadow rounded-full h-[60px] px-8 font-semibold text-[20px]"
-      data-name="Link"
+      icon={<ArrowRight className="ml-2 size-5" />}
     >
       Get a Demo
-      <ArrowRight className="ml-2 size-5" />
-    </Button>
+    </EnquiryButton>
   );
 }
 
 // Main Hero Component
 export default function Hero() {
   return (
-    <div
-      className="bg-white relative overflow-hidden"
-      data-name="Hero Section"
-    >
+    <div className="bg-white relative overflow-hidden" data-name="Hero Section">
       {/* Mobile Layout */}
       <div className="md:hidden flex flex-col items-center px-4 py-8 sm:py-12 gap-6 sm:gap-8">
         {/* Text Content */}
