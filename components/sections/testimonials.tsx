@@ -39,7 +39,7 @@ function TestimonialCard({
   rating,
 }: TestimonialCardProps) {
   return (
-    <Card className="bg-white rounded-[16px] border border-gray-100 min-w-[280px] w-[280px] md:min-w-[300px] md:w-[300px] flex-shrink-0">
+    <Card className="bg-white rounded-[16px] border border-gray-100 min-w-[280px] w-[280px] md:min-w-[300px] md:w-[300px] flex-shrink-0 mr-4">
       <CardContent className="p-6 flex flex-col gap-4">
         <StarRating rating={rating} />
         <p className="text-[13.5px] leading-[22.75px] text-gray-700">{quote}</p>
@@ -70,7 +70,7 @@ function MarqueeRow({ testimonials, reverse = false }: MarqueeRowProps) {
   return (
     <div className="flex overflow-hidden">
       <div
-        className={`flex gap-4 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
+        className="flex"
         style={{
           animation: reverse
             ? "marquee-reverse 30s linear infinite"
@@ -91,7 +91,7 @@ function MarqueeRow({ testimonials, reverse = false }: MarqueeRowProps) {
         ))}
       </div>
       <div
-        className={`flex gap-4 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
+        className="flex"
         style={{
           animation: reverse
             ? "marquee-reverse 30s linear infinite"
