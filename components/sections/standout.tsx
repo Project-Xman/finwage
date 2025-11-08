@@ -3,8 +3,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 const imgManTalking = "https://picsum.photos/600/400";
-const imgImagePhotoroom21 = "/assets/standing-person-1.png";
-const imgImagePhotoroom31 = "/assets/standing-person-2.png";
+const imgImagePhotoroom21 = "/assets/person-illustration-1.png";
+const imgImagePhotoroom31 = "/assets/person-illustration-2.png";
 
 export default function StandOut() {
   return (
