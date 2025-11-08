@@ -59,8 +59,8 @@ export default function StandOut() {
         </div>
 
         {/* Decorative Characters - Hidden on mobile */}
-        <div className="hidden md:block absolute left-1/2 -bottom-1/5 translate-x-[-200px]">
-          <div className="relative w-[150px] h-[300px]">
+        <div className="hidden md:block absolute left-1/2 md:-bottom-20 lg:-bottom-24 translate-x-[-200px] lg:translate-x-[-200px] md:translate-x-[-120px]">
+          <div className="relative md:w-[120px] md:h-[230px] lg:w-[150px] lg:h-[300px]">
             <Image
               src={imgImagePhotoroom21}
               alt=""
@@ -70,8 +70,8 @@ export default function StandOut() {
           </div>
         </div>
 
-        <div className="hidden md:block absolute left-1/2 -bottom-1/5  translate-x-[50px]">
-          <div className="relative w-[130px] h-[300px]">
+        <div className="hidden md:block absolute left-1/2 -bottom-1/5 translate-x-[50px] lg:translate-x-[50px] md:translate-x-[20px]">
+          <div className="relative md:w-[120px] md:h-[240px] lg:w-[130px] lg:h-[300px]">
             <Image
               src={imgImagePhotoroom31}
               alt=""
@@ -82,8 +82,8 @@ export default function StandOut() {
         </div>
 
         {/* Mobile Decorative Characters - At bottom, below grid */}
-        <div className="md:hidden absolute -bottom-20 left-1/2 -translate-x-1/2 flex gap-8 items-end z-10">
-          <div className="relative w-[300px] h-[600px]">
+        <div className="md:hidden absolute bottom-0  flex items-end gap-8 z-10">
+          <div className="relative w-[120px] h-[280px]">
             <Image
               src={imgImagePhotoroom21}
               alt=""
@@ -91,8 +91,8 @@ export default function StandOut() {
               className="object-contain"
             />
           </div>
-          <div className="w-1/6"></div>
-          <div className="relative w-[285px] h-[600px]">
+          <div className="w-2"></div>
+          <div className="relative w-[125px] h-[280px]">
             <Image
               src={imgImagePhotoroom31}
               alt=""
