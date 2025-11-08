@@ -13,10 +13,10 @@ function HeroImageContainer({
   hideWhiteArc?: boolean;
 }) {
   return (
-    <div className={`${className} relative`} data-name="Hero Image Container">
+    <div className={`${className} relative overflow-visible`} data-name="Hero Image Container">
       {/* Circular Container for the Hero Image */}
       <div
-        className="absolute rounded-full overflow-hidden"
+        className="absolute rounded-full overflow-visible"
         style={{
           width: "1000px",
           height: "1000px",
@@ -24,16 +24,19 @@ function HeroImageContainer({
           top: "2px",
         }}
       >
-        {/* Image fills the circular container using object-cover */}
-        <Image
-          fill
-          alt="Corporate workers brainstorming together"
-          className="object-cover pointer-events-none"
-          style={{ objectPosition: "center" }}
-          src="/assets/hero-image.jpg"
-        />
-        {/* Blue Overlay - Covers the circular image area */}
-        <div className="absolute inset-0 bg-blue-900 opacity-50"></div>
+        {/* Inner container for image clipping */}
+        <div className="absolute inset-0 rounded-full overflow-hidden">
+          {/* Image fills the circular container using object-cover */}
+          <Image
+            fill
+            alt="Corporate workers brainstorming together"
+            className="object-cover pointer-events-none"
+            style={{ objectPosition: "center" }}
+            src="/assets/hero-image.jpg"
+          />
+          {/* Blue Overlay - Covers the circular image area */}
+          <div className="absolute inset-0 bg-blue-900 opacity-50"></div>
+        </div>
       </div>
 
       {/* White Arc Overlay */}
@@ -146,18 +149,20 @@ export default function Hero() {
         </div>
 
         {/* Circular Image Container - Full Circle */}
-        <div className="relative w-full max-w-[350px] sm:max-w-[450px] aspect-square">
+        <div className="relative w-full max-w-[350px] sm:max-w-[450px] aspect-square mb-24">
           {/* Full circle with centered image - no white arc */}
-          <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl">
-            <Image
-              fill
-              alt="Corporate workers brainstorming together"
-              className="object-cover"
-              style={{ objectPosition: "center" }}
-              src="/assets/hero-image.jpg"
-            />
-            {/* Blue Overlay */}
-            <div className="absolute inset-0 bg-blue-900 opacity-50"></div>
+          <div className="relative w-full h-full rounded-full overflow-visible shadow-2xl">
+            <div className="absolute inset-0 rounded-full overflow-hidden">
+              <Image
+                fill
+                alt="Corporate workers brainstorming together"
+                className="object-cover"
+                style={{ objectPosition: "center" }}
+                src="/assets/hero-image.jpg"
+              />
+              {/* Blue Overlay */}
+              <div className="absolute inset-0 bg-blue-900 opacity-50"></div>
+            </div>
 
             {/* Play Icon Button - Centered */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px]">
@@ -171,15 +176,15 @@ export default function Hero() {
             </div>
 
             {/* FinWage Notification Card */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-2xl p-3 shadow-lg border border-gray-200 max-w-[280px] flex items-start gap-2">
-              <div className="bg-red-500 rounded-md p-1.5">
-                <BellIcon className="size-4 text-white" />
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-2xl p-4 shadow-lg border border-gray-200 max-w-[320px] w-[90%] flex items-start gap-3">
+              <div className="bg-red-500 rounded-md p-2">
+                <BellIcon className="size-5 text-white" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[#1d44c3] text-[10px] font-semibold uppercase">
+                <span className="text-[#1d44c3] text-[11px] font-semibold uppercase">
                   FINWAGE
                 </span>
-                <span className="text-gray-800 text-[12px]">
+                <span className="text-gray-800 text-[14px]">
                   Your FinWage balance went up!
                 </span>
               </div>
@@ -189,7 +194,7 @@ export default function Hero() {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden md:block relative h-[500px] lg:h-[945px]">
+      <div className="hidden md:block relative h-[500px] lg:h-[850px]">
         {/* Main Image Container */}
         <HeroImageContainer className="absolute bg-white h-[1021.191px] left-[-180px] md:left-[-160px] lg:left-[-131px] overflow-clip top-[-100px] md:top-[-140px] lg:top-[-177px] w-[1046.915px] scale-[0.45] md:scale-[0.55] lg:scale-100 origin-top-left" />
 
@@ -217,7 +222,7 @@ export default function Hero() {
         </div>
 
         {/* Pink Arc Overlay (Right side) */}
-        <div className="absolute right-0 bottom-[100px] md:bottom-[20px] lg:bottom-[80px] w-[110px] md:w-[150px] lg:w-[170px] h-[180px] md:h-[240px] lg:h-[300px]">
+        <div className="absolute right-0 bottom-[100px] md:bottom-[20px] lg:bottom-[120px] w-[110px] md:w-[150px] lg:w-[170px] h-[180px] md:h-[240px] lg:h-[300px]">
           <Image
             fill
             src="/assets/pink-arc.png"
