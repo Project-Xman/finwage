@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getEmployeeBenefits } from "@/lib/services/benefits";
+import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 import { getFAQs } from "@/lib/services/faqs";
 import { getTestimonials } from "@/lib/services/testimonials";
 import { renderIcon } from "@/lib/utils/icon-mapper";
@@ -129,7 +130,7 @@ export default async function ForEmployeesPage() {
                 >
                   <CardContent className="p-8">
                     <div className="text-[#1d44c3] mb-4">
-                      {renderIcon(benefit.icon, "w-8 h-8")}
+                      <SvgIcon svgString={benefit.icon_svg} className="w-8 h-8" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-3">
                       {benefit.title}

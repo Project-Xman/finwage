@@ -198,3 +198,9 @@
   box-sizing: border-box;
   outline: 1px solid rgba(0, 255, 0, 0.5);
 }
+
+FontAwesomeIcon {
+  width: 2rem;
+  height: 2rem;
+  color: inherit;
+}

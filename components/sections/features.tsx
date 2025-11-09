@@ -3,6 +3,7 @@ import Image from "next/image";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { getFeaturedFeatures } from "@/lib/services/features";
 import { getImageUrl } from "@/lib/utils/pocketbase";
+import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 
 export default async function Features() {
   const features = await getFeaturedFeatures(4);
@@ -22,10 +23,12 @@ export default async function Features() {
 
         <BentoGrid>
           {features.map((feature, index) => {
-            // Get the icon component from lucide-react if icon name is provided
-            const IconComponent = feature.icon
-              ? (LucideIcons as any)[feature.icon]
-              : null;
+            // Create icon component wrapper for SVG icons
+            const IconComponent = feature.icon_svg
+              ? ({ className }: { className?: string }) => (
+                  <SvgIcon svgString={feature.icon_svg} className={className} />
+                )
+              : LucideIcons.Star;
 
             // Determine grid layout based on index
             const className =
@@ -36,7 +39,7 @@ export default async function Features() {
             return (
               <BentoCard
                 key={feature.id}
-                Icon={IconComponent || LucideIcons.Star}
+                Icon={IconComponent}
                 name={feature.title}
                 description={feature.description}
                 href={`/features/${feature.slug}`}

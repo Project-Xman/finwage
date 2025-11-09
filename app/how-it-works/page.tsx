@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getEmployeeBenefits } from "@/lib/services/benefits";
 import { getProcessSteps } from "@/lib/services/process";
+import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 
 export const metadata = {
   title: "How It Works - FinWage",
@@ -76,7 +77,12 @@ export default async function HowItWorksPage() {
                 <div key={item.id} className="relative">
                   <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 h-full">
                     <CardContent className="p-8">
-                      <div className="text-6xl mb-6">{item.icon}</div>
+                      <div className="text-6xl mb-6 text-[#1d44c3]">
+                        <SvgIcon 
+                          svgString={item.icon_svg} 
+                          className="w-16 h-16 mx-auto"
+                        />
+                      </div>
                       <div className="text-sm font-bold text-[#1d44c3] mb-2">
                         STEP {item.step}
                       </div>
