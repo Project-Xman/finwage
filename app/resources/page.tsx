@@ -15,6 +15,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  getFeaturedResourceArticles,
+  getFeaturedResourceDownloads,
+  getResourceArticles,
+  getResourceCategories,
+} from "@/lib/services/resources";
 
 export const metadata = {
   title: "Resources - FinWage",
@@ -35,93 +41,27 @@ export const metadata = {
   },
 };
 
-export default function ResourcesPage() {
-  const featuredArticles = [
-    {
-      category: "Financial Wellness",
-      title: "The Real Cost of Living Paycheck to Paycheck",
-      excerpt:
-        "How earned wage access is helping millions of workers break free from the payday cycle and build long-term financial security.",
-      image: "/assets/analytic-image.png",
-      date: "Jan 15, 2025",
-      readTime: "5 min read",
-    },
-    {
-      category: "Employer Benefits",
-      title: "Why Top Companies Are Offering Wage Access",
-      excerpt:
-        "The ROI of financial wellness benefits and how they're transforming employee retention strategies.",
-      image: "/assets/office-meeting.png",
-      date: "Jan 10, 2025",
-      readTime: "7 min read",
-    },
-    {
-      category: "Industry Trends",
-      title: "The Future of Payroll: On-Demand Wages",
-      excerpt:
-        "Exploring how technology is revolutionizing when and how employees get paid.",
-      image: "/assets/laptop-office.png",
-      date: "Jan 5, 2025",
-      readTime: "6 min read",
-    },
-  ];
+export default async function ResourcesPage() {
+  // Fetch data from PocketBase
+  const [categories, featuredArticles, recentArticles, featuredDownload] =
+    await Promise.all([
+      getResourceCategories({ limit: 5 }),
+      getFeaturedResourceArticles(3),
+      getResourceArticles({ featured: false, limit: 6 }),
+      getFeaturedResourceDownloads(1),
+    ]);
 
-  const categories = [
-    {
-      name: "Financial Wellness",
-      count: 24,
-      icon: <TrendingUp className="w-6 h-6" />,
-    },
-    {
-      name: "Employee Retention",
-      count: 18,
-      icon: <Users className="w-6 h-6" />,
-    },
-    {
-      name: "Payroll Trends",
-      count: 15,
-      icon: <Calendar className="w-6 h-6" />,
-    },
-    { name: "Case Studies", count: 12, icon: <Award className="w-6 h-6" /> },
-    {
-      name: "Industry News",
-      count: 32,
-      icon: <BookOpen className="w-6 h-6" />,
-    },
-  ];
-
-  const recentArticles = [
-    {
-      title: "5 Ways Financial Stress Impacts Employee Productivity",
-      category: "Financial Wellness",
-      date: "Jan 12, 2025",
-    },
-    {
-      title: "How to Choose the Right Wage Access Provider",
-      category: "Employer Guide",
-      date: "Jan 8, 2025",
-    },
-    {
-      title: "Understanding the Earned Wage Access Regulation Landscape",
-      category: "Compliance",
-      date: "Jan 3, 2025",
-    },
-    {
-      title: "Case Study: Reducing Turnover by 30% with FinWage",
-      category: "Case Studies",
-      date: "Dec 28, 2024",
-    },
-    {
-      title: "The Psychology of Payday: Why Timing Matters",
-      category: "Research",
-      date: "Dec 22, 2024",
-    },
-    {
-      title: "Building a Financial Wellness Program That Works",
-      category: "Employer Guide",
-      date: "Dec 18, 2024",
-    },
-  ];
+  // Helper function to get icon component by name
+  const getIconComponent = (iconName: string) => {
+    const icons: Record<string, any> = {
+      TrendingUp,
+      Users,
+      Calendar,
+      Award,
+      BookOpen,
+    };
+    return icons[iconName] || BookOpen;
+  };
 
   return (
     <main className="min-h-screen">
@@ -144,24 +84,27 @@ export default function ResourcesPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {categories.map((category, index) => (
-              <Card
-                key={index}
-                className="hover:shadow-xl transition-all group cursor-pointer"
-              >
-                <CardContent className="p-6 text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full text-[#1d44c3] mb-3 group-hover:bg-[#1d44c3] group-hover:text-white transition-all">
-                    {category.icon}
-                  </div>
-                  <div className="font-semibold text-gray-900 mb-1">
-                    {category.name}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {category.count} articles
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {categories.map((category, index) => {
+              const IconComponent = getIconComponent(category.icon || "");
+              return (
+                <Card
+                  key={category.id}
+                  className="hover:shadow-xl transition-all group cursor-pointer"
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full text-[#1d44c3] mb-3 group-hover:bg-[#1d44c3] group-hover:text-white transition-all">
+                      <IconComponent className="w-6 h-6" />
+                    </div>
+                    <div className="font-semibold text-gray-900 mb-1">
+                      {category.name}
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      {category.article_count} articles
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -173,29 +116,42 @@ export default function ResourcesPage() {
             Featured Articles
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {featuredArticles.map((article, index) => (
+            {featuredArticles.map((article) => (
               <Card
-                key={index}
+                key={article.id}
                 className="overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
               >
-                <div className="relative h-48">
-                  <Image
-                    src={article.image}
-                    alt={article.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-[#1d44c3] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                      {article.category}
-                    </span>
+                {article.image && (
+                  <div className="relative h-48">
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform"
+                    />
+                    {article.expand?.category && (
+                      <div className="absolute top-4 left-4">
+                        <span className="bg-[#1d44c3] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          {article.expand.category.name}
+                        </span>
+                      </div>
+                    )}
                   </div>
-                </div>
+                )}
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
-                    <span>{article.date}</span>
+                    <span>
+                      {new Date(article.published_date).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        },
+                      )}
+                    </span>
                     <span>•</span>
-                    <span>{article.readTime}</span>
+                    <span>{article.read_time}</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1d44c3] transition-colors">
                     {article.title}
@@ -224,21 +180,30 @@ export default function ResourcesPage() {
                 Latest Articles
               </h2>
               <div className="space-y-6">
-                {recentArticles.map((article, index) => (
+                {recentArticles.map((article) => (
                   <div
-                    key={index}
+                    key={article.id}
                     className="bg-white rounded-xl p-6 hover:shadow-lg transition-all"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
-                        <div className="inline-block bg-blue-100 text-[#1d44c3] px-3 py-1 rounded-full text-sm font-semibold mb-3">
-                          {article.category}
-                        </div>
+                        {article.expand?.category && (
+                          <div className="inline-block bg-blue-100 text-[#1d44c3] px-3 py-1 rounded-full text-sm font-semibold mb-3">
+                            {article.expand.category.name}
+                          </div>
+                        )}
                         <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-[#1d44c3] transition-colors cursor-pointer">
                           {article.title}
                         </h3>
                         <div className="text-sm text-gray-500">
-                          {article.date}
+                          {new Date(article.published_date).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            },
+                          )}
                         </div>
                       </div>
                       <ArrowRight className="w-5 h-5 text-gray-400 flex-shrink-0 mt-2" />
@@ -268,17 +233,20 @@ export default function ResourcesPage() {
                 </Button>
               </div>
 
-              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  Download Our Guide
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  "The Complete Guide to Implementing Earned Wage Access"
-                </p>
-                <Button className="w-full bg-[#1d44c3] text-white py-3 rounded-lg font-semibold hover:bg-[#0d2463] transition-all">
-                  Download Free
-                </Button>
-              </div>
+              {featuredDownload.length > 0 && (
+                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                    Download Our Guide
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    {featuredDownload[0].description ||
+                      featuredDownload[0].title}
+                  </p>
+                  <Button className="w-full bg-[#1d44c3] text-white py-3 rounded-lg font-semibold hover:bg-[#0d2463] transition-all">
+                    Download Free
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
