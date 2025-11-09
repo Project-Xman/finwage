@@ -42,7 +42,7 @@ export default async function HowItWorksPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+      <section className="relative bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -76,15 +76,15 @@ export default async function HowItWorksPage() {
             {employeeSteps.length > 0 ? (
               employeeSteps.map((item, index) => (
                 <div key={item.id} className="relative">
-                  <Card className="bg-linear-to-br from-blue-50 to-purple-50 border-0 h-full">
+                  <Card className="bg-linear-to-br from-blue-50 to-pink-50 border-0 h-full">
                     <CardContent className="p-8">
-                      <div className="text-6xl mb-6 text-[#1d44c3]">
+                      <div className={`text-6xl mb-6 ${index % 2 === 1 ? 'text-[#f74b6b]' : 'text-[#1d44c3]'}`}>
                         <SvgIcon
                           svgString={item.icon_svg}
                           className="w-16 h-16 mx-auto"
                         />
                       </div>
-                      <div className="text-sm font-bold text-[#1d44c3] mb-2">
+                      <div className={`text-sm font-bold mb-2 ${index % 2 === 1 ? 'text-[#f74b6b]' : 'text-[#1d44c3]'}`}>
                         STEP {item.step}
                       </div>
                       <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -187,8 +187,8 @@ export default async function HowItWorksPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-4 p-4 bg-purple-50 rounded-xl">
-                      <Users className="w-8 h-8 text-purple-600" />
+                    <div className="flex items-center gap-4 p-4 bg-pink-50 rounded-xl">
+                      <Users className="w-8 h-8 text-[#f74b6b]" />
                       <div>
                         <div className="font-semibold text-gray-900">
                           Full Support
@@ -222,7 +222,7 @@ export default async function HowItWorksPage() {
                 { title: "Auto Repayment", desc: "On next payday" },
               ].map((item, index) => (
                 <div key={item.title} className="relative">
-                  <Card className="bg-linear-to-br from-blue-500 to-purple-500 text-white border-0">
+                  <Card className={`${index % 2 === 1 ? 'bg-linear-to-br from-pink-500 to-pink-600' : 'bg-linear-to-br from-blue-500 to-blue-600'} text-white border-0`}>
                     <CardContent className="p-6 text-center">
                       <div className="text-3xl font-bold mb-2">{index + 1}</div>
                       <div className="font-semibold mb-1">{item.title}</div>
@@ -242,7 +242,7 @@ export default async function HowItWorksPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
+      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Ready to Transform Your Workplace?

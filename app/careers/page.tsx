@@ -68,7 +68,7 @@ export default async function CareersPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+      <section className="relative bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -103,10 +103,10 @@ export default async function CareersPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {values.map((value) => (
+            {values.map((value, index) => (
               <Card
                 key={value.title}
-                className="bg-linear-to-br from-blue-50 to-purple-50 border-0 text-center"
+                className="bg-linear-to-br from-blue-50 to-pink-50 border-0 text-center"
               >
                 <CardContent className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -118,7 +118,7 @@ export default async function CareersPage() {
             ))}
           </div>
 
-          <div className="bg-linear-to-br from-[#1d44c3] to-[#0d2463] rounded-3xl p-8 md:p-16 text-white text-center">
+          <div className="bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] rounded-3xl p-8 md:p-16 text-white text-center">
             <h3 className="text-3xl md:text-4xl font-bold mb-6">
               Make Real Impact Every Day
             </h3>
@@ -146,10 +146,10 @@ export default async function CareersPage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {benefits.map((benefit) => (
+              {benefits.map((benefit, index) => (
                 <Card key={benefit.title} className="shadow-lg">
                   <CardContent className="p-8">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full text-[#1d44c3] mb-6">
+                    <div className={`inline-flex items-center justify-center w-16 h-16 ${index % 2 === 0 ? 'bg-blue-100 text-[#1d44c3]' : 'bg-pink-100 text-[#f74b6b]'} rounded-full mb-6`}>
                       {benefit.icon}
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-4">
@@ -193,7 +193,7 @@ export default async function CareersPage() {
                 {featuredJobs.map((position: JobsResponse) => (
                   <Card
                     key={position.id}
-                    className="bg-linear-to-br from-blue-100 to-purple-100 border-2 border-[#1d44c3] hover:shadow-2xl transition-all group"
+                    className="bg-linear-to-br from-blue-100 to-pink-100 border-2 border-[#f74b6b] hover:shadow-2xl transition-all group"
                   >
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between gap-4">
@@ -241,7 +241,7 @@ export default async function CareersPage() {
               openPositions.map((position: JobsResponse) => (
                 <Card
                   key={position.id}
-                  className="bg-linear-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all group"
+                  className="bg-linear-to-br from-blue-50 to-pink-50 border-0 hover:shadow-xl transition-all group"
                 >
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between gap-4">
@@ -290,7 +290,7 @@ export default async function CareersPage() {
             </p>
             <Button
               variant="link"
-              className="text-[#1d44c3] font-semibold text-base hover:underline"
+              className="text-[#f74b6b] font-semibold text-base hover:underline"
             >
               Send Us Your Resume →
             </Button>
@@ -374,7 +374,7 @@ export default async function CareersPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
+      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Ready to Make an Impact?

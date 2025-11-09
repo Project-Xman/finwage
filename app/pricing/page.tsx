@@ -134,7 +134,7 @@ async function PricingCards() {
 // Static Hero Section
 function HeroSection() {
   return (
-    <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+    <section className="relative bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-6">
           Transparent Pricing for Every Business
@@ -202,7 +202,7 @@ function EmployeeBenefitSection() {
 // CTA Section
 function CTASection() {
   return (
-    <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
+    <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white">
       <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
         <h2 className="text-3xl md:text-5xl font-bold mb-6">
           Ready to Get Started?

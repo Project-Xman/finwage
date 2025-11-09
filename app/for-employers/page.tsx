@@ -48,7 +48,7 @@ export default async function ForEmployersPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+      <section className="relative bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -119,13 +119,13 @@ export default async function ForEmployersPage() {
 
           {benefits.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {benefits.map((benefit) => (
+              {benefits.map((benefit, index) => (
                 <Card
                   key={benefit.id}
-                  className="bg-linear-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
+                  className="bg-linear-to-br from-blue-50 to-pink-50 border-0 hover:shadow-xl transition-all"
                 >
                   <CardContent className="p-8">
-                    <div className="text-[#1d44c3] mb-4">
+                    <div className={`${index % 3 === 1 ? 'text-[#f74b6b]' : 'text-[#1d44c3]'} mb-4`}>
                       <SvgIcon
                         svgString={benefit.icon_svg}
                         className="w-8 h-8"
@@ -177,7 +177,7 @@ export default async function ForEmployersPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="shrink-0 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center">
                     <Shield className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -192,7 +192,7 @@ export default async function ForEmployersPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="shrink-0 w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center">
                     <Users className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -249,7 +249,7 @@ export default async function ForEmployersPage() {
       {/* ROI Calculator Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="bg-linear-to-br from-[#1d44c3] to-[#0d2463] rounded-3xl p-8 md:p-16 text-white">
+          <div className="bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] rounded-3xl p-8 md:p-16 text-white">
             <div className="max-w-3xl mx-auto text-center mb-8">
               <h2 className="text-3xl md:text-5xl font-bold mb-6">
                 Calculate Your ROI
