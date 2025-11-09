@@ -1,19 +1,23 @@
 /**
  * Data Mappers (SRP - Single Responsibility Principle)
- * 
+ *
  * Mappers handle the transformation between different data representations:
  * - API responses → Domain models
  * - Domain models → DTOs (Data Transfer Objects)
  * - Database entities → Domain models
- * 
+ *
  * This separation ensures that changes in API structure don't affect
  * business logic and vice versa.
  */
 
-import type { BlogsResponse, AuthorsResponse, CategoryResponse } from '@/types/pocketbase';
-import { Collections } from '@/types/pocketbase';
-import type { Blog, Author, Category } from '../models/entities';
-import { Slug } from '../models/value-objects';
+import type {
+  AuthorsResponse,
+  BlogsResponse,
+  CategoryResponse,
+} from "@/types/pocketbase";
+import { Collections } from "@/types/pocketbase";
+import type { Author, Blog, Category } from "../models/entities";
+import { Slug } from "../models/value-objects";
 
 /**
  * Base mapper interface for read-only operations
@@ -25,14 +29,18 @@ export interface IReadMapper<TSource, TTarget> {
 /**
  * Bidirectional mapper interface for read/write operations
  */
-export interface IBidirectionalMapper<TSource, TTarget> extends IReadMapper<TSource, TTarget> {
+export interface IBidirectionalMapper<TSource, TTarget>
+  extends IReadMapper<TSource, TTarget> {
   toResponse(model: TTarget): Partial<TSource>;
 }
 
 /**
  * Utility function to safely parse date or throw error
  */
-function parseDateOrThrow(dateString: string | undefined, fieldName: string): Date {
+function parseDateOrThrow(
+  dateString: string | undefined,
+  fieldName: string,
+): Date {
   if (!dateString) {
     throw new Error(`Missing required date field: ${fieldName}`);
   }
@@ -53,21 +61,23 @@ export class BlogMapper implements IBidirectionalMapper<BlogsResponse, Blog> {
   toModel(response: BlogsResponse): Blog {
     return {
       id: response.id,
-      title: response.title || '',
-      slug: response.slug || '',
-      content: response.content || '',
-      excerpt: response.excerpt || '',
+      title: response.title || "",
+      slug: response.slug || "",
+      content: response.content || "",
+      excerpt: response.excerpt || "",
       published: response.published || false,
-      publishedDate: response.published_date ? new Date(response.published_date) : null,
+      publishedDate: response.published_date
+        ? new Date(response.published_date)
+        : null,
       featuredImage: response.featured_image || null,
       metaTitle: null, // Not in current schema - can be added later
       metaDescription: null, // Not in current schema - can be added later
       readingTime: 0, // Calculated field - can be implemented separately
       viewCount: response.views || 0,
-      authorId: response.author || '',
-      categoryId: response.category || '',
-      created: parseDateOrThrow(response.created, 'created'),
-      updated: parseDateOrThrow(response.updated, 'updated'),
+      authorId: response.author || "",
+      categoryId: response.category || "",
+      created: parseDateOrThrow(response.created, "created"),
+      updated: parseDateOrThrow(response.updated, "updated"),
     };
   }
 
@@ -83,8 +93,8 @@ export class BlogMapper implements IBidirectionalMapper<BlogsResponse, Blog> {
       content: model.content,
       excerpt: model.excerpt,
       published: model.published,
-      published_date: model.publishedDate?.toISOString() || '',
-      featured_image: model.featuredImage || '',
+      published_date: model.publishedDate?.toISOString() || "",
+      featured_image: model.featuredImage || "",
       views: model.viewCount,
       author: model.authorId,
       category: model.categoryId,
@@ -97,7 +107,10 @@ export class BlogMapper implements IBidirectionalMapper<BlogsResponse, Blog> {
    * Convert blog response with expanded relations
    */
   toModelWithRelations(
-    response: BlogsResponse<Record<string, unknown>, { author?: AuthorsResponse; category?: CategoryResponse }>,
+    response: BlogsResponse<
+      Record<string, unknown>,
+      { author?: AuthorsResponse; category?: CategoryResponse }
+    >,
   ): Blog {
     const blog = this.toModel(response);
 
@@ -118,14 +131,19 @@ export class BlogMapper implements IBidirectionalMapper<BlogsResponse, Blog> {
 /**
  * Author mapper
  */
-export class AuthorMapper implements IBidirectionalMapper<AuthorsResponse, Author> {
+export class AuthorMapper
+  implements IBidirectionalMapper<AuthorsResponse, Author>
+{
   toModel(response: AuthorsResponse): Author {
-    const socialLink = response.social_link as Record<string, string> | null | undefined;
-    
+    const socialLink = response.social_link as
+      | Record<string, string>
+      | null
+      | undefined;
+
     return {
       id: response.id,
-      name: response.name || '',
-      email: response.email || '',
+      name: response.name || "",
+      email: response.email || "",
       bio: response.bio || null,
       avatar: response.avatar || null,
       socialLinks: {
@@ -134,8 +152,8 @@ export class AuthorMapper implements IBidirectionalMapper<AuthorsResponse, Autho
         github: socialLink?.github || undefined,
         website: socialLink?.website || undefined,
       },
-      created: parseDateOrThrow(response.created, 'created'),
-      updated: parseDateOrThrow(response.updated, 'updated'),
+      created: parseDateOrThrow(response.created, "created"),
+      updated: parseDateOrThrow(response.updated, "updated"),
     };
   }
 
@@ -144,14 +162,14 @@ export class AuthorMapper implements IBidirectionalMapper<AuthorsResponse, Autho
       id: model.id,
       name: model.name,
       email: model.email,
-      bio: model.bio || '',
-      avatar: model.avatar || '',
+      bio: model.bio || "",
+      avatar: model.avatar || "",
       slug: Slug.create(model.name).toString(),
       social_link: {
-        twitter: model.socialLinks.twitter || '',
-        linkedin: model.socialLinks.linkedin || '',
-        github: model.socialLinks.github || '',
-        website: model.socialLinks.website || '',
+        twitter: model.socialLinks.twitter || "",
+        linkedin: model.socialLinks.linkedin || "",
+        github: model.socialLinks.github || "",
+        website: model.socialLinks.website || "",
       },
       created: model.created.toISOString(),
       updated: model.updated.toISOString(),
@@ -162,17 +180,19 @@ export class AuthorMapper implements IBidirectionalMapper<AuthorsResponse, Autho
 /**
  * Category mapper
  */
-export class CategoryMapper implements IBidirectionalMapper<CategoryResponse, Category> {
+export class CategoryMapper
+  implements IBidirectionalMapper<CategoryResponse, Category>
+{
   toModel(response: CategoryResponse): Category {
     return {
       id: response.id,
-      name: response.name || '',
-      slug: response.slug || '',
+      name: response.name || "",
+      slug: response.slug || "",
       description: response.description || null,
-      color: response.color || '#000000',
+      color: response.color || "#000000",
       icon: response.icon || null,
-      created: parseDateOrThrow(response.created, 'created'),
-      updated: parseDateOrThrow(response.updated, 'updated'),
+      created: parseDateOrThrow(response.created, "created"),
+      updated: parseDateOrThrow(response.updated, "updated"),
     };
   }
 
@@ -181,9 +201,9 @@ export class CategoryMapper implements IBidirectionalMapper<CategoryResponse, Ca
       id: model.id,
       name: model.name,
       slug: model.slug,
-      description: model.description || '',
+      description: model.description || "",
       color: model.color,
-      icon: model.icon || '',
+      icon: model.icon || "",
       created: model.created.toISOString(),
       updated: model.updated.toISOString(),
     };
@@ -192,12 +212,13 @@ export class CategoryMapper implements IBidirectionalMapper<CategoryResponse, Ca
 
 /**
  * Mapper factory for creating mappers
- * 
+ *
  * This follows the Factory Pattern and makes it easy to get
  * the appropriate mapper for a given type.
  */
 export class MapperFactory {
-  private static mappers: Map<string, IReadMapper<unknown, unknown>> = new Map();
+  private static mappers: Map<string, IReadMapper<unknown, unknown>> =
+    new Map();
 
   /**
    * Register a mapper
@@ -206,19 +227,21 @@ export class MapperFactory {
     key: string,
     mapper: IReadMapper<TSource, TTarget>,
   ): void {
-    this.mappers.set(key, mapper as IReadMapper<unknown, unknown>);
+    MapperFactory.mappers.set(key, mapper as IReadMapper<unknown, unknown>);
   }
 
   /**
    * Get a registered mapper
    */
-  static get<TSource, TTarget>(key: string): IReadMapper<TSource, TTarget> | null {
-    const mapper = this.mappers.get(key);
+  static get<TSource, TTarget>(
+    key: string,
+  ): IReadMapper<TSource, TTarget> | null {
+    const mapper = MapperFactory.mappers.get(key);
     return mapper ? (mapper as IReadMapper<TSource, TTarget>) : null;
   }
 }
 
 // Register default mappers
-MapperFactory.register('blog', new BlogMapper());
-MapperFactory.register('author', new AuthorMapper());
-MapperFactory.register('category', new CategoryMapper());
+MapperFactory.register("blog", new BlogMapper());
+MapperFactory.register("author", new AuthorMapper());
+MapperFactory.register("category", new CategoryMapper());

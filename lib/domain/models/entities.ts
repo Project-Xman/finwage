@@ -1,6 +1,6 @@
 /**
  * Domain Models (SRP - Single Responsibility Principle)
- * 
+ *
  * Domain models represent business entities with their rules and behaviors.
  * They are separate from API response types and database schemas.
  */
@@ -29,7 +29,7 @@ export interface Blog extends BaseEntity {
   metaDescription: string | null;
   readingTime: number;
   viewCount: number;
-  
+
   // Relations
   authorId: string;
   categoryId: string;
@@ -88,21 +88,21 @@ export interface ContactEnquiry extends BaseEntity {
  * Enquiry interest types
  */
 export enum EnquiryInterest {
-  Demo = 'demo',
-  Pricing = 'pricing',
-  Partnership = 'partnership',
-  Support = 'support',
-  Other = 'other',
+  Demo = "demo",
+  Pricing = "pricing",
+  Partnership = "partnership",
+  Support = "support",
+  Other = "other",
 }
 
 /**
  * Enquiry status types
  */
 export enum EnquiryStatus {
-  New = 'new',
-  InProgress = 'in_progress',
-  Resolved = 'resolved',
-  Closed = 'closed',
+  New = "new",
+  InProgress = "in_progress",
+  Resolved = "resolved",
+  Closed = "closed",
 }
 
 /**
@@ -126,9 +126,9 @@ export interface PricingPlan extends BaseEntity {
  * Billing period types
  */
 export enum BillingPeriod {
-  Monthly = 'monthly',
-  Yearly = 'yearly',
-  Custom = 'custom',
+  Monthly = "monthly",
+  Yearly = "yearly",
+  Custom = "custom",
 }
 
 /**
@@ -174,11 +174,11 @@ export interface Feature extends BaseEntity {
  * Feature categories
  */
 export enum FeatureCategory {
-  Core = 'core',
-  Security = 'security',
-  Integration = 'integration',
-  Analytics = 'analytics',
-  Compliance = 'compliance',
+  Core = "core",
+  Security = "security",
+  Integration = "integration",
+  Analytics = "analytics",
+  Compliance = "compliance",
 }
 
 /**
@@ -214,10 +214,10 @@ export interface JobPosting extends BaseEntity {
  * Job types
  */
 export enum JobType {
-  FullTime = 'full_time',
-  PartTime = 'part_time',
-  Contract = 'contract',
-  Intern = 'intern',
+  FullTime = "full_time",
+  PartTime = "part_time",
+  Contract = "contract",
+  Intern = "intern",
 }
 
 /**
@@ -227,5 +227,5 @@ export interface SalaryRange {
   min: number;
   max: number;
   currency: string;
-  period: 'hourly' | 'monthly' | 'yearly';
+  period: "hourly" | "monthly" | "yearly";
 }

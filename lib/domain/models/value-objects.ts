@@ -1,6 +1,6 @@
 /**
  * Value Objects (DDD - Domain Driven Design)
- * 
+ *
  * Value objects are immutable objects that represent a conceptual whole.
  * They are defined by their attributes rather than a unique identity.
  */
@@ -44,7 +44,7 @@ export class Email {
    * Get email domain
    */
   getDomain(): string {
-    return this.value.split('@')[1];
+    return this.value.split("@")[1];
   }
 
   /**
@@ -90,9 +90,9 @@ export class Slug {
     return text
       .toLowerCase()
       .trim()
-      .replace(/[^\w\s-]/g, '') // Remove special characters
-      .replace(/[\s_-]+/g, '-') // Replace spaces and underscores with hyphens
-      .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+      .replace(/[^\w\s-]/g, "") // Remove special characters
+      .replace(/[\s_-]+/g, "-") // Replace spaces and underscores with hyphens
+      .replace(/^-+|-+$/g, ""); // Remove leading/trailing hyphens
   }
 
   /**
@@ -127,14 +127,14 @@ export class Money {
     private readonly currency: string,
   ) {
     if (amount < 0) {
-      throw new Error('Amount cannot be negative');
+      throw new Error("Amount cannot be negative");
     }
   }
 
   /**
    * Create a Money instance
    */
-  static create(amount: number, currency: string = 'USD'): Money {
+  static create(amount: number, currency: string = "USD"): Money {
     return new Money(amount, currency.toUpperCase());
   }
 
@@ -157,7 +157,7 @@ export class Money {
    */
   add(other: Money): Money {
     if (this.currency !== other.currency) {
-      throw new Error('Cannot add money with different currencies');
+      throw new Error("Cannot add money with different currencies");
     }
     return Money.create(this.amount + other.amount, this.currency);
   }
@@ -167,7 +167,7 @@ export class Money {
    */
   subtract(other: Money): Money {
     if (this.currency !== other.currency) {
-      throw new Error('Cannot subtract money with different currencies');
+      throw new Error("Cannot subtract money with different currencies");
     }
     return Money.create(this.amount - other.amount, this.currency);
   }
@@ -183,8 +183,8 @@ export class Money {
    * Format as currency string
    */
   format(): string {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
       currency: this.currency,
     }).format(this.amount);
   }
@@ -201,7 +201,7 @@ export class Money {
    */
   greaterThan(other: Money): boolean {
     if (this.currency !== other.currency) {
-      throw new Error('Cannot compare money with different currencies');
+      throw new Error("Cannot compare money with different currencies");
     }
     return this.amount > other.amount;
   }
@@ -211,7 +211,7 @@ export class Money {
    */
   lessThan(other: Money): boolean {
     if (this.currency !== other.currency) {
-      throw new Error('Cannot compare money with different currencies');
+      throw new Error("Cannot compare money with different currencies");
     }
     return this.amount < other.amount;
   }
@@ -226,7 +226,7 @@ export class DateRange {
     private readonly endDate: Date,
   ) {
     if (startDate > endDate) {
-      throw new Error('Start date must be before end date');
+      throw new Error("Start date must be before end date");
     }
   }
 
@@ -311,7 +311,7 @@ export class Url {
       const urlObj = new URL(this.value);
       return urlObj.hostname;
     } catch {
-      return '';
+      return "";
     }
   }
 
@@ -319,7 +319,7 @@ export class Url {
    * Check if URL is HTTPS
    */
   isSecure(): boolean {
-    return this.value.startsWith('https://');
+    return this.value.startsWith("https://");
   }
 
   /**

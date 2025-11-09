@@ -18,7 +18,7 @@ import type {
   FaqTopicsResponse,
   SupportResponse,
 } from "@/types/pocketbase";
-import { ProcessListOptions } from "./process";
+import type { ProcessListOptions } from "./process";
 
 // ============================================================
 // TYPES
@@ -152,8 +152,9 @@ export async function getSupportResourcesGroupedByCategory(): Promise<
  * });
  * ```
  */
-export async function getFaqTopics(options: ProcessListOptions = {},): Promise<FaqTopicsResponse[]> {
-
+export async function getFaqTopics(
+  options: ProcessListOptions = {},
+): Promise<FaqTopicsResponse[]> {
   const { category } = options;
 
   try {

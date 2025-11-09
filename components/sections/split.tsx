@@ -1,11 +1,11 @@
+import { ArrowRight, BellIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { BellIcon, ArrowRight } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { PlatformImages } from "./platform";
-import { Safari } from "../ui/safari";
+import { Card, CardContent } from "@/components/ui/card";
 import { Iphone } from "../ui/iphone";
+import { Safari } from "../ui/safari";
+import { PlatformImages } from "./platform";
 
 function DemoButton() {
   return (
@@ -125,9 +125,7 @@ function SectionOne() {
             />
 
             {/* Notification card - Only for desktop image */}
-            <Card
-              className="absolute bg-white rounded-[16px] md:rounded-[20px] lg:rounded-[24px] p-2 md:p-3 lg:p-4 shadow-lg border border-gray-200 max-w-[200px] sm:max-w-[250px] md:max-w-[280px] lg:max-w-[300px] flex items-start gap-2 md:gap-3 bottom-8 md:bottom-12 lg:bottom-16 right-2 md:right-4 lg:right-6"
-            >
+            <Card className="absolute bg-white rounded-[16px] md:rounded-[20px] lg:rounded-[24px] p-2 md:p-3 lg:p-4 shadow-lg border border-gray-200 max-w-[200px] sm:max-w-[250px] md:max-w-[280px] lg:max-w-[300px] flex items-start gap-2 md:gap-3 bottom-8 md:bottom-12 lg:bottom-16 right-2 md:right-4 lg:right-6">
               <CardContent className="flex items-start gap-2 md:gap-3 p-0">
                 {/* Bell Icon in Red Square */}
                 <div className="bg-red-500 rounded-md p-1.5 md:p-2">

@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { EnquiryButton } from "@/components/shared/enquiry-button";
 import {
   Accordion,
   AccordionContent,
@@ -65,13 +66,14 @@ export default async function ForEmployeesPage() {
                 waiting. Just financial freedom when you need it most.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
+                <EnquiryButton
+                  type="contact"
                   size="lg"
                   className="bg-white text-[#1d44c3] hover:bg-gray-100"
+                  icon={<ArrowRight className="w-5 h-5 ml-2" />}
                 >
                   Get Started
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
+                </EnquiryButton>
                 <Button
                   size="lg"
                   variant="ghost"
@@ -274,13 +276,16 @@ export default async function ForEmployeesPage() {
             Join thousands of employees who have found financial freedom with
             FinWage
           </p>
-          <Button
+          <EnquiryButton
+            type="contact"
             size="lg"
             className="bg-white text-[#1d44c3] hover:bg-gray-100"
+            icon={<ArrowRight className="w-5 h-5 ml-2" />}
+            modalTitle="Get Started with FinWage"
+            modalDescription="Sign up for FinWage and start accessing your earned wages today."
           >
             Get Started Today
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
+          </EnquiryButton>
         </div>
       </section>
     </main>

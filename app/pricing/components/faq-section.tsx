@@ -1,3 +1,4 @@
+import { ca } from "date-fns/locale";
 import {
   Accordion,
   AccordionContent,
@@ -5,7 +6,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { getFaqItems, getFaqTopics } from "@/lib/services/support";
-import { ca } from "date-fns/locale";
 
 export async function FAQSection() {
   // First, get the "Pricing & Fees" category

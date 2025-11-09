@@ -891,11 +891,9 @@ export async function getOfficeLocationsByCity(
 export async function getFaqTopics(
   options: ListOptions & { category?: string } = {},
 ): Promise<PocketBaseListResponse<FaqTopicsResponse>> {
-
   const filter = options.category
     ? `category.name = "${options.category}"`
     : options.filter;
-
 
   return fetchCollection<FaqTopicsResponse>(
     "faq_topics",

@@ -132,28 +132,28 @@ export type AuthorsRecord<Tsocial_link = unknown> = {
 };
 
 export type BlogsRecord<Ttags = unknown> = {
-	author?: RecordIdString
-	category?: RecordIdString
-	content?: HTMLString
-	created?: IsoDateString
-	excerpt?: string
-	featured?: boolean
-	featured_image?: string
-	id: string
-	published?: boolean
-	published_date?: IsoDateString
-	slug: string
-	tags?: null | Ttags
-	title: string
-	updated?: IsoDateString
-	views?: number
-	// SEO metadata fields for Next.js 15 static generation
-	seo_title?: string
-	seo_description?: string
-	seo_keywords?: string
-	og_image?: string
-	canonical_url?: string
-}
+  author?: RecordIdString;
+  category?: RecordIdString;
+  content?: HTMLString;
+  created?: IsoDateString;
+  excerpt?: string;
+  featured?: boolean;
+  featured_image?: string;
+  id: string;
+  published?: boolean;
+  published_date?: IsoDateString;
+  slug: string;
+  tags?: null | Ttags;
+  title: string;
+  updated?: IsoDateString;
+  views?: number;
+  // SEO metadata fields for Next.js 15 static generation
+  seo_title?: string;
+  seo_description?: string;
+  seo_keywords?: string;
+  og_image?: string;
+  canonical_url?: string;
+};
 
 export type CategoryRecord = {
   color?: string;

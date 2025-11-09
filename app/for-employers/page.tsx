@@ -1,5 +1,6 @@
 import { ArrowRight, Shield, Users, Zap } from "lucide-react";
 import ROICalculator from "@/components/roi-calculator";
+import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getEmployeeBenefits } from "@/lib/services/benefits";
@@ -57,13 +58,14 @@ export default async function ForEmployersPage() {
                 through improved retention and productivity.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
+                <EnquiryButton
+                  type="demo"
                   size="lg"
                   className="bg-white text-[#1d44c3] hover:bg-gray-100"
+                  icon={<ArrowRight className="w-5 h-5 ml-2" />}
                 >
                   Schedule Demo
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
+                </EnquiryButton>
                 <Button
                   size="lg"
                   variant="ghost"
@@ -268,10 +270,14 @@ export default async function ForEmployersPage() {
             Schedule a demo with our team and see how FinWage can transform your
             workplace in just 30 minutes.
           </p>
-          <Button size="lg" className="bg-[#1d44c3] hover:bg-[#0d2463]">
+          <EnquiryButton
+            type="demo"
+            size="lg"
+            className="bg-[#1d44c3] hover:bg-[#0d2463]"
+            icon={<ArrowRight className="w-5 h-5 ml-2" />}
+          >
             Schedule Your Demo
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
+          </EnquiryButton>
         </div>
       </section>
     </main>

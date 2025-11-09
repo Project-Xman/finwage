@@ -1,6 +1,6 @@
 /**
  * Cache Strategy Interface (OCP - Open/Closed Principle)
- * 
+ *
  * This interface allows different caching strategies to be implemented
  * without modifying existing code. New cache strategies can be added
  * by creating new implementations of this interface.
@@ -35,7 +35,7 @@ export interface ICacheStrategy {
 
 /**
  * Logger Interface (DIP - Dependency Inversion Principle)
- * 
+ *
  * This interface abstracts logging operations, allowing different
  * logging implementations (console, file, external service) to be used
  * without changing business logic.
@@ -54,7 +54,11 @@ export interface ILogger {
   /**
    * Log error messages
    */
-  error(message: string, error?: Error, context?: Record<string, unknown>): void;
+  error(
+    message: string,
+    error?: Error,
+    context?: Record<string, unknown>,
+  ): void;
 
   /**
    * Log debug messages (development only)
@@ -64,7 +68,7 @@ export interface ILogger {
 
 /**
  * Validator Interface (SRP - Single Responsibility Principle)
- * 
+ *
  * This interface defines validation operations separately from
  * business logic, following SRP.
  */
@@ -100,7 +104,7 @@ export interface ValidationError {
 
 /**
  * Serializer Interface (SRP - Single Responsibility Principle)
- * 
+ *
  * Separates data transformation logic from business logic
  */
 export interface ISerializer<TInput, TOutput> {
@@ -117,7 +121,7 @@ export interface ISerializer<TInput, TOutput> {
 
 /**
  * Event Emitter Interface (OCP - Open/Closed Principle)
- * 
+ *
  * Allows event-driven architecture without coupling components
  */
 export interface IEventEmitter {

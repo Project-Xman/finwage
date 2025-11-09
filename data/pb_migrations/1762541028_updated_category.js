@@ -1,22 +1,31 @@
 /// <reference path="../pb_data/types.d.ts" />
-migrate((app) => {
-  const collection = app.findCollectionByNameOrId("4yynrrycy21emob")
+migrate(
+  (app) => {
+    const collection = app.findCollectionByNameOrId("4yynrrycy21emob");
 
-  // update collection data
-  unmarshal({
-    "listRule": "",
-    "viewRule": ""
-  }, collection)
+    // update collection data
+    unmarshal(
+      {
+        listRule: "",
+        viewRule: "",
+      },
+      collection,
+    );
 
-  return app.save(collection)
-}, (app) => {
-  const collection = app.findCollectionByNameOrId("4yynrrycy21emob")
+    return app.save(collection);
+  },
+  (app) => {
+    const collection = app.findCollectionByNameOrId("4yynrrycy21emob");
 
-  // update collection data
-  unmarshal({
-    "listRule": null,
-    "viewRule": null
-  }, collection)
+    // update collection data
+    unmarshal(
+      {
+        listRule: null,
+        viewRule: null,
+      },
+      collection,
+    );
 
-  return app.save(collection)
-})
+    return app.save(collection);
+  },
+);

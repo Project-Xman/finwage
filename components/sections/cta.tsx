@@ -1,5 +1,6 @@
-import Image from "next/image";
 import type { NextPage } from "next";
+import Image from "next/image";
+import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getCTACards } from "@/lib/services/cta";
@@ -77,13 +78,15 @@ function HeroImageContainer({ className }: { className?: string }) {
 
 function LetsTalkButton() {
   return (
-    <Button
+    <EnquiryButton
+      type="contact"
       size="lg"
       className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-xl transition-shadow rounded-full font-semibold w-full md:w-auto"
-      data-name="Link"
+      modalTitle="Let's Talk"
+      modalDescription="Tell us about your organization and how we can help you provide financial wellness benefits to your employees."
     >
       Let's Talk
-    </Button>
+    </EnquiryButton>
   );
 }
 
@@ -142,10 +145,7 @@ function CtaCardComponent({ icon_svg, bg_color, title, points }: CtaCard) {
         <div className="flex-1 space-y-2">
           {points &&
             points.map((point: string, index: number) => (
-              <p
-                key={index}
-                className="text-sm text-gray-600 leading-relaxed"
-              >
+              <p key={index} className="text-sm text-gray-600 leading-relaxed">
                 {point}
               </p>
             ))}
@@ -203,12 +203,15 @@ function DesktopView({ cards }: { cards: CtaCard[] }) {
             <h2 className="font-normal text-2xl text-[#1d44c3] leading-tight">
               Discover Why FinWage is Powering Top Employers
             </h2>
-            <Button
+            <EnquiryButton
+              type="contact"
               size="lg"
               className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-xl transition-shadow rounded-full font-semibold w-fit"
+              modalTitle="Let's Talk"
+              modalDescription="Tell us about your organization and how we can help you provide financial wellness benefits to your employees."
             >
               Let's Talk
-            </Button>
+            </EnquiryButton>
           </div>
         </div>
       </div>

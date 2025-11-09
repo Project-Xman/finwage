@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Blogs from "@/components/sections/blog";
 import Cta from "@/components/sections/cta";
+import CycleSection from "@/components/sections/cycle";
 import Employees from "@/components/sections/employees";
 import Features from "@/components/sections/features";
 import Globe from "@/components/sections/globe";
@@ -10,6 +11,7 @@ import Integrations from "@/components/sections/integrations";
 import Partners from "@/components/sections/partners";
 import PlatformSection from "@/components/sections/platform";
 import Pricing from "@/components/sections/pricing";
+import SplitSection from "@/components/sections/split";
 import StandOut from "@/components/sections/standout";
 import Testimonials from "@/components/sections/testimonials";
 import You from "@/components/sections/you";
@@ -21,8 +23,6 @@ import {
   TestimonialsSkeleton,
 } from "@/components/ui/loading-skeletons";
 import { getAllCompanyStats } from "@/lib/services/company";
-import SplitSection from "@/components/sections/split";
-import CycleSection from "@/components/sections/cycle";
 
 export const metadata = {
   title: "FinWage - Earned Wage Access for Financial Wellness",

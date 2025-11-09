@@ -134,21 +134,21 @@ export default async function Blogs() {
 
         {/* Grid Layout - 1 column on mobile, 2 columns on md+ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-            <div className="flex flex-col gap-3 ">
+          <div className="flex flex-col gap-3 ">
             <Button
               variant="ghost"
               className="text-[#f64162] hover:text-[#f64162] font-bold inline-flex self-start gap-2 hover:gap-3 transition-all p-0 h-auto"
               asChild
             >
               <NextLink href="/blog">
-              Explore all resources
-              <ArrowRight className="w-4 h-4" />
+                Explore all resources
+                <ArrowRight className="w-4 h-4" />
               </NextLink>
             </Button>
             {featuredBlogs.map((post) => (
               <FeaturedPost key={post.id} post={post as BlogWithExpand} />
             ))}
-            </div>
+          </div>
           <LatestPosts posts={latestPosts} />
         </div>
       </div>
