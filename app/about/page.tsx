@@ -9,8 +9,9 @@ import {
 } from "@/lib/services/company";
 import { getImageUrl } from "@/lib/utils/pocketbase";
 import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "About Us - FinWage",
   description:
     "Learn about FinWage's mission to transform financial wellness for millions of workers. Meet our leadership team and discover our journey.",
@@ -48,8 +49,8 @@ export default async function AboutPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Transforming Payday for Everyone
@@ -64,7 +65,7 @@ export default async function AboutPage() {
 
       {/* Mission & Story */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -103,7 +104,7 @@ export default async function AboutPage() {
             {values.map((value) => (
               <Card
                 key={value.id}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 text-center"
+                className="bg-linear-to-br from-blue-50 to-purple-50 border-0 text-center"
               >
                 <CardContent className="p-8">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
@@ -122,7 +123,7 @@ export default async function AboutPage() {
 
       {/* Leadership Team */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
               Meet Our Leadership
@@ -165,7 +166,7 @@ export default async function AboutPage() {
 
       {/* Timeline */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
               Our Journey
@@ -180,12 +181,12 @@ export default async function AboutPage() {
               <div className="space-y-8">
                 {milestones.map((milestone) => (
                   <div key={milestone.id} className="flex gap-6 items-center">
-                    <div className="flex-shrink-0">
-                      <div className="w-20 h-20 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] rounded-full flex items-center justify-center text-white font-bold">
+                    <div className="shrink-0">
+                      <div className="w-20 h-20 bg-linear-to-br from-[#1d44c3] to-[#0d2463] rounded-full flex items-center justify-center text-white font-bold">
                         {milestone.year}
                       </div>
                     </div>
-                    <Card className="flex-1 bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+                    <Card className="flex-1 bg-linear-to-br from-blue-50 to-purple-50 border-0">
                       <CardContent className="p-6">
                         <h3 className="text-2xl font-bold text-gray-900 mb-2">
                           {milestone.event}
@@ -206,8 +207,8 @@ export default async function AboutPage() {
       </section>
 
       {/* Vision & Compliance */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold mb-6">
@@ -229,7 +230,7 @@ export default async function AboutPage() {
               <h3 className="text-2xl font-bold mb-6">Compliance & Security</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
-                  <Shield className="w-6 h-6 flex-shrink-0 mt-1" />
+                  <Shield className="w-6 h-6 shrink-0 mt-1" />
                   <div>
                     <div className="font-semibold mb-1">AML Compliant</div>
                     <div className="text-blue-100 text-sm">
@@ -238,7 +239,7 @@ export default async function AboutPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <Shield className="w-6 h-6 flex-shrink-0 mt-1" />
+                  <Shield className="w-6 h-6 shrink-0 mt-1" />
                   <div>
                     <div className="font-semibold mb-1">
                       GDPR & Data Protection
@@ -249,7 +250,7 @@ export default async function AboutPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <Shield className="w-6 h-6 flex-shrink-0 mt-1" />
+                  <Shield className="w-6 h-6 shrink-0 mt-1" />
                   <div>
                     <div className="font-semibold mb-1">SOC 2 Certified</div>
                     <div className="text-blue-100 text-sm">
@@ -258,7 +259,7 @@ export default async function AboutPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <Shield className="w-6 h-6 flex-shrink-0 mt-1" />
+                  <Shield className="w-6 h-6 shrink-0 mt-1" />
                   <div>
                     <div className="font-semibold mb-1">State Licensed</div>
                     <div className="text-blue-100 text-sm">
@@ -274,7 +275,7 @@ export default async function AboutPage() {
 
       {/* CTA */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6 text-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
             Join Us on Our Mission
           </h2>

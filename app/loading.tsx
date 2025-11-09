@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1d44c3] to-[#0d2463]">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#1d44c3] to-[#0d2463]">
       <div className="text-center">
         {/* FinWage Logo Spinner */}
         <div className="relative w-24 h-24 mx-auto mb-8">

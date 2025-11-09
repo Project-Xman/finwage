@@ -10,7 +10,7 @@ export default async function Partners() {
       className="bg-[#f6f8ff] relative w-full py-16 md:py-24"
       data-name="Partners"
     >
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-[#1d44c3] text-[32px] md:text-[46.3px] leading-[40px] md:leading-[48px] mb-4 md:mb-6">
             Meet Our Partners

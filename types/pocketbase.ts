@@ -136,6 +136,7 @@ export type AuthorsRecord<Tsocial_link = unknown> = {
 
 export type BlogsRecord<Ttags = unknown> = {
   author?: RecordIdString;
+  canonical_url?: string;
   category?: RecordIdString;
   content?: HTMLString;
   created?: IsoDateString;
@@ -143,19 +144,17 @@ export type BlogsRecord<Ttags = unknown> = {
   featured?: boolean;
   featured_image?: string;
   id: string;
+  og_image?: string;
   published?: boolean;
   published_date?: IsoDateString;
+  seo_description?: string;
+  seo_keywords?: string;
+  seo_title?: string;
   slug: string;
   tags?: null | Ttags;
   title: string;
   updated?: IsoDateString;
   views?: number;
-  // SEO metadata fields for Next.js 15 static generation
-  seo_title?: string;
-  seo_description?: string;
-  seo_keywords?: string;
-  og_image?: string;
-  canonical_url?: string;
 };
 
 export type CategoryRecord = {
@@ -433,7 +432,7 @@ export type ResourceCategoriesRecord = {
   article_count?: number;
   created?: IsoDateString;
   description?: string;
-  icon?: string;
+  icon_svg?: string;
   id: string;
   name: string;
   order?: number;
@@ -448,7 +447,6 @@ export enum ResourceDownloadsTypeOptions {
   report = "report",
   template = "template",
 }
-
 export type ResourceDownloadsRecord = {
   active?: boolean;
   created?: IsoDateString;
@@ -458,7 +456,7 @@ export type ResourceDownloadsRecord = {
   file_url?: string;
   id: string;
   order?: number;
-  title: string;
+  title?: string;
   type?: ResourceDownloadsTypeOptions;
   updated?: IsoDateString;
 };

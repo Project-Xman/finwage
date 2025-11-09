@@ -1,11 +1,11 @@
 /**
  * SVG Icon Renderer Utility
- * 
+ *
  * Renders SVG icons from string content stored in the database.
  * Supports inline SVG strings and provides proper sanitization.
  */
 
-import React from 'react';
+import type React from "react";
 
 interface SvgIconProps {
   svgString: string;
@@ -15,27 +15,27 @@ interface SvgIconProps {
 
 /**
  * Renders an SVG icon from a string
- * 
+ *
  * @param svgString - The SVG markup as a string
  * @param className - Optional className for styling
  * @param size - Optional size (width and height)
- * 
+ *
  * @example
  * ```tsx
- * <SvgIcon 
- *   svgString='<svg viewBox="0 0 24 24">...</svg>' 
+ * <SvgIcon
+ *   svgString='<svg viewBox="0 0 24 24">...</svg>'
  *   className="w-6 h-6 text-blue-500"
  * />
  * ```
  */
-export function SvgIcon({ svgString, className = '', size }: SvgIconProps) {
+export function SvgIcon({ svgString, className = "", size }: SvgIconProps) {
   if (!svgString) {
     return null;
   }
 
   // Check if it's already an SVG tag
-  const isSvgTag = svgString.trim().startsWith('<svg');
-  
+  const isSvgTag = svgString.trim().startsWith("<svg");
+
   if (!isSvgTag) {
     // If it's just the path data or other content, wrap it in SVG
     return (
@@ -66,7 +66,7 @@ export function SvgIcon({ svgString, className = '', size }: SvgIconProps) {
 /**
  * Alternative safer approach: Extract SVG properties and render as React component
  */
-export function SafeSvgIcon({ svgString, className = '', size }: SvgIconProps) {
+export function SafeSvgIcon({ svgString, className = "", size }: SvgIconProps) {
   if (!svgString) {
     return null;
   }
@@ -74,17 +74,17 @@ export function SafeSvgIcon({ svgString, className = '', size }: SvgIconProps) {
   try {
     // Extract viewBox if present
     const viewBoxMatch = svgString.match(/viewBox="([^"]+)"/);
-    const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
+    const viewBox = viewBoxMatch ? viewBoxMatch[1] : "0 0 24 24";
 
     // Extract path data
     const pathMatch = svgString.match(/<path[^>]*d="([^"]+)"/);
-    const pathData = pathMatch ? pathMatch[1] : '';
+    const pathData = pathMatch ? pathMatch[1] : "";
 
     // Extract fill if present
     const fillMatch = svgString.match(/fill="([^"]+)"/);
-    const fill = fillMatch ? fillMatch[1] : 'currentColor';
+    const fill = fillMatch ? fillMatch[1] : "currentColor";
 
-    if (!pathData && !svgString.includes('<svg')) {
+    if (!pathData && !svgString.includes("<svg")) {
       // If no path found and it's not an SVG, treat the whole string as path data
       return (
         <svg
@@ -113,7 +113,7 @@ export function SafeSvgIcon({ svgString, className = '', size }: SvgIconProps) {
       </svg>
     );
   } catch (error) {
-    console.error('Error rendering SVG:', error);
+    console.error("Error rendering SVG:", error);
     return null;
   }
 }
@@ -124,7 +124,7 @@ export function SafeSvgIcon({ svgString, className = '', size }: SvgIconProps) {
 export function renderSvgIcon(
   svgString: string | undefined,
   className?: string,
-  fallback?: React.ReactNode
+  fallback?: React.ReactNode,
 ): React.ReactNode {
   if (!svgString) {
     return fallback || null;

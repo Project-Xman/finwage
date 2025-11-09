@@ -12,7 +12,7 @@ export default function NotFound() {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-purple-50 px-4">
       <div className="max-w-2xl w-full text-center">
         <div className="mb-8">
           <h1 className="text-[150px] md:text-[200px] font-bold text-[#1d44c3] leading-none opacity-20">

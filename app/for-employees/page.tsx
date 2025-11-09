@@ -10,13 +10,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getEmployeeBenefits } from "@/lib/services/benefits";
-import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 import { getFAQs } from "@/lib/services/faqs";
 import { getTestimonials } from "@/lib/services/testimonials";
 import { renderIcon } from "@/lib/utils/icon-mapper";
 import { getImageUrl } from "@/lib/utils/pocketbase";
+import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "For Employees - FinWage",
   description:
     "Get instant access to your earned wages with FinWage. Zero fees, no interest, completely free financial wellness tool.",
@@ -54,8 +55,8 @@ export default async function ForEmployeesPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -110,7 +111,7 @@ export default async function ForEmployeesPage() {
 
       {/* Why Use FinWage */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
               Why Thousands Choose FinWage
@@ -126,11 +127,14 @@ export default async function ForEmployeesPage() {
               benefits.map((benefit) => (
                 <Card
                   key={benefit.id}
-                  className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
+                  className="bg-linear-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
                 >
                   <CardContent className="p-8">
                     <div className="text-[#1d44c3] mb-4">
-                      <SvgIcon svgString={benefit.icon_svg} className="w-8 h-8" />
+                      <SvgIcon
+                        svgString={benefit.icon_svg}
+                        className="w-8 h-8"
+                      />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-3">
                       {benefit.title}
@@ -152,7 +156,7 @@ export default async function ForEmployeesPage() {
 
       {/* Testimonials */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
               Real Stories from Real People
@@ -223,7 +227,7 @@ export default async function ForEmployeesPage() {
 
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
               Frequently Asked Questions
@@ -267,8 +271,8 @@ export default async function ForEmployeesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6 text-center">
+      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Ready to Take Control?
           </h2>

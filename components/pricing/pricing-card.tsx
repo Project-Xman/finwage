@@ -72,7 +72,7 @@ export function PricingCard({ plan }: PricingCardProps) {
                 key={`${plan.id}-feature-${idx}`}
                 className="flex items-start gap-3"
               >
-                <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                <Check className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
                 <span className="text-sm text-foreground">{feature}</span>
               </div>
             ))}
@@ -81,7 +81,7 @@ export function PricingCard({ plan }: PricingCardProps) {
                 key={`${plan.id}-not-${idx}`}
                 className="flex items-start gap-3 opacity-50"
               >
-                <X className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+                <X className="w-5 h-5 text-muted-foreground shrink-0 mt-0.5" />
                 <span className="text-sm text-muted-foreground">{feature}</span>
               </div>
             ))}

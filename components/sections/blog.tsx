@@ -19,7 +19,7 @@ function BlogCard({ post }: { post: BlogWithExpand }) {
     <NextLink href={`/blog/${post.slug}`}>
       <Card className="rounded-lg hover:shadow-md transition-shadow border-0">
         <CardContent className="p-0 flex gap-3 h-[104px] items-center">
-          <div className="flex-shrink-0 w-32 h-20 rounded-md overflow-hidden">
+          <div className="shrink-0 w-32 h-20 rounded-md overflow-hidden">
             <Image
               src={imageUrl}
               alt={post.title}

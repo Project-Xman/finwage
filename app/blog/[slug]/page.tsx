@@ -145,7 +145,7 @@ export default async function BlogPostPage({
     <main className="min-h-screen bg-white">
       {/* Back Button */}
       <div className="bg-gray-50 border-b">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4">
           <NextLink
             href="/blog"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-[#1d44c3] transition-colors"
@@ -158,7 +158,7 @@ export default async function BlogPostPage({
 
       {/* Hero Section */}
       <article>
-        <header className="relative bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-16 md:py-24">
+        <header className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-16 md:py-24">
           <div className="max-w-[800px] mx-auto px-4 md:px-6">
             <div className="mb-6">
               <span className="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold">
@@ -305,7 +305,7 @@ export default async function BlogPostPage({
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
         <section className="py-16 md:py-24 bg-gray-50">
-          <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+          <div className="max-w-7xl mx-auto px-4 md:px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
               Related Articles
             </h2>
@@ -371,7 +371,7 @@ export default async function BlogPostPage({
       )}
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white">
+      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
         <div className="max-w-[800px] mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Ready to Transform Your Workplace?

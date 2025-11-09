@@ -9,16 +9,13 @@ import { getFaqItems, getFaqTopics } from "@/lib/services/support";
 
 export async function FAQSection() {
   // First, get the "Pricing & Fees" category
-  const categories = await getFaqTopics(
-    { category: "Pricing & Fees" },
-  );
-
+  const categories = await getFaqTopics({ category: "Pricing & Fees" });
 
   if (!categories || categories.length === 0) {
     console.error("Pricing & Fees category not found");
     return (
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
               Pricing FAQ
@@ -39,6 +36,8 @@ export async function FAQSection() {
     category: "Pricing & Fees",
   });
 
+  console.log("Fetched FAQs for Pricing & Fees:", faqs);
+
   // Sort by featured first, then by order
   const sortedFAQs = [...faqs].sort((a, b) => {
     // Featured first
@@ -51,7 +50,7 @@ export async function FAQSection() {
   if (sortedFAQs.length === 0) {
     return (
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
               Pricing FAQ
@@ -69,7 +68,7 @@ export async function FAQSection() {
 
   return (
     <section className="py-16 md:py-24 bg-gray-50">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
             Pricing FAQ

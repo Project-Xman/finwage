@@ -31,7 +31,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <NextLink
               href="/"
-              className="flex items-center gap-2 font-bold text-lg flex-shrink-0"
+              className="flex items-center gap-2 font-bold text-lg shrink-0"
             >
               <div className="relative w-36 h-10 md:w-44 md:h-12">
                 <Image

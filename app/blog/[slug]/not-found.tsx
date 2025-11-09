@@ -3,7 +3,7 @@ import NextLink from "next/link";
 
 export default function BlogPostNotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-purple-50 px-4">
       <div className="max-w-2xl w-full text-center">
         <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-6">

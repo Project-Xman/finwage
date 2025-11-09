@@ -39,7 +39,7 @@ function TestimonialCard({
   rating,
 }: TestimonialCardProps) {
   return (
-    <Card className="bg-white rounded-[16px] border border-gray-100 min-w-[280px] w-[280px] md:min-w-[300px] md:w-[300px] flex-shrink-0 mr-4">
+    <Card className="bg-white rounded-[16px] border border-gray-100 min-w-[280px] w-[280px] md:min-w-[300px] md:w-[300px] shrink-0 mr-4">
       <CardContent className="p-6 flex flex-col gap-4">
         <StarRating rating={rating} />
         <p className="text-[13.5px] leading-[22.75px] text-gray-700">{quote}</p>
@@ -149,7 +149,7 @@ export default async function Testimonials() {
         }
       `}</style>
 
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
           <p className="font-bold text-[#f64162] text-[12px] md:text-[13.5px] tracking-[1.4px] uppercase mb-3 md:mb-4">
             Testimonials

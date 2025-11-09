@@ -12,6 +12,7 @@ import type {
   BlogsResponse,
   CategoryResponse,
 } from "@/types/pocketbase";
+import { Metadata } from "next";
 
 // Type for blog with expanded relations
 type BlogWithExpand = BlogsResponse<
@@ -22,7 +23,7 @@ type BlogWithExpand = BlogsResponse<
   }
 >;
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Blog - FinWage",
   description:
     "Expert insights on financial wellness, earned wage access, and the future of payroll.",
@@ -71,8 +72,8 @@ export default async function BlogPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Blog & Insights
@@ -87,7 +88,7 @@ export default async function BlogPage() {
 
       {/* Categories */}
       <section className="py-8 bg-white border-b">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="flex flex-wrap gap-3">
             {categories.map((category, index) => (
               <Button
@@ -105,7 +106,7 @@ export default async function BlogPage() {
       {/* Featured Post */}
       {featuredPost && (
         <section className="py-16 bg-gray-50">
-          <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+          <div className="max-w-7xl mx-auto px-4 md:px-6">
             <h2 className="text-sm font-bold text-[#1d44c3] uppercase tracking-wider mb-4">
               Featured Post
             </h2>
@@ -207,7 +208,7 @@ export default async function BlogPage() {
 
       {/* Recent Posts Grid */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
             Recent Posts
           </h2>
@@ -289,7 +290,7 @@ export default async function BlogPage() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white">
+      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
         <div className="max-w-[800px] mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Stay Updated</h2>
           <p className="text-xl text-blue-100 mb-8">

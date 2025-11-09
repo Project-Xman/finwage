@@ -58,7 +58,7 @@ export default async function Features() {
                       />
                     </div>
                   ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-50" />
+                    <div className="absolute inset-0 bg-linear-to-br from-blue-50 to-purple-50 opacity-50" />
                   )
                 }
               />

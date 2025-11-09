@@ -22,8 +22,9 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { getContactOptions } from "@/lib/services/contact";
 import { EnquiriesInterestOptions } from "@/types/pocketbase";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Contact Us - FinWage",
   description:
     "Get in touch with FinWage. Schedule a demo, request support, or send us your questions. We're here to help.",
@@ -48,8 +49,8 @@ export default async function ContactPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Get in Touch
@@ -65,7 +66,7 @@ export default async function ContactPage() {
       {/* Contact Options */}
       {contactOptions.length > 0 && (
         <section className="py-16 md:py-24 bg-white">
-          <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+          <div className="max-w-7xl mx-auto px-4 md:px-6">
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               {contactOptions.slice(0, 3).map((option, index) => {
                 // Determine icon based on type or use default
@@ -87,7 +88,7 @@ export default async function ContactPage() {
                 return (
                   <Card
                     key={option.id}
-                    className="bg-gradient-to-br from-blue-50 to-purple-50 border-0"
+                    className="bg-linear-to-br from-blue-50 to-purple-50 border-0"
                   >
                     <CardHeader className="text-center">
                       <div
@@ -122,7 +123,7 @@ export default async function ContactPage() {
 
       {/* Demo Request Form */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -136,7 +137,7 @@ export default async function ContactPage() {
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                     <Clock className="w-6 h-6 text-[#1d44c3]" />
                   </div>
                   <div>
@@ -150,7 +151,7 @@ export default async function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                     <MessageSquare className="w-6 h-6 text-[#1d44c3]" />
                   </div>
                   <div>
@@ -164,7 +165,7 @@ export default async function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                     <ArrowRight className="w-6 h-6 text-[#1d44c3]" />
                   </div>
                   <div>
@@ -227,7 +228,7 @@ export default async function ContactPage() {
 
       {/* Office Info */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="text-center">
               <CardContent className="p-8">
@@ -277,7 +278,7 @@ export default async function ContactPage() {
 function SupportResourcesSkeleton() {
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <Skeleton className="h-12 w-96 mx-auto mb-4" />
           <Skeleton className="h-6 w-64 mx-auto" />
@@ -304,7 +305,7 @@ function SupportResourcesSkeleton() {
 function FAQSkeleton() {
   return (
     <section className="py-16 md:py-24 bg-gray-50">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <Skeleton className="h-12 w-96 mx-auto mb-4" />
           <Skeleton className="h-6 w-64 mx-auto" />

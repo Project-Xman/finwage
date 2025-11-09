@@ -98,7 +98,7 @@ export function TestimonialCardSkeleton() {
 export function TestimonialsSkeleton() {
   return (
     <section className="bg-[#f6f8ff] py-12 md:py-16 lg:py-24">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-8 md:mb-12">
           <Skeleton className="h-4 w-32 mx-auto mb-4" />
           <Skeleton className="h-12 w-96 mx-auto" />
@@ -131,7 +131,7 @@ export function PricingCardSkeleton() {
         <div className="space-y-4">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="flex items-start gap-3">
-              <Skeleton className="h-5 w-5 rounded flex-shrink-0" />
+              <Skeleton className="h-5 w-5 rounded shrink-0" />
               <Skeleton className="h-4 w-full" />
             </div>
           ))}
@@ -172,7 +172,7 @@ export function FeatureCardSkeleton() {
 export function FeaturesSkeleton({ count = 6 }: { count?: number }) {
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <Skeleton className="h-12 w-96 mx-auto mb-4" />
           <Skeleton className="h-6 w-64 mx-auto" />
@@ -198,7 +198,7 @@ export function PartnerLogoSkeleton() {
 export function PartnersSkeleton({ count = 8 }: { count?: number }) {
   return (
     <section className="py-16 md:py-24 bg-gray-50">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
           <Skeleton className="h-12 w-96 mx-auto mb-4" />
           <Skeleton className="h-6 w-64 mx-auto" />
@@ -264,7 +264,7 @@ export function FAQItemSkeleton() {
 export function FAQSkeleton({ count = 6 }: { count?: number }) {
   return (
     <section className="py-16 md:py-24 bg-gray-50">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <Skeleton className="h-12 w-96 mx-auto mb-4" />
           <Skeleton className="h-6 w-64 mx-auto" />
@@ -301,7 +301,7 @@ export function SupportResourceCardSkeleton() {
 export function SupportResourcesSkeleton({ count = 6 }: { count?: number }) {
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <Skeleton className="h-12 w-96 mx-auto mb-4" />
           <Skeleton className="h-6 w-64 mx-auto" />
@@ -322,7 +322,7 @@ export function SupportResourcesSkeleton({ count = 6 }: { count?: number }) {
 
 export function PressReleaseCardSkeleton() {
   return (
-    <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+    <Card className="bg-linear-to-br from-blue-50 to-purple-50 border-0">
       <CardContent className="p-6">
         <Skeleton className="h-6 w-full mb-2" />
         <Skeleton className="h-6 w-3/4 mb-4" />
@@ -335,7 +335,7 @@ export function PressReleaseCardSkeleton() {
 export function PressReleasesSkeleton({ count = 3 }: { count?: number }) {
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
           <Skeleton className="h-12 w-96 mx-auto mb-4" />
         </div>
@@ -379,7 +379,7 @@ export function StatsSkeleton({ count = 4 }: { count?: number }) {
 export function SectionSkeleton() {
   return (
     <section className="py-16 md:py-24">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <Skeleton className="h-12 w-96 mx-auto mb-4" />
           <Skeleton className="h-6 w-64 mx-auto" />
@@ -404,8 +404,8 @@ export function SectionSkeleton() {
 export function PageSkeleton() {
   return (
     <main className="min-h-screen">
-      <section className="bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <section className="bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <Skeleton className="h-16 w-96 mb-6 bg-white/20" />
           <Skeleton className="h-8 w-full max-w-2xl bg-white/20" />
         </div>

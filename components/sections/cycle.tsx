@@ -68,7 +68,7 @@ function HeroImageContainer({ className }: { className?: string }) {
       {/* Peace of Mind Card */}
       <div className="absolute right-[-23.6%] bottom-[21px] w-[34.68%] h-[139px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[12px] rounded-lg bg-[rgba(255,255,255,0.95)] border border-gray-200 overflow-hidden">
         <div className="absolute top-[calc(50%_-_23.7px)] left-[20.8px] rounded-[12px] w-[48px] h-[48px] overflow-hidden flex items-center justify-center">
-          <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
+          <div className="w-full h-full bg-linear-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -101,7 +101,7 @@ function HeroImageContainer({ className }: { className?: string }) {
 
 const CycleSection: NextPage = () => {
   return (
-    <div className="hidden md:block relative w-full h-[580px] md:h-[650px] lg:h-[734px] bg-white flex-shrink-0 text-left text-2xl text-white font-afacad overflow-hidden">
+    <div className="hidden md:block relative w-full h-[580px] md:h-[650px] lg:h-[734px] bg-white shrink-0 text-left text-2xl text-white font-afacad overflow-hidden">
       {/* Main Container */}
       <div className="absolute top-[-140px] md:top-[-160px] lg:top-[-184px] left-[-280px] md:left-[-220px] lg:left-[-162px] w-[1815px] flex items-center gap-8 md:gap-12 lg:gap-16 overflow-clip scale-[0.65] md:scale-[0.8] lg:scale-100 origin-left">
         <HeroImageContainer className="w-[1000px] h-[930px]" />
@@ -113,7 +113,7 @@ const CycleSection: NextPage = () => {
             {/* Work Card */}
             <div className="absolute right-[29.03%] bottom-[152px] w-[70.97%] h-[139px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[12px] rounded-lg bg-[rgba(255,255,255,0.95)] border border-gray-200 overflow-hidden">
               <div className="absolute top-[calc(50%_-_23.7px)] left-[20.8px] rounded-[12px] w-[48px] h-[48px] overflow-hidden flex items-center justify-center">
-                <div className="w-full h-full bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center">
+                <div className="w-full h-full bg-linear-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -145,7 +145,7 @@ const CycleSection: NextPage = () => {
             {/* Earn Card */}
             <div className="absolute right-[23.22%] bottom-[-34px] left-[5.81%] w-[70.97%] h-[139px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[12px] rounded-lg bg-[rgba(255,255,255,0.95)] border border-gray-200 overflow-hidden">
               <div className="absolute top-[calc(50%_-_23.7px)] left-[20.8px] rounded-[12px] w-[48px] h-[48px] overflow-hidden flex items-center justify-center">
-                <div className="w-full h-full bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center">
+                <div className="w-full h-full bg-linear-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -180,7 +180,7 @@ const CycleSection: NextPage = () => {
             {/* Access Pay Card */}
             <div className="absolute right-[46.72%] bottom-[88px] left-[2.61%] w-[50.67%] h-[139px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[12px] rounded-lg bg-[rgba(255,255,255,0.95)] border border-gray-200 overflow-hidden">
               <div className="absolute top-[calc(50%_-_23.7px)] left-[20.8px] rounded-[12px] w-[48px] h-[48px] overflow-hidden flex items-center justify-center">
-                <div className="w-full h-full bg-gradient-to-br from-pink-100 to-pink-200 rounded-full flex items-center justify-center">
+                <div className="w-full h-full bg-linear-to-br from-pink-100 to-pink-200 rounded-full flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"

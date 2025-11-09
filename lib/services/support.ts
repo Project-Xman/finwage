@@ -204,6 +204,7 @@ export async function getFaqItems(
     if (category) {
       // Fetch FAQs by category
       const faqs = await apiFetchFaqItemsByCategory(category);
+      console.log("Fetched FAQ items for category:", category, faqs);
       return limit ? faqs.slice(0, limit) : faqs;
     }
 

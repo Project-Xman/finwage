@@ -130,7 +130,7 @@ function ParagraphBackgroundBorderShadowOverlayBlur() {
 
 function Frame9() {
   return (
-    <div className="relative w-full md:w-[584px] min-h-[400px] md:h-[500px] flex-shrink-0">
+    <div className="relative w-full md:w-[584px] min-h-[400px] md:h-[500px] shrink-0">
       {/* Mobile: Stack images vertically */}
       <div className="md:hidden flex flex-col gap-4 items-center">
         <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden relative">
@@ -199,7 +199,7 @@ function Frame10() {
 export default function Employees() {
   return (
     <section className="relative w-full bg-[#fff9fa] py-16 md:py-24">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex flex-col gap-12 items-center min-[900px]:flex-row min-[900px]:gap-[112px]">
           <Frame9 />
           <Frame10 />

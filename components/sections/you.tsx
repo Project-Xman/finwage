@@ -210,10 +210,10 @@ const CycleStep = ({
       </div>
 
       {/* Modern Content Card */}
-      <Card className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200 w-[280px] md:w-[300px] lg:w-[320px] backdrop-blur-sm hover:-translate-y-1">
+      <Card className="bg-linear-to-br from-white to-gray-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-200 w-[280px] md:w-[300px] lg:w-[320px] backdrop-blur-sm hover:-translate-y-1">
         <CardContent className="flex flex-col items-center gap-4 p-0">
           <div className="flex justify-center">
-            <div className="w-[90px] h-[90px] md:w-[100px] md:h-[100px] rounded-2xl bg-gradient-to-br from-[#1d44c3]/10 to-[#f74b6b]/10 flex items-center justify-center p-3">
+            <div className="w-[90px] h-[90px] md:w-[100px] md:h-[100px] rounded-2xl bg-linear-to-br from-[#1d44c3]/10 to-[#f74b6b]/10 flex items-center justify-center p-3">
               <div className="relative w-full h-full">
                 <Image
                   src={image}
@@ -250,10 +250,10 @@ const YouCard = ({
   image: string;
 }) => {
   return (
-    <Card className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 w-full backdrop-blur-sm">
+    <Card className="bg-linear-to-br from-white to-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 w-full backdrop-blur-sm">
       <CardContent className="flex flex-col items-center gap-4 p-0">
         <div className="flex justify-center">
-          <div className="w-[90px] h-[90px] rounded-2xl bg-gradient-to-br from-[#1d44c3]/10 to-[#f74b6b]/10 flex items-center justify-center p-3">
+          <div className="w-[90px] h-[90px] rounded-2xl bg-linear-to-br from-[#1d44c3]/10 to-[#f74b6b]/10 flex items-center justify-center p-3">
             <div className="relative w-full h-full">
               <Image
                 src={image}

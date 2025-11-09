@@ -98,7 +98,7 @@ function HeroSection() {
           Discover Why FinWage is Powering Top Employers
         </h2>
       </div>
-      <div className="flex-shrink-0 w-full md:w-auto">
+      <div className="shrink-0 w-full md:w-auto">
         <LetsTalkButton />
       </div>
     </div>
@@ -116,7 +116,7 @@ function CtaCardComponent({ icon_svg, bg_color, title, points }: CtaCard) {
         <div className="mb-3">
           <div className="flex items-start gap-3">
             <div
-              className={`size-11 ${bg_color} rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm`}
+              className={`size-11 ${bg_color} rounded-lg flex items-center justify-center shrink-0 shadow-sm`}
             >
               {isImageIcon ? (
                 <Image
@@ -189,7 +189,7 @@ function MobileView({ cards }: { cards: CtaCard[] }) {
 
 function DesktopView({ cards }: { cards: CtaCard[] }) {
   return (
-    <div className="hidden lg:block relative w-full h-[580px] md:h-[650px] lg:h-[680px] bg-white flex-shrink-0 text-left text-2xl text-white font-afacad overflow-hidden">
+    <div className="hidden lg:block relative w-full h-[580px] md:h-[650px] lg:h-[680px] bg-white shrink-0 text-left text-2xl text-white font-afacad overflow-hidden">
       {/* Main Container */}
       <div className="absolute top-[-140px] md:top-[-160px] lg:top-[-184px] left-[-280px] md:left-[-320px] lg:left-[-162px] w-[1815px] flex items-center gap-8 md:gap-12 lg:gap-16 overflow-clip scale-[0.65] md:scale-[0.7] lg:scale-100 origin-left">
         <HeroImageContainer className="w-[1000px] h-[930px]" />

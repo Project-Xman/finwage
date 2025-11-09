@@ -4,7 +4,7 @@ function ImplementationCard() {
   return (
     <Card className="relative rounded-3xl w-full border border-gray-100 shadow-2xl">
       <CardContent className="flex flex-col lg:flex-row gap-6 lg:gap-12 xl:gap-16 items-start p-6 md:p-12 lg:p-16 w-full">
-        <div className="flex flex-col gap-2 items-start w-full lg:w-auto lg:flex-shrink-0">
+        <div className="flex flex-col gap-2 items-start w-full lg:w-auto lg:shrink-0">
           <div className="font-bold text-[#f64162] text-xs tracking-wider uppercase">
             <p className="leading-4">SUCCESSFUL IMPLEMENTATION</p>
           </div>

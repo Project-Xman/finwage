@@ -25,6 +25,7 @@ import {
   getSupportResources,
   getSupportResourcesGroupedByCategory,
 } from "@/lib/services/support";
+import type { CategoryResponse, SupportResponse } from "@/types/pocketbase";
 
 interface SupportResourcesSectionProps {
   title?: string;
@@ -41,18 +42,23 @@ export async function SupportResourcesSection({
   limit,
   grouped = true,
 }: SupportResourcesSectionProps) {
-  let resources;
-  let groupedResources;
+  // Type for support resources with expanded category
+  type SupportWithCategory = SupportResponse & {
+    expand?: { category?: CategoryResponse };
+  };
+
+  let resources: SupportWithCategory[] | undefined;
+  let groupedResources: Record<string, SupportWithCategory[]> | undefined;
 
   if (categoryFilter) {
     // Fetch resources for specific category
-    resources = await getSupportResources({ category: categoryFilter, limit });
+    resources = await getSupportResources({ category: categoryFilter, limit }) as SupportWithCategory[];
   } else if (grouped) {
     // Fetch all resources grouped by category
-    groupedResources = await getSupportResourcesGroupedByCategory();
+    groupedResources = await getSupportResourcesGroupedByCategory() as Record<string, SupportWithCategory[]>;
   } else {
     // Fetch all resources as flat list
-    resources = await getSupportResources({ limit });
+    resources = await getSupportResources({ limit }) as SupportWithCategory[];
   }
 
   // Helper function to get icon based on category
@@ -78,7 +84,7 @@ export async function SupportResourcesSection({
     if (resources.length === 0) {
       return (
         <section className="py-16 md:py-24 bg-white">
-          <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+          <div className="max-w-7xl mx-auto px-4 md:px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
                 {title}
@@ -100,7 +106,7 @@ export async function SupportResourcesSection({
 
     return (
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
               {title}
@@ -152,7 +158,7 @@ export async function SupportResourcesSection({
   if (!groupedResources || Object.keys(groupedResources).length === 0) {
     return (
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
               {title}
@@ -174,7 +180,7 @@ export async function SupportResourcesSection({
 
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
             {title}
@@ -189,7 +195,7 @@ export async function SupportResourcesSection({
             ([category, categoryResources]) => (
               <div key={category}>
                 <h3 className="text-2xl font-bold text-gray-900 mb-6 capitalize">
-                  {category.replace(/-/g, " ")}
+                  {categoryResources[0]?.expand?.category?.name || category}
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {categoryResources.map((resource) => (

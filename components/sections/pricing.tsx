@@ -143,9 +143,9 @@ export default async function Pricing() {
                       >
                         {/* Icon */}
                         {feature.enabled ? (
-                          <CheckCircle2 className="w-5 h-5 mt-0.5 flex-shrink-0 text-green-500" />
+                          <CheckCircle2 className="w-5 h-5 mt-0.5 shrink-0 text-green-500" />
                         ) : (
-                          <X className="w-5 h-5 mt-0.5 flex-shrink-0 text-gray-300" />
+                          <X className="w-5 h-5 mt-0.5 shrink-0 text-gray-300" />
                         )}
                         {/* Description */}
                         <p

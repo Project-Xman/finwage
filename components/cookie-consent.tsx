@@ -196,7 +196,7 @@ export default function CookieConsent() {
               <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                 <div className="flex items-start">
                   <svg
-                    className="w-5 h-5 text-blue-600 mt-0.5 mr-3 flex-shrink-0"
+                    className="w-5 h-5 text-blue-600 mt-0.5 mr-3 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

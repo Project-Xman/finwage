@@ -6,8 +6,9 @@ import {
   getSecurityFeatures,
 } from "@/lib/services/compliance";
 import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Compliance & Security - FinWage",
   description:
     "FinWage is fully compliant with all federal and state regulations. SOC 2 certified, AML compliant, and GDPR compliant.",
@@ -41,8 +42,8 @@ export default async function CompliancePage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full mb-6">
               <Shield className="w-5 h-5" />
@@ -61,7 +62,7 @@ export default async function CompliancePage() {
 
       {/* Compliance Grid */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
               Comprehensive Compliance Framework
@@ -77,7 +78,7 @@ export default async function CompliancePage() {
               complianceItems.map((item) => (
                 <Card
                   key={item.id}
-                  className="bg-gradient-to-br from-blue-50 to-purple-50 border-0"
+                  className="bg-linear-to-br from-blue-50 to-purple-50 border-0"
                 >
                   <CardContent className="p-8">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
@@ -91,7 +92,7 @@ export default async function CompliancePage() {
                       {Array.isArray(item.details) &&
                         item.details.map((detail: string, index: number) => (
                           <li key={index} className="flex items-start gap-3">
-                            <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <CheckCircle className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
                             <span className="text-gray-700">{detail}</span>
                           </li>
                         ))}
@@ -113,7 +114,7 @@ export default async function CompliancePage() {
 
       {/* Security Features */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -161,7 +162,7 @@ export default async function CompliancePage() {
                 {securityFeatures.length > 0 ? (
                   securityFeatures.map((feature) => (
                     <div key={feature.id} className="flex items-center gap-3">
-                      <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                      <div className="shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                         <CheckCircle className="w-4 h-4 text-white" />
                       </div>
                       <span className="text-gray-700">
@@ -182,8 +183,8 @@ export default async function CompliancePage() {
 
       {/* Reassurance Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-          <div className="bg-gradient-to-br from-[#1d44c3] to-[#0d2463] rounded-3xl p-8 md:p-16 text-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="bg-linear-to-br from-[#1d44c3] to-[#0d2463] rounded-3xl p-8 md:p-16 text-white">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-3xl md:text-5xl font-bold mb-6">
@@ -203,7 +204,7 @@ export default async function CompliancePage() {
               <div className="space-y-6">
                 <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
                   <div className="flex items-start gap-4">
-                    <Lock className="w-8 h-8 flex-shrink-0" />
+                    <Lock className="w-8 h-8 shrink-0" />
                     <div>
                       <div className="font-bold text-lg mb-2">For HR Teams</div>
                       <p className="text-blue-100">
@@ -215,7 +216,7 @@ export default async function CompliancePage() {
                 </div>
                 <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
                   <div className="flex items-start gap-4">
-                    <Shield className="w-8 h-8 flex-shrink-0" />
+                    <Shield className="w-8 h-8 shrink-0" />
                     <div>
                       <div className="font-bold text-lg mb-2">
                         For Employees
@@ -229,7 +230,7 @@ export default async function CompliancePage() {
                 </div>
                 <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
                   <div className="flex items-start gap-4">
-                    <FileText className="w-8 h-8 flex-shrink-0" />
+                    <FileText className="w-8 h-8 shrink-0" />
                     <div>
                       <div className="font-bold text-lg mb-2">
                         Transparent Policies
@@ -249,7 +250,7 @@ export default async function CompliancePage() {
 
       {/* Regulatory Notes */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
               Regulatory Information
@@ -322,7 +323,7 @@ export default async function CompliancePage() {
 
       {/* CTA */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6 text-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
             Security You Can Trust
           </h2>

@@ -46,7 +46,7 @@ export async function PressReleaseSection({
 
   return (
     <section className={`py-16 md:py-24 bg-white ${className}`}>
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
             {title}
@@ -64,7 +64,7 @@ export async function PressReleaseSection({
                 href={press.url || "#"}
                 target={press.url ? "_blank" : undefined}
                 rel={press.url ? "noopener noreferrer" : undefined}
-                className="block bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 hover:shadow-lg transition-all cursor-pointer"
+                className="block bg-linear-to-br from-blue-50 to-purple-50 rounded-xl p-6 hover:shadow-lg transition-all cursor-pointer"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
@@ -80,7 +80,7 @@ export async function PressReleaseSection({
                     </div>
                   </div>
                   {press.url && (
-                    <ArrowRight className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" />
+                    <ArrowRight className="w-5 h-5 text-gray-400 shrink-0 mt-1" />
                   )}
                 </div>
               </NextLink>

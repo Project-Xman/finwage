@@ -1,7 +1,7 @@
 /// <reference path="../pb_data/types.d.ts" />
 migrate(
   (app) => {
-    const collection = app.findCollectionByNameOrId("1orzmnhcxugwtya");
+    const collection = app.findCollectionByNameOrId("7mj7xmewunl692z");
 
     // update field
     collection.fields.addAt(
@@ -9,14 +9,14 @@ migrate(
       new Field({
         autogeneratePattern: "",
         hidden: false,
-        id: "n2vnppib",
+        id: "kxeuzwuu",
         max: 0,
         min: 0,
-        name: "icon_from_font_awesome",
+        name: "icon_svg",
         pattern: "",
         presentable: false,
         primaryKey: false,
-        required: true,
+        required: false,
         system: false,
         type: "text",
       }),
@@ -25,7 +25,7 @@ migrate(
     return app.save(collection);
   },
   (app) => {
-    const collection = app.findCollectionByNameOrId("1orzmnhcxugwtya");
+    const collection = app.findCollectionByNameOrId("7mj7xmewunl692z");
 
     // update field
     collection.fields.addAt(
@@ -33,14 +33,14 @@ migrate(
       new Field({
         autogeneratePattern: "",
         hidden: false,
-        id: "n2vnppib",
+        id: "kxeuzwuu",
         max: 0,
         min: 0,
         name: "icon",
         pattern: "",
         presentable: false,
         primaryKey: false,
-        required: true,
+        required: false,
         system: false,
         type: "text",
       }),

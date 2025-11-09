@@ -23,8 +23,9 @@ import {
   TestimonialsSkeleton,
 } from "@/components/ui/loading-skeletons";
 import { getAllCompanyStats } from "@/lib/services/company";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "FinWage - Earned Wage Access for Financial Wellness",
   description:
     "Work Today, Get Paid Today! FinWage provides earned wage access to help employees access their wages instantly while saving employers time and money.",

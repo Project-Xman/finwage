@@ -21,8 +21,10 @@ import {
   getResourceArticles,
   getResourceCategories,
 } from "@/lib/services/resources";
+import type { ResourceCategoriesResponse } from "@/types/pocketbase";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Resources - FinWage",
   description:
     "Access guides, case studies, webinars, and tools to help you get the most out of FinWage and achieve financial wellness.",
@@ -63,11 +65,16 @@ export default async function ResourcesPage() {
     return icons[iconName] || BookOpen;
   };
 
+  // Type for articles with expanded category
+  type ArticleWithCategory = (typeof featuredArticles)[number] & {
+    expand?: { category?: ResourceCategoriesResponse };
+  };
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+        <div className="max-w-7xluto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Resources & Insights
@@ -82,10 +89,10 @@ export default async function ResourcesPage() {
 
       {/* Categories */}
       <section className="py-16 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {categories.map((category, index) => {
-              const IconComponent = getIconComponent(category.icon || "");
+              const IconComponent = getIconComponent(category.icon_svg || "");
               return (
                 <Card
                   key={category.id}
@@ -111,105 +118,109 @@ export default async function ResourcesPage() {
 
       {/* Featured Articles */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-12">
             Featured Articles
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {featuredArticles.map((article) => (
-              <Card
-                key={article.id}
-                className="overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
-              >
-                {article.image && (
-                  <div className="relative h-48">
-                    <Image
-                      src={article.image}
-                      alt={article.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform"
-                    />
-                    {article.expand?.category && (
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-[#1d44c3] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          {article.expand.category.name}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                )}
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
-                    <span>
-                      {new Date(article.published_date).toLocaleDateString(
-                        "en-US",
-                        {
+            {featuredArticles.map((article) => {
+              const typedArticle = article as ArticleWithCategory;
+              return (
+                <Card
+                  key={typedArticle.id}
+                  className="overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
+                >
+                  {typedArticle.image && (
+                    <div className="relative h-48">
+                      <Image
+                        src={typedArticle.image}
+                        alt={typedArticle.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform"
+                      />
+                      {typedArticle.expand?.category && (
+                        <div className="absolute top-4 left-4">
+                          <span className="bg-[#1d44c3] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            {typedArticle.expand.category.name}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                      <span>
+                        {new Date(
+                          typedArticle.published_date,
+                        ).toLocaleDateString("en-US", {
                           month: "short",
                           day: "numeric",
                           year: "numeric",
-                        },
-                      )}
-                    </span>
-                    <span>•</span>
-                    <span>{article.read_time}</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1d44c3] transition-colors">
-                    {article.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                  <Button
-                    variant="link"
-                    className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 p-0"
-                  >
-                    Read More
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+                        })}
+                      </span>
+                      <span>•</span>
+                      <span>{typedArticle.read_time}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1d44c3] transition-colors">
+                      {typedArticle.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4">{typedArticle.excerpt}</p>
+                    <Button
+                      variant="link"
+                      className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 p-0"
+                    >
+                      Read More
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Recent Articles */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
                 Latest Articles
               </h2>
               <div className="space-y-6">
-                {recentArticles.map((article) => (
-                  <div
-                    key={article.id}
-                    className="bg-white rounded-xl p-6 hover:shadow-lg transition-all"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        {article.expand?.category && (
-                          <div className="inline-block bg-blue-100 text-[#1d44c3] px-3 py-1 rounded-full text-sm font-semibold mb-3">
-                            {article.expand.category.name}
-                          </div>
-                        )}
-                        <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-[#1d44c3] transition-colors cursor-pointer">
-                          {article.title}
-                        </h3>
-                        <div className="text-sm text-gray-500">
-                          {new Date(article.published_date).toLocaleDateString(
-                            "en-US",
-                            {
+                {recentArticles.map((article) => {
+                  const typedArticle = article as ArticleWithCategory;
+                  return (
+                    <div
+                      key={typedArticle.id}
+                      className="bg-white rounded-xl p-6 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          {typedArticle.expand?.category && (
+                            <div className="inline-block bg-blue-100 text-[#1d44c3] px-3 py-1 rounded-full text-sm font-semibold mb-3">
+                              {typedArticle.expand.category.name}
+                            </div>
+                          )}
+                          <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-[#1d44c3] transition-colors cursor-pointer">
+                            {typedArticle.title}
+                          </h3>
+                          <div className="text-sm text-gray-500">
+                            {new Date(
+                              typedArticle.published_date,
+                            ).toLocaleDateString("en-US", {
                               month: "short",
                               day: "numeric",
                               year: "numeric",
-                            },
-                          )}
+                            })}
+                          </div>
                         </div>
+                        <ArrowRight className="w-5 h-5 text-gray-400 shrink-0 mt-2" />
                       </div>
-                      <ArrowRight className="w-5 h-5 text-gray-400 flex-shrink-0 mt-2" />
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -234,7 +245,7 @@ export default async function ResourcesPage() {
               </div>
 
               {featuredDownload.length > 0 && (
-                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
+                <div className="bg-linear-to-br from-blue-50 to-purple-50 rounded-xl p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
                     Download Our Guide
                   </h3>
@@ -287,7 +298,7 @@ export default async function ResourcesPage() {
 function SupportResourcesSkeleton() {
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <Skeleton className="h-12 w-96 mx-auto mb-4" />
           <Skeleton className="h-6 w-64 mx-auto" />
@@ -312,7 +323,7 @@ function SupportResourcesSkeleton() {
 function FAQSkeleton() {
   return (
     <section className="py-16 md:py-24 bg-gray-50">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <Skeleton className="h-12 w-96 mx-auto mb-4" />
           <Skeleton className="h-6 w-64 mx-auto" />
@@ -330,7 +341,7 @@ function FAQSkeleton() {
 function PressReleasesSkeleton() {
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
           <Skeleton className="h-12 w-96 mx-auto mb-4" />
         </div>
@@ -338,7 +349,7 @@ function PressReleasesSkeleton() {
           {[1, 2, 3].map((i) => (
             <Card
               key={i}
-              className="bg-gradient-to-br from-blue-50 to-purple-50 border-0"
+              className="bg-linear-to-br from-blue-50 to-purple-50 border-0"
             >
               <div className="p-6">
                 <Skeleton className="h-6 w-full mb-2" />

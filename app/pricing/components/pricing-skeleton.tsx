@@ -38,7 +38,7 @@ export function PricingCardsSkeleton() {
 export function FAQSkeleton() {
   return (
     <section className="py-16 md:py-24 bg-gray-50">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <Skeleton className="h-12 w-64 mx-auto" />
           <Skeleton className="h-6 w-96 mx-auto mt-4" />

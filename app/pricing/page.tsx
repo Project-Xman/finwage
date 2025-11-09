@@ -20,9 +20,10 @@ import {
   FAQSkeleton,
   PricingCardsSkeleton,
 } from "./components/pricing-skeleton";
+import { Metadata } from "next";
 
 // Metadata generation
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Pricing - FinWage",
     description:
@@ -133,8 +134,8 @@ async function PricingCards() {
 // Static Hero Section
 function HeroSection() {
   return (
-    <section className="relative bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6 text-center">
+    <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-6">
           Transparent Pricing for Every Business
         </h1>
@@ -163,8 +164,8 @@ function EmployeeBenefitSection() {
 
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-        <Card className="bg-gradient-to-br from-green-50 to-blue-50 border-0">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <Card className="bg-linear-to-br from-green-50 to-blue-50 border-0">
           <CardHeader className="text-center">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-green-500 rounded-full mb-6 mx-auto">
               <Check className="w-10 h-10 text-white" />
@@ -201,8 +202,8 @@ function EmployeeBenefitSection() {
 // CTA Section
 function CTASection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6 text-center">
+    <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
         <h2 className="text-3xl md:text-5xl font-bold mb-6">
           Ready to Get Started?
         </h2>
@@ -225,7 +226,7 @@ export default function PricingPage() {
 
       {/* Dynamic Pricing Cards - streams in */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-3 gap-8">
             <Suspense fallback={<PricingCardsSkeleton />}>
               <PricingCards />

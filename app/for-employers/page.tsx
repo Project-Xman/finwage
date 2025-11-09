@@ -7,8 +7,9 @@ import { getEmployeeBenefits } from "@/lib/services/benefits";
 import { getIntegrations } from "@/lib/services/integrations";
 import { getEmployerStats } from "@/lib/services/stats";
 import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "For Employers - FinWage",
   description:
     "Reduce turnover by 27% and attract top talent. FinWage helps employers offer earned wage access benefits that improve retention and productivity.",
@@ -40,14 +41,15 @@ export default async function ForEmployersPage() {
   ]);
 
   const integrations = integrationsResult.items;
+  console.log("Integrations fetched:", integrations);
 
   console.log("Employer Stats fetched:", stats);
 
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -103,7 +105,7 @@ export default async function ForEmployersPage() {
 
       {/* Benefits Grid */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
               The Business Case for FinWage
@@ -120,11 +122,14 @@ export default async function ForEmployersPage() {
               {benefits.map((benefit) => (
                 <Card
                   key={benefit.id}
-                  className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
+                  className="bg-linear-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
                 >
                   <CardContent className="p-8">
                     <div className="text-[#1d44c3] mb-4">
-                      <SvgIcon svgString={benefit.icon_svg} className="w-8 h-8" />
+                      <SvgIcon
+                        svgString={benefit.icon_svg}
+                        className="w-8 h-8"
+                      />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-3">
                       {benefit.title}
@@ -144,7 +149,7 @@ export default async function ForEmployersPage() {
 
       {/* Integration Section */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -157,7 +162,7 @@ export default async function ForEmployersPage() {
 
               <div className="space-y-6 mb-8">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
                     <Zap className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -172,7 +177,7 @@ export default async function ForEmployersPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
                     <Shield className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -187,7 +192,7 @@ export default async function ForEmployersPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
                     <Users className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -243,8 +248,8 @@ export default async function ForEmployersPage() {
 
       {/* ROI Calculator Section */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-          <div className="bg-gradient-to-br from-[#1d44c3] to-[#0d2463] rounded-3xl p-8 md:p-16 text-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="bg-linear-to-br from-[#1d44c3] to-[#0d2463] rounded-3xl p-8 md:p-16 text-white">
             <div className="max-w-3xl mx-auto text-center mb-8">
               <h2 className="text-3xl md:text-5xl font-bold mb-6">
                 Calculate Your ROI
@@ -262,7 +267,7 @@ export default async function ForEmployersPage() {
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6 text-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
             Ready to Get Started?
           </h2>

@@ -11,6 +11,7 @@ import {
   getIntegrationsByCategory as apiFetchIntegrationsByCategory,
 } from "@/lib/api";
 import type { IntegrationsResponse } from "@/types/pocketbase";
+import { ca } from "date-fns/locale";
 
 // ============================================================
 // TYPES

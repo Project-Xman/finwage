@@ -73,7 +73,7 @@ export function PlatformImages() {
 export default function PlatformSection() {
   return (
     <div
-      className="bg-[#f74b6b] relative min-h-screen w-full overflow-hidden px-4 sm:px-6 md:px-16 lg:px-24"
+      className="bg-[#f74b6b] relative min-h-screen w-full overflow-hidden px-4 sm:px-6 md:px-16 lg:px-24 py-7"
       data-name="Platform Section"
     >
       {/* Background Circle - Hidden on mobile */}

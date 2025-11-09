@@ -830,6 +830,7 @@ export async function getSupportResources(
     "support",
     {
       sort: options.sort || "order",
+      expand: "category",
       ...options,
     },
     {
@@ -845,8 +846,9 @@ export async function getSupportResourcesByCategory(
   const response = await fetchCollection<SupportResponse>(
     "support",
     {
-      filter: `category = "${category}"`,
+      filter: `category.name = "${category}"`,
       sort: "order",
+      expand: "category",
     },
     {
       revalidate: CACHE_DURATION.LONG,
@@ -955,7 +957,7 @@ export async function getFaqItemsByCategory(
   const response = await fetchCollection<FaqsResponse>(
     "faqs",
     {
-      filter: `category = "${categoryId}"`,
+      filter: `category.name = "${categoryId}"`,
       sort: "order",
       expand: "category",
     },

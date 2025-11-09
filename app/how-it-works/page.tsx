@@ -5,8 +5,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getEmployeeBenefits } from "@/lib/services/benefits";
 import { getProcessSteps } from "@/lib/services/process";
 import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "How It Works - FinWage",
   description:
     "Learn how FinWage works for both employees and employers. Simple setup, instant access to earned wages, and seamless integration.",
@@ -41,8 +42,8 @@ export default async function HowItWorksPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               How FinWage Works
@@ -57,7 +58,7 @@ export default async function HowItWorksPage() {
 
       {/* Employee Journey */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-blue-50 text-[#1d44c3] px-4 py-2 rounded-full mb-4">
               <Users className="w-5 h-5" />
@@ -75,11 +76,11 @@ export default async function HowItWorksPage() {
             {employeeSteps.length > 0 ? (
               employeeSteps.map((item, index) => (
                 <div key={item.id} className="relative">
-                  <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 h-full">
+                  <Card className="bg-linear-to-br from-blue-50 to-purple-50 border-0 h-full">
                     <CardContent className="p-8">
                       <div className="text-6xl mb-6 text-[#1d44c3]">
-                        <SvgIcon 
-                          svgString={item.icon_svg} 
+                        <SvgIcon
+                          svgString={item.icon_svg}
                           className="w-16 h-16 mx-auto"
                         />
                       </div>
@@ -114,7 +115,7 @@ export default async function HowItWorksPage() {
 
       {/* Employer Side */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="inline-flex items-center gap-2 bg-white text-[#1d44c3] px-4 py-2 rounded-full mb-6 shadow-sm">
@@ -133,7 +134,7 @@ export default async function HowItWorksPage() {
                 {employerBenefits.length > 0 ? (
                   employerBenefits.map((benefit) => (
                     <div key={benefit.id} className="flex items-center gap-3">
-                      <div className="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                      <div className="shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                         <Check className="w-4 h-4 text-white" />
                       </div>
                       <span className="text-lg text-gray-700">
@@ -207,7 +208,7 @@ export default async function HowItWorksPage() {
 
       {/* Process Diagram */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <h2 className="text-3xl md:text-5xl font-bold text-center text-gray-900 mb-16">
             The Complete Flow
           </h2>
@@ -221,7 +222,7 @@ export default async function HowItWorksPage() {
                 { title: "Auto Repayment", desc: "On next payday" },
               ].map((item, index) => (
                 <div key={item.title} className="relative">
-                  <Card className="bg-gradient-to-br from-blue-500 to-purple-500 text-white border-0">
+                  <Card className="bg-linear-to-br from-blue-500 to-purple-500 text-white border-0">
                     <CardContent className="p-6 text-center">
                       <div className="text-3xl font-bold mb-2">{index + 1}</div>
                       <div className="font-semibold mb-1">{item.title}</div>
@@ -241,8 +242,8 @@ export default async function HowItWorksPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6 text-center">
+      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Ready to Transform Your Workplace?
           </h2>

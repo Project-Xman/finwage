@@ -8,9 +8,9 @@
 import {
   getFeaturedResourceArticles as apiFetchFeaturedResourceArticles,
   getFeaturedResourceDownloads as apiFetchFeaturedResourceDownloads,
+  getResourceArticleBySlug as apiFetchResourceArticleBySlug,
   getResourceArticles as apiFetchResourceArticles,
   getResourceArticlesByCategory as apiFetchResourceArticlesByCategory,
-  getResourceArticleBySlug as apiFetchResourceArticleBySlug,
   getResourceCategories as apiFetchResourceCategories,
   getResourceCategoryBySlug as apiFetchResourceCategoryBySlug,
   getResourceDownloads as apiFetchResourceDownloads,

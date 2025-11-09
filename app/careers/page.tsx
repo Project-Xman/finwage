@@ -4,10 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getBenefitsGroupedByCategory } from "@/lib/services/benefits";
 import { getFeaturedJobs, getJobPositions } from "@/lib/services/careers";
 import { getCompanyValues } from "@/lib/services/values";
-import type { JobsResponse } from "@/types/pocketbase";
 import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
+import type { JobsResponse } from "@/types/pocketbase";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Careers at FinWage",
   description:
     "Join FinWage and help transform financial wellness for millions of workers. Explore open positions, benefits, and our company culture.",
@@ -67,8 +68,8 @@ export default async function CareersPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Join Us in Transforming Financial Wellness
@@ -90,7 +91,7 @@ export default async function CareersPage() {
 
       {/* Why FinWage */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
               Why Work at FinWage?
@@ -105,7 +106,7 @@ export default async function CareersPage() {
             {values.map((value) => (
               <Card
                 key={value.title}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 text-center"
+                className="bg-linear-to-br from-blue-50 to-purple-50 border-0 text-center"
               >
                 <CardContent className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -117,7 +118,7 @@ export default async function CareersPage() {
             ))}
           </div>
 
-          <div className="bg-gradient-to-br from-[#1d44c3] to-[#0d2463] rounded-3xl p-8 md:p-16 text-white text-center">
+          <div className="bg-linear-to-br from-[#1d44c3] to-[#0d2463] rounded-3xl p-8 md:p-16 text-white text-center">
             <h3 className="text-3xl md:text-4xl font-bold mb-6">
               Make Real Impact Every Day
             </h3>
@@ -134,7 +135,7 @@ export default async function CareersPage() {
       {/* Benefits */}
       {benefits.length > 0 && (
         <section className="py-16 md:py-24 bg-gray-50">
-          <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+          <div className="max-w-7xl mx-auto px-4 md:px-6">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                 World-Class Benefits
@@ -172,7 +173,7 @@ export default async function CareersPage() {
 
       {/* Open Positions */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
               Open Positions
@@ -192,7 +193,7 @@ export default async function CareersPage() {
                 {featuredJobs.map((position: JobsResponse) => (
                   <Card
                     key={position.id}
-                    className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-[#1d44c3] hover:shadow-2xl transition-all group"
+                    className="bg-linear-to-br from-blue-100 to-purple-100 border-2 border-[#1d44c3] hover:shadow-2xl transition-all group"
                   >
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between gap-4">
@@ -223,7 +224,7 @@ export default async function CareersPage() {
                             {position.type && <span>💼 {position.type}</span>}
                           </div>
                         </div>
-                        <Button className="flex-shrink-0 bg-[#1d44c3] hover:bg-[#0d2463]">
+                        <Button className="shrink-0 bg-[#1d44c3] hover:bg-[#0d2463]">
                           Apply Now
                         </Button>
                       </div>
@@ -240,7 +241,7 @@ export default async function CareersPage() {
               openPositions.map((position: JobsResponse) => (
                 <Card
                   key={position.id}
-                  className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all group"
+                  className="bg-linear-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all group"
                 >
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between gap-4">
@@ -266,7 +267,7 @@ export default async function CareersPage() {
                           {position.type && <span>💼 {position.type}</span>}
                         </div>
                       </div>
-                      <Button className="flex-shrink-0 bg-[#1d44c3] hover:bg-[#0d2463]">
+                      <Button className="shrink-0 bg-[#1d44c3] hover:bg-[#0d2463]">
                         Apply Now
                       </Button>
                     </div>
@@ -299,7 +300,7 @@ export default async function CareersPage() {
 
       {/* Culture */}
       <section className="py-16 md:py-24 bg-gray-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -373,8 +374,8 @@ export default async function CareersPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#1d44c3] to-[#0d2463] text-white">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6 text-center">
+      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Ready to Make an Impact?
           </h2>
