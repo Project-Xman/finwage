@@ -8,6 +8,7 @@ import {
   getMilestones,
 } from "@/lib/services/company";
 import { getImageUrl } from "@/lib/utils/pocketbase";
+import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 
 export const metadata = {
   title: "About Us - FinWage",
@@ -43,21 +44,6 @@ export default async function AboutPage() {
   console.log("Leadership Data:", leadership);
   console.log("Values Data:", values);
   console.log("Milestones Data:", milestones);
-
-  // Icon mapping for values (fallback to default icons)
-  const getValueIcon = (icon?: string) => {
-    switch (icon?.toLowerCase()) {
-      case "heart":
-        return <Heart className="w-8 h-8" />;
-      case "shield":
-        return <Shield className="w-8 h-8" />;
-      case "trending-up":
-      case "trendingup":
-        return <TrendingUp className="w-8 h-8" />;
-      default:
-        return <Heart className="w-8 h-8" />;
-    }
-  };
 
   return (
     <main className="min-h-screen">
@@ -121,7 +107,7 @@ export default async function AboutPage() {
               >
                 <CardContent className="p-8">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
-                    {getValueIcon(value.icon)}
+                    <SvgIcon svgString={value.icon_svg} className="w-8 h-8" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
                     {value.title}

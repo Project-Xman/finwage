@@ -4,17 +4,17 @@ import { Search } from "lucide-react";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useState } from "react";
-import { ImagePaths } from "@/lib/assets";
 import {
-  Navbar,
-  NavBody,
-  NavItems,
   MobileNav,
   MobileNavHeader,
   MobileNavMenu,
   MobileNavToggle,
+  NavBody,
+  Navbar,
   NavbarButton,
+  NavItems,
 } from "@/components/ui/resizable-navbar";
+import { ImagePaths } from "@/lib/assets";
 
 // Navigation data
 const navigationItems = [

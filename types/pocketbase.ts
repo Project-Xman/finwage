@@ -132,35 +132,35 @@ export type AuthorsRecord<Tsocial_link = unknown> = {
 };
 
 export type BlogsRecord<Ttags = unknown> = {
-	author?: RecordIdString
-	category?: RecordIdString
-	content?: HTMLString
-	created?: IsoDateString
-	excerpt?: string
-	featured?: boolean
-	featured_image?: string
-	id: string
-	published?: boolean
-	published_date?: IsoDateString
-	slug: string
-	tags?: null | Ttags
-	title: string
-	updated?: IsoDateString
-	views?: number
-	// SEO metadata fields for Next.js 15 static generation
-	seo_title?: string
-	seo_description?: string
-	seo_keywords?: string
-	og_image?: string
-	canonical_url?: string
-}
+  author?: RecordIdString;
+  category?: RecordIdString;
+  content?: HTMLString;
+  created?: IsoDateString;
+  excerpt?: string;
+  featured?: boolean;
+  featured_image?: string;
+  id: string;
+  published?: boolean;
+  published_date?: IsoDateString;
+  slug: string;
+  tags?: null | Ttags;
+  title: string;
+  updated?: IsoDateString;
+  views?: number;
+  // SEO metadata fields for Next.js 15 static generation
+  seo_title?: string;
+  seo_description?: string;
+  seo_keywords?: string;
+  og_image?: string;
+  canonical_url?: string;
+};
 
 export type CategoryRecord = {
   color?: string;
   count?: string;
   created?: IsoDateString;
   description?: string;
-  icon?: string;
+  icon_svg?: string;
   id: string;
   name: string;
   slug: string;
@@ -182,7 +182,7 @@ export type ComplianceItemsRecord<Tdetails = unknown> = {
   created?: IsoDateString;
   description: string;
   details: null | Tdetails;
-  icon: string;
+  icon_svg: string;
   id: string;
   order?: number;
   title: string;
@@ -193,7 +193,7 @@ export type ContactOptionsRecord = {
   action_url?: string;
   created?: IsoDateString;
   description?: string;
-  icon?: string;
+  icon_svg?: string;
   id: string;
   is_featured?: boolean;
   title: string;
@@ -204,7 +204,7 @@ export type ContactOptionsRecord = {
 export type CtaCardsRecord<Tpoints = unknown> = {
   bg_color: string;
   created?: IsoDateString;
-  icon: string;
+  icon_svg: string;
   id: string;
   order?: number;
   points: null | Tpoints;
@@ -216,7 +216,7 @@ export type EmployeeBenefitsRecord = {
   category?: RecordIdString;
   created?: IsoDateString;
   description: string;
-  icon?: string;
+  icon_svg?: string;
   id: string;
   order?: number;
   title: string;
@@ -284,7 +284,7 @@ export type FeaturesRecord = {
   created?: IsoDateString;
   description: string;
   featured?: boolean;
-  icon?: string;
+  icon_svg?: string;
   id: string;
   image?: string;
   order?: number;
@@ -401,7 +401,7 @@ export type ProcessStepsRecord = {
   category?: RecordIdString;
   created?: IsoDateString;
   description: string;
-  icon: string;
+  icon_svg: string;
   id: string;
   order?: number;
   step: string;
@@ -472,7 +472,7 @@ export type ValuesRecord = {
   created?: IsoDateString;
   description: string;
   featured?: boolean;
-  icon?: string;
+  icon_svg?: string;
   id: string;
   order?: number;
   title: string;

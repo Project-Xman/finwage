@@ -1,8 +1,10 @@
 import { ArrowRight, Building2, Check, Users, Zap } from "lucide-react";
+import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getEmployeeBenefits } from "@/lib/services/benefits";
 import { getProcessSteps } from "@/lib/services/process";
+import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 
 export const metadata = {
   title: "How It Works - FinWage",
@@ -75,7 +77,12 @@ export default async function HowItWorksPage() {
                 <div key={item.id} className="relative">
                   <Card className="bg-gradient-to-br from-blue-50 to-purple-50 border-0 h-full">
                     <CardContent className="p-8">
-                      <div className="text-6xl mb-6">{item.icon}</div>
+                      <div className="text-6xl mb-6 text-[#1d44c3]">
+                        <SvgIcon 
+                          svgString={item.icon_svg} 
+                          className="w-16 h-16 mx-auto"
+                        />
+                      </div>
                       <div className="text-sm font-bold text-[#1d44c3] mb-2">
                         STEP {item.step}
                       </div>
@@ -141,10 +148,16 @@ export default async function HowItWorksPage() {
                 )}
               </div>
 
-              <Button size="lg" className="bg-[#1d44c3] hover:bg-[#0d2463]">
+              <EnquiryButton
+                type="demo"
+                size="lg"
+                className="bg-[#1d44c3] hover:bg-[#0d2463]"
+                icon={<ArrowRight className="w-5 h-5 ml-2" />}
+                modalTitle="Schedule Integration Demo"
+                modalDescription="We'll show you how easy it is to integrate FinWage with your payroll system."
+              >
                 Schedule Integration Demo
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
+              </EnquiryButton>
             </div>
 
             <div className="relative">
@@ -238,19 +251,23 @@ export default async function HowItWorksPage() {
             employees
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
+            <EnquiryButton
+              type="demo"
               size="lg"
               className="bg-white text-[#1d44c3] hover:bg-gray-100"
             >
               Get Started Now
-            </Button>
-            <Button
+            </EnquiryButton>
+            <EnquiryButton
+              type="demo"
               size="lg"
               variant="ghost"
               className="border-2 border-white text-white hover:bg-white/10"
+              modalTitle="Watch Demo"
+              modalDescription="Schedule a demo to see FinWage in action and learn how it can benefit your organization."
             >
               Watch Demo
-            </Button>
+            </EnquiryButton>
           </div>
         </div>
       </section>

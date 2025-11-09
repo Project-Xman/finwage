@@ -1,9 +1,10 @@
-import Image from "next/image";
 import type { NextPage } from "next";
+import Image from "next/image";
+import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getCTACards } from "@/lib/services/cta";
-import { renderIcon } from "@/lib/utils/icon-mapper";
+import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 import type { CtaCardsResponse } from "@/types/pocketbase";
 
 // Type for CTA cards with properly typed points array
@@ -77,13 +78,15 @@ function HeroImageContainer({ className }: { className?: string }) {
 
 function LetsTalkButton() {
   return (
-    <Button
+    <EnquiryButton
+      type="contact"
       size="lg"
       className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-xl transition-shadow rounded-full font-semibold w-full md:w-auto"
-      data-name="Link"
+      modalTitle="Let's Talk"
+      modalDescription="Tell us about your organization and how we can help you provide financial wellness benefits to your employees."
     >
       Let's Talk
-    </Button>
+    </EnquiryButton>
   );
 }
 
@@ -102,9 +105,9 @@ function HeroSection() {
   );
 }
 
-function CtaCardComponent({ icon, bg_color, title, points }: CtaCard) {
+function CtaCardComponent({ icon_svg, bg_color, title, points }: CtaCard) {
   // Check if icon is an image path (starts with / or http)
-  const isImageIcon = icon.startsWith("/") || icon.startsWith("http");
+  const isImageIcon = icon_svg?.startsWith("/") || icon_svg?.startsWith("http");
 
   return (
     <Card className="bg-white rounded-xl border-2 border-[#e5e7eb] shadow-md hover:shadow-xl hover:border-[#1d44c3] transition-all duration-300 h-full">
@@ -121,11 +124,11 @@ function CtaCardComponent({ icon, bg_color, title, points }: CtaCard) {
                   className="w-full h-full object-cover rounded-lg"
                   width={40}
                   height={40}
-                  src={icon}
+                  src={icon_svg}
                 />
               ) : (
                 <div className="text-[#1d44c3]">
-                  {renderIcon(icon, "w-6 h-6")}
+                  <SvgIcon svgString={icon_svg} className="w-6 h-6" />
                 </div>
               )}
             </div>
@@ -142,10 +145,7 @@ function CtaCardComponent({ icon, bg_color, title, points }: CtaCard) {
         <div className="flex-1 space-y-2">
           {points &&
             points.map((point: string, index: number) => (
-              <p
-                key={index}
-                className="text-sm text-gray-600 leading-relaxed"
-              >
+              <p key={index} className="text-sm text-gray-600 leading-relaxed">
                 {point}
               </p>
             ))}
@@ -203,12 +203,15 @@ function DesktopView({ cards }: { cards: CtaCard[] }) {
             <h2 className="font-normal text-2xl text-[#1d44c3] leading-tight">
               Discover Why FinWage is Powering Top Employers
             </h2>
-            <Button
+            <EnquiryButton
+              type="contact"
               size="lg"
               className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-xl transition-shadow rounded-full font-semibold w-fit"
+              modalTitle="Let's Talk"
+              modalDescription="Tell us about your organization and how we can help you provide financial wellness benefits to your employees."
             >
               Let's Talk
-            </Button>
+            </EnquiryButton>
           </div>
         </div>
       </div>

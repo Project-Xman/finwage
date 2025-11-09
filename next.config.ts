@@ -52,7 +52,7 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    unoptimized: process.env.NODE_ENV === 'development',
+    unoptimized: process.env.NODE_ENV === "development",
     remotePatterns: [
       // PocketBase image configuration (dynamic based on environment)
       getPocketBaseImageConfig(),
@@ -75,8 +75,6 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
-      
-      
     ],
     // Image optimization settings
     formats: ["image/avif", "image/webp"],
