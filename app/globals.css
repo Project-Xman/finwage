@@ -196,7 +196,7 @@
 
 * {
   box-sizing: border-box;
-  outline: 1px solid rgba(0, 255, 0, 0.5);
+  /* outline: 1px solid rgba(0, 255, 0, 0.5); */
 }
 
 FontAwesomeIcon {
