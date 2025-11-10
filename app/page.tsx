@@ -59,7 +59,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen">
       {/* Critical above-the-fold content - render immediately */}
-      {/* <Hero /> */}
+            <Hero />
       {/* <SplitSection /> */}
       <PlatformSection />
       <You />
@@ -71,42 +71,42 @@ export default async function Home() {
       </Suspense>
 
       {/* Static content - render immediately */}
-      {/* <Employees />
-      <StandOut /> */}
+      <Employees />
+      <StandOut />
 
       {/* Integrations section - stream in */}
-      {/* <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<SectionSkeleton />}>
         <Integrations />
-      </Suspense> */}
+      </Suspense>
 
       {/* Pricing section - stream in */}
-      {/* <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<SectionSkeleton />}>
         <Pricing />
-      </Suspense> */}
+      </Suspense>
 
       {/* Testimonials section - stream in */}
-      {/* <Suspense fallback={<TestimonialsSkeleton />}>
+      <Suspense fallback={<TestimonialsSkeleton />}>
         <Testimonials />
-      </Suspense> */}
+      </Suspense>
 
       {/* Features section - stream in */}
-      {/* <Suspense fallback={<FeaturesSkeleton />}>
+      <Suspense fallback={<FeaturesSkeleton />}>
         <Features />
-      </Suspense> */}
+      </Suspense>
 
       {/* Globe with stats - render with fetched data */}
-      {/* <Globe stats={stats} /> */}
+      <Globe stats={stats} />
 
       {/* Static content - render immediately */}
-      {/* <Implementation /> */}
+      <Implementation />
 
       {/* Blog section - stream in */}
-      {/* <Suspense fallback={<BlogListSkeleton />}>
+      <Suspense fallback={<BlogListSkeleton />}>
         <Blogs />
-      </Suspense> */}
+      </Suspense>
 
       {/* Static CTA - render immediately */}
-      {/* <Cta /> */}
+      <Cta />
     </main>
   );
 }
