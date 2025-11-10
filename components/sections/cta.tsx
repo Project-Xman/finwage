@@ -191,11 +191,11 @@ function DesktopView({ cards }: { cards: CtaCard[] }) {
   return (
     <div className="hidden lg:block relative w-full h-[580px] md:h-[650px] lg:h-[680px] bg-white shrink-0 text-left text-2xl text-white font-afacad overflow-hidden">
       {/* Main Container */}
-      <div className="absolute top-[-140px] md:top-[-160px] lg:top-[-184px] left-[-280px] md:left-[-320px] lg:left-[-162px] w-[1815px] flex items-center gap-8 md:gap-12 lg:gap-16 overflow-clip scale-[0.65] md:scale-[0.7] lg:scale-100 origin-left">
+      <div className="absolute top-[-140px] md:-top-40 lg:top-[-184px] left-[-280px] md:-left-80 lg:left-[-162px] w-[1815px] flex items-center gap-8 md:gap-12 lg:gap-16 overflow-clip scale-[0.65] md:scale-[0.7] lg:scale-100 origin-left">
         <HeroImageContainer className="w-[1000px] h-[930px]" />
 
         {/* Right Content Section */}
-        <div className="w-[400px] pt-15 flex flex-col gap-6">
+        <div className="w-[500px] pt-15 flex flex-col gap-6">
           <FeaturesGrid cards={cards} />
 
           {/* Bottom CTA Section */}

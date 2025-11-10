@@ -43,6 +43,7 @@ function PlatformContent() {
 }
 
 export function PlatformImages() {
+  console.log("Rendering PlatformImages",imgImageContainer);  
   return (
     <div className="relative w-full max-w-6xl lg:max-w-4xl">
       {/* Desktop Safari Browser */}
@@ -61,8 +62,8 @@ export function PlatformImages() {
       </div>
 
       {/* Desktop: iPhone positioned over Safari */}
-      <div className="hidden md:block absolute bottom-0 -right-20 w-[36%] lg:w-[21.5%] z-30 drop-shadow-2xl">
-        <div className="w-[252px] sm:w-[288px]">
+      <div className="hidden md:block absolute bottom-0 -right-20 z-30 drop-shadow-2xl">
+        <div className="w-[252px] lg:w-[288px]">
           <Iphone src={imgImageContainer} />
         </div>
       </div>
@@ -88,7 +89,7 @@ export default function PlatformSection() {
       </div>
 
       {/* Big Pink Arc */}
-      <div className="absolute right-[-2%] -top-10 w-[40%] md:w-[50%] h-[40%] md:h-[50%] z-0 opacity-30 md:opacity-100">
+      <div className="absolute right-[-4%] -top-10 w-[40%] md:w-[50%] h-[40%] md:h-[50%] z-0 opacity-30 md:opacity-100">
         <Image
           fill
           alt="Pink Arc"

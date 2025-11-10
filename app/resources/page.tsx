@@ -73,7 +73,7 @@ export default async function ResourcesPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+      <section className="relative bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white py-20 md:py-32">
         <div className="max-w-7xluto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -99,7 +99,7 @@ export default async function ResourcesPage() {
                   className="hover:shadow-xl transition-all group cursor-pointer"
                 >
                   <CardContent className="p-6 text-center">
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full text-[#1d44c3] mb-3 group-hover:bg-[#1d44c3] group-hover:text-white transition-all">
+                    <div className={`inline-flex items-center justify-center w-12 h-12 ${index % 2 === 0 ? 'bg-blue-100 text-[#1d44c3] group-hover:bg-[#1d44c3]' : 'bg-pink-100 text-[#f74b6b] group-hover:bg-[#f74b6b]'} rounded-full mb-3 group-hover:text-white transition-all`}>
                       <IconComponent className="w-6 h-6" />
                     </div>
                     <div className="font-semibold text-gray-900 mb-1">
@@ -161,13 +161,13 @@ export default async function ResourcesPage() {
                       <span>•</span>
                       <span>{typedArticle.read_time}</span>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#1d44c3] transition-colors">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#f74b6b] transition-colors">
                       {typedArticle.title}
                     </h3>
                     <p className="text-gray-600 mb-4">{typedArticle.excerpt}</p>
                     <Button
                       variant="link"
-                      className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3 p-0"
+                      className="text-[#f74b6b] font-semibold flex items-center gap-2 hover:gap-3 p-0"
                     >
                       Read More
                       <ArrowRight className="w-4 h-4" />
@@ -203,7 +203,7 @@ export default async function ResourcesPage() {
                               {typedArticle.expand.category.name}
                             </div>
                           )}
-                          <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-[#1d44c3] transition-colors cursor-pointer">
+                          <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-[#f74b6b] transition-colors cursor-pointer">
                             {typedArticle.title}
                           </h3>
                           <div className="text-sm text-gray-500">
@@ -245,7 +245,7 @@ export default async function ResourcesPage() {
               </div>
 
               {featuredDownload.length > 0 && (
-                <div className="bg-linear-to-br from-blue-50 to-purple-50 rounded-xl p-6">
+                <div className="bg-linear-to-br from-blue-50 to-pink-50 rounded-xl p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
                     Download Our Guide
                   </h3>

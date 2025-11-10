@@ -49,7 +49,7 @@ export default async function ContactPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+      <section className="relative bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -80,15 +80,15 @@ export default async function ContactPage() {
                 // Determine color based on index
                 const colors = [
                   { bg: "bg-[#1d44c3]", hover: "hover:bg-[#0d2463]" },
-                  { bg: "bg-green-500", hover: "hover:bg-green-600" },
-                  { bg: "bg-purple-500", hover: "hover:bg-purple-600" },
+                  { bg: "bg-[#f74b6b]", hover: "hover:bg-[#e03a5b]" },
+                  { bg: "bg-[#1d44c3]", hover: "hover:bg-[#0d2463]" },
                 ];
                 const color = colors[index] || colors[0];
 
                 return (
                   <Card
                     key={option.id}
-                    className="bg-linear-to-br from-blue-50 to-purple-50 border-0"
+                    className="bg-linear-to-br from-blue-50 to-pink-50 border-0"
                   >
                     <CardHeader className="text-center">
                       <div
@@ -137,8 +137,8 @@ export default async function ContactPage() {
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                    <Clock className="w-6 h-6 text-[#1d44c3]" />
+                  <div className="shrink-0 w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
+                    <Clock className="w-6 h-6 text-[#f74b6b]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg text-gray-900 mb-1">
@@ -165,8 +165,8 @@ export default async function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                    <ArrowRight className="w-6 h-6 text-[#1d44c3]" />
+                  <div className="shrink-0 w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
+                    <ArrowRight className="w-6 h-6 text-[#f74b6b]" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg text-gray-900 mb-1">

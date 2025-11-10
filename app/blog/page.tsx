@@ -72,7 +72,7 @@ export default async function BlogPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+      <section className="relative bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -117,7 +117,7 @@ export default async function BlogPage() {
                     <Image
                       src={getImageUrl(
                         featuredPost,
-                        featuredPost.featured_image?.[0],
+                        featuredPost.featured_image,
                         { fallback: "/placeholder.jpg" },
                       )}
                       alt={featuredPost.title}
@@ -191,7 +191,7 @@ export default async function BlogPage() {
                       <div className="ml-auto">
                         <Button
                           variant="link"
-                          className="text-[#1d44c3] font-semibold flex items-center gap-2 hover:gap-3"
+                          className="text-[#f74b6b] font-semibold flex items-center gap-2 hover:gap-3"
                         >
                           Read More
                           <ArrowRight className="w-5 h-5" />
@@ -218,7 +218,7 @@ export default async function BlogPage() {
                 <article className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group h-full flex flex-col">
                   <div className="relative h-48">
                     <Image
-                      src={getImageUrl(post, post.featured_image?.[0], {
+                      src={getImageUrl(post, post.featured_image, {
                         fallback: "/placeholder.jpg",
                       })}
                       alt={post.title}
@@ -279,7 +279,7 @@ export default async function BlogPage() {
                             "Anonymous"}
                         </div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-[#1d44c3] group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 text-[#f74b6b] group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </article>
@@ -290,7 +290,7 @@ export default async function BlogPage() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
+      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white">
         <div className="max-w-[800px] mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Stay Updated</h2>
           <p className="text-xl text-blue-100 mb-8">

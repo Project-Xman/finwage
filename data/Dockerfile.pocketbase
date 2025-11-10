@@ -21,10 +21,7 @@ RUN wget https://github.com/pocketbase/pocketbase/releases/download/v${POCKETBAS
 # Copy local data, hooks, migrations and schema (if they exist)
 # Create directories first to avoid errors
 RUN mkdir -p /pb/pb_data /pb/pb_hooks /pb/pb_migrations
-# Copy existing data directories
-# COPY ./data/pb_data /pb/pb_data
-# COPY ./data/pb_hooks /pb/pb_hooks
-# COPY ./data/pb_migrations /pb/pb_migrations
+
 
 # Expose PocketBase port
 EXPOSE 8090

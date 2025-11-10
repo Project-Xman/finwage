@@ -3,6 +3,7 @@
 import { Search } from "lucide-react";
 import Image from "next/image";
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
   MobileNav,
@@ -46,6 +47,7 @@ const navigationItems = [
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <Navbar className="top-0">
@@ -64,7 +66,7 @@ export default function Header() {
           </NextLink>
         </div>
 
-        <NavItems items={navigationItems} />
+        <NavItems items={navigationItems} currentPath={pathname} />
 
         <div className="flex items-center gap-3">
           <button className="p-2 hover:bg-muted rounded-md transition-colors">
@@ -99,16 +101,24 @@ export default function Header() {
         </MobileNavHeader>
 
         <MobileNavMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
-          {navigationItems.map((item, idx) => (
-            <a
-              key={`mobile-nav-${idx}`}
-              href={item.link}
-              className="relative w-full px-2 py-2 text-left text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item.name}
-            </a>
-          ))}
+          {navigationItems.map((item, idx) => {
+            const isActive = pathname === item.link;
+            return (
+              <a
+                key={`mobile-nav-${idx}`}
+                href={item.link}
+                className="relative w-full px-2 py-2 text-left text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="relative inline-block">
+                  {item.name}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-pink-500 origin-left animate-in zoom-in-0 slide-in-from-left-1/2 duration-300" style={{ animationFillMode: 'both' }} />
+                  )}
+                </span>
+              </a>
+            );
+          })}
           <div className="flex w-full flex-col gap-2 pt-4">
             <button className="w-full p-2 flex items-center justify-center gap-2 hover:bg-muted rounded-md transition-colors border border-border">
               <Search className="w-4 h-4" />

@@ -49,7 +49,7 @@ export default async function AboutPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+      <section className="relative bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -101,13 +101,13 @@ export default async function AboutPage() {
 
           {/* Values */}
           <div className="grid md:grid-cols-3 gap-8 mb-20">
-            {values.map((value) => (
+            {values.map((value, index) => (
               <Card
                 key={value.id}
-                className="bg-linear-to-br from-blue-50 to-purple-50 border-0 text-center"
+                className="bg-linear-to-br from-blue-50 to-pink-50 border-0 text-center"
               >
                 <CardContent className="p-8">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
+                  <div className={`inline-flex items-center justify-center w-16 h-16 ${index % 2 === 0 ? 'bg-[#1d44c3]' : 'bg-[#f74b6b]'} rounded-full text-white mb-6`}>
                     <SvgIcon svgString={value.icon_svg} className="w-8 h-8" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -153,7 +153,7 @@ export default async function AboutPage() {
                   <h3 className="text-xl font-bold text-gray-900 mb-1">
                     {leader.name}
                   </h3>
-                  <div className="text-[#1d44c3] font-semibold mb-3">
+                  <div className="text-[#f74b6b] font-semibold mb-3">
                     {leader.role}
                   </div>
                   <p className="text-gray-600 text-sm">{leader.bio}</p>
@@ -182,11 +182,11 @@ export default async function AboutPage() {
                 {milestones.map((milestone) => (
                   <div key={milestone.id} className="flex gap-6 items-center">
                     <div className="shrink-0">
-                      <div className="w-20 h-20 bg-linear-to-br from-[#1d44c3] to-[#0d2463] rounded-full flex items-center justify-center text-white font-bold">
+                      <div className="w-20 h-20 bg-linear-to-br from-[#1d44c3] to-[#f74b6b] rounded-full flex items-center justify-center text-white font-bold">
                         {milestone.year}
                       </div>
                     </div>
-                    <Card className="flex-1 bg-linear-to-br from-blue-50 to-purple-50 border-0">
+                    <Card className="flex-1 bg-linear-to-br from-blue-50 to-pink-50 border-0">
                       <CardContent className="p-6">
                         <h3 className="text-2xl font-bold text-gray-900 mb-2">
                           {milestone.event}
