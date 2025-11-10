@@ -29,5 +29,5 @@ RUN mkdir -p /pb/pb_data /pb/pb_hooks /pb/pb_migrations
 # Expose PocketBase port
 EXPOSE 8090
 
-#  Start PocketBase with superuser upsert
-CMD ["/pb/pocketbase","superuser", "upsert", "admin@projectx.com", "Admin@12345", "&&", "/pb/pocketbase", "serve", "--http=0.0.0.0:8090"]
+# Start PocketBase with superuser upsert
+CMD /pb/pocketbase superuser upsert admin@projectx.com Admin@12345; /pb/pocketbase serve --http 0.0.0.0:8090
