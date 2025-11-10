@@ -162,7 +162,7 @@ export default async function ForEmployersPage() {
 
               <div className="space-y-6 mb-8">
                 <div className="flex items-start gap-4">
-                  <div className="shrink-0 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center">
                     <Zap className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -225,7 +225,7 @@ export default async function ForEmployersPage() {
                       {integrations.map((integration) => (
                         <div
                           key={integration.id}
-                          className="bg-gray-50 rounded-lg p-4 text-center font-semibold text-gray-700 hover:bg-blue-50 hover:text-[#1d44c3] transition-colors"
+                          className="bg-gray-50 rounded-lg p-4 text-center font-semibold text-gray-700 hover:bg-pink-50 hover:text-[#f74b6b] transition-colors"
                         >
                           {integration.name}
                         </div>

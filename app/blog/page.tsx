@@ -117,7 +117,7 @@ export default async function BlogPage() {
                     <Image
                       src={getImageUrl(
                         featuredPost,
-                        featuredPost.featured_image?.[0],
+                        featuredPost.featured_image,
                         { fallback: "/placeholder.jpg" },
                       )}
                       alt={featuredPost.title}
@@ -218,7 +218,7 @@ export default async function BlogPage() {
                 <article className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group h-full flex flex-col">
                   <div className="relative h-48">
                     <Image
-                      src={getImageUrl(post, post.featured_image?.[0], {
+                      src={getImageUrl(post, post.featured_image, {
                         fallback: "/placeholder.jpg",
                       })}
                       alt={post.title}
