@@ -55,7 +55,7 @@ export default async function ForEmployeesPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+      <section className="relative bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -124,13 +124,13 @@ export default async function ForEmployeesPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.length > 0 ? (
-              benefits.map((benefit) => (
+              benefits.map((benefit, index) => (
                 <Card
                   key={benefit.id}
-                  className="bg-linear-to-br from-blue-50 to-purple-50 border-0 hover:shadow-xl transition-all"
+                  className="bg-linear-to-br from-blue-50 to-pink-50 border-0 hover:shadow-xl transition-all"
                 >
                   <CardContent className="p-8">
-                    <div className="text-[#1d44c3] mb-4">
+                    <div className={`${index % 3 === 1 ? 'text-[#f74b6b]' : 'text-[#1d44c3]'} mb-4`}>
                       <SvgIcon
                         svgString={benefit.icon_svg}
                         className="w-8 h-8"
@@ -242,7 +242,7 @@ export default async function ForEmployeesPage() {
               <Accordion type="single" collapsible>
                 {faqs.map((faq, index) => (
                   <AccordionItem key={faq.id} value={`item-${index}`}>
-                    <AccordionTrigger className="text-lg font-bold text-gray-900 hover:text-[#1d44c3]">
+                    <AccordionTrigger className="text-lg font-bold text-gray-900 hover:text-[#f74b6b]">
                       {faq.question}
                     </AccordionTrigger>
                     <AccordionContent className="text-gray-600 leading-relaxed">
@@ -262,7 +262,7 @@ export default async function ForEmployeesPage() {
             <p className="text-gray-600 mb-4">Still have questions?</p>
             <Button
               variant="link"
-              className="text-[#1d44c3] font-semibold text-base hover:underline"
+              className="text-[#f74b6b] font-semibold text-base hover:underline"
             >
               Contact Our Support Team →
             </Button>
@@ -271,7 +271,7 @@ export default async function ForEmployeesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white">
+      <section className="py-16 md:py-24 bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Ready to Take Control?

@@ -60,7 +60,7 @@ export function PricingCard({ plan }: PricingCardProps) {
             className={`w-full ${
               plan.recommended
                 ? "bg-[#1d44c3] hover:bg-[#0d2463]"
-                : "border border-[#1d44c3] text-[#1d44c3] hover:bg-[#1d44c3] hover:text-white"
+                : "border text-white border-[#1d44c3] hover:bg-[#1d44c3] hover:text-white"
             }`}
           >
             Get Started

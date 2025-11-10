@@ -11,9 +11,11 @@ type BlogWithExpand = BlogsResponse<unknown, { category?: CategoryResponse }>;
 
 function BlogCard({ post }: { post: BlogWithExpand }) {
   const categoryName = post.expand?.category?.name || "BLOG";
-  const imageUrl = getImageUrl(post, post.featured_image?.[0], {
+  const imageUrl = getImageUrl(post, post.featured_image, {
     fallback: "/placeholder.jpg",
   });
+
+  console.log("BlogCard post:", post);
 
   return (
     <NextLink href={`/blog/${post.slug}`}>
@@ -47,7 +49,7 @@ function FeaturedPost({ post }: { post: BlogWithExpand | null }) {
     return null;
   }
 
-  const imageUrl = getImageUrl(post, post.featured_image?.[0], {
+  const imageUrl = getImageUrl(post, post.featured_image, {
     fallback: "/placeholder.jpg",
   });
 

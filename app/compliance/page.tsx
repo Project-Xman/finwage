@@ -42,7 +42,7 @@ export default async function CompliancePage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-linear-to-br from-[#1d44c3] to-[#0d2463] text-white py-20 md:py-32">
+      <section className="relative bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] text-white py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full mb-6">
@@ -75,13 +75,13 @@ export default async function CompliancePage() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {complianceItems.length > 0 ? (
-              complianceItems.map((item) => (
+              complianceItems.map((item, index) => (
                 <Card
                   key={item.id}
-                  className="bg-linear-to-br from-blue-50 to-purple-50 border-0"
+                  className="bg-linear-to-br from-blue-50 to-pink-50 border-0"
                 >
                   <CardContent className="p-8">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-[#1d44c3] rounded-full text-white mb-6">
+                    <div className={`inline-flex items-center justify-center w-16 h-16 ${index % 2 === 0 ? 'bg-[#1d44c3]' : 'bg-[#f74b6b]'} rounded-full text-white mb-6`}>
                       <SvgIcon svgString={item.icon_svg} className="w-8 h-8" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">
@@ -184,7 +184,7 @@ export default async function CompliancePage() {
       {/* Reassurance Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="bg-linear-to-br from-[#1d44c3] to-[#0d2463] rounded-3xl p-8 md:p-16 text-white">
+          <div className="bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] rounded-3xl p-8 md:p-16 text-white">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-3xl md:text-5xl font-bold mb-6">
