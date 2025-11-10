@@ -190,7 +190,7 @@ export class CategoryMapper
       slug: response.slug || "",
       description: response.description || null,
       color: response.color || "#000000",
-      icon: response.icon || null,
+      icon: response.icon_svg || null,
       created: parseDateOrThrow(response.created, "created"),
       updated: parseDateOrThrow(response.updated, "updated"),
     };
@@ -203,7 +203,7 @@ export class CategoryMapper
       slug: model.slug,
       description: model.description || "",
       color: model.color,
-      icon: model.icon || "",
+      icon_svg: model.icon || "",
       created: model.created.toISOString(),
       updated: model.updated.toISOString(),
     };

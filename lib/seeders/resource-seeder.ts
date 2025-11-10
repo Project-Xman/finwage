@@ -61,7 +61,7 @@ export class ResourceSeeder extends DependentSeeder {
   /**
    * Seed all resource-related collections
    */
-  async seed(): Promise<void> {
+  async seed(): Promise<string[]> {
     try {
       this.log("Starting resource seeding...");
 
@@ -75,6 +75,8 @@ export class ResourceSeeder extends DependentSeeder {
       await this.seedDownloads();
 
       this.log("Resource seeding completed successfully");
+      
+      return categoryIds;
     } catch (error) {
       console.error("Resource seeding failed:", error);
       throw error;
