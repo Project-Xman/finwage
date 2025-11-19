@@ -6,47 +6,48 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_POCKETBASE_URL: http://pocketbase:8090
+        NEXT_PUBLIC_POCKETBASE_INTERNAL_URL: http://pocketbase:8090
     container_name: finwage-app
     restart: unless-stopped
     ports:
       - "3001:3000"
     environment:
-      - NODE_ENV=production
-      - NEXT_PUBLIC_POCKETBASE_URL=http://pocketbase:8090
-    depends_on:
-      - pocketbase
+      - NODE_ENV=development
+      - NEXT_PUBLIC_POCKETBASE_URL=http://31.97.210.200:8090
+    # depends_on:
+    #   - pocketbase
     networks:
       - finwage-network
 
   # PocketBase Backend with Webhooks
-  pocketbase:
-    build:
-      context: ./data
-      dockerfile: Dockerfile.pocketbase
-    container_name: finwage-pocketbase
-    restart: unless-stopped
-    ports:
-      - "8090:8090"
-    volumes:
-      - ./data/pb_data:/pb/pb_data
-      - ./data/pb_migrations:/pb/pb_migrations
-      - ./data/pb_hooks:/pb/pb_hooks
-    environment:
-      - PB_ENCRYPTION_KEY=${PB_ENCRYPTION_KEY:-your-secret-key-change-this}
-      - WEBHOOK_SECRET=${WEBHOOK_SECRET:-webhook-secret-change-this}
-    networks:
-      - finwage-network
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8090/api/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+  # pocketbase:
+  #   build:
+  #     context: ./data
+  #     dockerfile: Dockerfile.pocketbase
+  #   container_name: finwage-pocketbase
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8090:8090"
+  #   volumes:
+  #     - pocketbase-data:/pb/pb_data
+  #   environment:
+  #     - PB_ENCRYPTION_KEY=${PB_ENCRYPTION_KEY:-your-secret-key-change-this}
+  #     - WEBHOOK_SECRET=${WEBHOOK_SECRET:-webhook-secret-change-this}
+  #   networks:
+  #     - finwage-network
+  #   healthcheck:
+  #     test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8090/api/health"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 40s
 
 networks:
   finwage-network:
     driver: bridge
 
-volumes:
-  pocketbase-data:
-    driver: local
+# volumes:
+#   pocketbase-data:
+#     driver: local

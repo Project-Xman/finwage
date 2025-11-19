@@ -80,9 +80,9 @@ export default async function Home() {
       </Suspense>
 
       {/* Pricing section - stream in */}
-      <Suspense fallback={<SectionSkeleton />}>
+      {/* <Suspense fallback={<SectionSkeleton />}>
         <Pricing />
-      </Suspense>
+      </Suspense> */}
 
       {/* Testimonials section - stream in */}
       <Suspense fallback={<TestimonialsSkeleton />}>

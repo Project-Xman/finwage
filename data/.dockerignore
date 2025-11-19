@@ -1,6 +1,4 @@
 # Ignore local dev data and modules when building the image
-pb_data/
-pb_migrations/
 node_modules/
 .git
 .DS_Store

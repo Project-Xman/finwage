@@ -7,7 +7,9 @@
 
 // PocketBase URL - adjust based on your environment
 export const POCKETBASE_URL =
-  process.env.NEXT_PUBLIC_POCKETBASE_URL || "http://localhost:8090";
+  process.env.POCKETBASE_INTERNAL_URL ||
+  process.env.NEXT_PUBLIC_POCKETBASE_URL ||
+  "http://localhost:8090";
 
 /**
  * Generic fetch wrapper for PocketBase API calls

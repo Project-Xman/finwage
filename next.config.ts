@@ -40,7 +40,6 @@ const nextConfig: NextConfig = {
   output: "standalone",
 
   // Enable experimental caching features
-  experimental: {
     // turbopackFileSystemCacheForDev: true,
     cacheLife: {
       default: {
@@ -48,7 +47,6 @@ const nextConfig: NextConfig = {
         revalidate: 60, // 1 minute
         expire: 86400, // 24 hours
       },
-    },
   },
 
   images: {
@@ -61,6 +59,19 @@ const nextConfig: NextConfig = {
         protocol: "http",
         hostname: "localhost",
         port: "8090",
+        pathname: "/api/files/**",
+      },
+      // Internal Docker network access
+      {
+        protocol: "http",
+        hostname: "pocketbase",
+        port: "8090",
+        pathname: "/api/files/**",
+      },
+      {
+        protocol: "https",
+        hostname: "pocketbase.finwage.ca",
+        port: "443",
         pathname: "/api/files/**",
       },
       {

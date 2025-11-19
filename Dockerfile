@@ -29,6 +29,12 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
+# Build arguments for environment variables
+ARG NEXT_PUBLIC_POCKETBASE_URL
+ARG NEXT_PUBLIC_POCKETBASE_INTERNAL_URL
+ENV NEXT_PUBLIC_POCKETBASE_URL=$NEXT_PUBLIC_POCKETBASE_URL
+ENV NEXT_PUBLIC_POCKETBASE_INTERNAL_URL=$NEXT_PUBLIC_POCKETBASE_INTERNAL_URL
+
 # Build the application using Turbopack
 RUN bun run build
 
@@ -45,12 +51,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup -S nextjs && adduser -S nextjs -G nextjs
 
 # Copy necessary build artifacts
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
-# Ensure proper permissions for the nextjs user
-RUN chown -R nextjs:nextjs /app/public
+COPY --from=builder --chown=nextjs:nextjs /app/public ./public
+COPY --from=builder --chown=nextjs:nextjs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nextjs /app/.next/static ./.next/static
 
 USER nextjs
 
@@ -58,5 +61,5 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# Start the app with Bun (uses Node.js-compatible runtime)
 CMD ["bun", "server.js"]
+

@@ -60,13 +60,24 @@ async function triggerWebhooks(action, collectionName, record) {
     );
 
     // Query the 'webhooks' collection for active webhooks matching the collection and event type
-    const webhooks = $app.findRecordsByFilter(
-      "webhooks",
-      `collection = "${collectionName}" && active = true && (event_type ?~ "${eventType}" || event_type = "" || event_type = null)`,
-      null,
-      0,
-      0,
-    );
+    let webhooks = [];
+    try {
+      webhooks = $app.dao().findRecordsByFilter(
+        "webhooks",
+        `collection = "${collectionName}" && active = true && (event_type ?~ "${eventType}" || event_type = "" || event_type = null)`,
+        "-created",
+        0,
+        0,
+      );
+    } catch (dbErr) {
+      // Ignore "no rows in result set" error which can happen if no records match
+      // or if the collection is empty in some versions/configurations
+      if (dbErr.message && dbErr.message.includes("no rows in result set")) {
+        console.log("No matching webhooks found (sql: no rows in result set).");
+        return;
+      }
+      throw dbErr;
+    }
 
     console.log(
       `Query completed. Found ${webhooks.length} potential webhooks for ${collectionName} ${action}`,

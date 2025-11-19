@@ -16,6 +16,15 @@ export function getPocketBaseUrl(): string {
 }
 
 /**
+ * Get the PocketBase internal URL for server-side fetching (Docker)
+ */
+export function getPocketBaseInternalUrl(): string {
+  const url =
+    process.env.NEXT_PUBLIC_POCKETBASE_INTERNAL_URL || getPocketBaseUrl();
+  return url.endsWith("/") ? url.slice(0, -1) : url;
+}
+
+/**
  * Construct a file URL for a PocketBase record
  *
  * @param record - The PocketBase record containing the file
@@ -35,7 +44,6 @@ export function getFileUrl(record: BaseSystemFields, filename: string): string {
 
   const baseUrl = getPocketBaseUrl();
   const { collectionName, id } = record;
-  console.log(`${baseUrl}/api/files/${collectionName}/${id}/${filename}`);
 
   return `${baseUrl}/api/files/${collectionName}/${id}/${filename}`;
 }
@@ -74,7 +82,11 @@ export function getImageUrl(
     return fallback;
   }
 
-  const url = getFileUrl(record, filename);
+  // Use internal URL for images to support next/image optimization in Docker
+  const baseUrl = getPocketBaseInternalUrl();
+  const { collectionName, id } = record;
+  const url = `${baseUrl}/api/files/${collectionName}/${id}/${filename}`;
+
   return thumb ? `${url}?thumb=${thumb}` : url;
 }
 

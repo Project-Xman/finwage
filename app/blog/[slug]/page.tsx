@@ -65,7 +65,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = (await getBlogBySlug(slug)) as BlogWithExpand | null;
+  const decodedSlug = decodeURIComponent(slug);
+  const post = (await getBlogBySlug(decodedSlug)) as BlogWithExpand | null;
 
   if (!post) {
     return {
@@ -124,7 +125,8 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = (await getBlogBySlug(slug)) as BlogWithExpand | null;
+  const decodedSlug = decodeURIComponent(slug);
+  const post = (await getBlogBySlug(decodedSlug)) as BlogWithExpand | null;
 
   if (!post) {
     notFound();
@@ -138,7 +140,7 @@ export default async function BlogPostPage({
   )) as BlogWithExpand[];
   // Filter out the current post
   const relatedPosts = relatedPostsAll
-    .filter((p) => p.slug !== slug)
+    .filter((p) => p.slug !== decodedSlug)
     .slice(0, 3);
 
   return (
