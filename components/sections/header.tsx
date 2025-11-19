@@ -31,10 +31,10 @@ const navigationItems = [
     name: "How It Works",
     link: "/how-it-works",
   },
-  {
-    name: "Pricing",
-    link: "/pricing",
-  },
+  // {
+  //   name: "Pricing",
+  //   link: "/pricing",
+  // },
   // {
   //   name: "Resources",
   //   link: "/resources",

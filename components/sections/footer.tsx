@@ -19,7 +19,7 @@ export default function Footer() {
 
   const supportLinks = [
     { label: "Blog", href: "/blog" },
-    { label: "Pricing", href: "/pricing" },
+    // { label: "Pricing", href: "/pricing" },
     { label: "Compliance", href: "/compliance" },
   ];
 
