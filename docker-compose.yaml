@@ -28,7 +28,7 @@ services:
     # ports:
     #   - "8090:8090"
     volumes:
-      - ./data/pb_data:/pb/pb_data
+      - pocketbase-data:/pb/pb_data
       - ./data/pb_migrations:/pb/pb_migrations
       - ./data/pb_hooks:/pb/pb_hooks
     environment:
