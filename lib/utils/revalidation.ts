@@ -431,7 +431,7 @@ export async function handlePocketBaseWebhook(
       revalidated.tags.push("authors", "blogs");
       await revalidateBlogs();
     },
-    categories: async () => {
+    category: async () => {
       revalidated.tags.push("categories", "blogs");
       await revalidateBlogs();
     },
@@ -452,10 +452,15 @@ export async function handlePocketBaseWebhook(
       revalidated.paths.push("/");
       await revalidatePartners();
     },
-    press_releases: async () => {
+    press: async () => {
       revalidated.tags.push("press");
       revalidated.paths.push("/resources");
       await revalidatePress();
+    },
+    cta_cards: async () => {
+      revalidated.tags.push("cta");
+      revalidated.paths.push("/");
+      await revalidateHomepage();
     },
 
     // Product Collections
@@ -469,6 +474,11 @@ export async function handlePocketBaseWebhook(
       revalidated.paths.push("/");
       await revalidateIntegrations();
     },
+    process_steps: async () => {
+      revalidated.tags.push("process");
+      revalidated.paths.push("/how-it-works");
+      await revalidatePaths(["/how-it-works"]);
+    },
 
     // Company Collections
     leadership: async () => {
@@ -476,51 +486,53 @@ export async function handlePocketBaseWebhook(
       revalidated.paths.push("/about");
       await revalidateCompanyInfo();
     },
-    company_values: async () => {
+    values: async () => {
       revalidated.tags.push("values");
       revalidated.paths.push("/about");
       await revalidateCompanyInfo();
     },
-    milestones: async () => {
+    company_milestones: async () => {
       revalidated.tags.push("milestones");
       revalidated.paths.push("/about");
       await revalidateCompanyInfo();
     },
-    company_stats: async () => {
+    employer_stats: async () => {
       revalidated.tags.push("stats");
-      revalidated.paths.push("/about", "/");
+      revalidated.paths.push("/about", "/", "/for-employers");
       await revalidateCompanyInfo();
+      await revalidatePaths(["/for-employers"]);
     },
 
     // Careers Collections
-    job_positions: async () => {
+    jobs: async () => {
       revalidated.tags.push("jobs");
       revalidated.paths.push("/careers");
       await revalidateJobs();
     },
-    benefits: async () => {
+    employee_benefits: async () => {
       revalidated.tags.push("benefits");
-      revalidated.paths.push("/careers");
+      revalidated.paths.push("/careers", "/for-employees");
       await revalidateJobs();
+      await revalidatePaths(["/for-employees"]);
     },
-    office_locations: async () => {
+    locations: async () => {
       revalidated.tags.push("locations");
       revalidated.paths.push("/careers", "/contact");
       await revalidateJobs();
     },
 
-    // Support Collections
-    support_resources: async () => {
+    // Support & Resources Collections
+    support: async () => {
       revalidated.tags.push("support");
       revalidated.paths.push("/resources", "/contact");
       await revalidateSupport();
     },
-    faq_items: async () => {
+    faqs: async () => {
       revalidated.tags.push("faq");
       revalidated.paths.push("/resources");
       await revalidateSupport();
     },
-    faq_categories: async () => {
+    faq_topics: async () => {
       revalidated.tags.push("faq");
       revalidated.paths.push("/resources");
       await revalidateSupport();
@@ -530,28 +542,53 @@ export async function handlePocketBaseWebhook(
       revalidated.paths.push("/contact");
       await revalidateSupport();
     },
+    resource_articles: async () => {
+      revalidated.tags.push("resources");
+      revalidated.paths.push("/resources");
+      await revalidatePaths(["/resources"]);
+    },
+    resource_categories: async () => {
+      revalidated.tags.push("resources");
+      revalidated.paths.push("/resources");
+      await revalidatePaths(["/resources"]);
+    },
+    resource_downloads: async () => {
+      revalidated.tags.push("resources");
+      revalidated.paths.push("/resources");
+      await revalidatePaths(["/resources"]);
+    },
 
-    // Legacy collection names (for backward compatibility)
-    Blogs: async () => await collectionMap.blogs(),
-    Authors: async () => await collectionMap.authors(),
-    Category: async () => await collectionMap.categories(),
-    Testimonials: async () => await collectionMap.testimonials(),
-    Pricing_Plans: async () => await collectionMap.pricing_plans(),
-    Features: async () => await collectionMap.features(),
-    Integrations: async () => await collectionMap.integrations(),
-    Partners: async () => await collectionMap.partners(),
-    Jobs: async () => await collectionMap.job_positions(),
-    Employee_Benefits: async () => await collectionMap.benefits(),
-    Locations: async () => await collectionMap.office_locations(),
-    Leadership: async () => await collectionMap.leadership(),
-    Values: async () => await collectionMap.company_values(),
-    Company_Milestones: async () => await collectionMap.milestones(),
-    Stats: async () => await collectionMap.company_stats(),
-    Support: async () => await collectionMap.support_resources(),
-    Faqs: async () => await collectionMap.faq_items(),
-    Faq_Topics: async () => await collectionMap.faq_categories(),
-    Contacts: async () => await collectionMap.contact_options(),
-    Press: async () => await collectionMap.press_releases(),
+    // Compliance & Security
+    compliance_items: async () => {
+      revalidated.tags.push("compliance");
+      revalidated.paths.push("/compliance");
+      await revalidatePaths(["/compliance"]);
+    },
+    security_features: async () => {
+      revalidated.tags.push("security");
+      revalidated.paths.push("/compliance"); // Assuming security is part of compliance or similar
+      await revalidatePaths(["/compliance"]);
+    },
+
+    // Misc
+    status: async () => {
+      revalidated.tags.push("status");
+      await revalidateAllContent(); // Status might affect everything
+    },
+    
+    // Legacy / Aliases
+    categories: async () => await collectionMap.category(),
+    pricing: async () => await collectionMap.pricing_plans(),
+    press_releases: async () => await collectionMap.press(),
+    company_values: async () => await collectionMap.values(),
+    milestones: async () => await collectionMap.company_milestones(),
+    company_stats: async () => await collectionMap.employer_stats(),
+    job_positions: async () => await collectionMap.jobs(),
+    benefits: async () => await collectionMap.employee_benefits(),
+    office_locations: async () => await collectionMap.locations(),
+    support_resources: async () => await collectionMap.support(),
+    faq_items: async () => await collectionMap.faqs(),
+    faq_categories: async () => await collectionMap.faq_topics(),
   };
 
   // Normalize collection name (handle both snake_case and PascalCase)

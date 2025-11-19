@@ -16,12 +16,12 @@ function StatCard({ stat }: { stat: StatusResponse }) {
   return (
     <div className="flex flex-col gap-2 w-full">
       <div className="relative">
-        <div className="absolute bg-white h-6 left-0 top-1 w-px" />
-        <div className="text-xl md:text-2xl text-white tracking-tight pl-4">
-          <p className="leading-6 md:leading-8">{stat.value}</p>
+        <div className="absolute bg-white h-8 left-0 top-1 w-px" />
+        <div className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-tight pl-4">
+          <p className="leading-8 md:leading-9">{stat.value}</p>
         </div>
       </div>
-      <div className="text-xs md:text-sm lg:text-base text-white tracking-wide pl-4 leading-5 md:leading-6">
+      <div className="text-sm md:text-base lg:text-lg text-white tracking-wide pl-4 leading-6 md:leading-7">
         <p>{stat.description || stat.metric}</p>
       </div>
     </div>
@@ -43,15 +43,15 @@ export default function Global({ stats }: { stats: StatusResponse[] }) {
   }, []);
 
   const GLOBE_CONFIG: COBEOptions = {
-    width: 800,
-    height: 800,
+    width: 950,
+    height: 950,
     onRender: () => {},
-    devicePixelRatio: 0.5,
+    devicePixelRatio: 0.59  ,
     phi: 0,
     theta: 0.3,
     dark: 0,
     diffuse: 0.4,
-    mapSamples: 10000,
+    mapSamples: 18000,
     mapBrightness: 1.2,
     baseColor: [255 / 255, 179 / 255, 193 / 255], // Light pink #ffb3c1
     markerColor: [255 / 255, 230 / 255, 235 / 255], // Very light pink #ffe6eb
@@ -71,14 +71,14 @@ export default function Global({ stats }: { stats: StatusResponse[] }) {
   };
 
   return (
-    <section className="bg-[#f74b6b] relative w-full overflow-hidden py-12 md:py-16 lg:py-24 xl:py-32">
+    <section className="bg-[#f74b6b] relative w-full overflow-hidden py-8 md:py-12 lg:py-20 xl:py-24">
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8 xl:px-16">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 xl:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 xl:gap-20 items-center">
           {/* Globe - First on mobile, Second on desktop */}
-          <div className="relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[800px] w-full flex items-center justify-center lg:justify-end overflow-visible order-1 lg:order-2">
+          <div className="relative h-[310px] sm:h-[410px] md:h-[510px] lg:h-[620px] xl:h-[820px] w-full flex items-center justify-center lg:justify-end overflow-visible order-1 lg:order-2">
             <div
-              className="absolute right-0 w-[600px] h-[600px] sm:w-[700px] sm:h-[700px] md:w-[800px] md:h-[800px] lg:w-[1000px] lg:h-[1000px] xl:w-[1200px] xl:h-[1200px] lg:translate-x-[25%] xl:translate-x-[35%]"
+              className="absolute right-0 w-[620px] h-[620px] sm:w-[720px] sm:h-[720px] md:w-[820px] md:h-[820px] lg:w-[1020px] lg:h-[1020px] xl:w-[1220px] xl:h-[1220px] lg:translate-x-[25%] xl:translate-x-[35%]"
               style={{
                 willChange: "transform",
               }}
@@ -94,10 +94,10 @@ export default function Global({ stats }: { stats: StatusResponse[] }) {
           <div className="flex flex-col gap-8 md:gap-10 lg:gap-12 xl:gap-16 order-2 lg:order-1">
             {/* Header Section */}
             <div className="flex flex-col gap-4 md:gap-6 lg:gap-8">
-              <h1 className="text-2xl pt-15 md:pt-0 sm:text-3xl md:text-4xl lg:text-5xl font-bold md:font-normal text-white leading-tight max-w-xl">
+              <h1 className="text-3xl pt-15 md:pt-0 sm:text-4xl md:text-5xl lg:text-6xl font-bold md:font-normal text-white leading-tight max-w-2xl">
                 Global Recognition for Financial Innovation
               </h1>
-              <p className="text-sm sm:text-base md:text-lg text-white leading-6 md:leading-7 max-w-md tracking-wide">
+              <p className="text-base sm:text-lg md:text-xl text-white leading-7 md:leading-8 max-w-lg tracking-wide">
                 FinWage makes moving money as easy and programmable as moving
                 data. Our teams are based in offices around the world and we
                 process hundreds of billions of dollars each year for ambitious

@@ -1,7 +1,5 @@
-import type { NextPage } from "next";
 import Image from "next/image";
 import { EnquiryButton } from "@/components/shared/enquiry-button";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getCTACards } from "@/lib/services/cta";
 import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
@@ -10,212 +8,46 @@ import type { CtaCardsResponse } from "@/types/pocketbase";
 // Type for CTA cards with properly typed points array
 export type CtaCard = CtaCardsResponse<string[]>;
 
-function HeroImageContainer({ className }: { className?: string }) {
-  return (
-    <div className={`${className} relative`} data-name="Hero Image Container">
-      {/* Circular Container for the Hero Image */}
-      <div
-        className="absolute rounded-full overflow-hidden"
-        style={{
-          width: "800px",
-          height: "800px",
-          left: "6px",
-          top: "2px",
-        }}
-      >
-        {/* Image fills the circular container using object-cover */}
-        <Image
-          fill
-          alt="Corporate workers brainstorming together"
-          className="object-cover pointer-events-none"
-          style={{ objectPosition: "center" }}
-          src="/assets/hero-image.jpg"
-        />
-        {/* Blue Overlay - Covers the circular image area */}
-        <div className="absolute inset-0 bg-pink-900 opacity-50"></div>
-      </div>
-
-      {/* White Arc Overlay */}
-      <div
-        className="absolute"
-        style={{
-          left: "100px",
-          top: "26px",
-          width: "600px",
-          height: "600px",
-        }}
-      >
-        <Image
-          fill
-          alt=""
-          className="object-contain pointer-events-none"
-          src="/assets/white-arc.png"
-          sizes="900px"
-        />
-      </div>
-
-      {/* Play Icon Button */}
-      <div
-        className="absolute cursor-pointer flex items-center justify-center"
-        style={{
-          left: "300px",
-          top: "350px",
-          width: "260px",
-          height: "160px",
-        }}
-      >
-        <Image
-          fill
-          alt="Play Video"
-          className="object-contain"
-          src="/assets/app-icon.png"
-          sizes="160px"
-        />
-      </div>
-    </div>
-  );
-}
-
-function LetsTalkButton() {
-  return (
-    <EnquiryButton
-      type="contact"
-      size="lg"
-      className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-xl transition-shadow rounded-full font-semibold w-full md:w-auto"
-      modalTitle="Let's Talk"
-      modalDescription="Tell us about your organization and how we can help you provide financial wellness benefits to your employees."
-    >
-      Let's Talk
-    </EnquiryButton>
-  );
-}
-
-function HeroSection() {
-  return (
-    <div className="flex flex-col gap-4 md:gap-6 lg:flex-row lg:gap-12 items-center justify-between w-full">
-      <div className="flex-1 text-center lg:text-left">
-        <h2 className="font-normal text-2xl md:text-3xl lg:text-4xl text-[#1d44c3] leading-tight">
-          Discover Why FinWage is Powering Top Employers
-        </h2>
-      </div>
-      <div className="shrink-0 w-full md:w-auto">
-        <LetsTalkButton />
-      </div>
-    </div>
-  );
-}
-
 function CtaCardComponent({ icon_svg, bg_color, title, points }: CtaCard) {
   // Check if icon is an image path (starts with / or http)
   const isImageIcon = icon_svg?.startsWith("/") || icon_svg?.startsWith("http");
 
   return (
-    <Card className="bg-white rounded-xl border-2 border-[#e5e7eb] shadow-md hover:shadow-xl hover:border-[#1d44c3] transition-all duration-300 h-full">
-      <CardContent className="p-4 flex flex-col h-full">
-        {/* Icon + Title row */}
-        <div className="mb-3">
-          <div className="flex items-start gap-3">
-            <div
-              className={`size-11 ${bg_color} rounded-lg flex items-center justify-center shrink-0 shadow-sm`}
-            >
-              {isImageIcon ? (
-                <Image
-                  alt={`${title} icon`}
-                  className="w-full h-full object-cover rounded-lg"
-                  width={40}
-                  height={40}
-                  src={icon_svg}
-                />
-              ) : (
-                <div className="text-[#1d44c3]">
-                  <SvgIcon svgString={icon_svg} className="w-6 h-6" />
-                </div>
-              )}
+    <Card className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-600/20 transition-all duration-300">
+      <CardContent className="p-6 flex flex-col sm:flex-row gap-5 items-start">
+        <div
+          className={`size-12 ${bg_color || "bg-blue-50"} rounded-xl flex items-center justify-center shrink-0 shadow-sm`}
+        >
+          {isImageIcon ? (
+            <Image
+              alt={`${title} icon`}
+              className="w-full h-full object-cover rounded-xl"
+              width={48}
+              height={48}
+              src={icon_svg}
+            />
+          ) : (
+            <div className="text-[#1d44c3]">
+              <SvgIcon svgString={icon_svg} className="w-6 h-6" />
             </div>
-
-            <div className="flex-1">
-              <h3 className="font-bold text-base text-[#1d44c3] leading-snug">
-                {title}
-              </h3>
-            </div>
-          </div>
+          )}
         </div>
 
-        {/* Content */}
         <div className="flex-1 space-y-2">
-          {points &&
-            points.map((point: string, index: number) => (
-              <p key={index} className="text-sm text-gray-600 leading-relaxed">
-                {point}
-              </p>
-            ))}
+          <h3 className="font-bold text-lg text-[#1d44c3] leading-tight">
+            {title}
+          </h3>
+          <div className="space-y-1.5">
+            {points &&
+              points.map((point: string, index: number) => (
+                <p key={index} className="text-sm text-gray-600 leading-relaxed">
+                  {point}
+                </p>
+              ))}
+          </div>
         </div>
       </CardContent>
     </Card>
-  );
-}
-
-export function FeaturesGrid({ cards }: { cards: CtaCard[] }) {
-  if (cards.length === 0) {
-    return null;
-  }
-
-  return (
-    <div className="w-full">
-      {/* Single column list */}
-      <div className="flex flex-col gap-4">
-        {cards.map((card) => (
-          <CtaCardComponent key={card.id} {...card} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function MobileView({ cards }: { cards: CtaCard[] }) {
-  return (
-    <div className="lg:hidden bg-white w-full py-8 md:py-16 lg:py-24 flex items-center justify-center">
-      <div className="w-full max-w-7xl">
-        <Card className="bg-white rounded-xl border border-[#ecebeb] shadow-xl mx-4 md:mx-8 lg:mx-12 xl:mx-24 my-4 md:my-8">
-          <CardContent className="p-4 md:p-5 lg:p-6 xl:p-8 space-y-4 md:space-y-6 lg:space-y-8">
-            <HeroSection />
-            <FeaturesGrid cards={cards} />
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
-}
-
-function DesktopView({ cards }: { cards: CtaCard[] }) {
-  return (
-    <div className="hidden lg:block relative w-full h-[580px] md:h-[650px] lg:h-[680px] bg-white shrink-0 text-left text-2xl text-white font-afacad overflow-hidden">
-      {/* Main Container */}
-      <div className="absolute top-[-140px] md:-top-40 lg:top-[-184px] left-[-280px] md:-left-80 lg:left-[-162px] w-[1815px] flex items-center gap-8 md:gap-12 lg:gap-16 overflow-clip scale-[0.65] md:scale-[0.7] lg:scale-100 origin-left">
-        <HeroImageContainer className="w-[1000px] h-[930px]" />
-
-        {/* Right Content Section */}
-        <div className="w-[500px] pt-15 flex flex-col gap-6">
-          <FeaturesGrid cards={cards} />
-
-          {/* Bottom CTA Section */}
-          <div className="flex flex-col gap-4">
-            <h2 className="font-normal text-2xl text-[#1d44c3] leading-tight">
-              Discover Why FinWage is Powering Top Employers
-            </h2>
-            <EnquiryButton
-              type="contact"
-              size="lg"
-              className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-xl transition-shadow rounded-full font-semibold w-fit"
-              modalTitle="Let's Talk"
-              modalDescription="Tell us about your organization and how we can help you provide financial wellness benefits to your employees."
-            >
-              Let's Talk
-            </EnquiryButton>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -228,9 +60,68 @@ export default async function Cta() {
   }
 
   return (
-    <div data-name="CTA">
-      <MobileView cards={cards} />
-      <DesktopView cards={cards} />
-    </div>
+    <section className="w-full py-12 lg:py-24 bg-white overflow-hidden" data-name="CTA">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left Column: Image Composition */}
+          <div className="relative w-full max-w-[600px] mx-auto lg:mx-0 aspect-square lg:aspect-[4/5] order-2 lg:order-1">
+            {/* Decorative Background Circle */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-50/50 rounded-full -z-10" />
+            
+            <div className="relative h-full w-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
+              <Image
+                fill
+                alt="Corporate workers brainstorming together"
+                className="object-cover"
+                src="/assets/hero-image.jpg"
+                priority
+              />
+              {/* Overlay Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#1d44c3]/60 to-transparent mix-blend-multiply" />
+              
+              {/* Floating Badge/Icon */}
+              <div className="absolute bottom-8 left-8 bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-lg max-w-[240px]">
+                <Image
+                  width={160}
+                  height={60}
+                  alt="FinWage Logo"
+                  className="object-contain h-12 w-auto"
+                  src="/assets/app-icon.png"
+                />
+              </div>
+            </div>
+            
+            {/* Decorative Elements */}
+            <div className="absolute -top-8 -right-8 w-32 h-32 bg-[#1d44c3] rounded-full opacity-5 blur-3xl" />
+            <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-pink-500 rounded-full opacity-5 blur-3xl" />
+          </div>
+
+          {/* Right Column: Content */}
+          <div className="flex flex-col gap-10 order-1 lg:order-2">
+            <div className="space-y-6">
+              {cards.map((card) => (
+                <CtaCardComponent key={card.id} {...card} />
+              ))}
+            </div>
+
+            <div className="space-y-6 pt-6 border-t border-gray-100">
+              <h2 className="text-3xl md:text-4xl font-semibold text-[#1d44c3] leading-tight max-w-lg">
+                Discover Why FinWage is Powering Top Employers
+              </h2>
+              
+              <EnquiryButton
+                type="contact"
+                size="lg"
+                className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-lg hover:-translate-y-0.5 transition-all rounded-full px-8 h-14 text-lg font-semibold shadow-blue-900/20 shadow-md"
+                modalTitle="Let's Talk"
+                modalDescription="Tell us about your organization and how we can help you provide financial wellness benefits to your employees."
+              >
+                Let's Talk
+              </EnquiryButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

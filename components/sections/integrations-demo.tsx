@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type React from "react";
-import { forwardRef, useRef } from "react";
+import { forwardRef, useRef, useState, useEffect } from "react";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 import { cn } from "@/lib/utils";
 import { getImageUrl } from "@/lib/utils/pocketbase";
@@ -43,6 +43,11 @@ export default function IntegrationDemo({
   // Limit to 6 integrations for the demo (excluding center)
   const displayIntegrations = integrations.slice(0, 6);
   const centerIntegration = integrations[6] || integrations[0]; // Use 7th or fallback to first
+
+  const [_, forceUpdate] = useState(0);
+  useEffect(() => {
+    forceUpdate((prev) => prev + 1);
+  }, []);
 
   return (
     <div
@@ -174,9 +179,7 @@ export default function IntegrationDemo({
       </div>
 
       {/* Animated beams connecting integrations to center */}
-      {integrationRefs.current.map((ref, idx) => {
-        if (!ref || !centerRef.current) return null;
-
+      {displayIntegrations.map((_, idx) => {
         const isTopRow = idx < 2;
         const isBottomRow = idx >= 4;
         const isLeftSide = idx === 2;
@@ -186,7 +189,7 @@ export default function IntegrationDemo({
           <AnimatedBeam
             key={idx}
             containerRef={containerRef}
-            fromRef={{ current: ref }}
+            fromRef={{ current: integrationRefs.current[idx] ?? null }}
             toRef={centerRef}
             curvature={isTopRow || isBottomRow ? (idx % 2 === 0 ? -75 : 75) : 0}
             endYOffset={isTopRow ? -10 : isBottomRow ? 10 : 0}
