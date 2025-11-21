@@ -16,6 +16,7 @@ import { renderIcon } from "@/lib/utils/icon-mapper";
 import { getImageUrl } from "@/lib/utils/pocketbase";
 import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 import { Metadata } from "next";
+import { getContactOptions } from "@/lib/services/contact";
 
 export const metadata: Metadata = {
   title: "For Employees - FinWage",
@@ -42,15 +43,17 @@ export const revalidate = 2678400;
 
 export default async function ForEmployeesPage() {
   // Fetch data from PocketBase using Promise.all for parallel requests
-  const [benefits, testimonialsResult, faqs] = await Promise.all([
+  const [benefits, testimonialsResult, faqs, contacts] = await Promise.all([
     getEmployeeBenefits({ perPage: 20 }),
     getTestimonials({ perPage: 10 }),
     getFAQs({ perPage: 50, category: "employee" }),
+    getContactOptions(),
   ]);
 
   const testimonials = testimonialsResult.items;
 
-  console.log("For Employees Page - FAQs fetched:", faqs);
+    const employeeContact = contacts.find(contact => contact.type === 'employee');
+    console.log(employeeContact);
 
   return (
     <main className="min-h-screen">
@@ -260,12 +263,12 @@ export default async function ForEmployeesPage() {
 
           <div className="text-center mt-12">
             <p className="text-gray-600 mb-4">Still have questions?</p>
-            <Button
-              variant="link"
+            <Link
+              href={employeeContact ? employeeContact.action_url : '#'}
               className="text-[#f74b6b] font-semibold text-base hover:underline"
             >
               Contact Our Support Team →
-            </Button>
+            </Link>
           </div>
         </div>
       </section>
