@@ -7,6 +7,8 @@ import { getCompanyValues } from "@/lib/services/values";
 import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 import type { JobsResponse } from "@/types/pocketbase";
 import { Metadata } from "next";
+import Link from "next/link";
+import { getContactOptions } from "@/lib/services/contact";
 
 export const metadata: Metadata = {
   title: "Careers at FinWage",
@@ -30,16 +32,19 @@ export const metadata: Metadata = {
 
 export default async function CareersPage() {
   // Fetch open job positions, featured jobs, benefits, and values in parallel
-  const [jobsResult, featuredJobs, benefitsGrouped, values] = await Promise.all(
+  const [jobsResult, featuredJobs, benefitsGrouped, values,contacts] = await Promise.all(
     [
       getJobPositions({ status: "open", perPage: 50 }),
       getFeaturedJobs(3),
       getBenefitsGroupedByCategory(),
       getCompanyValues({ perPage: 10 }),
+      getContactOptions(),
     ],
   );
 
   // Filter out featured jobs from open positions to avoid duplication
+  const careersContact = contacts.find(contact => contact.type === 'careers');
+  console.log(careersContact);
   const featuredJobIds = new Set(featuredJobs.map((job) => job.id));
   const openPositions = jobsResult.items.filter(
     (job) => !featuredJobIds.has(job.id),
@@ -60,7 +65,7 @@ export default async function CareersPage() {
       ) : (
         <Heart className="w-8 h-8\" />
       ),
-      title: category,
+      title: items.map((item) => item.title),
       items: items.map((item) => item.description),
     };
   });
@@ -288,12 +293,12 @@ export default async function CareersPage() {
               Don't see the right role? We're always looking for talented
               people.
             </p>
-            <Button
-              variant="link"
+            <Link
+              href={careersContact ? careersContact.action_url : '#'}
               className="text-[#f74b6b] font-semibold text-base hover:underline"
             >
               Send Us Your Resume →
-            </Button>
+            </Link>
           </div>
         </div>
       </section>
