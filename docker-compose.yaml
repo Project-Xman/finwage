@@ -9,6 +9,7 @@ services:
       args:
         NEXT_PUBLIC_POCKETBASE_URL: http://pocketbase:8090
         NEXT_PUBLIC_POCKETBASE_INTERNAL_URL: http://pocketbase:8090
+    image: sulthaan/project-x-finwage:latest
     container_name: finwage-app
     restart: unless-stopped
     ports:
