@@ -17,6 +17,7 @@ import { getImageUrl } from "@/lib/utils/pocketbase";
 import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 import { Metadata } from "next";
 import { getContactOptions } from "@/lib/services/contact";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "For Employees - FinWage",
@@ -52,8 +53,8 @@ export default async function ForEmployeesPage() {
 
   const testimonials = testimonialsResult.items;
 
-    const employeeContact = contacts.find(contact => contact.type === 'employee');
-    console.log(employeeContact);
+  const employeeContact = contacts.find(c => c.type === 'employee');
+
 
   return (
     <main className="min-h-screen">

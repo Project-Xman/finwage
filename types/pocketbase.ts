@@ -346,6 +346,7 @@ export type LocationsRecord<Tcoordinates = unknown> = {
   country?: string;
   created?: IsoDateString;
   email?: string;
+  home_location?: boolean;
   id: string;
   name: string;
   phone?: string;

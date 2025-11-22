@@ -152,7 +152,7 @@ export default async function CareersPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {benefits.map((benefit, index) => (
-                <Card key={benefit.title} className="shadow-lg">
+                <Card key={benefit.title[0]} className="shadow-lg">
                   <CardContent className="p-8">
                     <div className={`inline-flex items-center justify-center w-16 h-16 ${index % 2 === 0 ? 'bg-blue-100 text-[#1d44c3]' : 'bg-pink-100 text-[#f74b6b]'} rounded-full mb-6`}>
                       {benefit.icon}

@@ -23,6 +23,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { getContactOptions } from "@/lib/services/contact";
 import { EnquiriesInterestOptions } from "@/types/pocketbase";
 import { Metadata } from "next";
+import { getOfficeLocations } from "@/lib/services/locations";
 
 export const metadata: Metadata = {
   title: "Contact Us - FinWage",
@@ -46,6 +47,13 @@ export const metadata: Metadata = {
 export default async function ContactPage() {
   // Fetch contact options from PocketBase
   const contactOptions = await getContactOptions();
+  const locations = await getOfficeLocations();
+  const homeLocation = locations.items.find(locations => locations.home_location === true);
+  const contactPhoneSupport = contactOptions.find(c => c.type === 'phone-support');
+  const contactPhoneSales = contactOptions.find(c => c.type === 'phone-sales');
+  const contactEmailSupport = contactOptions.find(c => c.type === 'email-support');
+  const contactEmailSales = contactOptions.find(c => c.type === 'email-sales');
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -186,10 +194,10 @@ export default async function ContactPage() {
                 <CardContent>
                   <p className="text-gray-600 mb-3">Call us directly at:</p>
                   <NextLink
-                    href="tel:1-800-FINWAGE"
+                    href={contactPhoneSupport ? contactPhoneSupport.action_url : '#'}
                     className="text-2xl font-bold text-[#1d44c3] hover:underline"
                   >
-                    1-800-FINWAGE
+                    {contactPhoneSupport ? contactPhoneSupport.action_url.replace('tel:', '') : '1-800-FINWAGE'}
                   </NextLink>
                 </CardContent>
               </Card>
@@ -234,12 +242,12 @@ export default async function ContactPage() {
               <CardContent className="p-8">
                 <MapPin className="w-8 h-8 text-primary mx-auto mb-4" />
                 <h3 className="font-bold text-gray-900 mb-2">
-                  San Francisco HQ
+                  {homeLocation?.name || "San Francisco HQ"}
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  123 Market Street
+                  {homeLocation?.address || "123 Market Street"}
                   <br />
-                  San Francisco, CA 94105
+                  {homeLocation ? `${homeLocation.city}, ${homeLocation.state} ${homeLocation.zip}` : "San Francisco, CA 94105"}
                 </p>
               </CardContent>
             </Card>
@@ -249,9 +257,9 @@ export default async function ContactPage() {
                 <Mail className="w-8 h-8 text-primary mx-auto mb-4" />
                 <h3 className="font-bold text-gray-900 mb-2">Email</h3>
                 <p className="text-gray-600 text-sm">
-                  Sales: sales@finwage.com
+                  Sales: {contactEmailSales ? contactEmailSales.action_url.replace('mailto:', '') : 'support@finwage.com'}
                   <br />
-                  Support: support@finwage.com
+                  Support: {contactEmailSupport ? contactEmailSupport.action_url.replace('mailto:', '') : 'support@finwage.com'}
                 </p>
               </CardContent>
             </Card>
@@ -261,9 +269,9 @@ export default async function ContactPage() {
                 <Phone className="w-8 h-8 text-primary mx-auto mb-4" />
                 <h3 className="font-bold text-gray-900 mb-2">Phone</h3>
                 <p className="text-gray-600 text-sm">
-                  Sales: 1-800-FINWAGE
+                  Sales: {contactPhoneSales ? contactPhoneSales.action_url.replace('tel:', '') : '1-800-FINWAGE'}
                   <br />
-                  Support: 1-888-FINWAGE
+                  Support: {contactPhoneSupport ? contactPhoneSupport.action_url.replace('tel:', '') : '1-800-FINWAGE'}
                 </p>
               </CardContent>
             </Card>

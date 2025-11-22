@@ -7,6 +7,8 @@ import {
 } from "@/lib/services/compliance";
 import { SvgIcon } from "@/lib/utils/svg-icon-renderer";
 import { Metadata } from "next";
+import Link from "next/link";
+import { getContactOptions } from "@/lib/services/contact";
 
 export const metadata: Metadata = {
   title: "Compliance & Security - FinWage",
@@ -32,12 +34,15 @@ export const metadata: Metadata = {
 export const revalidate = 2678400;
 
 export default async function CompliancePage() {
-  const [complianceResult, securityFeatures] = await Promise.all([
+  const [complianceResult, securityFeatures, contact] = await Promise.all([
     getComplianceItems({ perPage: 20 }),
     getSecurityFeatures({ perPage: 50 }),
+    getContactOptions(),
   ]);
 
+
   const complianceItems = complianceResult.items;
+  const employeeContact = contact.find(c => c.type === 'security');
 
   return (
     <main className="min-h-screen">
@@ -309,13 +314,13 @@ export default async function CompliancePage() {
               <p className="text-gray-600 mb-4">
                 Have questions about our compliance or security practices?
               </p>
-              <Button
+              <Link href={employeeContact ? employeeContact.action_url : '#'}
                 type="button"
                 className="text-[#1d44c3] font-semibold hover:underline"
-                variant="link"
+               
               >
                 Contact Our Compliance Team →
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
