@@ -43,8 +43,11 @@ import type {
 
 import { CACHE_DURATION, CACHE_TAGS } from "@/lib/utils/cache-config";
 
+// Use server-side env var first (runtime), then fall back to NEXT_PUBLIC (build-time)
 const POCKETBASE_URL =
-  process.env.NEXT_PUBLIC_POCKETBASE_URL || "http://127.0.0.1:8090";
+  process.env.POCKETBASE_URL ||
+  process.env.NEXT_PUBLIC_POCKETBASE_URL ||
+  "http://127.0.0.1:8090";
 
 // Re-export cache configuration for backward compatibility
 export { CACHE_TAGS, CACHE_DURATION };

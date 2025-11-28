@@ -16,6 +16,7 @@ services:
       - "3001:3000"
     environment:
       - NODE_ENV=development
+      - POCKETBASE_URL=http://31.97.210.200:8090
       - NEXT_PUBLIC_POCKETBASE_URL=http://31.97.210.200:8090
     # depends_on:
     #   - pocketbase
