@@ -25,6 +25,9 @@ import { EnquiriesInterestOptions } from "@/types/pocketbase";
 import { Metadata } from "next";
 import { getOfficeLocations } from "@/lib/services/locations";
 
+// Configure runtime for Server Actions on this page
+export const maxDuration = 30; // Maximum execution time in seconds
+
 export const metadata: Metadata = {
   title: "Contact Us - FinWage",
   description:

@@ -5,11 +5,29 @@
  * Install pocketbase-js SDK: npm install pocketbase
  */
 
+import PocketBase from "pocketbase";
+
 // PocketBase URL - adjust based on your environment
 export const POCKETBASE_URL =
+  process.env.POCKETBASE_URL ||
   process.env.POCKETBASE_INTERNAL_URL ||
   process.env.NEXT_PUBLIC_POCKETBASE_URL ||
   "http://localhost:8090";
+
+// PocketBase SDK instance
+let pbInstance: PocketBase | null = null;
+
+/**
+ * Get PocketBase SDK instance (singleton)
+ */
+export function getPocketBase(): PocketBase {
+  if (!pbInstance) {
+    pbInstance = new PocketBase(POCKETBASE_URL);
+    // Disable auto-cancellation for server-side usage
+    pbInstance.autoCancellation(false);
+  }
+  return pbInstance;
+}
 
 /**
  * Generic fetch wrapper for PocketBase API calls

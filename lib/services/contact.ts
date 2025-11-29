@@ -84,6 +84,7 @@ export async function getContactOptions(): Promise<ContactOptionsResponse[]> {
  *
  * Validates and submits contact form data to PocketBase.
  * This function should be called from Server Actions for security.
+ * Optimized for Cloudflare with timeout handling.
  *
  * @param data - Enquiry data from contact form
  * @returns Result object with success status and data or error
@@ -140,7 +141,7 @@ export async function createEnquiry(data: EnquiryData): Promise<EnquiryResult> {
       };
     }
 
-    // Create enquiry in PocketBase
+    // Create enquiry in PocketBase with timeout handling
     const enquiry = await apiCreateEnquiry({
       name: data.name.trim(),
       email: data.email.trim().toLowerCase(),
@@ -160,8 +161,14 @@ export async function createEnquiry(data: EnquiryData): Promise<EnquiryResult> {
 
     // Extract error message if available
     let errorMessage = "Failed to submit enquiry. Please try again later.";
+    
     if (error instanceof Error) {
-      errorMessage = error.message;
+      // Handle timeout errors specifically
+      if (error.message.includes("timeout") || error.message.includes("408")) {
+        errorMessage = "Request timed out. Please try again.";
+      } else {
+        errorMessage = error.message;
+      }
     }
 
     return {

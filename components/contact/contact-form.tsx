@@ -3,13 +3,12 @@
 /**
  * Contact Form Component
  *
- * Client component for contact form with Server Action integration.
+ * Client component for contact form with direct PocketBase API integration.
  * Handles form state, validation errors, and success messages.
  */
 
-import { AlertCircle, ArrowRight, CheckCircle2 } from "lucide-react";
-import { useActionState, useEffect, useRef } from "react";
-import { useFormStatus } from "react-dom";
+import { AlertCircle, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { useRef, useState } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,18 +22,33 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  type ContactFormState,
-  submitContactForm,
-} from "@/lib/actions/contact";
-import { EnquiriesInterestOptions } from "@/types/pocketbase";
+  EnquiriesInterestOptions,
+  EnquiriesStatusOptions,
+} from "@/types/pocketbase";
+
+// Direct PocketBase URL for client-side requests (bypasses Next.js server)
+const POCKETBASE_URL =
+  process.env.NEXT_PUBLIC_POCKETBASE_URL || "https://pocketbase.finwage.ca";
+
+// ============================================================
+// TYPES
+// ============================================================
+
+interface FormErrors {
+  name?: string[];
+  email?: string[];
+  message?: string[];
+  interest?: string[];
+  company?: string[];
+  phone?: string[];
+  _form?: string[];
+}
 
 // ============================================================
 // SUBMIT BUTTON COMPONENT
 // ============================================================
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
+function SubmitButton({ pending }: { pending: boolean }) {
   return (
     <Button
       type="submit"
@@ -42,8 +56,17 @@ function SubmitButton() {
       size="lg"
       disabled={pending}
     >
-      {pending ? "Sending..." : "Send Message"}
-      {!pending && <ArrowRight className="w-5 h-5 ml-2" />}
+      {pending ? (
+        <>
+          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+          Sending...
+        </>
+      ) : (
+        <>
+          Send Message
+          <ArrowRight className="w-5 h-5 ml-2" />
+        </>
+      )}
     </Button>
   );
 }
@@ -59,36 +82,118 @@ interface ContactFormProps {
 export function ContactForm({
   defaultInterest = EnquiriesInterestOptions.contact,
 }: ContactFormProps) {
-  const [state, formAction] = useActionState<ContactFormState, FormData>(
-    submitContactForm,
-    { success: false },
-  );
+  const [isPending, setIsPending] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [message, setMessage] = useState<string | undefined>();
+  const [errors, setErrors] = useState<FormErrors>({});
   const formRef = useRef<HTMLFormElement>(null);
 
-  // Reset form on successful submission
-  useEffect(() => {
-    if (state.success) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsPending(true);
+    setErrors({});
+    setSuccess(false);
+    setMessage(undefined);
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      // Extract form data
+      const name = formData.get("name") as string;
+      const email = formData.get("email") as string;
+      const messageText = formData.get("message") as string;
+      const interest = formData.get("interest") as EnquiriesInterestOptions;
+      const company = formData.get("company") as string;
+      const phone = formData.get("phone") as string;
+
+      // Client-side validation
+      const newErrors: FormErrors = {};
+
+      if (!name || name.trim().length < 2) {
+        newErrors.name = ["Name must be at least 2 characters"];
+      }
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        newErrors.email = ["Please enter a valid email address"];
+      }
+
+      if (!messageText || messageText.trim().length < 10) {
+        newErrors.message = ["Message must be at least 10 characters"];
+      }
+
+      if (messageText && messageText.length > 1000) {
+        newErrors.message = ["Message must not exceed 1000 characters"];
+      }
+
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        setIsPending(false);
+        return;
+      }
+
+      // Prepare data for PocketBase
+      const data = {
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        message: messageText.trim(),
+        interest: interest || EnquiriesInterestOptions.contact,
+        company: company?.trim() || undefined,
+        phone: phone ? Number(phone.replace(/[\s\-()]/g, "")) : undefined,
+        status: EnquiriesStatusOptions.new,
+      };
+
+      // Submit directly to PocketBase (bypasses Next.js server)
+      const response = await fetch(
+        `${POCKETBASE_URL}/api/collections/enquiries/records`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Failed to submit enquiry");
+      }
+
+      // Success
+      setSuccess(true);
+      setMessage("Thank you for contacting us! We'll get back to you soon.");
       formRef.current?.reset();
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setErrors({
+        _form: [
+          error instanceof Error
+            ? error.message
+            : "Failed to submit enquiry. Please try again later.",
+        ],
+      });
+    } finally {
+      setIsPending(false);
     }
-  }, [state.success]);
+  };
 
   return (
-    <form ref={formRef} action={formAction} className="space-y-6">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
       {/* Success Message */}
-      {state.success && state.message && (
+      {success && message && (
         <Alert className="bg-green-50 border-green-200">
           <CheckCircle2 className="h-4 w-4 text-green-600" />
           <AlertDescription className="text-green-800">
-            {state.message}
+            {message}
           </AlertDescription>
         </Alert>
       )}
 
       {/* Error Message */}
-      {!state.success && state.errors?._form && (
+      {!success && errors._form && (
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{state.errors._form.join(", ")}</AlertDescription>
+          <AlertDescription>{errors._form.join(", ")}</AlertDescription>
         </Alert>
       )}
 
@@ -103,12 +208,12 @@ export function ContactForm({
           type="text"
           placeholder="John Doe"
           required
-          aria-invalid={state.errors?.name ? "true" : "false"}
-          aria-describedby={state.errors?.name ? "name-error" : undefined}
+          aria-invalid={errors.name ? "true" : "false"}
+          aria-describedby={errors.name ? "name-error" : undefined}
         />
-        {state.errors?.name && (
+        {errors.name && (
           <p id="name-error" className="text-sm text-red-600">
-            {state.errors.name.join(", ")}
+            {errors.name.join(", ")}
           </p>
         )}
       </div>
@@ -124,12 +229,12 @@ export function ContactForm({
           type="email"
           placeholder="john@example.com"
           required
-          aria-invalid={state.errors?.email ? "true" : "false"}
-          aria-describedby={state.errors?.email ? "email-error" : undefined}
+          aria-invalid={errors.email ? "true" : "false"}
+          aria-describedby={errors.email ? "email-error" : undefined}
         />
-        {state.errors?.email && (
+        {errors.email && (
           <p id="email-error" className="text-sm text-red-600">
-            {state.errors.email.join(", ")}
+            {errors.email.join(", ")}
           </p>
         )}
       </div>
@@ -142,12 +247,12 @@ export function ContactForm({
           name="company"
           type="text"
           placeholder="Acme Corporation"
-          aria-invalid={state.errors?.company ? "true" : "false"}
-          aria-describedby={state.errors?.company ? "company-error" : undefined}
+          aria-invalid={errors.company ? "true" : "false"}
+          aria-describedby={errors.company ? "company-error" : undefined}
         />
-        {state.errors?.company && (
+        {errors.company && (
           <p id="company-error" className="text-sm text-red-600">
-            {state.errors.company.join(", ")}
+            {errors.company.join(", ")}
           </p>
         )}
       </div>
@@ -160,12 +265,12 @@ export function ContactForm({
           name="phone"
           type="tel"
           placeholder="+1 (555) 000-0000"
-          aria-invalid={state.errors?.phone ? "true" : "false"}
-          aria-describedby={state.errors?.phone ? "phone-error" : undefined}
+          aria-invalid={errors.phone ? "true" : "false"}
+          aria-describedby={errors.phone ? "phone-error" : undefined}
         />
-        {state.errors?.phone && (
+        {errors.phone && (
           <p id="phone-error" className="text-sm text-red-600">
-            {state.errors.phone.join(", ")}
+            {errors.phone.join(", ")}
           </p>
         )}
       </div>
@@ -194,9 +299,9 @@ export function ContactForm({
             </SelectItem>
           </SelectContent>
         </Select>
-        {state.errors?.interest && (
+        {errors.interest && (
           <p id="interest-error" className="text-sm text-red-600">
-            {state.errors.interest.join(", ")}
+            {errors.interest.join(", ")}
           </p>
         )}
       </div>
@@ -212,18 +317,18 @@ export function ContactForm({
           placeholder="Tell us about your needs..."
           rows={5}
           required
-          aria-invalid={state.errors?.message ? "true" : "false"}
-          aria-describedby={state.errors?.message ? "message-error" : undefined}
+          aria-invalid={errors.message ? "true" : "false"}
+          aria-describedby={errors.message ? "message-error" : undefined}
         />
-        {state.errors?.message && (
+        {errors.message && (
           <p id="message-error" className="text-sm text-red-600">
-            {state.errors.message.join(", ")}
+            {errors.message.join(", ")}
           </p>
         )}
       </div>
 
       {/* Submit Button */}
-      <SubmitButton />
+      <SubmitButton pending={isPending} />
 
       {/* Privacy Notice */}
       <p className="text-sm text-gray-500 text-center">

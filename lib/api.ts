@@ -1073,23 +1073,78 @@ export async function createEnquiry(
 ): Promise<EnquiriesResponse> {
   const url = `${POCKETBASE_URL}/api/collections/enquiries/records`;
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  // Retry configuration for Cloudflare resilience
+  const maxRetries = 2;
+  const timeout = 15000; // 15 seconds per attempt (Cloudflare friendly)
 
-  if (!response.ok) {
-    throw new PocketBaseError(
-      `Failed to create enquiry: ${response.statusText}`,
-      response.status,
-      "enquiries",
-    );
+  let lastError: Error | null = null;
+
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          // Prevent Cloudflare from caching POST requests
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+        },
+        body: JSON.stringify(data),
+        cache: "no-store",
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new PocketBaseError(
+          `Failed to create enquiry: ${response.statusText} - ${errorText}`,
+          response.status,
+          "enquiries",
+        );
+      }
+
+      return response.json();
+    } catch (error) {
+      clearTimeout(timeoutId);
+      lastError = error instanceof Error ? error : new Error(String(error));
+
+      // Don't retry on non-timeout errors (like validation errors)
+      if (error instanceof PocketBaseError && error.statusCode !== 408) {
+        throw error;
+      }
+
+      // Only retry on timeout/network errors
+      const isRetryable =
+        error instanceof Error &&
+        (error.name === "AbortError" ||
+          error.message.includes("fetch") ||
+          error.message.includes("network"));
+
+      if (!isRetryable || attempt === maxRetries) {
+        if (error instanceof Error && error.name === "AbortError") {
+          throw new PocketBaseError(
+            "Request timed out - please try again",
+            408,
+            "enquiries",
+          );
+        }
+        throw error;
+      }
+
+      // Wait before retry (exponential backoff)
+      await new Promise((resolve) =>
+        setTimeout(resolve, Math.pow(2, attempt) * 500)
+      );
+    }
   }
 
-  return response.json();
+  // Should never reach here, but TypeScript needs this
+  throw lastError || new PocketBaseError("Unknown error", 500, "enquiries");
 }
 
 // ============================================================

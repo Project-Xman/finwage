@@ -5,6 +5,7 @@
  *
  * Handles form submissions for contact enquiries using Next.js Server Actions.
  * Provides validation, error handling, and cache revalidation.
+ * Optimized for Cloudflare with 30-second timeout handling.
  */
 
 import { z } from "zod";
