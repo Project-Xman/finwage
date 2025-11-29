@@ -110,6 +110,7 @@ export async function submitContactForm(
       message: formData.get("message"),
       interest: formData.get("interest"),
       company: formData.get("company"),
+      status: 'new',
       phone: formData.get("phone"),
     };
 

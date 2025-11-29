@@ -5,36 +5,37 @@
  */
 
 import { unstable_cache } from "next/cache";
-import type {
-  AuthorsResponse,
-  BlogsResponse,
-  CategoryResponse,
-  CompanyMilestonesResponse,
-  ComplianceItemsResponse,
-  ContactOptionsResponse,
-  CtaCardsResponse,
-  EmployeeBenefitsResponse,
-  EmployerStatsResponse,
-  EnquiriesResponse,
-  FaqsResponse,
-  FaqTopicsResponse,
-  FeaturesResponse,
-  IntegrationsResponse,
-  JobsResponse,
-  LeadershipResponse,
-  LocationsResponse,
-  PartnersResponse,
-  PressResponse,
-  PricingPlansResponse,
-  ProcessStepsResponse,
-  ResourceArticlesResponse,
-  ResourceCategoriesResponse,
-  ResourceDownloadsResponse,
-  SecurityFeaturesResponse,
-  StatusResponse,
-  SupportResponse,
-  TestimonialsResponse,
-  ValuesResponse,
+import {
+  EnquiriesStatusOptions,
+  type AuthorsResponse,
+  type BlogsResponse,
+  type CategoryResponse,
+  type CompanyMilestonesResponse,
+  type ComplianceItemsResponse,
+  type ContactOptionsResponse,
+  type CtaCardsResponse,
+  type EmployeeBenefitsResponse,
+  type EmployerStatsResponse,
+  type EnquiriesResponse,
+  type FaqsResponse,
+  type FaqTopicsResponse,
+  type FeaturesResponse,
+  type IntegrationsResponse,
+  type JobsResponse,
+  type LeadershipResponse,
+  type LocationsResponse,
+  type PartnersResponse,
+  type PressResponse,
+  type PricingPlansResponse,
+  type ProcessStepsResponse,
+  type ResourceArticlesResponse,
+  type ResourceCategoriesResponse,
+  type ResourceDownloadsResponse,
+  type SecurityFeaturesResponse,
+  type StatusResponse,
+  type SupportResponse,
+  type TestimonialsResponse,
+  type ValuesResponse,
 } from "@/types/pocketbase";
 
 // ============================================================
@@ -1078,6 +1079,8 @@ export async function createEnquiry(
   const timeout = 15000; // 15 seconds per attempt (Cloudflare friendly)
 
   let lastError: Error | null = null;
+
+  data["status"] = data["status"] || EnquiriesStatusOptions.new;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     const controller = new AbortController();
