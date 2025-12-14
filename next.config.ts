@@ -40,17 +40,17 @@ const nextConfig: NextConfig = {
   output: "standalone",
 
   // Enable experimental caching features
-    // turbopackFileSystemCacheForDev: true,
-    cacheLife: {
-      default: {
-        stale: 3600, // 1 hour
-        revalidate: 60, // 1 minute
-        expire: 86400, // 24 hours
-      },
+  // turbopackFileSystemCacheForDev: true,
+  cacheLife: {
+    default: {
+      stale: 3600, // 1 hour
+      revalidate: 60, // 1 minute
+      expire: 86400, // 24 hours
+    },
   },
 
   images: {
-    unoptimized: process.env.NODE_ENV === "development",
+    unoptimized: true,
     remotePatterns: [
       // PocketBase image configuration (dynamic based on environment)
       getPocketBaseImageConfig(),
@@ -112,8 +112,8 @@ const nextConfig: NextConfig = {
     removeConsole:
       process.env.NODE_ENV === "production"
         ? {
-            exclude: ["error", "warn"],
-          }
+          exclude: ["error", "warn"],
+        }
         : false,
   },
 
