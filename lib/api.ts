@@ -99,12 +99,18 @@ function buildQueryParams(params: Record<string, any>): string {
 }
 
 /**
+ * Check if we're in a build environment where PocketBase may not be available
+ */
+const isBuildTime = process.env.NODE_ENV === "production" && typeof window === "undefined";
+
+/**
  * Generic fetch with error handling
+ * Returns null on failure during build time to allow static generation to proceed
  */
 async function fetchWithCache<T>(
   url: string,
   cacheConfig: CacheConfig = {},
-): Promise<T> {
+): Promise<T | null> {
   const { revalidate = CACHE_DURATION.MEDIUM, tags = [] } = cacheConfig;
 
   try {
@@ -122,8 +128,25 @@ async function fetchWithCache<T>(
     return response.json();
   } catch (error) {
     console.error("Fetch error:", error);
+    // During build time, return null instead of throwing to allow static generation
+    if (isBuildTime) {
+      return null;
+    }
     throw error;
   }
+}
+
+/**
+ * Empty response for when PocketBase is unavailable during build
+ */
+function emptyListResponse<T>(): PocketBaseListResponse<T> {
+  return {
+    page: 1,
+    perPage: 20,
+    totalItems: 0,
+    totalPages: 0,
+    items: [],
+  };
 }
 
 /**
@@ -154,18 +177,20 @@ async function fetchCollection<T>(
 
   const url = `${POCKETBASE_URL}/api/collections/${collectionName}/records?${query}`;
 
-  return fetchWithCache<PocketBaseListResponse<T>>(url, cacheConfig);
+  const result = await fetchWithCache<PocketBaseListResponse<T>>(url, cacheConfig);
+  return result ?? emptyListResponse<T>();
 }
 
 /**
  * Generic function to fetch a single record with caching
+ * Returns null if record not found or PocketBase unavailable during build
  */
 async function fetchRecord<T>(
   collectionName: string,
   recordId: string,
   options: { expand?: string; fields?: string } = {},
   cacheConfig: CacheConfig = {},
-): Promise<T> {
+): Promise<T | null> {
   const query = buildQueryParams(options);
   const url = `${POCKETBASE_URL}/api/collections/${collectionName}/records/${recordId}?${query}`;
 
@@ -194,7 +219,7 @@ export async function getBlogs(
 }
 
 export const getBlogBySlug = unstable_cache(
-  async (slug: string): Promise<BlogsResponse> => {
+  async (slug: string): Promise<BlogsResponse | null> => {
     const response = await fetchCollection<BlogsResponse>(
       "blogs",
       {
@@ -209,7 +234,7 @@ export const getBlogBySlug = unstable_cache(
     );
 
     if (!response.items.length) {
-      throw new Error(`Blog post not found: ${slug}`);
+      return null;
     }
 
     return response.items[0];
@@ -284,7 +309,7 @@ export async function getAuthors(
 
 export async function getAuthorById(
   authorId: string,
-): Promise<AuthorsResponse> {
+): Promise<AuthorsResponse | null> {
   return fetchRecord<AuthorsResponse>(
     "authors",
     authorId,
@@ -296,7 +321,7 @@ export async function getAuthorById(
   );
 }
 
-export async function getAuthorBySlug(slug: string): Promise<AuthorsResponse> {
+export async function getAuthorBySlug(slug: string): Promise<AuthorsResponse | null> {
   const response = await fetchCollection<AuthorsResponse>(
     "authors",
     {
@@ -310,7 +335,7 @@ export async function getAuthorBySlug(slug: string): Promise<AuthorsResponse> {
   );
 
   if (!response.items.length) {
-    throw new Error(`Author not found: ${slug}`);
+    return null;
   }
 
   return response.items[0];
@@ -716,7 +741,7 @@ export async function getJobsByDepartment(
   return response.items;
 }
 
-export async function getJobById(jobId: string): Promise<JobsResponse> {
+export async function getJobById(jobId: string): Promise<JobsResponse | null> {
   return fetchRecord<JobsResponse>(
     "jobs",
     jobId,
@@ -989,7 +1014,7 @@ export async function getCategories(
 
 export async function getCategoryBySlug(
   slug: string,
-): Promise<CategoryResponse> {
+): Promise<CategoryResponse | null> {
   const response = await fetchCollection<CategoryResponse>(
     "category",
     {
@@ -1003,7 +1028,7 @@ export async function getCategoryBySlug(
   );
 
   if (!response.items.length) {
-    throw new Error(`Category not found: ${slug}`);
+    return null;
   }
 
   return response.items[0];
