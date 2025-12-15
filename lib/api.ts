@@ -99,7 +99,7 @@ function buildQueryParams(params: Record<string, any>): string {
 }
 
 /**
- * Generic fetch with error handling and caching
+ * Generic fetch with error handling
  */
 async function fetchWithCache<T>(
   url: string,
@@ -108,18 +108,12 @@ async function fetchWithCache<T>(
   const { revalidate = CACHE_DURATION.MEDIUM, tags = [] } = cacheConfig;
 
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 60000); // 30s timeout
-
     const response = await fetch(url, {
-      signal: controller.signal,
       next: {
         revalidate,
         tags,
       },
     });
-
-    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
