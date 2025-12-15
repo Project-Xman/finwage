@@ -7,19 +7,21 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_POCKETBASE_URL: https://pocketbase.finwage.ca
-        NEXT_PUBLIC_POCKETBASE_INTERNAL_URL: https://pocketbase.finwage.ca
-    image: sulthaan/project-x-finwage:latest
+        NEXT_PUBLIC_POCKETBASE_URL: http://pocketbase:8090
+        NEXT_PUBLIC_POCKETBASE_INTERNAL_URL: http://pocketbase:8090
+    # image: sulthaan/project-x-finwage:latest
     container_name: finwage-app
     restart: unless-stopped
-    ports:
-      - "3001:3000"
+    expose:
+      - "3000"
+    # ports:
+    #   - "3000:3000"
     environment:
       - NODE_ENV=development
-      - POCKETBASE_URL=https://pocketbase.finwage.ca
-      - NEXT_PUBLIC_POCKETBASE_URL=https://pocketbase.finwage.ca
-    # depends_on:
-    #   - pocketbase
+      - POCKETBASE_URL=http://pocketbase:8090
+      - NEXT_PUBLIC_POCKETBASE_URL=http://pocketbase:8090
+    depends_on:
+      - pocketbase
     networks:
       - finwage-network
 
@@ -30,8 +32,10 @@ services:
       dockerfile: Dockerfile.pocketbase
     container_name: finwage-pocketbase
     restart: unless-stopped
-    ports:
-      - "8090:8090"
+    expose:
+      - "8090"
+    # ports:
+    #   - "8090:8090"
     volumes:
       - pocketbase-data:/pb/pb_data
     environment:
