@@ -8,10 +8,11 @@ async function sendWebhook(destination, headersObject, payload) {
   headers["Content-Type"] = "application/json";
 
   console.log(`Sending webhook to: ${destination}`); // Log for debugging
+  console.log(`Headers being sent: ${JSON.stringify(headers)}`);
 
   try {
     // Use PocketBase's $http.send for making HTTP requests
-    const response = await $http.send({
+    const response = $http.send({
       url: destination,
       method: "POST", // Typically POST for webhooks
       headers: headers,
@@ -19,15 +20,25 @@ async function sendWebhook(destination, headersObject, payload) {
       timeout: 10000, // 10 second timeout
     });
 
+    // Convert response body from raw bytes to string if needed
+    let responseBody = response.raw;
+    if (response.raw && typeof response.raw !== "string") {
+      try {
+        responseBody = String.fromCharCode.apply(null, response.raw);
+      } catch (e) {
+        responseBody = String(response.raw);
+      }
+    }
+
     // Check the response status
-    if (response.status >= 200 && response.status < 300) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       console.log(
-        `Webhook to ${destination} succeeded with status ${response.status}`,
+        `Webhook to ${destination} succeeded with status ${response.statusCode}`,
       );
     } else {
       // Log failure with status and potentially response body
       console.error(
-        `Webhook to ${destination} failed with status ${response.status}: ${response.body}`,
+        `Webhook to ${destination} failed with status ${response.statusCode}: ${responseBody}`,
       );
     }
   } catch (error) {
@@ -101,11 +112,31 @@ async function triggerWebhooks(app, action, collectionName, record) {
 
     for (const webhook of webhooks) {
       const destination = webhook.getString("destination");
-      const headersObject = webhook.unmarshalJSONField("headers");
+      let headersObject = null;
+      
+      try {
+        headersObject = webhook.unmarshalJSONField("headers");
+      } catch (headerErr) {
+        console.log(`Could not parse headers field: ${headerErr.message}`);
+      }
+      
+      // If headers is empty/null, try getting raw string value
+      if (!headersObject) {
+        const headersRaw = webhook.getString("headers");
+        console.log(`Raw headers field value: ${headersRaw}`);
+        if (headersRaw) {
+          try {
+            headersObject = JSON.parse(headersRaw);
+          } catch (e) {
+            console.log(`Could not parse headers as JSON: ${e.message}`);
+          }
+        }
+      }
 
       console.log(
         `Processing webhook config: ${webhook.getString("name")} -> ${destination}`,
       );
+      console.log(`Headers from webhook record: ${JSON.stringify(headersObject)}`);
 
       await sendWebhook(destination, headersObject, payload);
     }
