@@ -37,7 +37,7 @@ async function sendWebhook(destination, headersObject, payload) {
 }
 
 // --- Main Function: Trigger Webhooks Based on Event ---
-async function triggerWebhooks(action, collectionName, record) {
+async function triggerWebhooks(app, action, collectionName, record) {
   // Add logging immediately inside the function
   console.log("--- Entering triggerWebhooks function ---");
   console.log(`Action: ${action}`);
@@ -62,13 +62,11 @@ async function triggerWebhooks(action, collectionName, record) {
     // Query the 'webhooks' collection for active webhooks matching the collection and event type
     let webhooks = [];
     try {
-      const dao = $app.dao;
-      const collection = dao.findCollectionByNameOrId("webhooks");
-      webhooks = dao.findRecordsByFilter(
-        collection,
+      webhooks = app.findRecordsByFilter(
+        "webhooks",
         `collection = "${collectionName}" && active = true && (event_type ?~ "${eventType}" || event_type = "" || event_type = null)`,
         "-created",
-        0,
+        10,
         0,
       );
     } catch (dbErr) {

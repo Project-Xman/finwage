@@ -35,7 +35,7 @@ onRecordAfterCreateSuccess(async (e) => {
   });
 
   try {
-    await triggerWebhooks("create", recordCollectionName, e.record);
+    await triggerWebhooks(e.app, "create", recordCollectionName, e.record);
   } catch (error) {
     console.error(
       "*** CRITICAL ERROR in create webhook handler:",
@@ -68,7 +68,7 @@ onRecordAfterUpdateSuccess(async (e) => {
   console.log("About to call triggerWebhooks for update");
 
   try {
-    await triggerWebhooks("update", recordCollectionName, e.record);
+    await triggerWebhooks(e.app, "update", recordCollectionName, e.record);
   } catch (error) {
     console.error(
       "*** CRITICAL ERROR in update webhook handler:",
@@ -101,7 +101,7 @@ onRecordAfterDeleteSuccess(async (e) => {
   console.log("About to call triggerWebhooks for delete");
 
   try {
-    await triggerWebhooks("delete", recordCollectionName, e.record);
+    await triggerWebhooks(e.app, "delete", recordCollectionName, e.record);
   } catch (error) {
     console.error(
       "*** CRITICAL ERROR in delete webhook handler:",
