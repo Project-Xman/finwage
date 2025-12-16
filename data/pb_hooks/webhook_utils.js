@@ -62,8 +62,10 @@ async function triggerWebhooks(action, collectionName, record) {
     // Query the 'webhooks' collection for active webhooks matching the collection and event type
     let webhooks = [];
     try {
-      webhooks = $app.dao().findRecordsByFilter(
-        "webhooks",
+      const dao = $app.dao;
+      const collection = dao.findCollectionByNameOrId("webhooks");
+      webhooks = dao.findRecordsByFilter(
+        collection,
         `collection = "${collectionName}" && active = true && (event_type ?~ "${eventType}" || event_type = "" || event_type = null)`,
         "-created",
         0,
