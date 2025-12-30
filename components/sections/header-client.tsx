@@ -74,9 +74,10 @@ export function HeaderClient({ loginUrl }: HeaderClientProps) {
         <NavItems items={navigationItems} currentPath={pathname} />
 
         <div className="flex items-center gap-3">
-          <NavbarButton variant="secondary" href={loginUrl}>
+          {/* TODO: Hide Login Button */}
+          {/* <NavbarButton variant="secondary" href={loginUrl}>
             Log in
-          </NavbarButton>
+          </NavbarButton> */}
           <NavbarButton variant="gradient" href="/contact">
             Contact Us
           </NavbarButton>
@@ -122,13 +123,14 @@ export function HeaderClient({ loginUrl }: HeaderClientProps) {
             );
           })}
           <div className="flex w-full flex-col gap-2 pt-4">
-            <button className="w-full p-2 flex items-center justify-center gap-2 hover:bg-muted rounded-md transition-colors border border-border">
+            <Button className="w-full p-2 flex items-center justify-center gap-2 hover:bg-muted rounded-md transition-colors border border-border">
               <Search className="w-4 h-4" />
               <span className="text-sm font-medium">Search</span>
-            </button>
-            <NavbarButton variant="secondary" href={loginUrl} className="w-full">
+            </Button>
+            {/* TODO: Hide Login Button */}
+            {/* <NavbarButton variant="secondary" href={loginUrl} className="w-full">
               Log in
-            </NavbarButton>
+            </NavbarButton> */}
             <NavbarButton variant="gradient" href="/contact" className="w-full">
               Contact Us
             </NavbarButton>

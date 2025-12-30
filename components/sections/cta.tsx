@@ -29,9 +29,7 @@ function CtaCardComponent({ icon_svg, bg_color, title, points }: CtaCard) {
                 src={icon_svg}
               />
             ) : (
-              <div className="text-[#1d44c3]">
-                <SvgIcon svgString={icon_svg} className="w-7 h-7" />
-              </div>
+              <SvgIcon svgString={icon_svg} className="w-7 h-7 text-[#1d44c3]" />
             )}
           </div>
         </div>

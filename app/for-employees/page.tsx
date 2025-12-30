@@ -131,7 +131,7 @@ export default async function ForEmployeesPage() {
                 src="/employee1.jpeg"
                 alt="Access earned pay"
                 fill
-                className="object-contain"
+                className="object-cover"
                 priority
               />
             </div>
@@ -144,7 +144,7 @@ export default async function ForEmployeesPage() {
                 src="/employee2.jpeg"
                 alt="No loans or interest"
                 fill
-                className="object-contain"
+                className="object-cover"
               />
             </div>
             <div className="lg:col-start-2">
@@ -172,7 +172,7 @@ export default async function ForEmployeesPage() {
                 src="/employee3.jpeg"
                 alt="Stay financially steady"
                 fill
-                className="object-contain"
+                className="object-cover"
               />
             </div>
           </div>

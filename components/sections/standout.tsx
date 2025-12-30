@@ -1,12 +1,24 @@
+"use client";
+
 import { ArrowRight, Play } from "lucide-react";
 import Image from "next/image";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import CustomVideoPlayer from "@/components/ui/custom-video-player";
 
 const imgManTalking = "https://picsum.photos/600/400";
 const imgImagePhotoroom21 = "/assets/person-illustration-1.png";
 const imgImagePhotoroom31 = "/assets/person-illustration-2.png";
 
 export default function StandOut() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const videoPlayerRef = useRef<{ play: () => void; pause: () => void; reset: () => void }>(null);
+
   return (
     <section className="bg-white relative w-full py-12 md:py-24 lg:py-32 pb-40 md:pb-24 lg:pb-32">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
@@ -52,6 +64,7 @@ export default function StandOut() {
             <div className="absolute inset-0 flex items-center justify-center">
               <Button
                 size="lg"
+                onClick={() => setIsVideoOpen(true)}
                 className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white/50 backdrop-blur-md shadow-2xl flex items-center justify-center hover:bg-white/60 transition-all group-hover:scale-110"
               >
                 <Play className="w-10 h-10 md:w-12 md:h-12 text-white fill-white ml-1" />
@@ -72,8 +85,8 @@ export default function StandOut() {
           </div>
         </div>
 
-        <div className="hidden md:block absolute left-1/2 -bottom-1/5 translate-x-[50px] lg:translate-x-[50px] md:translate-x-[20px]">
-          <div className="relative md:w-[120px] md:h-[240px] lg:w-[130px] lg:h-[300px]">
+        <div className="hidden md:block absolute left-1/2 -bottom-1/5 translate-x-[50px] lg:translate-x-[50px] md:translate-x-5">
+          <div className="relative md:w-[120px] md:h-60 lg:w-[130px] lg:h-[300px]">
             <Image
               src={imgImagePhotoroom31}
               alt=""
@@ -84,7 +97,7 @@ export default function StandOut() {
         </div>
 
         {/* Mobile Decorative Characters - At bottom, below grid */}
-        <div className="md:hidden absolute bottom-0  flex items-end gap-8 z-10">
+        <div className="md:hidden absolute bottom-0 flex items-end gap-8 z-10">
           <div className="relative w-[120px] h-[280px]">
             <Image
               src={imgImagePhotoroom21}
@@ -103,6 +116,32 @@ export default function StandOut() {
             />
           </div>
         </div>
+
+        {/* Video Modal */}
+        <Dialog
+          open={isVideoOpen}
+          onOpenChange={(open) => {
+            setIsVideoOpen(open);
+            if (videoPlayerRef.current) {
+              if (open) videoPlayerRef.current.play();
+              else {
+                videoPlayerRef.current.pause();
+                videoPlayerRef.current.reset();
+              }
+            }
+          }}
+        >
+          <DialogContent className="p-0 bg-transparent shadow-none border-none flex items-center justify-center" style={{ maxWidth: 'unset', width: 'unset' }}>
+            <DialogTitle className="sr-only">FinWage Overview Video</DialogTitle>
+            <CustomVideoPlayer
+              ref={videoPlayerRef}
+              src="/video.mp4"
+              poster="/assets/video-thumbnail.webp"
+              autoPlay={isVideoOpen}
+              className="w-[90vw] max-w-5xl"
+            />
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );

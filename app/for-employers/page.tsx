@@ -124,7 +124,7 @@ export default async function ForEmployersPage() {
                 src="/employer1.png"
                 alt="Total Rewards and Employee Benefits"
                 fill
-                className="object-contain"
+                className="object-cover"
                 priority
               />
             </div>
@@ -137,7 +137,7 @@ export default async function ForEmployersPage() {
                 src="/employer2.jpeg"
                 alt="No Payroll Disruption"
                 fill
-                className="object-contain"
+                className="object-cover"
               />
             </div>
             <div className="lg:col-start-2">
@@ -165,7 +165,7 @@ export default async function ForEmployersPage() {
                 src="/employer3.jpeg"
                 alt="Easy Integration and HR Management"
                 fill
-                className="object-contain"
+                className="object-cover"
               />
             </div>
           </div>

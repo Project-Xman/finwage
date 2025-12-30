@@ -75,9 +75,10 @@ export default async function Home() {
       <StandOut />
 
       {/* Integrations section - stream in */}
-      <Suspense fallback={<SectionSkeleton />}>
+      {/* TODO: Hide Integrations Button */}
+      {/* <Suspense fallback={<SectionSkeleton />}>
         <Integrations />
-      </Suspense>
+      </Suspense> */}
 
       {/* Pricing section - stream in */}
       {/* <Suspense fallback={<SectionSkeleton />}>

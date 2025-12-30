@@ -56,7 +56,7 @@ export function SvgIcon({ svgString, className = "", size }: SvgIconProps) {
   // Using dangerouslySetInnerHTML with a wrapper div
   return (
     <div
-      className={className}
+      className={`${className} flex items-center justify-center [&>svg]:w-full [&>svg]:h-full`}
       style={size ? { width: size, height: size } : undefined}
       dangerouslySetInnerHTML={{ __html: svgString }}
     />

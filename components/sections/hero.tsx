@@ -2,16 +2,21 @@
 
 import { ArrowRight, BellIcon } from "lucide-react";
 import Image from "next/image";
+import { useState, useRef } from "react";
 import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import CustomVideoPlayer from "@/components/ui/custom-video-player";
 
 function HeroImageContainer({
   className,
   hideWhiteArc = false,
+  onPlayClick,
 }: {
   className?: string;
   hideWhiteArc?: boolean;
+  onPlayClick?: () => void;
 }) {
   return (
     <div
@@ -73,6 +78,10 @@ function HeroImageContainer({
           width: "160px",
           height: "160px",
         }}
+        onClick={onPlayClick}
+        role="button"
+        tabIndex={0}
+        aria-label="Play Video"
       >
         <Image
           fill
@@ -127,6 +136,8 @@ function DemoButton() {
 
 // Main Hero Component
 export default function Hero() {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const videoPlayerRef = useRef<{ play: () => void; pause: () => void; reset: () => void }>(null);
   return (
     <div className="bg-white relative overflow-hidden" data-name="Hero Section">
       {/* Mobile Layout */}
@@ -135,7 +146,7 @@ export default function Hero() {
         <div className="flex flex-col gap-4 sm:gap-6 items-center text-center max-w-[340px] sm:max-w-[400px]">
           <div className="flex flex-col font-bold leading-[40px] text-[#1d44c3] text-[38px] tracking-[-1.5px] mb-[16px]">
             <p className="mb-0">Your Money.</p>
-            <p className="mb-0 whitespace-nowrap">In Your Control.</p>
+            <p className="mb-0">In Your Control.</p>
           </div>
           <div className="flex flex-col font-normal leading-[19px] text-[12.5px] text-gray-800 mb-[20px]">
             <p className="mb-0 font-semibold text-[#f74b6b]">
@@ -144,7 +155,7 @@ export default function Hero() {
             <p className="mb-0 mt-2">
               You earn your pay every day. Access to it shouldn't depend on a fixed payday.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-gray-500">
+            <p className="mt-4 text-base leading-relaxed text-gray-500 w-4/6">
               FinWage is a Canadian Earned Wage Access (EWA) platform that gives employees instant access to their pay—helping reduce financial stress while supporting a more focused and productive workforce.
             </p>
           </div>
@@ -168,11 +179,17 @@ export default function Hero() {
             </div>
 
             {/* Play Icon Button - Centered */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px]">
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] cursor-pointer flex items-center justify-center"
+              onClick={() => setIsVideoOpen(true)}
+              role="button"
+              tabIndex={0}
+              aria-label="Play Video"
+            >
               <Image
                 fill
                 alt="Play Video"
-                className="object-contain cursor-pointer"
+                className="object-contain"
                 src="/assets/play-icon.png"
                 sizes="100px"
               />
@@ -199,10 +216,13 @@ export default function Hero() {
       {/* Desktop Layout */}
       <div className="hidden md:block relative h-[500px] lg:h-[850px]">
         {/* Main Image Container */}
-        <HeroImageContainer className="absolute bg-white h-[919.072px] left-[-162px] md:left-[-144px] lg:left-[-117.9px] overflow-clip top-[-90px] md:top-[-126px] lg:top-[-159.3px] w-[942.224px] scale-[0.405] md:scale-[0.495] lg:scale-90 origin-top-left" />
+        <HeroImageContainer
+          className="absolute bg-white h-[919.072px] left-[-162px] md:left-[-144px] lg:left-[-117.9px] overflow-clip top-[-90px] md:top-[-126px] lg:top-[-159.3px] w-[942.224px] scale-[0.405] md:scale-[0.495] lg:scale-90 origin-top-left"
+          onPlayClick={() => setIsVideoOpen(true)}
+        />
 
         {/* Text Content and Button */}
-        <div className="absolute left-[300px] md:left-[420px] lg:left-[912px] top-[40px] md:top-[60px] lg:top-[97px] right-[40px] md:right-[60px] lg:right-auto lg:w-[583px] max-w-[420px] md:max-w-[340px] lg:max-w-none">
+        <div className="absolute left-[280px] md:left-[350px] lg:left-[820px] top-[40px] md:top-[60px] lg:top-[97px] right-[40px] md:right-[60px] lg:right-auto lg:w-[583px] max-w-[420px] md:max-w-[340px] lg:max-w-none">
           {/* Text Content */}
           <div className="flex flex-col font-bold leading-[40px] md:leading-[52px] lg:leading-[96px] text-[#1d44c3] text-[42px] md:text-[52px] lg:text-[93px] tracking-[-1.5px] md:tracking-[-2px] lg:tracking-[-2.4px] mb-[12px] md:mb-[16px] lg:mb-[43px]">
             <p className="mb-0">Your Money.</p>
@@ -215,7 +235,7 @@ export default function Hero() {
             <p className="mb-0 mt-2">
               You earn your pay every day. Access to it shouldn't depend on a fixed payday.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-gray-500">
+            <p className="mt-4 text-base leading-relaxed text-gray-500  w-4/6">
               FinWage is a Canadian Earned Wage Access (EWA) platform that gives employees instant access to their pay—helping reduce financial stress while supporting a more focused and productive workforce.
             </p>
           </div>
@@ -237,6 +257,32 @@ export default function Hero() {
           />
         </div>
       </div>
+
+      {/* Video Modal */}
+      <Dialog
+        open={isVideoOpen}
+        onOpenChange={(open) => {
+          setIsVideoOpen(open);
+          if (videoPlayerRef.current) {
+            if (open) videoPlayerRef.current.play();
+            else {
+              videoPlayerRef.current.pause();
+              videoPlayerRef.current.reset();
+            }
+          }
+        }}
+      >
+        <DialogContent className="p-0 bg-transparent shadow-none border-none flex items-center justify-center" style={{ maxWidth: 'unset', width: 'unset' }}>
+          <DialogTitle className="sr-only">FinWage Overview Video</DialogTitle>
+          <CustomVideoPlayer
+            ref={videoPlayerRef}
+            src="/video.mp4"
+            poster="/assets/video-thumbnail.webp"
+            autoPlay={isVideoOpen}
+            className="w-[90vw] max-w-5xl"
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
