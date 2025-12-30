@@ -10,11 +10,11 @@ export default async function Integrations() {
   return (
     <section className="bg-white w-full py-12 md:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
-        <div className="flex flex-col gap-4 mb-8 md:mb-12 text-center">
+        <div className="flex flex-col gap-4 mb-3 md:mb-12 text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#1d44c3] leading-tight">
             Seamless Integrations
           </h2>
-          <p className="text-base md:text-lg text-base leading-relaxed text-gray-500 leading-7 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg leading-relaxed text-gray-500 leading-7 max-w-2xl mx-auto">
             FinWage integrates directly with existing payroll, time and attendance, and HR systems—ensuring accurate calculations, instant access, and a smooth experience for both employees and administrators.
           </p>
         </div>

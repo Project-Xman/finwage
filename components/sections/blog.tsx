@@ -100,7 +100,7 @@ function LatestPosts({ posts }: { posts: BlogWithExpand[] }) {
         </h2>
       </div>
 
-      <div className="space-y-6">
+      <div className="grid gap-4">
         {posts.map((post) => (
           <BlogCard key={post.id} post={post} />
         ))}
@@ -119,18 +119,20 @@ export default async function Blogs() {
   const featuredPost = (featuredBlogs[0] as BlogWithExpand) || null;
   const latestPosts = latestBlogs.items as BlogWithExpand[];
 
+  if (!latestPosts || latestPosts.length === 0) {
+    return null;
+  }
+
   return (
     <section className="bg-[#f7f9ff] py-12 md:py-24 px-4 md:px-8 lg:px-32">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-10 md:mb-14 space-y-4">
           <h1 className="text-3xl md:text-4xl font-bold text-[#1d44c3] leading-tight">
-            Actionable Insights, Anytime, Anywhere.
+            Actionable insights for better financial wellness.
           </h1>
-          <p className="text-gray-800 leading-6 max-w-2xl">
-            Discover the latest insights, initiatives, and innovations from
-            FinWage as we shape the future of on-demand pay and modern payroll
-            solutions.
+          <p className="text-base leading-relaxed text-gray-500 leading-6 max-w-2xl">
+            Explore resources, insights, and best practices on earned wage access, employee financial wellness, and modern payroll benefits. Learn how financial stability impacts productivity, retention, and overall workplace wellbeing.
           </p>
         </div>
 

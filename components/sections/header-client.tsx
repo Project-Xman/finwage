@@ -16,6 +16,7 @@ import {
   NavItems,
 } from "@/components/ui/resizable-navbar";
 import { ImagePaths } from "@/lib/assets";
+import { Button } from "../ui/button";
 
 // Navigation data
 const navigationItems = [
@@ -73,9 +74,6 @@ export function HeaderClient({ loginUrl }: HeaderClientProps) {
         <NavItems items={navigationItems} currentPath={pathname} />
 
         <div className="flex items-center gap-3">
-          <button className="p-2 hover:bg-muted rounded-md transition-colors">
-            <Search className="w-4 h-4 text-foreground/80 hover:text-foreground" />
-          </button>
           <NavbarButton variant="secondary" href={loginUrl}>
             Log in
           </NavbarButton>

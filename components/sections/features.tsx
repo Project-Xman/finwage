@@ -41,7 +41,7 @@ export default async function Features() {
                 Icon={IconComponent}
                 name={feature.title}
                 description={feature.description}
-                href={`/features/${feature.slug}`}
+                href={`#`}
                 cta="Learn more"
                 className={className}
                 background={

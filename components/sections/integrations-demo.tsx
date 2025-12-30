@@ -44,15 +44,16 @@ export default function IntegrationDemo({
   const displayIntegrations = integrations.slice(0, 6);
   const centerIntegration = integrations[6] || integrations[0]; // Use 7th or fallback to first
 
-  const [_, forceUpdate] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
-    forceUpdate((prev) => prev + 1);
+    setIsMounted(true);
   }, []);
 
   return (
     <div
-      className="relative flex h-[500px] md:h-[600px] lg:h-[700px] w-full items-center justify-center overflow-hidden p-10 md:p-16 lg:p-20"
+      className="relative flex h-[500px] md:h-[600px] lg:h-[700px] w-full items-center justify-center overflow-hidden"
       ref={containerRef}
+      suppressHydrationWarning
     >
       <div className="flex size-full max-h-[400px] md:max-h-[500px] lg:max-h-[600px] max-w-2xl md:max-w-4xl lg:max-w-5xl flex-col items-stretch justify-between gap-12 md:gap-16 lg:gap-20">
         {/* Top row */}
@@ -179,7 +180,7 @@ export default function IntegrationDemo({
       </div>
 
       {/* Animated beams connecting integrations to center */}
-      {displayIntegrations.map((_, idx) => {
+      {isMounted && displayIntegrations.map((_, idx) => {
         const isTopRow = idx < 2;
         const isBottomRow = idx >= 4;
         const isLeftSide = idx === 2;

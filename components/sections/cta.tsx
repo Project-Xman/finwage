@@ -1,3 +1,4 @@
+import { CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,41 +14,48 @@ function CtaCardComponent({ icon_svg, bg_color, title, points }: CtaCard) {
   const isImageIcon = icon_svg?.startsWith("/") || icon_svg?.startsWith("http");
 
   return (
-    <Card className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-600/20 transition-all duration-300">
-      <CardContent className="p-6 flex flex-col sm:flex-row gap-5 items-start">
-        <div
-          className={`size-12 ${bg_color || "bg-blue-50"} rounded-xl flex items-center justify-center shrink-0 shadow-sm`}
-        >
-          {isImageIcon ? (
-            <Image
-              alt={`${title} icon`}
-              className="w-full h-full object-cover rounded-xl"
-              width={48}
-              height={48}
-              src={icon_svg}
-            />
-          ) : (
-            <div className="text-[#1d44c3]">
-              <SvgIcon svgString={icon_svg} className="w-6 h-6" />
-            </div>
-          )}
+    <div className="group relative bg-white rounded-2xl p-6 border border-gray-100 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] hover:border-blue-100 transition-all duration-300">
+      <div className="flex gap-5 items-start">
+        <div className="shrink-0 relative">
+          <div
+            className={`size-14 ${bg_color || "bg-blue-50"} rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
+          >
+            {isImageIcon ? (
+              <Image
+                alt={`${title} icon`}
+                className="w-full h-full object-cover rounded-2xl"
+                width={56}
+                height={56}
+                src={icon_svg}
+              />
+            ) : (
+              <div className="text-[#1d44c3]">
+                <SvgIcon svgString={icon_svg} className="w-7 h-7" />
+              </div>
+            )}
+          </div>
         </div>
 
-        <div className="flex-1 space-y-2">
-          <h3 className="font-bold text-lg text-[#1d44c3] leading-tight">
+        <div className="flex-1 space-y-3">
+          <h3 className="font-bold text-xl text-[#1d44c3] leading-tight group-hover:text-blue-700 transition-colors">
             {title}
           </h3>
-          <div className="space-y-1.5">
+          <div className="space-y-2.5">
             {points &&
               points.map((point: string, index: number) => (
-                <p key={index} className="text-sm text-gray-600 leading-relaxed">
-                  {point}
-                </p>
+                <div key={index} className="flex items-start gap-3 group/item">
+                  <div className="mt-1 shrink-0 w-4 h-4 rounded-full bg-green-50 flex items-center justify-center group-hover/item:bg-green-100 transition-colors">
+                    <CheckCircle2 className="w-3 h-3 text-green-600" />
+                  </div>
+                  <p className="text-sm text-gray-600 leading-relaxed font-medium group-hover/item:text-gray-900 transition-colors">
+                    {point}
+                  </p>
+                </div>
               ))}
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 
@@ -105,14 +113,6 @@ export default async function Cta() {
             </div>
 
             <div className="space-y-6 pt-6 border-t border-gray-100">
-              <div className="space-y-4">
-                <h2 className="text-3xl md:text-4xl font-semibold text-[#1d44c3] leading-tight max-w-lg">
-                  Actionable insights for better financial wellness
-                </h2>
-                <p className="text-base md:text-lg text-gray-800 leading-7 max-w-lg">
-                  Explore resources, insights, and best practices on earned wage access, employee financial wellness, and modern payroll benefits. Learn how financial stability impacts productivity, retention, and overall workplace wellbeing.
-                </p>
-              </div>
               
               <EnquiryButton
                 type="contact"
