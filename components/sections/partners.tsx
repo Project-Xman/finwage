@@ -15,9 +15,8 @@ export default async function Partners() {
           <h2 className="text-[#1d44c3] text-[32px] md:text-[46.3px] leading-[40px] md:leading-[48px] mb-4 md:mb-6">
             Meet Our Partners
           </h2>
-          <p className="text-[15px] md:text-[17.4px] leading-[24px] md:leading-[28px] text-gray-800 max-w-[634px] mx-auto px-4">
-            Partnering with industry leaders, FinWage provides forward-thinking
-            financial solutions for today's workforce.
+          <p className="text-[15px] md:text-[17.4px] leading-[24px] md:leading-[28px] text-base leading-relaxed text-gray-500 max-w-[634px] mx-auto px-4">
+            FinWage partners with trusted payroll, HR, and workforce technology providers to deliver secure, compliant, and reliable earned wage access solutions across industries.
           </p>
         </div>
 

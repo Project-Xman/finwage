@@ -11,12 +11,12 @@ function PlatformHeader() {
   return (
     <div className="flex flex-col items-start text-white w-full gap-4 md:gap-6">
       <h2 className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
-        Our Platform
+        A simple way to stay in control of your earnings
       </h2>
       <p className="font-normal text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl">
-        FinWage is revolutionizing the way people get paid by creating a
-        platform that empowers both employers and employees. For employers, it
-        provides smarter tools to attract, retain, and engage talent.
+        FinWage delivers instant access to pay through a platform built for modern workplaces. Simple 
+        to use, fast to access, and reliable by design, it supports everyday financial needs while helping 
+        employers offer a meaningful financial wellness benefit.
       </p>
     </div>
   );

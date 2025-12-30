@@ -64,11 +64,11 @@ export default async function ForEmployeesPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Your Money, Your Control
+                Work Today. Get Paid Today.
               </h1>
               <p className="text-xl md:text-2xl text-blue-100 mb-8">
-                Access your earned wages instantly. No fees, no interest, no
-                waiting. Just financial freedom when you need it most.
+                Access a portion of your pay any day of the week—without waiting 
+                for payday. No loans, no interest, no credit checks.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <EnquiryButton
@@ -116,44 +116,64 @@ export default async function ForEmployeesPage() {
       {/* Why Use FinWage */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
-              Why Thousands Choose FinWage
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Break free from the payday cycle and take control of your
-              financial future
-            </p>
+          {/* Slide 1: Left Content, Right Image */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-24">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+                Access Earned Pay When You Need It
+              </h2>
+              <p className="text-xl text-gray-600 leading-relaxed">
+                With FinWage, access a portion of your pay any day of the week—without waiting for payday.
+              </p>
+            </div>
+            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
+              <Image
+                src="/assets/person-illustration-1.png"
+                alt="Access earned pay"
+                fill
+                className="object-cover"
+              />
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {benefits.length > 0 ? (
-              benefits.map((benefit, index) => (
-                <Card
-                  key={benefit.id}
-                  className="bg-linear-to-br from-blue-50 to-pink-50 border-0 hover:shadow-xl transition-all"
-                >
-                  <CardContent className="p-8">
-                    <div className={`${index % 3 === 1 ? 'text-[#f74b6b]' : 'text-[#1d44c3]'} mb-4`}>
-                      <SvgIcon
-                        svgString={benefit.icon_svg}
-                        className="w-8 h-8"
-                      />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-gray-600">{benefit.description}</p>
-                  </CardContent>
-                </Card>
-              ))
-            ) : (
-              <div className="col-span-full text-center py-12">
-                <p className="text-gray-600">
-                  No benefits available at this time.
-                </p>
-              </div>
-            )}
+          {/* Slide 2: Right Content, Left Image */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 lg:grid-flow-col-dense">
+            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl lg:col-start-1">
+              <Image
+                src="/assets/person-illustration-2.png"
+                alt="No loans or interest"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="lg:col-start-2">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+                No Loans. No Interest. No Credit Checks
+              </h2>
+              <p className="text-xl text-gray-600 leading-relaxed">
+                FinWage is not a loan. You're accessing your own pay, with no impact on your credit score.
+              </p>
+            </div>
+          </div>
+
+          {/* Slide 3: Left Content, Right Image */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+                Stay Financially Steady
+              </h2>
+              <p className="text-xl text-gray-600 leading-relaxed">
+                We help you use your credit card responsibly—rather than relying on it out of necessity. Manage expenses with confidence and reduce financial pressure.
+              </p>
+            </div>
+            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
+              <Image
+                src="/assets/person-illustration-1.png"
+                alt="Stay financially steady"
+                fill
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>

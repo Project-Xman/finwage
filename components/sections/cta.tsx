@@ -105,9 +105,14 @@ export default async function Cta() {
             </div>
 
             <div className="space-y-6 pt-6 border-t border-gray-100">
-              <h2 className="text-3xl md:text-4xl font-semibold text-[#1d44c3] leading-tight max-w-lg">
-                Discover Why FinWage is Powering Top Employers
-              </h2>
+              <div className="space-y-4">
+                <h2 className="text-3xl md:text-4xl font-semibold text-[#1d44c3] leading-tight max-w-lg">
+                  Actionable insights for better financial wellness
+                </h2>
+                <p className="text-base md:text-lg text-gray-800 leading-7 max-w-lg">
+                  Explore resources, insights, and best practices on earned wage access, employee financial wellness, and modern payroll benefits. Learn how financial stability impacts productivity, retention, and overall workplace wellbeing.
+                </p>
+              </div>
               
               <EnquiryButton
                 type="contact"
@@ -116,7 +121,7 @@ export default async function Cta() {
                 modalTitle="Let's Talk"
                 modalDescription="Tell us about your organization and how we can help you provide financial wellness benefits to your employees."
               >
-                Let's Talk
+                Explore Resource
               </EnquiryButton>
             </div>
           </div>

@@ -53,11 +53,13 @@ export default async function ForEmployersPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Attract, Retain & Motivate Your Best Employees
+                Attract, Retain, and Empower Your Workforce
               </h1>
               <p className="text-xl md:text-2xl text-blue-100 mb-8">
-                Offer FinWage as a zero-cost benefit that pays for itself
-                through improved retention and productivity.
+                Earned Wage Access is a proven financial wellness benefit that helps 
+                reduce financial stress, improve engagement, and strengthen retention. 
+                FinWage enables employers to offer this benefit without increasing 
+                payroll costs or disrupting payroll operations.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <EnquiryButton
@@ -106,44 +108,56 @@ export default async function ForEmployersPage() {
       {/* Benefits Grid */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
-              The Business Case for FinWage
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Every dollar you invest in employee financial wellness returns
-              multiplied through retention, productivity, and recruiting
-              savings.
-            </p>
+          {/* Slide 1: Left Content, Right Image */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-24">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+                A Smarter Employee Benefit
+              </h2>
+              <p className="text-xl text-gray-600 leading-relaxed">
+                Offer earned wage access as a financial wellness benefit without increasing salaries or payroll risk.
+              </p>
+            </div>
+            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl bg-gray-100">
+              <div className="flex items-center justify-center h-full text-gray-400">
+                <span>Image placeholder</span>
+              </div>
+            </div>
           </div>
 
-          {benefits.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {benefits.map((benefit, index) => (
-                <Card
-                  key={benefit.id}
-                  className="bg-linear-to-br from-blue-50 to-pink-50 border-0 hover:shadow-xl transition-all"
-                >
-                  <CardContent className="p-8">
-                    <div className={`${index % 3 === 1 ? 'text-[#f74b6b]' : 'text-[#1d44c3]'} mb-4`}>
-                      <SvgIcon
-                        svgString={benefit.icon_svg}
-                        className="w-8 h-8"
-                      />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-gray-600">{benefit.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
+          {/* Slide 2: Right Content, Left Image */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 lg:grid-flow-col-dense">
+            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl bg-gray-100 lg:col-start-1">
+              <div className="flex items-center justify-center h-full text-gray-400">
+                <span>Image placeholder</span>
+              </div>
             </div>
-          ) : (
-            <div className="text-center text-gray-600">
-              <p>Benefits information coming soon</p>
+            <div className="lg:col-start-2">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+                No Payroll Disruption
+              </h2>
+              <p className="text-xl text-gray-600 leading-relaxed">
+                FinWage connects directly with payroll or time & attendance systems, allowing employees to access pay any day of the week—without changing payroll cycles.
+              </p>
             </div>
-          )}
+          </div>
+
+          {/* Slide 3: Left Content, Right Image */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+                Easy Integration, Real Impact
+              </h2>
+              <p className="text-xl text-gray-600 leading-relaxed">
+                Fast setup, minimal effort, and a fully secured platform built with strong data privacy and compliance-first architecture.
+              </p>
+            </div>
+            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl bg-gray-100">
+              <div className="flex items-center justify-center h-full text-gray-400">
+                <span>Image placeholder</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -153,11 +167,12 @@ export default async function ForEmployersPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-                Seamless HR/Payroll Integration
+                Seamless Integrations
               </h2>
               <p className="text-xl text-gray-600 mb-8">
-                FinWage integrates directly with your existing systems. No new
-                processes, no extra work for your HR team.
+                FinWage integrates directly with existing payroll, time and attendance, 
+                and HR systems—ensuring accurate calculations, instant access, and a 
+                smooth experience for both employees and administrators.
               </p>
 
               <div className="space-y-6 mb-8">

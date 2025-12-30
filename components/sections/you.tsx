@@ -69,29 +69,29 @@ const You: NextPage = () => {
           <div className="space-y-8 sm:space-y-10 w-full">
             <TimelineCard
               title="Work"
-              description="Put in the hours and do what you do best. Your earnings accumulate with every shift."
+              description="Employees work their scheduled hours as usual."
               image={imgWork}
               step="STEP 1"
               color="#60A5FA"
               isFirst={true}
             />
             <TimelineCard
-              title="Earn"
-              description="Your available earnings update in the FinWage app after each workday. No more waiting."
+              title="Track Earnings"
+              description="Earnings are calculated in real time and updated after each workday, giving employees clear visibility into available pay."
               image={imgEarn}
               step="STEP 2"
               color="#22D3EE"
             />
             <TimelineCard
-              title="Access Pay"
-              description="Instantly transfer your earned pay to any bank account, debit card, or prepaid card, 24/7."
+              title="Access When Needed"
+              description="Instant access to pay—no interest, no borrowing, no impact on credit."
               image={imgAccessPay}
               step="STEP 3"
               color="#3B82F6"
             />
             <TimelineCard
-              title="Peace of Mind"
-              description="Take control of your finances, pay bills on time, and reduce financial stress."
+              title="Stay Steady"
+              description="By using pay instead of credit, employees can manage expenses responsibly and avoid unnecessary debt"
               image={imgPeaceOfMind}
               step="STEP 4"
               color="#1E40AF"
@@ -139,7 +139,7 @@ const CircularInfographic = () => {
       endAngle: 225,
       title: "Work",
       tag: "STEP 1",
-      description: "Put in the hours and do what you do best. Your earnings accumulate with every shift.",
+      description: "Employees work their scheduled hours as usual.",
       iconPath: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z", // User icon
       image: imgWork,
     },
@@ -148,9 +148,9 @@ const CircularInfographic = () => {
       color: colors.blueGreen,
       startAngle: 225,
       endAngle: 270,
-      title: "Earn",
+      title: "Track Earnings",
       tag: "STEP 2",
-      description: "Your available earnings update in the FinWage app after each workday. No more waiting.",
+      description: "Earnings update daily in real time, giving employees clear visibility into their available pay.",
       iconPath: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z", // Dollar icon
       image: imgEarn,
     },
@@ -159,9 +159,9 @@ const CircularInfographic = () => {
       color: colors.mediumBlue,
       startAngle: 270,
       endAngle: 315,
-      title: "Access Pay",
+      title: "Access When Needed",
       tag: "STEP 3",
-      description: "Instantly transfer your earned pay to any bank account, debit card, or prepaid card, 24/7.",
+      description: "Instant access to pay—no interest, no borrowing, no impact on credit.",
       iconPath: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z", // Credit card icon
       image: imgAccessPay,
     },
@@ -170,9 +170,9 @@ const CircularInfographic = () => {
       color: colors.darkBlue,
       startAngle: 315,
       endAngle: 360,
-      title: "Peace of Mind",
+      title: "Stay Steady",
       tag: "STEP 4",
-      description: "Take control of your finances, pay bills on time, and reduce financial stress.",
+      description: "By using pay instead of credit, employees can manage expenses responsibly and avoid unnecessary debt",
       iconPath: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z", // Check circle icon
       image: imgPeaceOfMind,
     },

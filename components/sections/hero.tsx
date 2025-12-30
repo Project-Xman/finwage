@@ -134,17 +134,19 @@ export default function Hero() {
         {/* Text Content */}
         <div className="flex flex-col gap-4 sm:gap-6 items-center text-center max-w-[340px] sm:max-w-[400px]">
           <div className="flex flex-col font-bold leading-[40px] text-[#1d44c3] text-[38px] tracking-[-1.5px] mb-[16px]">
-            <p className="mb-0">Your Money,</p>
-            <p className="mb-0">Your Control.</p>
+            <p className="mb-0">Your Money.</p>
+            <p className="mb-0 whitespace-nowrap">In Your Control.</p>
           </div>
           <div className="flex flex-col font-normal leading-[19px] text-[12.5px] text-gray-800 mb-[20px]">
-            <p className="mb-0">
-              Work Today, Get Paid Today! A financial wellness
+            <p className="mb-0 font-semibold text-[#f74b6b]">
+              FinWage — It's Your Wage!
             </p>
-            <p className="mb-0">
-              benefit that helps employees access their earned
+            <p className="mb-0 mt-2">
+              You earn your pay every day. Access to it shouldn't depend on a fixed payday.
             </p>
-            <p>wages while saving employers time and money</p>
+            <p className="mt-4 text-base leading-relaxed text-gray-500">
+              FinWage is a Canadian Earned Wage Access (EWA) platform that gives employees instant access to their pay—helping reduce financial stress while supporting a more focused and productive workforce.
+            </p>
           </div>
           <DemoButton />
         </div>
@@ -203,17 +205,19 @@ export default function Hero() {
         <div className="absolute left-[300px] md:left-[420px] lg:left-[912px] top-[40px] md:top-[60px] lg:top-[97px] right-[40px] md:right-[60px] lg:right-auto lg:w-[583px] max-w-[420px] md:max-w-[340px] lg:max-w-none">
           {/* Text Content */}
           <div className="flex flex-col font-bold leading-[40px] md:leading-[52px] lg:leading-[96px] text-[#1d44c3] text-[42px] md:text-[52px] lg:text-[93px] tracking-[-1.5px] md:tracking-[-2px] lg:tracking-[-2.4px] mb-[12px] md:mb-[16px] lg:mb-[43px]">
-            <p className="mb-0">Your Money,</p>
-            <p className="mb-0">Your Control.</p>
+            <p className="mb-0">Your Money.</p>
+            <p className="mb-0 whitespace-nowrap">In Your Control.</p>
           </div>
           <div className="flex flex-col font-normal leading-[20px] md:leading-[24px] lg:leading-[29.25px] text-[13px] md:text-[10.5px] lg:text-[17.4px] text-gray-800 mb-[16px] md:mb-[20px] lg:mb-[43px]">
-            <p className="mb-0">
-              Work Today, Get Paid Today! A financial wellness
+            <p className="mb-0 font-semibold text-[#f74b6b]">
+              FinWage — It's Your Wage!
             </p>
-            <p className="mb-0">
-              benefit that helps employees access their earned
+            <p className="mb-0 mt-2">
+              You earn your pay every day. Access to it shouldn't depend on a fixed payday.
             </p>
-            <p>wages while saving employers time and money</p>
+            <p className="mt-4 text-base leading-relaxed text-gray-500">
+              FinWage is a Canadian Earned Wage Access (EWA) platform that gives employees instant access to their pay—helping reduce financial stress while supporting a more focused and productive workforce.
+            </p>
           </div>
 
           {/* Button - Below text content */}

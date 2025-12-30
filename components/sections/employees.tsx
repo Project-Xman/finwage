@@ -185,12 +185,40 @@ function Frame10() {
   return (
     <div className="flex flex-col gap-6 md:gap-[24.8px] w-full md:flex-1">
       <h2 className="text-[#1d44c3] text-[32px] md:text-[47.1px] leading-[40px] md:leading-[60px]">
-        Supporting Every Employee's Journey Toward Financial Growth
+        Supporting everyday financial stability
       </h2>
-      <p className="text-[15.6px] leading-[24px] text-gray-800">
-        FinWage enables employees to confidently manage and optimize their
-        earnings, fostering financial wellness.
+      <p className="text-[15.6px] leading-[24px] text-base leading-relaxed text-gray-500">
+        FinWage helps employees manage cash flow, cover essential expenses, and plan ahead—without relying on payday loans, high-interest credit cards, or short-term borrowing.
       </p>
+      
+      <div className="pt-4">
+        <h3 className="text-[#1d44c3] text-[16px] md:text-[18px] font-semibold leading-[24px] mb-4">
+          Create smart money buckets
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[
+            "Vacation Fund",
+            "Car Payments",
+            "Daily Expenses",
+            "Party Wallet",
+          ].map((item) => (
+            <div
+              key={item}
+              className="flex items-center gap-3 p-3 rounded-lg bg-white border border-gray-100 shadow-sm hover:border-blue-100 transition-colors"
+            >
+              <div className="w-2 h-2 rounded-full bg-[#1d44c3]" />
+              <span className="text-[15px] font-medium text-gray-700">
+                {item}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <p className="text-[15.6px] leading-[24px] text-gray-800 font-semibold">
+        Absolutely no credit checks. No interest. No hidden fees.
+      </p>
+
       <LinkComponent />
     </div>
   );

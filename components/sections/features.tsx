@@ -15,9 +15,8 @@ export default async function Features() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#1d44c3] leading-tight">
             Everything you need to empower your workforce
           </h2>
-          <p className="text-base md:text-lg text-gray-800 leading-7 max-w-2xl">
-            Discover how FinWage provides comprehensive solutions for modern
-            payroll management.
+          <p className="text-base md:text-lg text-base leading-relaxed text-gray-500 leading-7 max-w-2xl">
+            From responsible earned wage access to payroll-friendly workflows, FinWage provides employers with the tools needed to support financial wellness while maintaining operational efficiency.
           </p>
         </div>
 

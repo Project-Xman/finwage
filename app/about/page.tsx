@@ -53,40 +53,30 @@ export default async function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Transforming Payday for Everyone
+              Transforming Payday for the Modern Workforce
             </h1>
             <p className="text-xl md:text-2xl text-blue-100">
-              We believe no one should have to wait two weeks to access money
-              they've already earned.
+              FinWage is a Canadian Earned Wage Access (EWA) platform that gives 
+              employees instant access to their pay—helping reduce financial stress 
+              while supporting a more focused and productive workforce.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Mission & Story */}
+      {/* Purpose & Story */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-                Our Mission
+                Our Purpose
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed mb-6">
-                FinWage was born from a simple observation: millions of
-                hardworking people live paycheck to paycheck, not because they
-                don't earn enough, but because traditional pay cycles don't
-                match real life.
+              <p className="text-xl text-gray-600 leading-relaxed mb-6 font-semibold">
+                FinWage isn't about borrowing money. It's about accessing what you've already earned.
               </p>
               <p className="text-xl text-gray-600 leading-relaxed mb-6">
-                We're on a mission to eliminate financial stress for workers by
-                giving them instant access to their earned wages, while
-                providing employers with a powerful retention and recruiting
-                tool.
-              </p>
-              <p className="text-xl text-gray-600 leading-relaxed">
-                Every day, we help thousands of families avoid overdraft fees,
-                payday loans, and the anxiety of unexpected expenses. That's
-                what drives us.
+                Our purpose is to improve financial wellbeing in the workplace by giving employees timely access to pay while helping employers build stronger, more resilient teams.
               </p>
             </div>
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
@@ -212,29 +202,24 @@ export default async function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold mb-6">
-                Our Vision for the Future
+                Our Vision
               </h2>
               <p className="text-xl text-blue-100 leading-relaxed mb-6">
-                We're building a world where financial stress doesn't exist for
-                working people. Where every employee has instant access to their
-                earned wages and the tools to build long-term financial
-                wellness.
-              </p>
-              <p className="text-xl text-blue-100 leading-relaxed">
-                In the next five years, we aim to serve 10 million workers
-                across North America, partnering with businesses of all sizes to
-                make financial freedom the standard, not the exception.
+                We envision a future where earned wage access supports financial stability, productivity, and dignity for workers across industries.
               </p>
             </div>
             <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
-              <h3 className="text-2xl font-bold mb-6">Compliance & Security</h3>
+              <h3 className="text-2xl font-bold mb-6">Trust, Compliance & Responsibility</h3>
+              <p className="text-blue-100 text-sm mb-6">
+                FinWage is built with compliance, transparency, and responsible financial access at its core—ensuring protection for both employees and employers.
+              </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <Shield className="w-6 h-6 shrink-0 mt-1" />
                   <div>
-                    <div className="font-semibold mb-1">AML Compliant</div>
+                    <div className="font-semibold mb-1">AML & KYC Compliant</div>
                     <div className="text-blue-100 text-sm">
-                      Full Anti-Money Laundering protocols in place
+                      Full Anti-Money Laundering and Know Your Customer protocols
                     </div>
                   </div>
                 </div>
@@ -242,7 +227,7 @@ export default async function AboutPage() {
                   <Shield className="w-6 h-6 shrink-0 mt-1" />
                   <div>
                     <div className="font-semibold mb-1">
-                      GDPR & Data Protection
+                      Data Privacy & Protection
                     </div>
                     <div className="text-blue-100 text-sm">
                       Bank-level encryption and data privacy standards
@@ -252,18 +237,18 @@ export default async function AboutPage() {
                 <div className="flex items-start gap-4">
                   <Shield className="w-6 h-6 shrink-0 mt-1" />
                   <div>
-                    <div className="font-semibold mb-1">SOC 2 Certified</div>
+                    <div className="font-semibold mb-1">Regulatory Governance</div>
                     <div className="text-blue-100 text-sm">
-                      Independently audited security controls
+                      Adherence to applicable regulations in Canada
                     </div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <Shield className="w-6 h-6 shrink-0 mt-1" />
                   <div>
-                    <div className="font-semibold mb-1">State Licensed</div>
+                    <div className="font-semibold mb-1">Secure System Design</div>
                     <div className="text-blue-100 text-sm">
-                      Licensed in all 50 states for wage access services
+                      Enterprise-grade security across all platforms
                     </div>
                   </div>
                 </div>

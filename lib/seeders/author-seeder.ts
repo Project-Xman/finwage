@@ -25,42 +25,40 @@ export class AuthorSeeder extends BaseSeeder {
 
   /**
    * Get author seed data
-   * Returns FinWage content team members with realistic profiles
+   * Returns FinWage team members for content authorship
    */
   protected getSeedData(): AuthorSeedData[] {
     return [
       {
-        name: "Sarah Mitchell",
-        slug: "sarah-mitchell",
-        email: "sarah@finwage.com",
-        bio: "Head of Content at FinWage with 10+ years experience in fintech and employee benefits. Passionate about financial wellness and helping employees achieve financial freedom.",
-        role: "Head of Content",
+        name: "Shibin Shahul",
+        slug: "shibin-shahul",
+        email: "shibin@finwage.com",
+        bio: "Founder & CEO of FinWage with extensive experience in building and scaling technology-driven businesses across the Middle East and North America. With a strong background in fintech and workforce solutions, Shibin leads FinWage with a focus on responsible innovation and operational excellence.",
+        role: "Founder & CEO",
         social_link: {
-          twitter: "https://twitter.com/sarahmitchell",
-          linkedin: "https://linkedin.com/in/sarah-mitchell-finwage",
+          linkedin: "https://linkedin.com/in/shibin-shahul",
         },
         active: true,
       },
       {
-        name: "David Chen",
-        slug: "david-chen",
-        email: "david@finwage.com",
-        bio: "Financial wellness expert and product strategist. David has helped thousands of employees improve their financial health through earned wage access.",
-        role: "Product Strategist",
+        name: "Richard James",
+        slug: "richard-james",
+        email: "richard@finwage.com",
+        bio: "Chief Technology Officer leading FinWage's technology strategy, overseeing the design and development of secure, scalable, and high-performance platforms. With deep expertise in fintech architecture and product engineering.",
+        role: "Chief Technology Officer",
         social_link: {
-          linkedin: "https://linkedin.com/in/davidchen-finwage",
-          twitter: "https://twitter.com/davidchen_ewa",
+          linkedin: "https://linkedin.com/in/richard-james-cto",
         },
         active: true,
       },
       {
-        name: "Maria Rodriguez",
-        slug: "maria-rodriguez",
-        email: "maria@finwage.com",
-        bio: "HR and benefits consultant specializing in modern compensation strategies. Maria writes about the future of work and employee financial wellness.",
-        role: "Benefits Consultant",
+        name: "Joby Varghese",
+        slug: "joby-varghese",
+        email: "joby@finwage.com",
+        bio: "Compliance Officer with strong expertise in financial services and fintech compliance, focusing on AML, KYC, data privacy, and regulatory governance. Joby oversees FinWage's compliance framework and risk management practices.",
+        role: "Compliance Officer",
         social_link: {
-          linkedin: "https://linkedin.com/in/maria-rodriguez-hr",
+          linkedin: "https://linkedin.com/in/joby-varghese",
         },
         active: true,
       },

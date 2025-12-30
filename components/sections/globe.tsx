@@ -95,13 +95,10 @@ export default function Global({ stats }: { stats: StatusResponse[] }) {
             {/* Header Section */}
             <div className="flex flex-col gap-4 md:gap-6 lg:gap-8">
               <h1 className="text-3xl pt-15 md:pt-0 sm:text-4xl md:text-5xl lg:text-6xl font-bold md:font-normal text-white leading-tight max-w-2xl">
-                Global Recognition for Financial Innovation
+                Built for reliability, transparency, and real-world use
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-white leading-7 md:leading-8 max-w-lg tracking-wide">
-                FinWage makes moving money as easy and programmable as moving
-                data. Our teams are based in offices around the world and we
-                process hundreds of billions of dollars each year for ambitious
-                businesses of all sizes.
+                FinWage is built on secure, scalable financial infrastructure designed to deliver consistent performance, dependable access, and compliance-focused operations for employers and employees alike.
               </p>
             </div>
 

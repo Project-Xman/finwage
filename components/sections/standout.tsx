@@ -16,11 +16,13 @@ export default function StandOut() {
           <div className="flex flex-col gap-8 md:gap-10">
             <div className="flex flex-col gap-5">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-[#1d44c3] leading-tight">
-                Attract, Retain, and Inspire Your Workforce
+                Attract, Retain, and Empower Your Workforce
               </h1>
               <p className="text-base md:text-lg text-gray-800 leading-7">
-                FinWage empowers employers to lead their industry by redefining
-                how employees access and manage their pay.
+                Earned Wage Access is a proven financial wellness benefit that helps 
+                reduce financial stress, improve engagement, and strengthen retention. 
+                FinWage enables employers to offer this benefit without increasing 
+                payroll costs or disrupting payroll operations.
               </p>
             </div>
 

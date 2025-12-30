@@ -1,7 +1,9 @@
-// Configuration
-const POCKETBASE_URL = "http://localhost:8090";
-const SEEDER_EMAIL = "admin@projectx.com";
-const SEEDER_PASSWORD = "Admin@12345";
+/**
+ * FinWage PocketBase Seed Script
+ * 
+ * Seeds the database with FinWage-specific content from the official documentation.
+ * Usage: bun run data/seed.ts or npx tsx data/seed.ts
+ */
 
 import PocketBase from 'pocketbase';
 
@@ -9,9 +11,9 @@ import PocketBase from 'pocketbase';
 // CONFIGURATION
 // ============================================================
 
-const POCKETBASE_URL = process.env.NEXT_PUBLIC_POCKETBASE_URL || 'http://localhost:8090';
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@finwage.com';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Admin@12345';
+const POCKETBASE_URL = process.env.NEXT_PUBLIC_POCKETBASE_URL || 'https://pocketbase.finwage.ca';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'finwage.ca@gmail.com';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'FinWageCasa@786';
 
 // Initialize PocketBase client
 const pb = new PocketBase(POCKETBASE_URL);
@@ -54,57 +56,6 @@ async function createRecord(collection: string, data: any, label: string) {
 
 async function seedData() {
   try {
-    // Authenticate or create seeder user
-    console.log("Logging in as seeder...");
-    try {
-      await pb
-        .collection("users")
-        .authWithPassword(SEEDER_EMAIL, SEEDER_PASSWORD);
-    } catch (authError: any) {
-      if (authError.status === 400) {
-        console.log("User not found, creating seeder user...");
-        await pb.collection("users").create({
-          email: SEEDER_EMAIL,
-          password: SEEDER_PASSWORD,
-          passwordConfirm: SEEDER_PASSWORD,
-          name: "Seeder Admin",
-        });
-        await pb
-          .collection("users")
-          .authWithPassword(SEEDER_EMAIL, SEEDER_PASSWORD);
-      } else {
-        throw authError;
-      }
-    }
-    console.log("Logged in successfully.");
-
-    // Seed categories first (independent)
-    console.log("Seeding categories...");
-    const categories = [
-      {
-        name: "Technology",
-        slug: "technology",
-        description: "All things tech-related.",
-        color: "#007bff",
-        icon_svg: "fa-laptop",
-        count: "0",
-      },
-      {
-        name: "Business",
-        slug: "business",
-        description: "Business and management topics.",
-        color: "#28a745",
-        icon_svg: "fa-briefcase",
-        count: "0",
-      },
-      {
-        name: "Development",
-        slug: "development",
-        description: "Software development insights.",
-        color: "#ffc107",
-        icon_svg: "fa-code",
-        count: "0",
-      },
     await authenticateAdmin();
 
     console.log('\n📊 Starting data seeding for FinWage...\n');
@@ -142,43 +93,6 @@ async function seedData() {
     
     const categoryRecords: any[] = [];
     for (const cat of categories) {
-      const record = await pb.collection("category").create(cat);
-      categoryRecords.push(record);
-    }
-    const techCategoryId = categoryRecords.find(
-      (c: any) => c.slug === "technology",
-    )?.id;
-    const businessCategoryId = categoryRecords.find(
-      (c: any) => c.slug === "business",
-    )?.id;
-    const devCategoryId = categoryRecords.find(
-      (c: any) => c.slug === "development",
-    )?.id;
-
-    // Seed authors
-    console.log("Seeding authors...");
-    const authors = [
-      {
-        name: "John Doe",
-        slug: "john-doe",
-        email: "john@example.com",
-        bio: "Senior developer with 10+ years experience.",
-        role: "Developer",
-        social_link: {
-          twitter: "https://twitter.com/johndoe",
-          linkedin: "https://linkedin.com/in/johndoe",
-        },
-        active: true,
-      },
-      {
-        name: "Jane Smith",
-        slug: "jane-smith",
-        email: "jane@example.com",
-        bio: "Product manager passionate about innovation.",
-        role: "Manager",
-        social_link: { twitter: "https://twitter.com/janesmith" },
-        active: true,
-      },
       const record = await createRecord('category', cat, `Category: ${cat.name}`);
       categoryRecords.push(record);
     }
@@ -193,37 +107,35 @@ async function seedData() {
     console.log('\n👥 Seeding Authors...');
     const authors = [
       {
-        name: 'Sarah Mitchell',
-        slug: 'sarah-mitchell',
-        email: 'sarah@finwage.com',
-        bio: 'Head of Content at FinWage with 10+ years experience in fintech and employee benefits. Passionate about financial wellness and helping employees achieve financial freedom.',
-        role: 'Head of Content',
-        social_link: { 
-          twitter: 'https://twitter.com/sarahmitchell', 
-          linkedin: 'https://linkedin.com/in/sarah-mitchell-finwage' 
+        name: 'Shibin Shahul',
+        slug: 'shibin-shahul',
+        email: 'shibin@finwage.com',
+        bio: 'Founder & CEO of FinWage with extensive experience in building and scaling technology-driven businesses across the Middle East and North America. With a strong background in fintech and workforce solutions, Shibin leads FinWage with a focus on responsible innovation and operational excellence.',
+        role: 'Founder & CEO',
+        social_link: {
+          linkedin: 'https://linkedin.com/in/shibin-shahul',
         },
         active: true
       },
       {
-        name: 'David Chen',
-        slug: 'david-chen',
-        email: 'david@finwage.com',
-        bio: 'Financial wellness expert and product strategist. David has helped thousands of employees improve their financial health through earned wage access.',
-        role: 'Product Strategist',
-        social_link: { 
-          linkedin: 'https://linkedin.com/in/davidchen-finwage',
-          twitter: 'https://twitter.com/davidchen_ewa'
+        name: 'Richard James',
+        slug: 'richard-james',
+        email: 'richard@finwage.com',
+        bio: 'Chief Technology Officer leading FinWage\'s technology strategy, overseeing the design and development of secure, scalable, and high-performance platforms.',
+        role: 'Chief Technology Officer',
+        social_link: {
+          linkedin: 'https://linkedin.com/in/richard-james-cto',
         },
         active: true
       },
       {
-        name: 'Maria Rodriguez',
-        slug: 'maria-rodriguez',
-        email: 'maria@finwage.com',
-        bio: 'HR and benefits consultant specializing in modern compensation strategies. Maria writes about the future of work and employee financial wellness.',
-        role: 'Benefits Consultant',
-        social_link: { 
-          linkedin: 'https://linkedin.com/in/maria-rodriguez-hr'
+        name: 'Joby Varghese',
+        slug: 'joby-varghese',
+        email: 'joby@finwage.com',
+        bio: 'Compliance Officer with strong expertise in financial services and fintech compliance, focusing on AML, KYC, data privacy, and regulatory governance.',
+        role: 'Compliance Officer',
+        social_link: {
+          linkedin: 'https://linkedin.com/in/joby-varghese',
         },
         active: true
       }
@@ -231,142 +143,76 @@ async function seedData() {
     
     const authorRecords: any[] = [];
     for (const author of authors) {
-      const record = await pb.collection("authors").create(author);
-      authorRecords.push(record);
-    }
-    const johnAuthorId = authorRecords.find(
-      (a: any) => a.slug === "john-doe",
-    )?.id;
-    const janeAuthorId = authorRecords.find(
-      (a: any) => a.slug === "jane-smith",
-    )?.id;
-
-    // Seed blogs (depends on authors and categories)
-    console.log("Seeding blogs...");
-    const blogs = [
-      {
-        title: "Introduction to Modern Web Development",
-        slug: "intro-modern-web-dev",
-        content: "<p>This is a sample blog post about web development.</p>",
-        excerpt: "A quick intro to modern web tech.",
-        author: johnAuthorId,
-        category: techCategoryId,
-        tags: ["web", "dev"],
-        featured: true,
-        published: true,
-        published_date: new Date().toISOString(),
-        views: 100,
-      },
-      {
-        title: "Best Practices for Agile Teams",
-        slug: "agile-best-practices",
-        content: "<p>Exploring agile methodologies.</p>",
-        excerpt: "Tips for better team collaboration.",
-        author: janeAuthorId,
-        category: businessCategoryId,
-        tags: ["agile", "team"],
-        featured: false,
-        published: true,
-        published_date: new Date().toISOString(),
-        views: 50,
-      },
       const record = await createRecord('authors', author, `Author: ${author.name}`);
       authorRecords.push(record);
     }
     
-    const sarahAuthorId = authorRecords[0]?.id;
-    const davidAuthorId = authorRecords[1]?.id;
-    const mariaAuthorId = authorRecords[2]?.id;
+    const shibinAuthorId = authorRecords[0]?.id;
+    const richardAuthorId = authorRecords[1]?.id;
+    const jobyAuthorId = authorRecords[2]?.id;
 
     // ============================================================
-    // 3. SEED BLOGS (Depends on authors and categories - includes SEO fields)
+    // 3. SEED BLOGS (Depends on authors and categories)
     // ============================================================
     console.log('\n📝 Seeding Blog Posts...');
     const blogs = [
       {
         title: 'What is Earned Wage Access and How Does It Work?',
         slug: 'what-is-earned-wage-access',
-        content: '<h2>Understanding Earned Wage Access</h2><p>Earned Wage Access (EWA) is a modern financial benefit that allows employees to access their earned wages before the traditional payday. Instead of waiting two weeks for a paycheck, employees can receive a portion of their already-earned wages on-demand.</p><h3>How It Works</h3><p>The process is simple: As you work, you earn wages. With FinWage, you can access a portion of those earned wages through our mobile app, instantly. There are no loans, no interest charges, and no credit checks required.</p><h3>Benefits for Employees</h3><ul><li>Eliminate payday loans and high-interest debt</li><li>Cover unexpected expenses immediately</li><li>Reduce financial stress and anxiety</li><li>Improve overall financial wellness</li></ul><h3>Benefits for Employers</h3><ul><li>Attract and retain top talent</li><li>Increase employee satisfaction</li><li>Reduce turnover costs</li><li>Zero cost implementation</li></ul>',
+        content: '<h2>Understanding Earned Wage Access</h2><p>Earned Wage Access (EWA) is a modern financial benefit that allows employees to access their earned wages before the traditional payday. FinWage is a Canadian EWA platform that gives employees instant access to their pay—helping reduce financial stress while supporting a more focused and productive workforce.</p><h3>How It Works</h3><p>The FinWage Cycle is simple:</p><ul><li><strong>Work</strong> - Employees work their scheduled hours as usual</li><li><strong>Track Earnings</strong> - Earnings are calculated in real time and updated after each workday</li><li><strong>Access When Needed</strong> - Instant access to pay—no interest, no borrowing, no impact on credit</li><li><strong>Stay Steady</strong> - Manage expenses responsibly and avoid unnecessary debt</li></ul><h3>Key Benefits</h3><p>Absolutely no credit checks. No interest. No hidden fees.</p>',
         excerpt: 'Discover how Earned Wage Access revolutionizes employee financial wellness by providing instant access to earned wages without loans or interest.',
-        author: sarahAuthorId,
+        author: shibinAuthorId,
         category: ewaCategoryId,
         tags: ['earned wage access', 'financial wellness', 'employee benefits', 'instant pay'],
         featured: true,
         published: true,
         published_date: new Date('2024-01-15').toISOString(),
         views: 2500,
-        // SEO metadata fields for Next.js 15 static generation
         seo_title: 'What is Earned Wage Access? Complete Guide 2024 | FinWage',
-        seo_description: 'Learn everything about Earned Wage Access (EWA) - how it works, benefits for employees and employers, and why it\'s revolutionizing workplace benefits. No loans, no interest.',
-        seo_keywords: 'earned wage access, EWA, instant pay, on-demand pay, financial wellness, employee benefits, payroll advance',
+        seo_description: 'Learn everything about Earned Wage Access (EWA) - how it works, benefits for employees and employers. FinWage is a Canadian EWA platform. No loans, no interest.',
+        seo_keywords: 'earned wage access, EWA, instant pay, on-demand pay, financial wellness, employee benefits, Canadian EWA',
         og_image: null,
         canonical_url: null
       },
       {
-        title: '10 Ways to Improve Employee Financial Wellness',
-        slug: '10-ways-improve-employee-financial-wellness',
-        content: '<h2>Building a Financially Healthy Workforce</h2><p>Financial stress is the leading cause of employee distraction and decreased productivity. Here are 10 proven strategies to improve your employees\' financial wellness:</p><h3>1. Offer Earned Wage Access</h3><p>Give employees the flexibility to access their earned wages when they need them, not just on payday.</p><h3>2. Provide Financial Education</h3><p>Host workshops and webinars on budgeting, saving, and debt management.</p><h3>3. Emergency Savings Programs</h3><p>Help employees build emergency funds through automatic savings programs.</p><h3>4. Transparent Compensation</h3><p>Be clear about pay structures, bonuses, and benefits.</p><h3>5. Flexible Benefits Packages</h3><p>Allow employees to choose benefits that match their life stage and needs.</p><p>...and 5 more proven strategies that create real impact.</p>',
-        excerpt: '10 proven strategies to reduce employee financial stress and build a financially healthy, productive workforce.',
-        author: mariaAuthorId,
+        title: 'Supporting Everyday Financial Stability for Employees',
+        slug: 'supporting-everyday-financial-stability',
+        content: '<h2>Financial Wellness in the Workplace</h2><p>FinWage helps employees manage cash flow, cover essential expenses, and plan ahead—without relying on payday loans, high-interest credit cards, or short-term borrowing.</p><h3>Smart Money Buckets</h3><p>Create smart money buckets for your goals:</p><ul><li>Vacation Fund</li><li>Car Payments</li><li>Daily Expenses</li><li>Party Wallet</li></ul><h3>Our Promise</h3><p>FinWage isn\'t about borrowing money. It\'s about accessing what you\'ve already earned. Our purpose is to improve financial wellbeing in the workplace by giving employees timely access to pay while helping employers build stronger, more resilient teams.</p>',
+        excerpt: 'FinWage helps employees manage cash flow and plan ahead without relying on payday loans or high-interest credit cards.',
+        author: jobyAuthorId,
         category: financialWellnessCategoryId,
-        tags: ['financial wellness', 'HR strategies', 'employee engagement', 'workplace benefits'],
+        tags: ['financial wellness', 'money management', 'employee wellbeing', 'budgeting'],
         featured: true,
         published: true,
         published_date: new Date('2024-02-20').toISOString(),
         views: 1850,
-        seo_title: '10 Proven Ways to Improve Employee Financial Wellness | FinWage',
-        seo_description: 'Reduce financial stress and boost productivity with these 10 proven employee financial wellness strategies. Includes earned wage access, education programs, and more.',
-        seo_keywords: 'employee financial wellness, financial stress, workplace benefits, HR strategies, employee engagement, financial education',
+        seo_title: 'Supporting Everyday Financial Stability | FinWage',
+        seo_description: 'Learn how FinWage helps employees manage cash flow and cover essential expenses without payday loans or credit cards.',
+        seo_keywords: 'financial stability, employee financial wellness, money management, cash flow, budgeting',
         og_image: null,
         canonical_url: null
       },
       {
-        title: 'The True Cost of Employee Turnover and How to Reduce It',
-        slug: 'true-cost-employee-turnover',
-        content: '<h2>Understanding Turnover Costs</h2><p>Employee turnover is expensive. Studies show replacing an employee costs between 50% to 200% of their annual salary. But the true costs go beyond just recruitment and training.</p><h3>Hidden Costs of Turnover</h3><ul><li>Lost productivity during transition</li><li>Decreased team morale</li><li>Knowledge and skill gaps</li><li>Customer relationship disruption</li><li>Employer brand damage</li></ul><h3>How Financial Benefits Reduce Turnover</h3><p>Research shows that companies offering earned wage access see up to 27% reduction in turnover. When employees have better financial wellness, they\'re more engaged, productive, and loyal.</p><h3>Implementing Retention Strategies</h3><p>FinWage helps employers reduce turnover by providing employees with financial flexibility and peace of mind. It\'s a zero-cost benefit that pays for itself in reduced turnover alone.</p>',
-        excerpt: 'Employee turnover costs more than you think. Learn the true impact and how modern benefits like earned wage access can dramatically reduce turnover rates.',
-        author: davidAuthorId,
+        title: 'How Employers Benefit from Earned Wage Access',
+        slug: 'employer-benefits-earned-wage-access',
+        content: '<h2>Attract, Retain, and Empower Your Workforce</h2><p>Earned Wage Access is a proven financial wellness benefit that helps reduce financial stress, improve engagement, and strengthen retention. FinWage enables employers to offer this benefit without increasing payroll costs or disrupting payroll operations.</p><h3>Seamless Integration</h3><p>FinWage integrates directly with existing payroll, time and attendance, and HR systems—ensuring accurate calculations, instant access, and a smooth experience for both employees and administrators.</p><h3>Simple to Launch</h3><p>FinWage connects with your existing payroll or workforce systems with minimal setup. Our onboarding and support teams ensure a smooth rollout and responsible employee adoption.</p><p><strong>A modern earned wage access solution—without changing payroll schedules or cash flow.</strong></p>',
+        excerpt: 'Earned Wage Access helps reduce financial stress, improve engagement, and strengthen retention without disrupting payroll operations.',
+        author: richardAuthorId,
         category: benefitsCategoryId,
-        tags: ['employee retention', 'turnover costs', 'HR analytics', 'earned wage access'],
+        tags: ['employer benefits', 'employee retention', 'HR solutions', 'payroll integration'],
         featured: false,
         published: true,
         published_date: new Date('2024-03-10').toISOString(),
         views: 1200,
-        seo_title: 'The True Cost of Employee Turnover & How to Reduce It | FinWage',
-        seo_description: 'Discover the hidden costs of employee turnover and proven strategies to reduce it by up to 27% using modern financial wellness benefits.',
-        seo_keywords: 'employee turnover, turnover costs, employee retention, HR costs, retention strategies, earned wage access benefits',
+        seo_title: 'Employer Benefits of Earned Wage Access | FinWage',
+        seo_description: 'Discover how EWA helps employers attract talent, reduce turnover, and improve productivity without disrupting payroll.',
+        seo_keywords: 'employer benefits, employee retention, payroll integration, HR benefits, workforce engagement',
         og_image: null,
         canonical_url: null
       }
     ];
     
-    for (const blog of blogs) 
-      await pb.collection("blogs").create(blog);
-
-    // Seed company_milestones
-    console.log("Seeding company milestones...");
-    const milestones = [
-      {
-        year: 2020,
-        event: "Company Founded",
-        description: "Started our journey.",
-        order: 1,
-        featured: true,
-      },
-      {
-        year: 2022,
-        event: "First Major Funding",
-        description: "Secured seed round.",
-        order: 2,
-        featured: false,
-      },
-      {
-        year: 2024,
-        event: "Product Launch",
-        description: "Released v1.0.",
-        order: 3,
-        featured: true,
-      },
+    for (const blog of blogs) {
       await createRecord('blogs', blog, `Blog: ${blog.title}`);
     }
 
@@ -376,48 +222,29 @@ async function seedData() {
     console.log('\n🏆 Seeding Company Milestones...');
     const milestones = [
       { 
-        year: 2020, 
+        year: 2022, 
         event: 'FinWage Founded', 
-        description: 'Started our mission to improve employee financial wellness through earned wage access.',
+        description: 'Started our mission to transform payday for the modern workforce in Canada through responsible earned wage access.',
         order: 1, 
         featured: true 
       },
       { 
-        year: 2022, 
-        event: '1 Million Users', 
-        description: 'Reached 1 million employees using FinWage for their financial wellness needs.',
+        year: 2023, 
+        event: 'Platform Launch', 
+        description: 'Launched our secure, scalable financial infrastructure designed for Canadian employers and employees.',
         order: 2, 
         featured: true 
       },
       { 
         year: 2024, 
-        event: 'National Expansion', 
-        description: 'Expanded services nationwide, helping employees in all 50 states achieve financial freedom.',
+        event: 'Partner Network Growth', 
+        description: 'Partnered with trusted payroll, HR, and workforce technology providers to deliver secure, compliant earned wage access solutions across industries.',
         order: 3, 
-        featured: false 
+        featured: true 
       }
     ];
     
-    for (const milestone of milestones) 
-      await pb.collection("company_milestones").create(milestone);
-
-    // Seed compliance_items
-    console.log("Seeding compliance items...");
-    const complianceItems = [
-      {
-        icon_svg: "fa-shield",
-        title: "GDPR Compliant",
-        description: "Full compliance with EU data protection.",
-        details: { standard: "GDPR", certified: true },
-        order: 1,
-      },
-      {
-        icon_svg: "fa-lock",
-        title: "SOC 2 Certified",
-        description: "Security and availability standards met.",
-        details: { standard: "SOC 2", certified: true },
-        order: 2,
-      },
+    for (const milestone of milestones) {
       await createRecord('company_milestones', milestone, `Milestone: ${milestone.event}`);
     }
 
@@ -428,21 +255,21 @@ async function seedData() {
     const complianceItems = [
       {
         icon_svg: 'fa-shield-alt',
-        title: 'CFPB Compliant',
-        description: 'Fully compliant with Consumer Financial Protection Bureau regulations.',
+        title: 'AML & KYC Compliant',
+        description: 'Full Anti-Money Laundering and Know Your Customer protocols in place.',
         details: { 
-          standard: 'CFPB', 
+          standard: 'AML/KYC', 
           certified: true,
-          description: 'Our earned wage access solution meets all CFPB guidelines for financial services.'
+          description: 'Our earned wage access solution meets all regulatory guidelines for financial services in Canada.'
         },
         order: 1
       },
       {
         icon_svg: 'fa-lock',
-        title: 'SOC 2 Type II Certified',
-        description: 'Industry-leading security and compliance standards for data protection.',
+        title: 'Data Privacy & Protection',
+        description: 'Bank-level encryption and comprehensive data privacy standards.',
         details: { 
-          standard: 'SOC 2 Type II', 
+          standard: 'Data Privacy', 
           certified: true,
           description: 'Bank-level security protecting your employees\' financial data.'
         },
@@ -450,39 +277,18 @@ async function seedData() {
       },
       {
         icon_svg: 'fa-check-circle',
-        title: 'GDPR Compliant',
-        description: 'Full compliance with EU data protection and privacy regulations.',
+        title: 'Regulatory Governance',
+        description: 'Full adherence to applicable regulations in Canada.',
         details: { 
-          standard: 'GDPR', 
+          standard: 'Canadian Regulatory', 
           certified: true,
-          description: 'Protecting employee privacy and data rights across all jurisdictions.'
+          description: 'FinWage is built with compliance, transparency, and responsible financial access at its core.'
         },
         order: 3
       }
     ];
     
-    for (const item of complianceItems) 
-      await pb.collection("compliance_items").create(item);
-
-    // Seed contact_options
-    console.log("Seeding contact options...");
-    const contactOptions = [
-      {
-        title: "Email Us",
-        description: "Send a message directly.",
-        icon_svg: "fa-envelope",
-        type: "email",
-        action_url: "mailto:info@example.com",
-        is_featured: true,
-      },
-      {
-        title: "Schedule a Call",
-        description: "Book a demo.",
-        icon_svg: "fa-calendar",
-        type: "call",
-        action_url: "https://cal.com/example",
-        is_featured: false,
-      },
+    for (const item of complianceItems) {
       await createRecord('compliance_items', item, `Compliance: ${item.title}`);
     }
 
@@ -492,7 +298,7 @@ async function seedData() {
     console.log('\n📞 Seeding Contact Options...');
     const contactOptions = [
       { 
-        title: 'Schedule a Demo', 
+        title: 'Get a Demo', 
         description: 'See FinWage in action with a personalized demo for your organization.',
         icon_svg: 'fa-calendar-check', 
         type: 'demo', 
@@ -508,39 +314,16 @@ async function seedData() {
         is_featured: true 
       },
       { 
-        title: 'Support Center', 
+        title: 'Employee Support', 
         description: 'Find answers to common questions in our help center.',
         icon_svg: 'fa-life-ring', 
-        type: 'support', 
+        type: 'employee', 
         action_url: 'https://support.finwage.com',
         is_featured: false 
       }
     ];
     
-    for (const option of contactOptions) 
-      await pb.collection("contact_options").create(option);
-
-    // Seed cta_cards
-    console.log("Seeding CTA cards...");
-    const ctaCards = [
-      {
-        icon_svg: "fa-rocket",
-        bg_color: "#007bff",
-        title: "Get Started Today",
-        points: ["Easy setup", "Free trial", "24/7 support"],
-        order: 1,
-      },
-      {
-        icon_svg: "fa-star",
-        bg_color: "#28a745",
-        title: "Upgrade Your Plan",
-        points: [
-          "Advanced features",
-          "Priority support",
-          "Custom integrations",
-        ],
-        order: 2,
-      },
+    for (const option of contactOptions) {
       await createRecord('contact_options', option, `Contact: ${option.title}`);
     }
 
@@ -550,14 +333,14 @@ async function seedData() {
     console.log('\n🎯 Seeding CTA Cards...');
     const ctaCards = [
       {
-        icon_svg: 'fa-rocket',
+        icon_svg: 'fa-briefcase',
         bg_color: '#1d44c3',
         title: 'For Employers',
         points: [
-          'Zero cost implementation',
-          'Reduce employee turnover by 27%',
-          'Increase job applications by 35%',
-          '24/7 support for your HR team'
+          'A smarter employee benefit without increasing salaries',
+          'No payroll disruption—integrates with existing systems',
+          'Reduce financial stress, improve engagement',
+          'Fast setup with compliance-first architecture'
         ],
         order: 1
       },
@@ -566,47 +349,28 @@ async function seedData() {
         bg_color: '#0d2463',
         title: 'For Employees',
         points: [
-          'Access earned wages instantly',
+          'Work today, get paid today',
           'No loans, no interest, no credit checks',
-          'Cover unexpected expenses',
-          'Improve your financial wellness'
+          'Access pay any day of the week',
+          'Create smart money buckets for your goals'
         ],
         order: 2
       },
       {
-        icon_svg: 'fa-chart-line',
-        bg_color: '#28a745',
-        title: 'See the Impact',
+        icon_svg: 'fa-shield-alt',
+        bg_color: '#f74b6b',
+        title: 'Trust & Security',
         points: [
-          '90% employee satisfaction rate',
-          'Average $500 saved per employee annually',
-          'Used by over 5,000 companies',
-          'Trusted by 1M+ employees'
+          'Built with compliance and transparency',
+          'Bank-level security and data privacy',
+          'AML & KYC compliant',
+          'Responsible financial access at its core'
         ],
         order: 3
       }
     ];
     
-    for (const card of ctaCards) 
-      await pb.collection("cta_cards").create(card);
-
-    // Seed employee_benefits (depends on category)
-    console.log("Seeding employee benefits...");
-    const benefits = [
-      {
-        title: "Health Insurance",
-        description: "Comprehensive coverage.",
-        icon_svg: "fa-heart",
-        category: businessCategoryId,
-        order: 1,
-      },
-      {
-        title: "Remote Work",
-        description: "Work from anywhere.",
-        icon_svg: "fa-home",
-        category: devCategoryId,
-        order: 2,
-      },
+    for (const card of ctaCards) {
       await createRecord('cta_cards', card, `CTA: ${card.title}`);
     }
 
@@ -616,37 +380,50 @@ async function seedData() {
     console.log('\n💼 Seeding Employee Benefits...');
     const benefits = [
       { 
-        title: 'Instant Wage Access', 
-        description: 'Access your earned wages on-demand, anytime you need them.',
+        title: 'Access Earned Pay When You Need It', 
+        description: 'With FinWage, access a portion of your pay any day of the week—without waiting for payday.',
         icon_svg: 'fa-bolt', 
         category: benefitsCategoryId,
         order: 1 
       },
       { 
-        title: 'Financial Wellness Tools', 
-        description: 'Budgeting tools, savings tips, and financial education resources.',
-        icon_svg: 'fa-chart-pie', 
+        title: 'No Loans. No Interest. No Credit Checks.', 
+        description: 'FinWage is not a loan. You\'re accessing your own pay, with no impact on your credit score.',
+        icon_svg: 'fa-check-circle', 
         category: financialWellnessCategoryId,
         order: 2 
       },
       { 
-        title: 'No Hidden Fees', 
-        description: 'Transparent pricing with no surprise charges or interest rates.',
-        icon_svg: 'fa-hand-holding-usd', 
+        title: 'Stay Financially Steady', 
+        description: 'We help you use your credit card responsibly—rather than relying on it out of necessity. Manage expenses with confidence and reduce financial pressure.',
+        icon_svg: 'fa-balance-scale', 
         category: ewaCategoryId,
         order: 3 
+      },
+      { 
+        title: 'Smart Money Buckets', 
+        description: 'Create smart money buckets for Vacation Fund, Car Payments, Daily Expenses, and more. Organize your earnings the way you want.',
+        icon_svg: 'fa-piggy-bank', 
+        category: financialWellnessCategoryId,
+        order: 4 
+      },
+      { 
+        title: 'No Hidden Fees', 
+        description: 'Absolutely no credit checks. No interest. No hidden fees. Complete transparency in every transaction.',
+        icon_svg: 'fa-hand-holding-usd', 
+        category: ewaCategoryId,
+        order: 5 
+      },
+      { 
+        title: 'Supporting Financial Stability', 
+        description: 'FinWage helps employees manage cash flow, cover essential expenses, and plan ahead—without relying on payday loans or high-interest credit cards.',
+        icon_svg: 'fa-shield-alt', 
+        category: financialWellnessCategoryId,
+        order: 6 
       }
     ];
     
-    for (const benefit of benefits) 
-      await pb.collection("employee_benefits").create(benefit);
-
-    // Seed employer_stats
-    console.log("Seeding employer stats...");
-    const stats = [
-      { value: "500+", label: "Happy Clients", order: 1 },
-      { value: "50+", label: "Team Members", order: 2 },
-      { value: "10+", label: "Years Experience", order: 3 },
+    for (const benefit of benefits) {
       await createRecord('employee_benefits', benefit, `Benefit: ${benefit.title}`);
     }
 
@@ -660,44 +437,7 @@ async function seedData() {
       { value: '$0', label: 'Implementation Cost', order: 3 }
     ];
     
-    for (const stat of stats) 
-      await pb.collection("employer_stats").create(stat);
-
-    // Seed enquiries (public create)
-    console.log("Seeding enquiries...");
-    const enquiries = [
-      {
-        name: "Test User",
-        email: "test@example.com",
-        company: "Test Corp",
-        phone: 1234567890,
-        message: "Interested in demo.",
-        interest: "demo",
-        status: "new",
-      },
-      {
-        name: "Demo Seeker",
-        email: "demo@example.com",
-        company: "Demo Inc",
-        phone: 9876543210,
-        message: "Pricing info.",
-        interest: "pricing",
-        status: "new",
-      },
-    ];
-    for (const enquiry of enquiries) {
-      await pb.collection("enquiries").create(enquiry);
-    }
-
-    // Seed faq_topics
-    console.log("Seeding FAQ topics...");
-    const faqTopics = [
-      {
-        name: "Getting Started",
-        description: "Basics for new users.",
-        order: 1,
-      },
-      { name: "Troubleshooting", description: "Common issues.", order: 2 },
+    for (const stat of stats) {
       await createRecord('employer_stats', stat, `Stat: ${stat.label}`);
     }
 
@@ -723,28 +463,7 @@ async function seedData() {
       }
     ];
     
-    for (const topic of faqTopics) 
-      await pb.collection("faq_topics").create(topic);
-
-    // Seed faqs (depends on category)
-    console.log("Seeding FAQs...");
-    const faqs = [
-      {
-        question: "How do I sign up?",
-        answer: "Visit the signup page.",
-        category: techCategoryId,
-        order: 1,
-        featured: true,
-        category_text: "Getting Started",
-      },
-      {
-        question: "What is the pricing?",
-        answer: "Check our plans page.",
-        category: businessCategoryId,
-        order: 2,
-        featured: false,
-        category_text: "Pricing",
-      },
+    for (const topic of faqTopics) {
       await createRecord('faq_topics', topic, `FAQ Topic: ${topic.name}`);
     }
 
@@ -755,122 +474,126 @@ async function seedData() {
     const faqs = [
       { 
         question: 'What is Earned Wage Access?', 
-        answer: 'Earned Wage Access (EWA) allows employees to access their earned wages before payday. It\'s not a loan - employees are simply accessing money they\'ve already earned.',
+        answer: 'Earned Wage Access (EWA) is a financial wellness benefit that allows employees to access their earned wages before the traditional payday. FinWage is a Canadian EWA platform that gives employees instant access to their pay—it\'s not a loan, there\'s no interest, and no impact on credit.',
         category: financialWellnessCategoryId,
         category_text: 'Getting Started',
         order: 1, 
         featured: true 
       },
       { 
-        question: 'How much does FinWage cost for employers?', 
-        answer: 'FinWage is zero-cost for employers. We offer a sustainable model where the benefit pays for itself through reduced turnover and increased recruitment.',
-        category: benefitsCategoryId,
-        category_text: 'For Employers',
+        question: 'Is FinWage a loan?', 
+        answer: 'No, FinWage is not a loan. You\'re accessing your own pay that you\'ve already earned, with no impact on your credit score. Absolutely no credit checks, no interest, and no hidden fees.',
+        category: ewaCategoryId,
+        category_text: 'For Employees',
         order: 2, 
         featured: true 
       },
       { 
-        question: 'Are there any fees for employees?', 
-        answer: 'Employees can access their wages with a small transparent fee, or they can wait for the free instant transfer option. There are never any hidden charges or interest rates.',
+        question: 'How does FinWage integrate with payroll?', 
+        answer: 'FinWage integrates directly with existing payroll, time and attendance, and HR systems—ensuring accurate calculations, instant access, and a smooth experience for both employees and administrators. No payroll disruption and no changes to payroll cycles required.',
+        category: benefitsCategoryId,
+        category_text: 'For Employers',
+        order: 3, 
+        featured: true 
+      },
+      { 
+        question: 'How does FinWage help employers?', 
+        answer: 'Earned Wage Access is a proven financial wellness benefit that helps reduce financial stress, improve engagement, and strengthen retention. FinWage enables employers to offer this benefit without increasing payroll costs or disrupting payroll operations.',
+        category: benefitsCategoryId,
+        category_text: 'For Employers',
+        order: 4, 
+        featured: true 
+      },
+      { 
+        question: 'How do I access my earned wages?', 
+        answer: 'With FinWage, you can access a portion of your pay any day of the week—without waiting for payday. Your earnings are calculated in real time and updated after each workday, giving you clear visibility into available pay.',
         category: ewaCategoryId,
         category_text: 'For Employees',
-        order: 3, 
+        order: 5, 
+        featured: false 
+      },
+      { 
+        question: 'Is FinWage compliant and secure?', 
+        answer: 'Yes, FinWage is built with compliance, transparency, and responsible financial access at its core—ensuring protection for both employees and employers. We adhere to AML, KYC, data privacy, and regulatory governance standards in Canada.',
+        category: financialWellnessCategoryId,
+        category_text: 'Getting Started',
+        order: 6, 
         featured: false 
       }
     ];
     
-    for (const faq of faqs) 
-      await pb.collection("faqs").create(faq);
-
-    // Seed features (depends on category)
-    console.log("Seeding features...");
-    const features = [
-      {
-        title: "Fast Performance",
-        slug: "fast-performance",
-        description: "Lightning quick.",
-        icon_svg: "fa-bolt",
-        category: devCategoryId,
-        order: 1,
-        featured: true,
-        active: true,
-      },
-      {
-        title: "Secure Data",
-        slug: "secure-data",
-        description: "Top-notch security.",
-        icon_svg: "fa-shield",
-        category: techCategoryId,
-        order: 2,
-        featured: false,
-        active: true,
-      },
+    for (const faq of faqs) {
       await createRecord('faqs', faq, `FAQ: ${faq.question}`);
     }
 
     // ============================================================
-    // 12. SEED FEATURES
+    // 12. SEED FEATURES (Everything You Need to Empower Your Workforce)
     // ============================================================
     console.log('\n✨ Seeding Features...');
     const features = [
       { 
-        title: 'Instant Access', 
-        slug: 'instant-access',
-        description: 'Get your earned wages in seconds, not days. Available 24/7 through our mobile app.',
-        icon_svg: 'fa-bolt', 
+        title: 'Responsible Earned Wage Access', 
+        slug: 'responsible-ewa',
+        description: 'Instant access to pay—no interest, no borrowing, no impact on credit. Access what you\'ve already earned.',
+        icon_svg: 'fa-hand-holding-usd', 
         category: ewaCategoryId,
         order: 1, 
         featured: true, 
         active: true 
       },
       { 
-        title: 'Bank-Level Security', 
-        slug: 'bank-security',
-        description: 'Your financial data is protected with 256-bit encryption and SOC 2 Type II certification.',
-        icon_svg: 'fa-shield-alt', 
-        category: financialWellnessCategoryId,
+        title: 'Payroll-Friendly Workflows', 
+        slug: 'payroll-friendly',
+        description: 'FinWage integrates directly with existing payroll, time and attendance, and HR systems—no disruption to payroll cycles.',
+        icon_svg: 'fa-sync-alt', 
+        category: benefitsCategoryId,
         order: 2, 
         featured: true, 
         active: true 
       },
       { 
-        title: 'No Credit Check', 
-        slug: 'no-credit-check',
-        description: 'Access your earned wages with no credit check required. Your wages, your choice.',
-        icon_svg: 'fa-check-circle', 
-        category: benefitsCategoryId,
+        title: 'Real-Time Earnings Tracking', 
+        slug: 'real-time-tracking',
+        description: 'Earnings are calculated in real time and updated after each workday, giving employees clear visibility into available pay.',
+        icon_svg: 'fa-chart-bar', 
+        category: financialWellnessCategoryId,
         order: 3, 
+        featured: true, 
+        active: true 
+      },
+      { 
+        title: 'Secure & Compliant', 
+        slug: 'secure-compliant',
+        description: 'Built on secure, scalable financial infrastructure with compliance-focused operations for employers and employees alike.',
+        icon_svg: 'fa-shield-alt', 
+        category: benefitsCategoryId,
+        order: 4, 
+        featured: true, 
+        active: true 
+      },
+      { 
+        title: 'Operational Efficiency', 
+        slug: 'operational-efficiency',
+        description: 'Support financial wellness while maintaining operational efficiency. A modern solution without changing payroll schedules or cash flow.',
+        icon_svg: 'fa-cogs', 
+        category: ewaCategoryId,
+        order: 5, 
+        featured: false, 
+        active: true 
+      },
+      { 
+        title: 'Reliable by Design', 
+        slug: 'reliable-design',
+        description: 'Simple to use, fast to access, and reliable by design. Dependable access and consistent performance.',
+        icon_svg: 'fa-check-double', 
+        category: financialWellnessCategoryId,
+        order: 6, 
         featured: false, 
         active: true 
       }
     ];
     
-    for (const feature of features) 
-      await pb.collection("features").create(feature);
-
-    // Seed integrations (depends on category)
-    console.log("Seeding integrations...");
-    const integrations = [
-      {
-        name: "Slack",
-        slug: "slack",
-        description: "Team communication.",
-        documentation_url: "https://slack.com/docs",
-        featured: true,
-        order: 1,
-        active: true,
-        category: businessCategoryId,
-      },
-      {
-        name: "GitHub",
-        slug: "github",
-        description: "Code repository.",
-        documentation_url: "https://github.com/docs",
-        featured: false,
-        order: 2,
-        active: true,
-        category: devCategoryId,
-      },
+    for (const feature of features) {
       await createRecord('features', feature, `Feature: ${feature.title}`);
     }
 
@@ -911,34 +634,7 @@ async function seedData() {
       }
     ];
     
-    for (const integration of integrations) 
-      await pb.collection("integrations").create(integration);
-
-    // Seed jobs
-    console.log("Seeding jobs...");
-    const jobs = [
-      {
-        title: "Senior Developer",
-        department: "Engineering",
-        location: "Remote",
-        type: "Full-time",
-        description: "Build amazing things.",
-        requirements: "5+ years exp.",
-        salary_range: "$100k-$150k",
-        featured: true,
-        status: "open",
-      },
-      {
-        title: "Product Manager",
-        department: "Product",
-        location: "NYC",
-        type: "Full-time",
-        description: "Lead the team.",
-        requirements: "3+ years.",
-        salary_range: "$120k-$160k",
-        featured: false,
-        status: "open",
-      },
+    for (const integration of integrations) {
       await createRecord('integrations', integration, `Integration: ${integration.name}`);
     }
 
@@ -950,51 +646,28 @@ async function seedData() {
       { 
         title: 'Senior Full Stack Engineer', 
         department: 'Engineering', 
-        location: 'Remote (US)', 
+        location: 'Remote (Canada)', 
         type: 'Full-time', 
-        description: '<p>Join our engineering team to build the future of employee financial wellness. You\'ll work on scalable systems that process millions of transactions and help employees achieve financial freedom.</p>',
+        description: '<p>Join our engineering team to build the future of employee financial wellness in Canada. You\'ll work on scalable systems that help employees access their earned wages instantly.</p>',
         requirements: '<ul><li>5+ years of full-stack development experience</li><li>Strong knowledge of React, Node.js, and PostgreSQL</li><li>Experience with fintech or payment systems</li></ul>',
-        salary_range: '$140k - $180k',
+        salary_range: '$140k - $180k CAD',
         featured: true, 
         status: 'open' 
       },
       { 
         title: 'Product Marketing Manager', 
         department: 'Marketing', 
-        location: 'New York, NY', 
+        location: 'Toronto, ON', 
         type: 'Full-time', 
-        description: '<p>Lead our go-to-market strategy for earned wage access solutions. You\'ll craft compelling narratives that resonate with HR leaders and employees alike.</p>',
+        description: '<p>Lead our go-to-market strategy for earned wage access solutions across Canada. You\'ll craft compelling narratives that resonate with HR leaders and employees alike.</p>',
         requirements: '<ul><li>3+ years in B2B SaaS product marketing</li><li>Experience in HR tech or fintech</li><li>Strong storytelling and communication skills</li></ul>',
-        salary_range: '$120k - $150k',
+        salary_range: '$120k - $150k CAD',
         featured: false, 
         status: 'open' 
       }
     ];
     
-    for (const job of jobs) 
-      await pb.collection("jobs").create(job);
-
-    // Seed leadership
-    console.log("Seeding leadership...");
-    const leadership = [
-      {
-        name: "Alice Johnson",
-        role: "CEO",
-        bio: "Visionary leader.",
-        email: "alice@company.com",
-        order: 1,
-        featured: true,
-        social_links: { linkedin: "https://linkedin.com/in/alice" },
-      },
-      {
-        name: "Bob Wilson",
-        role: "CTO",
-        bio: "Tech expert.",
-        email: "bob@company.com",
-        order: 2,
-        featured: false,
-        social_links: { twitter: "https://twitter.com/bob" },
-      },
+    for (const job of jobs) {
       await createRecord('jobs', job, `Job: ${job.title}`);
     }
 
@@ -1004,70 +677,63 @@ async function seedData() {
     console.log('\n👔 Seeding Leadership Team...');
     const leadership = [
       { 
-        name: 'Jennifer Adams', 
-        role: 'Chief Executive Officer', 
-        bio: 'Jennifer is a fintech veteran with 15+ years leading innovative financial services companies. She founded FinWage to make financial wellness accessible to every employee.',
-        email: 'jennifer@finwage.com',
+        name: 'Shibin Shahul', 
+        role: 'Founder & CEO', 
+        bio: 'Shibin brings extensive experience in building and scaling technology-driven businesses across the Middle East and North America. With a strong background in fintech and workforce solutions, he leads FinWage with a clear focus on responsible innovation, operational excellence, and long-term value creation for employers and employees.',
+        email: 'shibin@finwage.com',
         order: 1, 
         featured: true, 
         social_links: { 
-          linkedin: 'https://linkedin.com/in/jennifer-adams-finwage',
-          twitter: 'https://twitter.com/jennifer_ewa'
+          linkedin: 'https://linkedin.com/in/shibin-shahul'
         } 
       },
       { 
-        name: 'Michael Torres', 
-        role: 'Chief Technology Officer', 
-        bio: 'Michael brings 20 years of engineering leadership from top fintech companies. He architects the secure, scalable systems that power FinWage.',
-        email: 'michael@finwage.com',
+        name: 'Richard James', 
+        role: 'Chief Technology Officer (CTO)', 
+        bio: 'Richard leads FinWage\'s technology strategy, overseeing the design and development of secure, scalable, and high-performance platforms. With deep expertise in fintech architecture and product engineering, he ensures FinWage delivers a reliable, user-friendly experience while meeting rigorous security standards.',
+        email: 'richard@finwage.com',
         order: 2, 
         featured: true, 
         social_links: { 
-          linkedin: 'https://linkedin.com/in/michael-torres-cto'
+          linkedin: 'https://linkedin.com/in/richard-james-cto'
         } 
       },
       { 
-        name: 'Priya Patel', 
-        role: 'Chief Product Officer', 
-        bio: 'Priya is passionate about building products that improve people\'s lives. She leads FinWage\'s product vision and ensures we\'re solving real employee needs.',
-        email: 'priya@finwage.com',
+        name: 'Dennis Thomas', 
+        role: 'Advisory Board - Finance & Payroll', 
+        bio: 'A senior finance and payroll operations leader with over a decade of experience in North America, advising on payroll systems, financial operations, and workforce solutions.',
+        email: 'dennis@finwage.com',
         order: 3, 
+        featured: true, 
+        social_links: { 
+          linkedin: 'https://linkedin.com/in/dennis-thomas'
+        } 
+      },
+      { 
+        name: 'Deepak Vijayan', 
+        role: 'Advisory Board - Security & Technology', 
+        bio: 'A security and technology expert with 15+ years of experience in application development and compliance across iOS, Android, and enterprise platforms, with a strong focus on secure system design.',
+        email: 'deepak@finwage.com',
+        order: 4, 
+        featured: true, 
+        social_links: { 
+          linkedin: 'https://linkedin.com/in/deepak-vijayan'
+        } 
+      },
+      { 
+        name: 'Joby Varghese', 
+        role: 'Compliance Officer', 
+        bio: 'Joby brings strong expertise in financial services and fintech compliance, with a focus on AML, KYC, data privacy, and regulatory governance. He oversees FinWage\'s compliance framework, internal controls, and risk management practices to ensure adherence to applicable regulations in Canada.',
+        email: 'joby@finwage.com',
+        order: 5, 
         featured: false, 
         social_links: { 
-          linkedin: 'https://linkedin.com/in/priya-patel-product',
-          twitter: 'https://twitter.com/priya_fintech'
+          linkedin: 'https://linkedin.com/in/joby-varghese'
         } 
       }
     ];
     
-    for (const leader of leadership) 
-      await pb.collection("leadership").create(leader);
-
-    // Seed locations
-    console.log("Seeding locations...");
-    const locations = [
-      {
-        name: "HQ",
-        address: "123 Main St",
-        city: "New York",
-        state: "NY",
-        zip: "10001",
-        country: "USA",
-        phone: "+1-123-456-7890",
-        email: "hq@company.com",
-        coordinates: { lat: 40.7128, lng: -74.006 },
-      },
-      {
-        name: "Branch Office",
-        address: "456 Oak Ave",
-        city: "San Francisco",
-        state: "CA",
-        zip: "94105",
-        country: "USA",
-        phone: "+1-098-765-4321",
-        email: "branch@company.com",
-        coordinates: { lat: 37.7749, lng: -122.4194 },
-      },
+    for (const leader of leadership) {
       await createRecord('leadership', leader, `Leader: ${leader.name}`);
     }
 
@@ -1078,54 +744,29 @@ async function seedData() {
     const locations = [
       { 
         name: 'Headquarters', 
-        address: '123 Market Street, Suite 400', 
-        city: 'San Francisco', 
-        state: 'CA', 
-        zip: '94103', 
-        country: 'USA', 
-        phone: '+1 (415) 555-0100', 
-        email: 'sf@finwage.com',
-        coordinates: { lat: 37.7749, lng: -122.4194 } 
+        address: '100 King Street West, Suite 5700', 
+        city: 'Toronto', 
+        state: 'ON', 
+        zip: 'M5X 1C7', 
+        country: 'Canada', 
+        phone: '+1 (416) 555-0100', 
+        email: 'info@finwage.com',
+        coordinates: { lat: 43.6532, lng: -79.3832 } 
       },
       { 
-        name: 'East Coast Office', 
-        address: '456 Broadway, Floor 12', 
-        city: 'New York', 
-        state: 'NY', 
-        zip: '10013', 
-        country: 'USA', 
-        phone: '+1 (212) 555-0200', 
-        email: 'nyc@finwage.com',
-        coordinates: { lat: 40.7128, lng: -74.0060 } 
+        name: 'Western Canada Office', 
+        address: '1055 West Georgia Street, Suite 2100', 
+        city: 'Vancouver', 
+        state: 'BC', 
+        zip: 'V6E 3P3', 
+        country: 'Canada', 
+        phone: '+1 (604) 555-0200', 
+        email: 'vancouver@finwage.com',
+        coordinates: { lat: 49.2827, lng: -123.1207 } 
       }
     ];
     
-    for (const location of locations) 
-      await pb.collection("locations").create(location);
-
-    // Seed partners (depends on category)
-    console.log("Seeding partners...");
-    const partners = [
-      {
-        name: "Partner A",
-        slug: "partner-a",
-        website: "https://partnera.com",
-        description: "Great collaborator.",
-        featured: true,
-        order: 1,
-        active: true,
-        category: businessCategoryId,
-      },
-      {
-        name: "Partner B",
-        slug: "partner-b",
-        website: "https://partnerb.com",
-        description: "Reliable ally.",
-        featured: false,
-        order: 2,
-        active: true,
-        category: techCategoryId,
-      },
+    for (const location of locations) {
       await createRecord('locations', location, `Location: ${location.name}`);
     }
 
@@ -1145,10 +786,10 @@ async function seedData() {
         category: benefitsCategoryId 
       },
       { 
-        name: 'PayrollPro', 
+        name: 'PayrollPro Canada', 
         slug: 'payrollpro',
-        website: 'https://payrollpro.com',
-        description: 'Trusted payroll integration partner serving thousands of businesses.',
+        website: 'https://payrollpro.ca',
+        description: 'Trusted Canadian payroll integration partner serving thousands of businesses.',
         featured: true, 
         order: 2, 
         active: true, 
@@ -1156,30 +797,7 @@ async function seedData() {
       }
     ];
     
-    for (const partner of partners) 
-      await pb.collection("partners").create(partner);
-
-    // Seed press
-    console.log("Seeding press...");
-    const press = [
-      {
-        title: "Featured in TechCrunch",
-        content: "Exciting news about our launch.",
-        published_date: new Date().toISOString(),
-        source: "TechCrunch",
-        url: "https://techcrunch.com/article",
-        featured: true,
-        published: true,
-      },
-      {
-        title: "Award Winner",
-        content: "Received innovation award.",
-        published_date: new Date().toISOString(),
-        source: "Awards Inc",
-        url: "https://awards.com/news",
-        featured: false,
-        published: true,
-      },
+    for (const partner of partners) {
       await createRecord('partners', partner, `Partner: ${partner.name}`);
     }
 
@@ -1189,70 +807,26 @@ async function seedData() {
     console.log('\n📰 Seeding Press Releases...');
     const press = [
       { 
-        title: 'FinWage Raises $50M Series B to Expand Earned Wage Access', 
-        content: 'FinWage announced today a $50 million Series B funding round led by venture capital firms to expand its earned wage access platform nationwide.',
+        title: 'FinWage Launches Canadian Earned Wage Access Platform', 
+        content: 'FinWage announced today the launch of its Canadian Earned Wage Access platform, designed to help employees access their earned wages instantly while helping employers build stronger, more resilient teams.',
         published_date: new Date('2024-01-10').toISOString(),
-        source: 'Business Wire', 
-        url: 'https://businesswire.com/finwage-series-b',
+        source: 'Business Wire Canada', 
+        url: 'https://businesswire.com/finwage-launch',
         featured: true, 
         published: true 
       },
       { 
-        title: 'FinWage Named Best Financial Wellness Platform 2024', 
-        content: 'The company received the prestigious award for innovation in employee financial benefits and earned wage access solutions.',
+        title: 'FinWage Partners with Leading Canadian Payroll Providers', 
+        content: 'FinWage has partnered with trusted payroll, HR, and workforce technology providers to deliver secure, compliant, and reliable earned wage access solutions across industries in Canada.',
         published_date: new Date('2024-02-15').toISOString(),
-        source: 'HR Tech Awards', 
-        url: 'https://hrtechawards.com/finwage-winner',
+        source: 'Canadian HR Reporter', 
+        url: 'https://hrreporter.com/finwage-partners',
         featured: false, 
         published: true 
       }
     ];
     
-    for (const item of press) 
-      await pb.collection("press").create(item);
-
-    // Seed pricing_plans
-    console.log("Seeding pricing plans...");
-    const plans = [
-      {
-        name: "Basic",
-        slug: "basic",
-        description: "Starter plan.",
-        price: 10,
-        currency: "USD",
-        features: ["Feature 1", "Feature 2"],
-        limitations: ["Limit 1"],
-        is_popular: false,
-        is_enterprise: false,
-        order: 1,
-        active: true,
-      },
-      {
-        name: "Pro",
-        slug: "pro",
-        description: "Advanced plan.",
-        price: 50,
-        currency: "USD",
-        features: ["All basic", "Pro features"],
-        limitations: [],
-        is_popular: true,
-        is_enterprise: false,
-        order: 2,
-        active: true,
-      },
-      {
-        name: "Enterprise",
-        slug: "enterprise",
-        description: "Custom plan.",
-        price: 0,
-        currency: "USD",
-        features: ["All pro", "Custom"],
-        limitations: [],
-        is_popular: false,
-        is_enterprise: true,
-        order: 3,
-        active: true,
-      },
+    for (const item of press) {
       await createRecord('press', item, `Press: ${item.title}`);
     }
 
@@ -1266,7 +840,7 @@ async function seedData() {
         slug: 'starter',
         description: 'Perfect for small businesses getting started with earned wage access.',
         price: 0,
-        currency: 'USD', 
+        currency: 'CAD', 
         features: [
           'Up to 100 employees',
           'Instant wage access',
@@ -1287,7 +861,7 @@ async function seedData() {
         slug: 'professional',
         description: 'Advanced features for growing organizations.',
         price: 0,
-        currency: 'USD', 
+        currency: 'CAD', 
         features: [
           'Up to 1,000 employees',
           'All Starter features',
@@ -1307,7 +881,7 @@ async function seedData() {
         slug: 'enterprise',
         description: 'Custom solution for large organizations with complex needs.',
         price: 0,
-        currency: 'USD', 
+        currency: 'CAD', 
         features: [
           'Unlimited employees',
           'All Professional features',
@@ -1325,70 +899,50 @@ async function seedData() {
       }
     ];
     
-    for (const plan of plans) 
-      await pb.collection("pricing_plans").create(plan);
-
-    // Seed process_steps (depends on category)
-    console.log("Seeding process steps...");
-    const steps = [
-      {
-        step: "1",
-        title: "Consultation",
-        description: "Discuss needs.",
-        icon_svg: "fa-handshake",
-        category: businessCategoryId,
-        order: 1,
-      },
-      {
-        step: "2",
-        title: "Development",
-        description: "Build solution.",
-        icon_svg: "fa-code",
-        category: devCategoryId,
-        order: 2,
-      },
+    for (const plan of plans) {
       await createRecord('pricing_plans', plan, `Plan: ${plan.name}`);
     }
 
     // ============================================================
-    // 20. SEED PROCESS STEPS
+    // 20. SEED PROCESS STEPS (FINWAGE CYCLE)
     // ============================================================
-    console.log('\n📋 Seeding Process Steps...');
+    console.log('\n📋 Seeding Process Steps (FinWage Cycle)...');
     const steps = [
       { 
         step: '1', 
-        title: 'Connect Your Payroll', 
-        description: 'Simple integration with your existing payroll system in minutes.',
-        icon_svg: 'fa-plug', 
+        title: 'Work', 
+        description: 'Employees work their scheduled hours as usual.',
+        icon_svg: 'fa-briefcase', 
         category: benefitsCategoryId,
         order: 1 
       },
       { 
         step: '2', 
-        title: 'Employees Download App', 
-        description: 'Your team downloads the FinWage app and verifies their identity.',
-        icon_svg: 'fa-mobile-alt', 
+        title: 'Track Earnings', 
+        description: 'Earnings are calculated in real time and updated after each workday, giving employees clear visibility into available pay.',
+        icon_svg: 'fa-chart-bar', 
         category: ewaCategoryId,
         order: 2 
       },
       { 
         step: '3', 
-        title: 'Access Earned Wages', 
-        description: 'Employees can instantly access their earned wages anytime they need.',
+        title: 'Access When Needed', 
+        description: 'Instant access to pay—no interest, no borrowing, no impact on credit.',
         icon_svg: 'fa-hand-holding-usd', 
         category: financialWellnessCategoryId,
         order: 3 
+      },
+      { 
+        step: '4', 
+        title: 'Stay Steady', 
+        description: 'By using pay instead of credit, employees can manage expenses responsibly and avoid unnecessary debt.',
+        icon_svg: 'fa-balance-scale', 
+        category: financialWellnessCategoryId,
+        order: 4 
       }
     ];
     
-    for (const step of steps) 
-      await pb.collection("process_steps").create(step);
-
-    // Seed security_features
-    console.log("Seeding security features...");
-    const secFeatures = [
-      { description: "End-to-end encryption.", order: 1 },
-      { description: "Two-factor authentication.", order: 2 },
+    for (const step of steps) {
       await createRecord('process_steps', step, `Step: ${step.title}`);
     }
 
@@ -1398,30 +952,11 @@ async function seedData() {
     console.log('\n🔐 Seeding Security Features...');
     const secFeatures = [
       { description: '256-bit SSL encryption for all data transmission', order: 1 },
-      { description: 'SOC 2 Type II certified data centers', order: 2 },
-      { description: 'Multi-factor authentication for enhanced security', order: 3 }
+      { description: 'Bank-level security and data privacy standards', order: 2 },
+      { description: 'AML & KYC compliant financial infrastructure', order: 3 }
     ];
     
-    for (const feature of secFeatures) 
-      await pb.collection("security_features").create(feature);
-
-    // Seed status
-    console.log("Seeding status...");
-    const statuses = [
-      {
-        metric: "Uptime",
-        value: "99.9%",
-        label: "System Uptime",
-        description: "Guaranteed availability.",
-        order: 1,
-      },
-      {
-        metric: "Response Time",
-        value: "<100ms",
-        label: "Avg Response",
-        description: "Fast performance.",
-        order: 2,
-      },
+    for (const feature of secFeatures) {
       await createRecord('security_features', feature, `Security: ${feature.description}`);
     }
 
@@ -1453,26 +988,7 @@ async function seedData() {
       }
     ];
     
-    for (const status of statuses) 
-      await pb.collection("status").create(status);
-
-    // Seed support (depends on category)
-    console.log("Seeding support...");
-    const support = [
-      {
-        title: "Documentation",
-        description: "Guides and APIs.",
-        field: "https://docs.company.com",
-        category: devCategoryId,
-        order: 1,
-      },
-      {
-        title: "Community Forum",
-        description: "Ask questions.",
-        field: "https://forum.company.com",
-        category: techCategoryId,
-        order: 2,
-      },
+    for (const status of statuses) {
       await createRecord('status', status, `Status: ${status.metric}`);
     }
 
@@ -1504,32 +1020,7 @@ async function seedData() {
       }
     ];
     
-    for (const item of support) 
-      await pb.collection("support").create(item);
-
-    // Seed testimonials
-    console.log("Seeding testimonials...");
-    const testimonials = [
-      {
-        name: "Client A",
-        company: "Client Corp",
-        position: "CEO",
-        quote: "Amazing service!",
-        rating: 5,
-        verified: true,
-        featured: true,
-        order: true,
-      },
-      {
-        name: "Client B",
-        company: "Client Inc",
-        position: "Manager",
-        quote: "Highly recommend.",
-        rating: 4,
-        verified: true,
-        featured: false,
-        order: false,
-      },
+    for (const item of support) {
       await createRecord('support', item, `Support: ${item.title}`);
     }
 
@@ -1540,7 +1031,7 @@ async function seedData() {
     const testimonials = [
       { 
         name: 'Sarah Johnson', 
-        company: 'Retail Corp', 
+        company: 'Retail Corp Canada', 
         position: 'HR Director', 
         quote: 'FinWage has transformed how we support our employees. Turnover dropped 30% in the first year, and employee satisfaction scores are at an all-time high.',
         rating: 5,
@@ -1570,26 +1061,7 @@ async function seedData() {
       }
     ];
     
-    for (const testimonial of testimonials) 
-      await pb.collection("testimonials").create(testimonial);
-
-    // Seed values
-    console.log("Seeding values...");
-    const values = [
-      {
-        title: "Innovation",
-        description: "Drive change.",
-        icon_svg: "fa-lightbulb",
-        order: 1,
-        featured: true,
-      },
-      {
-        title: "Integrity",
-        description: "Do the right thing.",
-        icon_svg: "fa-balance-scale",
-        order: 2,
-        featured: false,
-      },
+    for (const testimonial of testimonials) {
       await createRecord('testimonials', testimonial, `Testimonial: ${testimonial.name}`);
     }
 
@@ -1599,34 +1071,36 @@ async function seedData() {
     console.log('\n💎 Seeding Company Values...');
     const values = [
       { 
-        title: 'Employee First', 
-        description: 'We put employees at the center of everything we do. Their financial wellness is our mission.',
-        icon_svg: 'fa-users', 
+        title: 'Trustworthy', 
+        description: 'Security, transparency, and compliance guide every decision we make.',
+        icon_svg: 'fa-shield-alt', 
         order: 1, 
         featured: true 
       },
       { 
-        title: 'Transparency', 
-        description: 'No hidden fees, no surprises. We believe in complete transparency in all our operations.',
-        icon_svg: 'fa-eye', 
+        title: 'Innovative', 
+        description: 'We continuously improve our platform to meet evolving workplace needs.',
+        icon_svg: 'fa-lightbulb', 
         order: 2, 
         featured: true 
       },
       { 
-        title: 'Innovation', 
-        description: 'We continuously innovate to provide the best financial wellness solutions for modern workplaces.',
-        icon_svg: 'fa-lightbulb', 
+        title: 'Employee-Centric', 
+        description: 'Solutions designed to reduce financial stress and empower workers.',
+        icon_svg: 'fa-users', 
         order: 3, 
+        featured: true 
+      },
+      { 
+        title: 'Results-Oriented', 
+        description: 'Focused on delivering measurable value for employers and their workforce.',
+        icon_svg: 'fa-chart-line', 
+        order: 4, 
         featured: false 
       }
     ];
     
-    for (const value of values) 
-      await pb.collection("values").create(value);
-
-    console.log("Seeding completed successfully!");
-  } catch (error) {
-    console.error("Seeding failed:", error);
+    for (const value of values) {
       await createRecord('values', value, `Value: ${value.title}`);
     }
 
@@ -1639,24 +1113,24 @@ async function seedData() {
     console.log('  - 3 Compliance Items');
     console.log('  - 3 Contact Options');
     console.log('  - 3 CTA Cards');
-    console.log('  - 3 Employee Benefits');
+    console.log('  - 6 Employee Benefits');
     console.log('  - 3 Employer Stats');
     console.log('  - 3 FAQ Topics');
-    console.log('  - 3 FAQs');
-    console.log('  - 3 Features');
+    console.log('  - 6 FAQs');
+    console.log('  - 6 Features');
     console.log('  - 3 Integrations');
     console.log('  - 2 Job Openings');
-    console.log('  - 3 Leadership Team Members');
-    console.log('  - 2 Office Locations');
+    console.log('  - 5 Leadership Team Members (FinWage Team)');
+    console.log('  - 2 Office Locations (Canada)');
     console.log('  - 2 Partners');
     console.log('  - 2 Press Releases');
     console.log('  - 3 Pricing Plans');
-    console.log('  - 3 Process Steps');
+    console.log('  - 4 Process Steps (FinWage Cycle)');
     console.log('  - 3 Security Features');
     console.log('  - 3 Status Metrics');
     console.log('  - 3 Support Resources');
     console.log('  - 3 Testimonials');
-    console.log('  - 3 Company Values');
+    console.log('  - 4 Company Values');
     console.log('\n🎉 Your FinWage database is ready to use!\n');
 
   } catch (error: any) {
@@ -1671,7 +1145,6 @@ async function seedData() {
   }
 }
 
-// Run the seeder
 // ============================================================
 // RUN SEEDER
 // ============================================================
