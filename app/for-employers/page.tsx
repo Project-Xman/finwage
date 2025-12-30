@@ -1,4 +1,5 @@
 import { ArrowRight, Shield, Users, Zap } from "lucide-react";
+import Image from "next/image";
 import ROICalculator from "@/components/roi-calculator";
 import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Button } from "@/components/ui/button";
@@ -118,19 +119,26 @@ export default async function ForEmployersPage() {
                 Offer earned wage access as a financial wellness benefit without increasing salaries or payroll risk.
               </p>
             </div>
-            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl bg-gray-100">
-              <div className="flex items-center justify-center h-full text-gray-400">
-                <span>Image placeholder</span>
-              </div>
+            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
+              <Image
+                src="/employer1.png"
+                alt="Total Rewards and Employee Benefits"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
           </div>
 
           {/* Slide 2: Right Content, Left Image */}
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 lg:grid-flow-col-dense">
-            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl bg-gray-100 lg:col-start-1">
-              <div className="flex items-center justify-center h-full text-gray-400">
-                <span>Image placeholder</span>
-              </div>
+            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl lg:col-start-1">
+              <Image
+                src="/employer2.jpeg"
+                alt="No Payroll Disruption"
+                fill
+                className="object-contain"
+              />
             </div>
             <div className="lg:col-start-2">
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -152,10 +160,13 @@ export default async function ForEmployersPage() {
                 Fast setup, minimal effort, and a fully secured platform built with strong data privacy and compliance-first architecture.
               </p>
             </div>
-            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl bg-gray-100">
-              <div className="flex items-center justify-center h-full text-gray-400">
-                <span>Image placeholder</span>
-              </div>
+            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
+              <Image
+                src="/employer3.jpeg"
+                alt="Easy Integration and HR Management"
+                fill
+                className="object-contain"
+              />
             </div>
           </div>
         </div>

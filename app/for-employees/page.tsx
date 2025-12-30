@@ -128,10 +128,11 @@ export default async function ForEmployeesPage() {
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/assets/person-illustration-1.png"
+                src="/employee1.jpeg"
                 alt="Access earned pay"
                 fill
-                className="object-cover"
+                className="object-contain"
+                priority
               />
             </div>
           </div>
@@ -140,10 +141,10 @@ export default async function ForEmployeesPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 lg:grid-flow-col-dense">
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl lg:col-start-1">
               <Image
-                src="/assets/person-illustration-2.png"
+                src="/employee2.jpeg"
                 alt="No loans or interest"
                 fill
-                className="object-cover"
+                className="object-contain"
               />
             </div>
             <div className="lg:col-start-2">
@@ -168,10 +169,10 @@ export default async function ForEmployeesPage() {
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/assets/person-illustration-1.png"
+                src="/employee3.jpeg"
                 alt="Stay financially steady"
                 fill
-                className="object-cover"
+                className="object-contain"
               />
             </div>
           </div>
