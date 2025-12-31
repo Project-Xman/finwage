@@ -18,8 +18,7 @@ export default function Implementation() {
               </h2>
 
               <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg">
-                FinWage connects with your existing payroll or workforce systems 
-                with minimal setup. Our onboarding and support teams ensure a 
+                FinWage connects with <span className="text-[#f74b6b] font-semibold">your existing payroll or workforce systems</span> with minimal setup. Our onboarding and support teams ensure a 
                 smooth rollout and responsible employee adoption.
               </p>
 
@@ -50,11 +49,31 @@ export default function Implementation() {
                         </div>
                         
                         <div className="flex-1 px-4 flex flex-col items-center gap-2">
-                            <div className="w-full h-px bg-gray-200 relative">
-                                <div className="absolute inset-0 bg-green-500 w-1/2 animate-[shimmer_2s_infinite]" />
+                            {/* Animated connection line with ping effect */}
+                            <div className="w-full h-[3px] bg-gray-200 relative rounded-full overflow-hidden">
+                                {/* Base green line */}
+                                <div className="absolute inset-0 bg-green-400/30" />
+                                {/* Animated ping pulse traveling across the line */}
+                                <div 
+                                    className="absolute top-0 h-full w-8 bg-linear-to-r from-transparent via-green-500 to-transparent animate-[ping-line_2s_ease-in-out_infinite]"
+                                    style={{
+                                        boxShadow: '0 0 10px 2px rgba(34, 197, 94, 0.6)',
+                                    }}
+                                />
+                                {/* Secondary ping for continuous effect */}
+                                <div 
+                                    className="absolute top-0 h-full w-6 bg-linear-to-r from-transparent via-green-400 to-transparent animate-[ping-line_2s_ease-in-out_infinite_1s]"
+                                    style={{
+                                        boxShadow: '0 0 8px 1px rgba(34, 197, 94, 0.4)',
+                                    }}
+                                />
                             </div>
-                            <div className="px-2 py-1 rounded-full bg-green-50 text-green-600 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5">
-                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                            {/* Connected status badge */}
+                            <div className="px-3 py-1.5 rounded-full bg-green-50 border border-green-100 text-green-600 text-[11px] font-bold uppercase tracking-wider flex items-center gap-2">
+                                <div className="relative">
+                                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                                    <div className="absolute inset-0 w-2 h-2 rounded-full bg-green-500 animate-ping" />
+                                </div>
                                 Connected
                             </div>
                         </div>
@@ -63,7 +82,7 @@ export default function Implementation() {
                             <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center border border-gray-200">
                                 <Layers className="w-7 h-7 text-gray-500" />
                             </div>
-                            <div className="font-bold text-gray-900 text-sm">Your System</div>
+                            <div className="font-bold text-sm px-3 py-1 rounded-lg bg-[#f74b6b] text-white">Your System</div>
                         </div>
                     </div>
                     

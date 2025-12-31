@@ -116,14 +116,24 @@ export default async function ForEmployeesPage() {
       {/* Why Use FinWage */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
+          {/* Professional Aim Statement */}
+          <div className="text-center mb-16 md:mb-20">
+            <blockquote className="text-xl md:text-2xl text-[#4B7BEC] italic max-w-3xl mx-auto leading-relaxed">
+              "Our aim is to empower every employee with financial flexibility, helping create a healthier, more confident workplace."
+            </blockquote>
+          </div>
+
           {/* Slide 1: Left Content, Right Image */}
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-24">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+            <div className="space-y-4">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                 Access Earned Pay When You Need It
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-lg text-[#5B7BA3] leading-relaxed">
                 With FinWage, access a portion of your pay any day of the week—without waiting for payday.
+              </p>
+              <p className="text-base text-[#4B7BEC] italic mt-4 border-l-4 border-[#f74b6b] pl-4">
+                "Live your moments with financial confidence."
               </p>
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
@@ -147,24 +157,33 @@ export default async function ForEmployeesPage() {
                 className="object-cover"
               />
             </div>
-            <div className="lg:col-start-2">
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+            <div className="lg:col-start-2 space-y-4">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                 No Loans. No Interest. No Credit Checks
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-lg text-[#5B7BA3] leading-relaxed">
                 FinWage is not a loan. You're accessing your own pay, with no impact on your credit score.
+              </p>
+              <p className="text-base text-[#4B7BEC] italic mt-4 border-l-4 border-[#f74b6b] pl-4">
+                "We help you breathe easier between paydays."
               </p>
             </div>
           </div>
 
           {/* Slide 3: Left Content, Right Image */}
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+            <div className="space-y-4">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                 Stay Financially Steady
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
-                We help you use your credit card responsibly—rather than relying on it out of necessity. Manage expenses with confidence and reduce financial pressure.
+              <p className="text-lg text-[#5B7BA3] leading-relaxed">
+                We help you use your credit card responsibly—rather than relying on it out of necessity.
+              </p>
+              <p className="text-base text-[#5B7BA3] leading-relaxed">
+                Manage expenses with confidence and reduce financial pressure.
+              </p>
+              <p className="text-base text-[#4B7BEC] italic mt-4 border-l-4 border-[#f74b6b] pl-4">
+                "Financial wellness starts with having options."
               </p>
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
@@ -180,7 +199,7 @@ export default async function ForEmployeesPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 md:py-24 bg-gray-50">
+      {/* <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -248,7 +267,7 @@ export default async function ForEmployeesPage() {
             )}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* FAQ Section */}
       <section className="py-16 md:py-24 bg-white">
@@ -270,7 +289,7 @@ export default async function ForEmployeesPage() {
                     <AccordionTrigger className="text-lg font-bold text-gray-900 hover:text-[#f74b6b]">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-gray-600 leading-relaxed">
+                    <AccordionContent className="text-[#4B7BEC] leading-relaxed">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>

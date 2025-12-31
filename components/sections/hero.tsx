@@ -92,30 +92,121 @@ function HeroImageContainer({
         />
       </div>
 
-      {/* FinWage Notification Card */}
-      <Card
-        className="absolute bg-white rounded-[24px] p-4 shadow-lg border border-gray-200 max-w-[300px] flex items-start gap-3"
+      {/* Toast Notification Stack - All positioned at same location with z-axis stacking */}
+      <style>{`
+        @keyframes stackedToast {
+          0% {
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            z-index: 30;
+          }
+          10% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            z-index: 30;
+          }
+          30% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            z-index: 30;
+          }
+          35% {
+            opacity: 0;
+            transform: translateY(-15px) scale(0.95);
+            z-index: 30;
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-15px) scale(0.95);
+            z-index: 10;
+          }
+        }
+        .stacked-toast-1 {
+          animation: stackedToast 6s ease-in-out infinite;
+          animation-delay: 0s;
+        }
+        .stacked-toast-2 {
+          animation: stackedToast 6s ease-in-out infinite;
+          animation-delay: 2s;
+        }
+        .stacked-toast-3 {
+          animation: stackedToast 6s ease-in-out infinite;
+          animation-delay: 4s;
+        }
+      `}</style>
+
+      {/* Stacked Notification Container */}
+      <div 
+        className="absolute"
         style={{
-          bottom: "63.19px",
+          bottom: "60px",
           right: "10px",
+          width: "300px",
+          height: "80px",
         }}
       >
-        <CardContent className="flex items-start gap-3 p-0">
-          {/* Bell Icon in Red Square */}
-          <div className="bg-red-500 rounded-md p-2">
-            <BellIcon className="size-5 text-white" />
-          </div>
-          {/* Text Content */}
-          <div className="flex flex-col">
-            <span className="text-[#1d44c3] text-[11.8px] font-semibold uppercase">
-              FINWAGE
-            </span>
-            <span className="text-gray-800 text-[13.7px]">
-              Your FinWage balance went up!
-            </span>
-          </div>
-        </CardContent>
-      </Card>
+        {/* Toast 1 - Real-time Tracking (Blue) */}
+        <Card
+          className="stacked-toast-1 absolute inset-0 bg-white/95 backdrop-blur-sm rounded-[20px] p-4 shadow-xl border border-blue-100 flex items-start gap-3"
+        >
+          <CardContent className="flex items-start gap-3 p-0">
+            <div className="bg-[#1d44c3] rounded-md p-2">
+              <svg className="size-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[#1d44c3] text-[11px] font-semibold uppercase">
+                Real-time Tracking
+              </span>
+              <span className="text-gray-700 text-[13px]">
+                Real-time visibility into your earnings
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Toast 2 - Access Ready (Green) */}
+        <Card
+          className="stacked-toast-2 absolute inset-0 bg-white/95 backdrop-blur-sm rounded-[20px] p-4 shadow-xl border border-green-100 flex items-start gap-3"
+        >
+          <CardContent className="flex items-start gap-3 p-0">
+            <div className="bg-green-500 rounded-md p-2">
+              <svg className="size-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[#1d44c3] text-[11px] font-semibold uppercase">
+                Access Ready
+              </span>
+              <span className="text-gray-700 text-[13px]">
+                Access what you've earned—when you need it
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Toast 3 - FinWage Balance (Red Bell) */}
+        <Card
+          className="stacked-toast-3 absolute inset-0 bg-white rounded-[20px] p-4 shadow-xl border border-gray-200 flex items-start gap-3"
+        >
+          <CardContent className="flex items-start gap-3 p-0">
+            <div className="bg-red-500 rounded-md p-2">
+              <BellIcon className="size-5 text-white" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[#1d44c3] text-[11px] font-semibold uppercase">
+                FINWAGE
+              </span>
+              <span className="text-gray-800 text-[13px]">
+                Your FinWage balance just went up!
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

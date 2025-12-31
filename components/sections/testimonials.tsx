@@ -126,7 +126,7 @@ export default async function Testimonials() {
   }
   return (
     <div
-      className="bg-[#f6f8ff] relative w-full py-12 md:py-16 lg:py-24 overflow-hidden"
+      className="bg-[#f6f8ff] relative w-full pt-20 md:pt-24 lg:pt-28 py-12 md:py-16 lg:py-24 overflow-hidden"
       data-name="Testimonials"
     >
       <style>{`
@@ -158,7 +158,7 @@ export default async function Testimonials() {
             What Our Customers Are Saying
           </h2>
         </div>
-      </div>
+        </div>
 
       <div className="relative">
         {/* Left fade overlay */}

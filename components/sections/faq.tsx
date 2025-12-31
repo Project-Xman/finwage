@@ -107,7 +107,7 @@ export async function FAQSection({
                       )}
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-base text-gray-700">
+                  <AccordionContent className="text-base text-[#4B7BEC] leading-relaxed">
                     <div dangerouslySetInnerHTML={{ __html: faq.answer }} />
                   </AccordionContent>
                 </AccordionItem>
@@ -176,7 +176,7 @@ export async function FAQSection({
                         )}
                       </span>
                     </AccordionTrigger>
-                    <AccordionContent className="text-base text-gray-700">
+                    <AccordionContent className="text-base text-[#4B7BEC] leading-relaxed">
                       <div dangerouslySetInnerHTML={{ __html: faq.answer }} />
                     </AccordionContent>
                   </AccordionItem>

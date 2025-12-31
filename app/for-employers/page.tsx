@@ -111,12 +111,15 @@ export default async function ForEmployersPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           {/* Slide 1: Left Content, Right Image */}
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-24">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+            <div className="space-y-4">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                 A Smarter Employee Benefit
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
-                Offer earned wage access as a financial wellness benefit without increasing salaries or payroll risk.
+              <p className="text-lg text-[#5B7BA3] leading-relaxed">
+                Offer earned wage access as a financial wellness benefit.
+              </p>
+              <p className="text-base text-[#5B7BA3] leading-relaxed">
+                No need to increase salaries or take on payroll risk.
               </p>
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
@@ -140,24 +143,30 @@ export default async function ForEmployersPage() {
                 className="object-cover"
               />
             </div>
-            <div className="lg:col-start-2">
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+            <div className="lg:col-start-2 space-y-4">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                 No Payroll Disruption
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
-                FinWage connects directly with payroll or time & attendance systems, allowing employees to access pay any day of the week—without changing payroll cycles.
+              <p className="text-lg text-[#5B7BA3] leading-relaxed">
+                FinWage connects directly with payroll or time & attendance systems.
+              </p>
+              <p className="text-base text-[#5B7BA3] leading-relaxed">
+                Employees access pay any day—without changing payroll cycles.
               </p>
             </div>
           </div>
 
           {/* Slide 3: Left Content, Right Image */}
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+            <div className="space-y-4">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                 Easy Integration, Real Impact
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
-                Fast setup, minimal effort, and a fully secured platform built with strong data privacy and compliance-first architecture.
+              <p className="text-lg text-[#5B7BA3] leading-relaxed">
+                Fast setup, minimal effort, and a fully secured platform.
+              </p>
+              <p className="text-base text-[#5B7BA3] leading-relaxed">
+                Built with strong data privacy and compliance-first architecture.
               </p>
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">

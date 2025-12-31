@@ -97,34 +97,35 @@ export default async function ContactPage() {
                 const color = colors[index] || colors[0];
 
                 return (
-                  <Card
-                    key={option.id}
-                    className="bg-linear-to-br from-blue-50 to-pink-50 border-0"
-                  >
-                    <CardHeader className="text-center">
-                      <div
-                        className={`inline-flex items-center justify-center w-16 h-16 ${color.bg} rounded-full text-white mb-6 mx-auto`}
-                      >
-                        <IconComponent className="w-8 h-8" />
-                      </div>
-                      <CardTitle>{option.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="text-center">
-                      <CardDescription className="mb-6">
-                        {option.description}
-                      </CardDescription>
-                      {option.action_url && (
-                        <Button
-                          className={`${color.bg} ${color.hover} w-full`}
-                          asChild
+                  <div key={option.id} className="flex h-full">
+                    <Card
+                      className="flex flex-col justify-between w-full min-h-[23.125rem] bg-linear-to-br from-blue-50 to-pink-50 border-0"
+                    >
+                      <CardHeader className="text-center">
+                        <div
+                          className={`inline-flex items-center justify-center w-16 h-16 ${color.bg} rounded-full text-white mb-6 mx-auto`}
                         >
-                          <NextLink href={option.action_url}>
-                            {option.title}
-                          </NextLink>
-                        </Button>
-                      )}
-                    </CardContent>
-                  </Card>
+                          <IconComponent className="w-8 h-8" />
+                        </div>
+                        <CardTitle>{option.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="text-center flex flex-col flex-1 justify-between">
+                        <CardDescription className="mb-6">
+                          {option.description}
+                        </CardDescription>
+                        {option.action_url && (
+                          <Button
+                            className={`${color.bg} ${color.hover} w-full mt-auto`}
+                            asChild
+                          >
+                            <NextLink href={option.action_url}>
+                              {option.title}
+                            </NextLink>
+                          </Button>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </div>
                 );
               })}
             </div>

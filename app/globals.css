@@ -52,6 +52,22 @@
       transform: translate(-50%, -50%) scale(0.9);
     }
   }
+  @keyframes ping-line {
+    0% {
+      left: -10%;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
 }
 
 :root {

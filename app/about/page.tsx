@@ -107,11 +107,17 @@ export default async function AboutPage() {
             <h2 className="text-3xl font-bold mb-4">Our Core Values</h2>
             <div className="w-20 h-1 bg-linear-to-r from-blue-600 to-pink-500 mx-auto rounded-full"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          <div
+            className={
+              values.length < 4
+                ? "flex justify-center items-center gap-6 mb-20 flex-wrap"
+                : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
+            }
+          >
             {values.map((value, index) => (
               <Card
                 key={value.id}
-                className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-300 bg-white dark:bg-zinc-800 overflow-hidden relative"
+                className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-300 bg-white dark:bg-zinc-800 overflow-hidden relative min-w-[260px] max-w-xs flex-1"
               >
                 <div className={`absolute top-0 left-0 w-full h-1 bg-linear-to-r ${index % 2 === 0 ? 'from-[#1d44c3] to-blue-400' : 'from-[#f74b6b] to-pink-400'} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}></div>
                 <CardContent className="p-8 flex flex-col items-center text-center h-full">
@@ -188,54 +194,103 @@ export default async function AboutPage() {
 
       {/* Timeline / Journey */}
       <section className="py-20 md:py-32 bg-white dark:bg-zinc-900 relative">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center mb-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               Our Journey
             </h2>
             <div className="w-24 h-1 bg-linear-to-r from-blue-600 to-pink-500 mx-auto rounded-full"></div>
-            <p className="mt-6 text-xl text-gray-600 dark:text-gray-400">
+            <p className="mt-6 text-xl text-[#5B7BA3]">
               Growing rapidly while staying true to our mission
             </p>
           </div>
 
-          <div className="relative">
-             {/* Center Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200 dark:bg-gray-800 hidden md:block"></div>
+          {/* Journey Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            {/* Card 1: Built for real moments */}
+            <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-zinc-700 hover:shadow-xl transition-all">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+                  <Heart className="w-6 h-6 text-[#f74b6b]" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Built for Real Moments</h3>
+              </div>
+              <p className="text-[#5B7BA3] leading-relaxed">
+                Every feature we develop comes from understanding real financial challenges that people face every day.
+              </p>
+            </div>
 
-            <div className="space-y-16">
-              {milestones.length > 0 ? (
-                milestones.map((milestone, i) => (
-                  <div key={milestone.id} className={`flex flex-col md:flex-row items-center gap-8 ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                    
-                    {/* Content Card */}
-                    <div className="flex-1 w-full">
-                      <div className={`bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow border border-gray-100 dark:border-zinc-700 relative ${i % 2 === 0 ? 'text-left md:text-left' : 'text-left md:text-right'}`}>
-                         {/* Arrow for desktop */}
-                        <div className={`hidden md:block absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white dark:bg-zinc-800 transform rotate-45 border-t border-l border-gray-100 dark:border-zinc-700 ${i % 2 === 0 ? '-right-2 border-r border-b border-t-0 border-l-0' : '-left-2'}`}></div>
-                        
-                        <span className="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full text-sm font-bold mb-3">{milestone.year}</span>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                          {milestone.event}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{milestone.description}</p>
-                      </div>
-                    </div>
+            {/* Card 2: Driven by purpose */}
+            <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-zinc-700 hover:shadow-xl transition-all">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-pink-100 dark:bg-pink-900/30 rounded-full flex items-center justify-center">
+                  <TrendingUp className="w-6 h-6 text-[#1d44c3]" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Driven by Purpose</h3>
+              </div>
+              <p className="text-[#5B7BA3] leading-relaxed">
+                Our mission is clear: reduce financial stress and empower people to take control of their earnings.
+              </p>
+            </div>
 
-                    {/* Center Dot */}
-                    <div className="relative shrink-0 flex items-center justify-center w-12 h-12 z-10">
-                        <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border-4 border-[#f74b6b] shadow-lg flex items-center justify-center">
-                            <div className="w-3 h-3 bg-[#f74b6b] rounded-full"></div>
-                        </div>
-                    </div>
+            {/* Card 3: From a simple idea to meaningful impact */}
+            <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-zinc-700 hover:shadow-xl transition-all">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">From Idea to Impact</h3>
+              </div>
+              <p className="text-[#5B7BA3] leading-relaxed">
+                What started as a simple idea has grown into a platform making meaningful impact in people's financial lives.
+              </p>
+            </div>
 
-                    {/* Empty Space for layout balance */}
-                    <div className="flex-1 w-full hidden md:block"></div>
-                  </div>
-                ))
-              ) : (
-                 <p className="text-center text-gray-600">No milestones available.</p>
-              )}
+            {/* Card 4: Our journey is powered by people */}
+            <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-zinc-700 hover:shadow-xl transition-all">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Powered by People</h3>
+              </div>
+              <p className="text-[#5B7BA3] leading-relaxed">
+                Every step of our journey is powered by the employees, employers, and partners who believe in financial wellness.
+              </p>
+            </div>
+          </div>
+
+          {/* Additional Supportive Images */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="relative h-[300px] rounded-2xl overflow-hidden shadow-xl group">
+              <Image
+                src="/assets/office-meeting-2.png"
+                alt="Team collaboration and work moments"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 text-white">
+                <p className="font-bold text-lg">Work-Life Balance</p>
+                <p className="text-sm text-white/80">Supporting employees in their daily journey</p>
+              </div>
+            </div>
+            <div className="relative h-[300px] rounded-2xl overflow-hidden shadow-xl group">
+              <Image
+                src="/assets/laptop-office.png"
+                alt="People using FinWage platform"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 text-white">
+                <p className="font-bold text-lg">Real Moments</p>
+                <p className="text-sm text-white/80">Making financial access simple and instant</p>
+              </div>
             </div>
           </div>
         </div>

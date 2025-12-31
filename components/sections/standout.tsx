@@ -20,7 +20,7 @@ export default function StandOut() {
   const videoPlayerRef = useRef<{ play: () => void; pause: () => void; reset: () => void }>(null);
 
   return (
-    <section className="bg-white relative w-full py-12 md:py-24 lg:py-32 pb-40 md:pb-24 lg:pb-32">
+    <section className="bg-white relative w-full py-12 md:py-24 lg:py-32 pb-40 md:pb-24 lg:pb-32 z-10">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
         {/* Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
@@ -73,46 +73,45 @@ export default function StandOut() {
           </div>
         </div>
 
-        {/* Decorative Characters - Hidden on mobile */}
-        <div className="hidden md:block absolute left-1/2 md:-bottom-20 lg:-bottom-24 translate-x-[-200px] lg:translate-x-[-200px] md:translate-x-[-120px]">
+        {/* Decorative Characters - Hidden on mobile, overflow into next section */}
+        <div className="hidden md:block absolute left-1/2 md:-bottom-20 lg:-bottom-24 translate-x-[-200px] lg:translate-x-[-200px] md:translate-x-[-120px] z-20">
           <div className="relative md:w-[120px] md:h-[230px] lg:w-[150px] lg:h-[300px]">
             <Image
               src={imgImagePhotoroom21}
               alt=""
               fill
-              className="object-contain"
+              className="object-contain object-bottom"
             />
           </div>
         </div>
 
-        <div className="hidden md:block absolute left-1/2 -bottom-1/5 translate-x-[50px] lg:translate-x-[50px] md:translate-x-5">
-          <div className="relative md:w-[120px] md:h-60 lg:w-[130px] lg:h-[300px]">
+        <div className="hidden md:block absolute left-1/2 md:-bottom-16 lg:-bottom-20 translate-x-[50px] lg:translate-x-[50px] md:translate-x-5 z-20">
+          <div className="relative md:w-[120px] md:h-[240px] lg:w-[130px] lg:h-[300px]">
             <Image
               src={imgImagePhotoroom31}
               alt=""
               fill
-              className="object-contain"
+              className="object-contain object-bottom"
             />
           </div>
         </div>
 
-        {/* Mobile Decorative Characters - At bottom, below grid */}
-        <div className="md:hidden absolute bottom-0 flex items-end gap-8 z-10">
+        {/* Mobile Decorative Characters - At bottom, overflow into next section */}
+        <div className="md:hidden absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-end justify-center gap-4 z-20">
           <div className="relative w-[120px] h-[280px]">
             <Image
               src={imgImagePhotoroom21}
               alt=""
               fill
-              className="object-contain"
+              className="object-contain object-bottom"
             />
           </div>
-          <div className="w-2"></div>
           <div className="relative w-[125px] h-[280px]">
             <Image
               src={imgImagePhotoroom31}
               alt=""
               fill
-              className="object-contain"
+              className="object-contain object-bottom"
             />
           </div>
         </div>

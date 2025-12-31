@@ -2,11 +2,11 @@ import { ImageResponse } from "next/og";
 import { readFile } from "fs/promises";
 import { join } from "path";
 
-export const size = { width: 512, height: 512 };
+export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-export default async function Icon() {
-  // Try to use the FinWage app icon from public/assets
+export default async function AppleIcon() {
+  // Use the FinWage app icon for Apple Touch Icon
   try {
     const iconData = await readFile(
       join(process.cwd(), "public", "assets", "app-icon.png")
@@ -22,7 +22,7 @@ export default async function Icon() {
           alignItems: "center",
           justifyContent: "center",
           background: "white",
-          borderRadius: "20%",
+          borderRadius: "22%",
         }}
       >
         <img
@@ -38,7 +38,7 @@ export default async function Icon() {
       { ...size }
     );
   } catch {
-    // Fallback to text-based icon if image not found
+    // Fallback to text-based icon
     return new ImageResponse(
       <div
         style={{
@@ -48,7 +48,7 @@ export default async function Icon() {
           alignItems: "center",
           justifyContent: "center",
           background: "linear-gradient(135deg, #1d44c3 0%, #0d2463 100%)",
-          borderRadius: "20%",
+          borderRadius: "22%",
         }}
       >
         <div
@@ -56,10 +56,10 @@ export default async function Icon() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "280px",
+            fontSize: "100px",
             fontWeight: "bold",
             color: "white",
-            letterSpacing: "-10px",
+            letterSpacing: "-4px",
           }}
         >
           F
