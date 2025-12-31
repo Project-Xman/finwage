@@ -211,14 +211,13 @@ function HeroImageContainer({
   );
 }
 
-// Function for the "Get a Demo" Link/Button
 function DemoButton() {
   return (
     <EnquiryButton
       type="demo"
       size="lg"
-      className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-lg transition-shadow rounded-full h-[60px] px-8 font-semibold text-[20px]"
-      icon={<ArrowRight className="ml-2 size-5" />}
+      className="bg-[#1d44c3] text-white hover:bg-blue-800 hover:shadow-lg transition-shadow rounded-full h-[50px] sm:h-[60px] px-6 sm:px-8 font-semibold text-base sm:text-[20px]"
+      icon={<ArrowRight className="ml-2 size-4 sm:size-5" />}
     >
       Get a Demo
     </EnquiryButton>
@@ -232,21 +231,21 @@ export default function Hero() {
   return (
     <div className="bg-white relative overflow-hidden" data-name="Hero Section">
       {/* Mobile Layout */}
-      <div className="md:hidden flex flex-col items-center px-4 py-8 sm:py-12 gap-6 sm:gap-8">
+      <div className="md:hidden flex flex-col items-center px-4 py-8 sm:py-12 gap-6 sm:gap-8 w-full">
         {/* Text Content */}
-        <div className="flex flex-col gap-4 sm:gap-6 items-center text-center max-w-[340px] sm:max-w-[400px]">
-          <div className="flex flex-col font-bold leading-[40px] text-[#1d44c3] text-[38px] tracking-[-1.5px] mb-[16px]">
+        <div className="flex flex-col gap-4 sm:gap-6 items-center text-center w-full max-w-[95vw] sm:max-w-[400px]">
+          <div className="flex flex-col font-bold leading-[1.1] text-[#1d44c3] text-[32px] sm:text-[38px] tracking-[-1.5px] mb-2 sm:mb-4">
             <p className="mb-0">Your Money.</p>
             <p className="mb-0">In Your Control.</p>
           </div>
-          <div className="flex flex-col font-normal leading-[19px] text-[12.5px] text-gray-800 mb-[20px]">
-            <p className="mb-0 font-semibold text-[#f74b6b]">
+          <div className="flex flex-col font-normal text-gray-800 mb-4 space-y-3 w-full px-2">
+            <p className="mb-0 font-semibold text-[#f74b6b] text-sm sm:text-base">
               FinWage — It's Your Wage!
             </p>
-            <p className="mb-0 mt-2">
+            <p className="mb-0 text-sm sm:text-base leading-relaxed">
               You earn your pay every day. Access to it shouldn't depend on a fixed payday.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-gray-500 w-4/6">
+            <p className="text-sm sm:text-base leading-relaxed text-gray-500">
               FinWage is a Canadian Earned Wage Access (EWA) platform that gives employees instant access to their pay—helping reduce financial stress while supporting a more focused and productive workforce.
             </p>
           </div>
@@ -326,7 +325,7 @@ export default function Hero() {
             <p className="mb-0 mt-2">
               You earn your pay every day. Access to it shouldn't depend on a fixed payday.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-gray-500  w-4/6">
+            <p className="mt-4 text-base leading-relaxed text-gray-500">
               FinWage is a Canadian Earned Wage Access (EWA) platform that gives employees instant access to their pay—helping reduce financial stress while supporting a more focused and productive workforce.
             </p>
           </div>
@@ -363,14 +362,17 @@ export default function Hero() {
           }
         }}
       >
-        <DialogContent className="p-0 bg-transparent shadow-none border-none flex items-center justify-center" style={{ maxWidth: 'unset', width: 'unset' }}>
+        <DialogContent 
+          className="p-0 sm:p-2 bg-transparent shadow-none border-none flex items-center justify-center max-w-[95vw] sm:max-w-[90vw] md:max-w-4xl lg:max-w-5xl w-full" 
+          showCloseButton={true}
+        >
           <DialogTitle className="sr-only">FinWage Overview Video</DialogTitle>
           <CustomVideoPlayer
             ref={videoPlayerRef}
             src="/video.mp4"
             poster="/assets/video-thumbnail.webp"
             autoPlay={isVideoOpen}
-            className="w-[90vw] max-w-5xl"
+            className="w-full max-w-full"
           />
         </DialogContent>
       </Dialog>

@@ -130,14 +130,17 @@ export default function StandOut() {
             }
           }}
         >
-          <DialogContent className="p-0 bg-transparent shadow-none border-none flex items-center justify-center" style={{ maxWidth: 'unset', width: 'unset' }}>
+          <DialogContent 
+            className="p-0 sm:p-2 bg-transparent shadow-none border-none flex items-center justify-center max-w-[95vw] sm:max-w-[90vw] md:max-w-4xl lg:max-w-5xl w-full"
+            showCloseButton={true}
+          >
             <DialogTitle className="sr-only">FinWage Overview Video</DialogTitle>
             <CustomVideoPlayer
               ref={videoPlayerRef}
               src="/video.mp4"
               poster="/assets/video-thumbnail.webp"
               autoPlay={isVideoOpen}
-              className="w-[90vw] max-w-5xl"
+              className="w-full max-w-full"
             />
           </DialogContent>
         </Dialog>

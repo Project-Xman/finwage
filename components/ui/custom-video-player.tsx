@@ -170,11 +170,11 @@ const CustomVideoPlayer = forwardRef<
             <div className="absolute inset-0 flex items-center justify-center">
               <button
                 aria-label="Play Video"
-                className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 group-hover/video:scale-110 group-hover/video:bg-white/30 pointer-events-auto shadow-xl"
+                className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 group-hover/video:scale-110 group-hover/video:bg-white/30 pointer-events-auto shadow-xl"
                 onClick={handleTogglePlay}
               >
-                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg transform translate-x-0.5">
-                      <Play className="w-6 h-6 text-black fill-black" />
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center shadow-lg transform translate-x-0.5">
+                      <Play className="w-5 h-5 sm:w-6 sm:h-6 text-black fill-black" />
                   </div>
               </button>
             </div>
@@ -194,13 +194,13 @@ const CustomVideoPlayer = forwardRef<
 
         {/* Controls Overlay - Fade in on hover or when paused */}
         <div
-          className={`absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 via-black/40 to-transparent px-6 pb-6 pt-20 transition-opacity duration-300 ${
+          className={`absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 via-black/40 to-transparent px-3 sm:px-6 pb-3 sm:pb-6 pt-12 sm:pt-20 transition-opacity duration-300 ${
             isPlaying && !isHovering ? "opacity-0" : "opacity-100"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
             {/* Progress Bar */}
-            <div className="relative w-full h-1.5 bg-white/20 rounded-full mb-4 cursor-pointer group/progress touch-none hover:h-2 transition-all">
+            <div className="relative w-full h-2 sm:h-1.5 bg-white/20 rounded-full mb-3 sm:mb-4 cursor-pointer group/progress touch-none hover:h-2.5 sm:hover:h-2 transition-all">
                  <div 
                     className="absolute top-0 left-0 h-full bg-[#1d44c3] rounded-full" 
                     style={{ width: `${progress}%` }} 
@@ -214,32 +214,33 @@ const CustomVideoPlayer = forwardRef<
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
                  />
                  <div 
-                    className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-md opacity-0 group-hover/progress:opacity-100 transition-opacity pointer-events-none transform scale-0 group-hover/progress:scale-100 duration-200"
+                    className="absolute top-1/2 -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-white rounded-full shadow-md opacity-0 group-hover/progress:opacity-100 transition-opacity pointer-events-none transform scale-0 group-hover/progress:scale-100 duration-200"
                     style={{ left: `${progress}%` }}
                  />
             </div>
 
             {/* Controls Row */}
             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-6">
-                    <button onClick={handleTogglePlay} className="text-white hover:text-blue-300 transition-colors focus:outline-none">
-                        {isPlaying ? <Pause className="w-8 h-8 fill-current" /> : <Play className="w-8 h-8 fill-current" />}
+                <div className="flex items-center gap-3 sm:gap-6">
+                    <button onClick={handleTogglePlay} className="text-white hover:text-blue-300 transition-colors focus:outline-none p-1 sm:p-0">
+                        {isPlaying ? <Pause className="w-6 h-6 sm:w-8 sm:h-8 fill-current" /> : <Play className="w-6 h-6 sm:w-8 sm:h-8 fill-current" />}
                     </button>
                     
-                    <div className="flex items-center gap-3 group/volume">
-                        <button onClick={handleMute} className="text-white/90 hover:text-white transition-colors focus:outline-none">
-                            {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+                    <div className="flex items-center gap-2 sm:gap-3 group/volume">
+                        <button onClick={handleMute} className="text-white/90 hover:text-white transition-colors focus:outline-none p-1 sm:p-0">
+                            {isMuted ? <VolumeX className="w-5 h-5 sm:w-6 sm:h-6" /> : <Volume2 className="w-5 h-5 sm:w-6 sm:h-6" />}
                         </button>
                     </div>
 
-                    <div className="text-white/90 text-sm font-medium tabular-nums tracking-wide">
-                        {formatTime(currentTime)} <span className="text-white/50 mx-1">/</span> {formatTime(duration)}
+                    <div className="text-white/90 text-xs sm:text-sm font-medium tabular-nums tracking-wide">
+                        <span className="hidden sm:inline">{formatTime(currentTime)} <span className="text-white/50 mx-1">/</span> {formatTime(duration)}</span>
+                        <span className="sm:hidden">{formatTime(currentTime)}/{formatTime(duration)}</span>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <button onClick={handleFullscreen} className="text-white/90 hover:text-white transition-colors focus:outline-none">
-                        {isFullscreen ? <Minimize2 className="w-6 h-6" /> : <Maximize2 className="w-6 h-6" />}
+                <div className="flex items-center gap-2 sm:gap-4">
+                    <button onClick={handleFullscreen} className="text-white/90 hover:text-white transition-colors focus:outline-none p-1 sm:p-0">
+                        {isFullscreen ? <Minimize2 className="w-5 h-5 sm:w-6 sm:h-6" /> : <Maximize2 className="w-5 h-5 sm:w-6 sm:h-6" />}
                     </button>
                 </div>
             </div>
