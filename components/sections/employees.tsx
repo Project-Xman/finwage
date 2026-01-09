@@ -131,7 +131,7 @@ function ParagraphBackgroundBorderShadowOverlayBlur() {
 function Frame9() {
   return (
     <div className="relative w-full md:w-[584px] min-h-[400px] md:h-[500px] shrink-0">
-      {/* Mobile: Stack images vertically */}
+      {/* Mobile: Stack all elements vertically */}
       <div className="md:hidden flex flex-col gap-4 items-center">
         <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden relative">
           <Image
@@ -148,6 +148,12 @@ function Frame9() {
             src="/assets/worker-2.png"
             fill
           />
+        </div>
+        <div className="w-full max-w-[288px]">
+          <ParagraphBackgroundBorderShadowOverlayBlur />
+        </div>
+        <div className="w-full max-w-[288px]">
+          <BackgroundBorderShadowOverlayBlur />
         </div>
       </div>
 
