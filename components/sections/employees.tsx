@@ -131,9 +131,9 @@ function ParagraphBackgroundBorderShadowOverlayBlur() {
 function Frame9() {
   return (
     <div className="relative w-full md:w-[584px] min-h-[400px] md:h-[500px] shrink-0">
-      {/* Mobile: Stack all elements vertically */}
-      <div className="md:hidden flex flex-col gap-4 items-center">
-        <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden relative">
+      {/* Mobile: Stack all elements vertically with simplified cards */}
+      <div className="md:hidden flex flex-col gap-6 items-center py-4">
+        <div className="w-64 h-80 rounded-2xl shadow-xl overflow-hidden relative">
           <Image
             alt="Employee using financial wellness features"
             className="object-cover"
@@ -141,7 +141,16 @@ function Frame9() {
             fill
           />
         </div>
-        <div className="w-48 h-64 rounded-2xl shadow-lg overflow-hidden relative">
+        
+        {/* Simplified mobile card 1 */}
+        <div className="w-full max-w-[280px] bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-gray-100">
+          <p className="text-sm text-gray-600 mb-2">You have</p>
+          <p className="text-4xl font-bold text-green-600 mb-1">$85.00</p>
+          <p className="text-4xl font-bold text-green-600 mb-2">planned</p>
+          <p className="text-sm text-gray-600">for payday</p>
+        </div>
+        
+        <div className="w-64 h-80 rounded-2xl shadow-xl overflow-hidden relative">
           <Image
             alt="Employee managing savings goals"
             className="object-cover"
@@ -149,11 +158,24 @@ function Frame9() {
             fill
           />
         </div>
-        <div className="w-full max-w-[288px]">
-          <ParagraphBackgroundBorderShadowOverlayBlur />
-        </div>
-        <div className="w-full max-w-[288px]">
-          <BackgroundBorderShadowOverlayBlur />
+        
+        {/* Simplified mobile card 2 */}
+        <div className="w-full max-w-[280px] bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-gray-100">
+          <h3 className="text-[#1d44c3] font-bold text-base mb-3">Set a savings goal</h3>
+          <p className="text-sm text-gray-600 mb-4">
+            Tap to start building your savings habit with a goal to work towards.
+          </p>
+          <div className="bg-gray-50 rounded-xl p-4">
+            <p className="text-sm font-semibold text-gray-800 mb-2">Rainy day jar</p>
+            <div className="flex justify-between items-center mb-2">
+              <p className="text-xs text-gray-600">Account ending: 1890</p>
+              <p className="text-sm font-bold text-gray-900">$2,500.00</p>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2 mb-1">
+              <div className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full" style={{width: '65%'}}></div>
+            </div>
+            <p className="text-xs text-gray-500 text-right">Goal: $2,500.00</p>
+          </div>
         </div>
       </div>
 
