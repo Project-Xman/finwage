@@ -42,6 +42,11 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  icons: {
+    icon: "/Favicon.ico",
+    shortcut: "/Favicon.ico",
+    apple: "/Favicon.ico",
+  },
   metadataBase: new URL("https://finwage.com"),
   alternates: {
     canonical: "/",
