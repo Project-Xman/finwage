@@ -201,7 +201,7 @@ export default async function ContactPage() {
                     href={contactPhoneSupport ? contactPhoneSupport.action_url : '#'}
                     className="text-2xl font-bold text-[#1d44c3] hover:underline"
                   >
-                    {contactPhoneSupport ? contactPhoneSupport.action_url.replace('tel:', '') : '1-800-FINWAGE'}
+                    {contactPhoneSupport ? contactPhoneSupport.action_url.replace('tel:', '') : '(+1)(672)(667)7710'}
                   </NextLink>
                 </CardContent>
               </Card>
@@ -246,10 +246,10 @@ export default async function ContactPage() {
               <CardContent className="p-8">
                 <MapPin className="w-8 h-8 text-primary mx-auto mb-4" />
                 <h3 className="font-bold text-gray-900 mb-2">
-                  {homeLocation?.name || "San Francisco HQ"}
+                  {homeLocation?.name || "Granville Street, Vancouver,BC"}
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  {homeLocation?.address || "123 Market Street"}
+                  {homeLocation?.address || "Suite 1147"}
                   <br />
                   {homeLocation ? `${homeLocation.city}, ${homeLocation.state} ${homeLocation.zip}` : "San Francisco, CA 94105"}
                 </p>
@@ -273,9 +273,9 @@ export default async function ContactPage() {
                 <Phone className="w-8 h-8 text-primary mx-auto mb-4" />
                 <h3 className="font-bold text-gray-900 mb-2">Phone</h3>
                 <p className="text-gray-600 text-sm">
-                  Sales: {contactPhoneSales ? contactPhoneSales.action_url.replace('tel:', '') : '1-800-FINWAGE'}
+                  Sales: {contactPhoneSales ? contactPhoneSales.action_url.replace('tel:', '') : '(+1)(672)(667)7710'}
                   <br />
-                  Support: {contactPhoneSupport ? contactPhoneSupport.action_url.replace('tel:', '') : '1-800-FINWAGE'}
+                  Support: {contactPhoneSupport ? contactPhoneSupport.action_url.replace('tel:', '') : '(+1)(672)(667)7710'}
                 </p>
               </CardContent>
             </Card>

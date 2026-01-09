@@ -54,7 +54,7 @@ export default async function ForEmployersPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Attract, Retain, and Empower Your Workforce
+                Attract, Retain, and <span className="text-[#f74b6b]">Empower</span> Your Workforce
               </h1>
               <p className="text-xl md:text-2xl text-blue-100 mb-8">
                 Earned Wage Access is a proven financial wellness benefit that helps 
@@ -124,7 +124,7 @@ export default async function ForEmployersPage() {
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/employer1.png"
+                src="/employers1.png"
                 alt="Total Rewards and Employee Benefits"
                 fill
                 className="object-cover"
@@ -137,7 +137,7 @@ export default async function ForEmployersPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 lg:grid-flow-col-dense">
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl lg:col-start-1">
               <Image
-                src="/employer2.jpeg"
+                src="/employers2.png"
                 alt="No Payroll Disruption"
                 fill
                 className="object-cover"
@@ -151,7 +151,7 @@ export default async function ForEmployersPage() {
                 FinWage connects directly with payroll or time & attendance systems.
               </p>
               <p className="text-base text-[#5B7BA3] leading-relaxed">
-                Employees access pay any day—without changing payroll cycles.
+                Employees access pay any day without changing payroll cycles.
               </p>
             </div>
           </div>
@@ -171,7 +171,7 @@ export default async function ForEmployersPage() {
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/employer3.jpeg"
+                src="/employers3.png"
                 alt="Easy Integration and HR Management"
                 fill
                 className="object-cover"
@@ -191,7 +191,7 @@ export default async function ForEmployersPage() {
               </h2>
               <p className="text-xl text-gray-600 mb-8">
                 FinWage integrates directly with existing payroll, time and attendance, 
-                and HR systems—ensuring accurate calculations, instant access, and a 
+                and HR systems ensuring accurate calculations, instant access, and a 
                 smooth experience for both employees and administrators.
               </p>
 
@@ -287,7 +287,7 @@ export default async function ForEmployersPage() {
           <div className="bg-linear-to-br from-[#1d44c3] via-[#2a4db8] to-[#f74b6b] rounded-3xl p-8 md:p-16 text-white">
             <div className="max-w-3xl mx-auto text-center mb-8">
               <h2 className="text-3xl md:text-5xl font-bold mb-6">
-                Calculate Your ROI
+                Calculate Your <span className="text-[#f74b6b]">ROI</span>
               </h2>
               <p className="text-xl text-blue-100 mb-8">
                 See exactly how much FinWage can save your company in reduced

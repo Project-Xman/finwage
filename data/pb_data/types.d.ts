@@ -20809,9 +20809,9 @@ namespace exec {
    * first. When the delay has elapsed, the command shuts down the child process
    * and/or its I/O pipes.
    * 
-   * If the child process has failed to exit — perhaps because it ignored or
+   * If the child process has failed to exit   perhaps because it ignored or
    * failed to receive a shutdown signal from a Cancel function, or because no
-   * Cancel function was set — then it will be terminated using os.Process.Kill.
+   * Cancel function was set   then it will be terminated using os.Process.Kill.
    * 
    * Then, if the I/O pipes communicating with the child process are still open,
    * those pipes are closed in order to unblock any goroutines currently blocked

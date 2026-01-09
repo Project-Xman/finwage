@@ -62,7 +62,7 @@ export default async function AboutPage() {
             </h1>
             <p className="text-xl md:text-2xl text-blue-50 max-w-3xl mx-auto leading-relaxed font-light">
               FinWage is a Canadian Earned Wage Access (EWA) platform that gives 
-              employees instant access to their pay—helping reduce financial stress 
+              employees instant access to their pay helping reduce financial stress 
               while supporting a more focused and productive workforce.
             </p>
         </div>
@@ -336,9 +336,9 @@ export default async function AboutPage() {
             </div>
 
             <div className="bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 shadow-2xl">
-              <h3 className="text-3xl font-bold mb-8 text-white">Trust, Compliance & Responsibility</h3>
+              <h3 className="text-3xl font-bold mb-8 text-white"><span className="text-[#f74b6b]">Trust</span>, Compliance & Responsibility</h3>
               <p className="text-blue-100 mb-10 text-lg leading-relaxed border-b border-white/10 pb-8">
-                FinWage is built with compliance, transparency, and responsible financial access at its core—ensuring protection for both employees and employers.
+                FinWage is built with compliance, transparency, and responsible financial access at its core ensuring protection for both employees and employers.
               </p>
               <div className="space-y-6">
                 {[

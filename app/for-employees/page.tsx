@@ -67,7 +67,7 @@ export default async function ForEmployeesPage() {
                 Work Today. Get Paid Today.
               </h1>
               <p className="text-xl md:text-2xl text-blue-100 mb-8">
-                Access a portion of your pay any day of the week—without waiting 
+                Access a portion of your pay any day of the week without waiting 
                 for payday. No loans, no interest, no credit checks.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -130,7 +130,7 @@ export default async function ForEmployeesPage() {
                 Access Earned Pay When You Need It
               </h2>
               <p className="text-lg text-[#5B7BA3] leading-relaxed">
-                With FinWage, access a portion of your pay any day of the week—without waiting for payday.
+                With FinWage, access a portion of your pay any day of the week without waiting for payday.
               </p>
               <p className="text-base text-[#4B7BEC] italic mt-4 border-l-4 border-[#f74b6b] pl-4">
                 "Live your moments with financial confidence."
@@ -138,7 +138,7 @@ export default async function ForEmployeesPage() {
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/employee1.jpeg"
+                src="/employee1.png"
                 alt="Access earned pay"
                 fill
                 className="object-cover"
@@ -151,7 +151,7 @@ export default async function ForEmployeesPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-24 lg:grid-flow-col-dense">
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl lg:col-start-1">
               <Image
-                src="/employee2.jpeg"
+                src="/employee2.png"
                 alt="No loans or interest"
                 fill
                 className="object-cover"
@@ -177,7 +177,7 @@ export default async function ForEmployeesPage() {
                 Stay Financially Steady
               </h2>
               <p className="text-lg text-[#5B7BA3] leading-relaxed">
-                We help you use your credit card responsibly—rather than relying on it out of necessity.
+                We help you use your credit card responsibly rather than relying on it out of necessity.
               </p>
               <p className="text-base text-[#5B7BA3] leading-relaxed">
                 Manage expenses with confidence and reduce financial pressure.
@@ -188,7 +188,7 @@ export default async function ForEmployeesPage() {
             </div>
             <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/employee3.jpeg"
+                src="/employee3.png"
                 alt="Stay financially steady"
                 fill
                 className="object-cover"

@@ -188,7 +188,7 @@ function Frame10() {
         Supporting everyday financial stability
       </h2>
       <p className="text-[15.6px] leading-[24px] text-base leading-relaxed text-gray-500">
-        FinWage helps employees manage cash flow, cover essential expenses, and plan ahead—without relying on payday loans, high-interest credit cards, or short-term borrowing.
+        FinWage helps employees manage cash flow, cover essential expenses, and plan ahead without relying on payday loans, high-interest credit cards, or short-term borrowing.
       </p>
       
       <div className="pt-4">

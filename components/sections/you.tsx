@@ -84,7 +84,7 @@ const You: NextPage = () => {
             />
             <TimelineCard
               title="Access When Needed"
-              description="Instant access to pay—no interest, no borrowing, no impact on credit."
+              description="Instant access to pay no interest, no borrowing, no impact on credit."
               image={imgAccessPay}
               step="STEP 3"
               color="#3B82F6"
@@ -161,7 +161,7 @@ const CircularInfographic = () => {
       endAngle: 315,
       title: "Access When Needed",
       tag: "STEP 3",
-      description: "Instant access to pay—no interest, no borrowing, no impact on credit.",
+      description: "Instant access to pay no interest, no borrowing, no impact on credit.",
       iconPath: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z", // Credit card icon
       image: imgAccessPay,
     },

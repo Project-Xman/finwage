@@ -29,7 +29,7 @@ export default function Implementation() {
                 <div>
                   <h3 className="font-bold text-[#1d44c3] mb-1 text-lg">Modern Solution</h3>
                   <p className="text-gray-600 leading-relaxed">
-                    A modern earned wage access solution—without changing payroll 
+                    A modern earned wage access solution without changing payroll 
                     schedules or cash flow.
                   </p>
                 </div>

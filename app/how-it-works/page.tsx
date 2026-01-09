@@ -126,7 +126,7 @@ export default async function HowItWorksPage() {
                   { title: "You Work", desc: "Hours logged as usual", icon: Briefcase, color: "from-blue-500 to-blue-600" },
                   { title: "We Sync", desc: "Earnings updated daily", icon: RefreshCw, color: "from-indigo-500 to-indigo-600" },
                   { title: "You Withdraw", desc: "Instant transfer to bank", icon: Wallet, color: "from-purple-500 to-purple-600" },
-                  { title: "Auto Repay", desc: "Settled on payday", icon: Check, color: "from-pink-500 to-pink-600" },
+                  { title: "Auto Repay", desc: "Employer settles on payday", icon: Check, color: "from-pink-500 to-pink-600" },
                 ].map((step, idx) => (
                     <div key={idx} className="relative group">
                         <div className={`h-full rounded-2xl p-6 bg-linear-to-br ${step.color} text-white shadow-lg relative overflow-hidden transition-transform duration-300 hover:-translate-y-1`}>
@@ -252,7 +252,7 @@ export default async function HowItWorksPage() {
          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-gray-50 to-transparent dark:from-zinc-900 dark:to-transparent pointer-events-none"></div>
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Ready to Transform Your Workplace?
+            Ready to Transform Your <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-pink-500">Workplace?</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
             Join thousands of companies offering financial wellness to their

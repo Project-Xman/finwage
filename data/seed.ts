@@ -159,7 +159,7 @@ async function seedData() {
       {
         title: 'What is Earned Wage Access and How Does It Work?',
         slug: 'what-is-earned-wage-access',
-        content: '<h2>Understanding Earned Wage Access</h2><p>Earned Wage Access (EWA) is a modern financial benefit that allows employees to access their earned wages before the traditional payday. FinWage is a Canadian EWA platform that gives employees instant access to their pay—helping reduce financial stress while supporting a more focused and productive workforce.</p><h3>How It Works</h3><p>The FinWage Cycle is simple:</p><ul><li><strong>Work</strong> - Employees work their scheduled hours as usual</li><li><strong>Track Earnings</strong> - Earnings are calculated in real time and updated after each workday</li><li><strong>Access When Needed</strong> - Instant access to pay—no interest, no borrowing, no impact on credit</li><li><strong>Stay Steady</strong> - Manage expenses responsibly and avoid unnecessary debt</li></ul><h3>Key Benefits</h3><p>Absolutely no credit checks. No interest. No hidden fees.</p>',
+        content: '<h2>Understanding Earned Wage Access</h2><p>Earned Wage Access (EWA) is a modern financial benefit that allows employees to access their earned wages before the traditional payday. FinWage is a Canadian EWA platform that gives employees instant access to their pay helping reduce financial stress while supporting a more focused and productive workforce.</p><h3>How It Works</h3><p>The FinWage Cycle is simple:</p><ul><li><strong>Work</strong> - Employees work their scheduled hours as usual</li><li><strong>Track Earnings</strong> - Earnings are calculated in real time and updated after each workday</li><li><strong>Access When Needed</strong> - Instant access to pay no interest, no borrowing, no impact on credit</li><li><strong>Stay Steady</strong> - Manage expenses responsibly and avoid unnecessary debt</li></ul><h3>Key Benefits</h3><p>Absolutely no credit checks. No interest. No hidden fees.</p>',
         excerpt: 'Discover how Earned Wage Access revolutionizes employee financial wellness by providing instant access to earned wages without loans or interest.',
         author: shibinAuthorId,
         category: ewaCategoryId,
@@ -177,7 +177,7 @@ async function seedData() {
       {
         title: 'Supporting Everyday Financial Stability for Employees',
         slug: 'supporting-everyday-financial-stability',
-        content: '<h2>Financial Wellness in the Workplace</h2><p>FinWage helps employees manage cash flow, cover essential expenses, and plan ahead—without relying on payday loans, high-interest credit cards, or short-term borrowing.</p><h3>Smart Money Buckets</h3><p>Create smart money buckets for your goals:</p><ul><li>Vacation Fund</li><li>Car Payments</li><li>Daily Expenses</li><li>Party Wallet</li></ul><h3>Our Promise</h3><p>FinWage isn\'t about borrowing money. It\'s about accessing what you\'ve already earned. Our purpose is to improve financial wellbeing in the workplace by giving employees timely access to pay while helping employers build stronger, more resilient teams.</p>',
+        content: '<h2>Financial Wellness in the Workplace</h2><p>FinWage helps employees manage cash flow, cover essential expenses, and plan ahead without relying on payday loans, high-interest credit cards, or short-term borrowing.</p><h3>Smart Money Buckets</h3><p>Create smart money buckets for your goals:</p><ul><li>Vacation Fund</li><li>Car Payments</li><li>Daily Expenses</li><li>Party Wallet</li></ul><h3>Our Promise</h3><p>FinWage isn\'t about borrowing money. It\'s about accessing what you\'ve already earned. Our purpose is to improve financial wellbeing in the workplace by giving employees timely access to pay while helping employers build stronger, more resilient teams.</p>',
         excerpt: 'FinWage helps employees manage cash flow and plan ahead without relying on payday loans or high-interest credit cards.',
         author: jobyAuthorId,
         category: financialWellnessCategoryId,
@@ -195,7 +195,7 @@ async function seedData() {
       {
         title: 'How Employers Benefit from Earned Wage Access',
         slug: 'employer-benefits-earned-wage-access',
-        content: '<h2>Attract, Retain, and Empower Your Workforce</h2><p>Earned Wage Access is a proven financial wellness benefit that helps reduce financial stress, improve engagement, and strengthen retention. FinWage enables employers to offer this benefit without increasing payroll costs or disrupting payroll operations.</p><h3>Seamless Integration</h3><p>FinWage integrates directly with existing payroll, time and attendance, and HR systems—ensuring accurate calculations, instant access, and a smooth experience for both employees and administrators.</p><h3>Simple to Launch</h3><p>FinWage connects with your existing payroll or workforce systems with minimal setup. Our onboarding and support teams ensure a smooth rollout and responsible employee adoption.</p><p><strong>A modern earned wage access solution—without changing payroll schedules or cash flow.</strong></p>',
+        content: '<h2>Attract, Retain, and Empower Your Workforce</h2><p>Earned Wage Access is a proven financial wellness benefit that helps reduce financial stress, improve engagement, and strengthen retention. FinWage enables employers to offer this benefit without increasing payroll costs or disrupting payroll operations.</p><h3>Seamless Integration</h3><p>FinWage integrates directly with existing payroll, time and attendance, and HR systems ensuring accurate calculations, instant access, and a smooth experience for both employees and administrators.</p><h3>Simple to Launch</h3><p>FinWage connects with your existing payroll or workforce systems with minimal setup. Our onboarding and support teams ensure a smooth rollout and responsible employee adoption.</p><p><strong>A modern earned wage access solution without changing payroll schedules or cash flow.</strong></p>',
         excerpt: 'Earned Wage Access helps reduce financial stress, improve engagement, and strengthen retention without disrupting payroll operations.',
         author: richardAuthorId,
         category: benefitsCategoryId,
@@ -338,7 +338,7 @@ async function seedData() {
         title: 'For Employers',
         points: [
           'A smarter employee benefit without increasing salaries',
-          'No payroll disruption—integrates with existing systems',
+          'No payroll disruption integrates with existing systems',
           'Reduce financial stress, improve engagement',
           'Fast setup with compliance-first architecture'
         ],
@@ -381,7 +381,7 @@ async function seedData() {
     const benefits = [
       { 
         title: 'Access Earned Pay When You Need It', 
-        description: 'With FinWage, access a portion of your pay any day of the week—without waiting for payday.',
+        description: 'With FinWage, access a portion of your pay any day of the week without waiting for payday.',
         icon_svg: 'fa-bolt', 
         category: benefitsCategoryId,
         order: 1 
@@ -395,7 +395,7 @@ async function seedData() {
       },
       { 
         title: 'Stay Financially Steady', 
-        description: 'We help you use your credit card responsibly—rather than relying on it out of necessity. Manage expenses with confidence and reduce financial pressure.',
+        description: 'We help you use your credit card responsibly rather than relying on it out of necessity. Manage expenses with confidence and reduce financial pressure.',
         icon_svg: 'fa-balance-scale', 
         category: ewaCategoryId,
         order: 3 
@@ -416,7 +416,7 @@ async function seedData() {
       },
       { 
         title: 'Supporting Financial Stability', 
-        description: 'FinWage helps employees manage cash flow, cover essential expenses, and plan ahead—without relying on payday loans or high-interest credit cards.',
+        description: 'FinWage helps employees manage cash flow, cover essential expenses, and plan ahead without relying on payday loans or high-interest credit cards.',
         icon_svg: 'fa-shield-alt', 
         category: financialWellnessCategoryId,
         order: 6 
@@ -474,7 +474,7 @@ async function seedData() {
     const faqs = [
       { 
         question: 'What is Earned Wage Access?', 
-        answer: 'Earned Wage Access (EWA) is a financial wellness benefit that allows employees to access their earned wages before the traditional payday. FinWage is a Canadian EWA platform that gives employees instant access to their pay—it\'s not a loan, there\'s no interest, and no impact on credit.',
+        answer: 'Earned Wage Access (EWA) is a financial wellness benefit that allows employees to access their earned wages before the traditional payday. FinWage is a Canadian EWA platform that gives employees instant access to their pay it\'s not a loan, there\'s no interest, and no impact on credit.',
         category: financialWellnessCategoryId,
         category_text: 'Getting Started',
         order: 1, 
@@ -490,7 +490,7 @@ async function seedData() {
       },
       { 
         question: 'How does FinWage integrate with payroll?', 
-        answer: 'FinWage integrates directly with existing payroll, time and attendance, and HR systems—ensuring accurate calculations, instant access, and a smooth experience for both employees and administrators. No payroll disruption and no changes to payroll cycles required.',
+        answer: 'FinWage integrates directly with existing payroll, time and attendance, and HR systems ensuring accurate calculations, instant access, and a smooth experience for both employees and administrators. No payroll disruption and no changes to payroll cycles required.',
         category: benefitsCategoryId,
         category_text: 'For Employers',
         order: 3, 
@@ -506,7 +506,7 @@ async function seedData() {
       },
       { 
         question: 'How do I access my earned wages?', 
-        answer: 'With FinWage, you can access a portion of your pay any day of the week—without waiting for payday. Your earnings are calculated in real time and updated after each workday, giving you clear visibility into available pay.',
+        answer: 'With FinWage, you can access a portion of your pay any day of the week without waiting for payday. Your earnings are calculated in real time and updated after each workday, giving you clear visibility into available pay.',
         category: ewaCategoryId,
         category_text: 'For Employees',
         order: 5, 
@@ -514,7 +514,7 @@ async function seedData() {
       },
       { 
         question: 'Is FinWage compliant and secure?', 
-        answer: 'Yes, FinWage is built with compliance, transparency, and responsible financial access at its core—ensuring protection for both employees and employers. We adhere to AML, KYC, data privacy, and regulatory governance standards in Canada.',
+        answer: 'Yes, FinWage is built with compliance, transparency, and responsible financial access at its core ensuring protection for both employees and employers. We adhere to AML, KYC, data privacy, and regulatory governance standards in Canada.',
         category: financialWellnessCategoryId,
         category_text: 'Getting Started',
         order: 6, 
@@ -534,7 +534,7 @@ async function seedData() {
       { 
         title: 'Responsible Earned Wage Access', 
         slug: 'responsible-ewa',
-        description: 'Instant access to pay—no interest, no borrowing, no impact on credit. Access what you\'ve already earned.',
+        description: 'Instant access to pay no interest, no borrowing, no impact on credit. Access what you\'ve already earned.',
         icon_svg: 'fa-hand-holding-usd', 
         category: ewaCategoryId,
         order: 1, 
@@ -544,7 +544,7 @@ async function seedData() {
       { 
         title: 'Payroll-Friendly Workflows', 
         slug: 'payroll-friendly',
-        description: 'FinWage integrates directly with existing payroll, time and attendance, and HR systems—no disruption to payroll cycles.',
+        description: 'FinWage integrates directly with existing payroll, time and attendance, and HR systems no disruption to payroll cycles.',
         icon_svg: 'fa-sync-alt', 
         category: benefitsCategoryId,
         order: 2, 
@@ -751,18 +751,20 @@ async function seedData() {
         country: 'Canada', 
         phone: '+1 (416) 555-0100', 
         email: 'info@finwage.com',
-        coordinates: { lat: 43.6532, lng: -79.3832 } 
+        coordinates: { lat: 43.6532, lng: -79.3832 },
+        home_location: false
       },
       { 
         name: 'Western Canada Office', 
-        address: '1055 West Georgia Street, Suite 2100', 
+        address: 'Granville Street, Suite 1147', 
         city: 'Vancouver', 
         state: 'BC', 
-        zip: 'V6E 3P3', 
+        zip: '', 
         country: 'Canada', 
-        phone: '+1 (604) 555-0200', 
+        phone: '+1 (672) 667-7710', 
         email: 'vancouver@finwage.com',
-        coordinates: { lat: 49.2827, lng: -123.1207 } 
+        coordinates: { lat: 49.2827, lng: -123.1207 },
+        home_location: true
       }
     ];
     
@@ -927,7 +929,7 @@ async function seedData() {
       { 
         step: '3', 
         title: 'Access When Needed', 
-        description: 'Instant access to pay—no interest, no borrowing, no impact on credit.',
+        description: 'Instant access to pay no interest, no borrowing, no impact on credit.',
         icon_svg: 'fa-hand-holding-usd', 
         category: financialWellnessCategoryId,
         order: 3 

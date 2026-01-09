@@ -182,7 +182,7 @@ function HeroImageContainer({
                 Access Ready
               </span>
               <span className="text-gray-700 text-[13px]">
-                Access what you've earned—when you need it
+                Access what you've earned when you need it
               </span>
             </div>
           </CardContent>
@@ -240,13 +240,13 @@ export default function Hero() {
           </div>
           <div className="flex flex-col font-normal text-gray-800 mb-4 space-y-3 w-full px-2">
             <p className="mb-0 font-semibold text-[#f74b6b] text-sm sm:text-base">
-              FinWage — It's Your Wage!
+              FinWage   It's Your Wage!
             </p>
             <p className="mb-0 text-sm sm:text-base leading-relaxed">
               You earn your pay every day. Access to it shouldn't depend on a fixed payday.
             </p>
             <p className="text-sm sm:text-base leading-relaxed text-gray-500">
-              FinWage is a Canadian Earned Wage Access (EWA) platform that gives employees instant access to their pay—helping reduce financial stress while supporting a more focused and productive workforce.
+              FinWage is a Canadian Earned Wage Access (EWA) platform that gives employees instant access to their pay helping reduce financial stress while supporting a more focused and productive workforce.
             </p>
           </div>
           <DemoButton />
@@ -320,13 +320,13 @@ export default function Hero() {
           </div>
           <div className="flex flex-col font-normal leading-[20px] md:leading-[24px] lg:leading-[29.25px] text-[13px] md:text-[10.5px] lg:text-[17.4px] text-gray-800 mb-[16px] md:mb-[20px] lg:mb-[43px]">
             <p className="mb-0 font-semibold text-[#f74b6b]">
-              FinWage — It's Your Wage!
+              FinWage   It's Your Wage!
             </p>
             <p className="mb-0 mt-2">
               You earn your pay every day. Access to it shouldn't depend on a fixed payday.
             </p>
             <p className="mt-4 text-base leading-relaxed text-gray-500">
-              FinWage is a Canadian Earned Wage Access (EWA) platform that gives employees instant access to their pay—helping reduce financial stress while supporting a more focused and productive workforce.
+              FinWage is a Canadian Earned Wage Access (EWA) platform that gives employees instant access to their pay helping reduce financial stress while supporting a more focused and productive workforce.
             </p>
           </div>
 

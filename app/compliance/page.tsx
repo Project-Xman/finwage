@@ -273,7 +273,7 @@ export default async function CompliancePage() {
                 </p>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-lg">
+              {/* <div className="bg-white rounded-xl p-6 shadow-lg">
                 <h3 className="font-bold text-lg text-gray-900 mb-3">
                   Consumer Protection
                 </h3>
@@ -283,7 +283,7 @@ export default async function CompliancePage() {
                   collection practices. FinWage does not charge interest or fees
                   to employees.
                 </p>
-              </div>
+              </div> */}
 
               <div className="bg-white rounded-xl p-6 shadow-lg">
                 <h3 className="font-bold text-lg text-gray-900 mb-3">

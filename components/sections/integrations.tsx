@@ -15,7 +15,7 @@ export default async function Integrations() {
             Seamless Integrations
           </h2>
           <p className="text-base md:text-lg leading-relaxed text-gray-500 leading-7 max-w-2xl mx-auto">
-            FinWage integrates directly with existing payroll, time and attendance, and HR systems—ensuring accurate calculations, instant access, and a smooth experience for both employees and administrators.
+            FinWage integrates directly with existing payroll, time and attendance, and HR systems ensuring accurate calculations, instant access, and a smooth experience for both employees and administrators.
           </p>
         </div>
 
