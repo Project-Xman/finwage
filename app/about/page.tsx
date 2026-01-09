@@ -136,54 +136,55 @@ export default async function AboutPage() {
       </section>
 
       {/* Leadership Team - 5 in a row */}
-      <section className="py-20 md:py-28 bg-gray-50 dark:bg-zinc-950">
-        <div className="max-w-[1600px] mx-auto px-6">
+      <section className="py-20 md:py-28 bg-gradient-to-b from-gray-50 to-white dark:from-zinc-950 dark:to-zinc-900">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Meet Our Leadership
+            <div className="inline-block px-4 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 rounded-full font-semibold text-sm mb-6">Our Team</div>
+            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+              Meet Our <span className="text-[#f74b6b]">Leadership</span>
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
+            <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
               Experienced leaders dedicated to transforming financial wellness. Our team brings together expertise from finance, technology, and HR sectors.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {leadership.map((leader) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {leadership.map((leader, index) => (
               <Card
                 key={leader.id}
-                className="group relative overflow-hidden h-[450px] border-none shadow-md hover:shadow-2xl rounded-2xl transition-all duration-300 bg-white"
+                className="group relative overflow-hidden h-[360px] border-none shadow-xl hover:shadow-2xl rounded-2xl transition-all duration-500 bg-white dark:bg-zinc-800 hover:-translate-y-1"
               >
-                <Image
-                  src={getImageUrl(leader, leader.image, {
-                    fallback: "/assets/person-1.png",
-                  })}
-                  alt={leader.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
-                />
-                
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                <div className="absolute bottom-0 left-0 w-full p-6 text-white z-10 flex flex-col justify-end">
-                  <h3 className="text-xl font-bold mb-1">
-                    {leader.name}
-                  </h3>
+                <div className="relative h-full w-full">
+                  <Image
+                    src={getImageUrl(leader, leader.image, {
+                      fallback: "/assets/person-1.png",
+                    })}
+                    alt={leader.name}
+                    fill
+                    className="object-cover object-top transition-all duration-700 group-hover:scale-105 filter grayscale group-hover:grayscale-0"
+                  />
                   
-                  {/* Fixed height container for Role to ensure Name alignment */}
-                  <div className="min-h-[40px] flex items-start">
-                     <div className="text-[#f74b6b] text-sm font-bold uppercase tracking-wider">
-                       {leader.role}
-                     </div>
-                  </div>
+                  {/* Overlay Gradient - more subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                  
+                  {/* Color accent line on hover */}
+                  <div className={`absolute top-0 left-0 w-full h-1 ${index % 3 === 0 ? 'bg-[#1d44c3]' : index % 3 === 1 ? 'bg-[#f74b6b]' : 'bg-purple-500'} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}></div>
+                  
+                  <div className="absolute bottom-0 left-0 w-full p-5 text-white z-10">
+                    <h3 className="text-xl font-bold mb-1 group-hover:text-[#f74b6b] transition-colors duration-300">
+                      {leader.name}
+                    </h3>
+                    
+                    <div className="text-[#f74b6b] text-[11px] font-bold uppercase tracking-wider">
+                      {leader.role}
+                    </div>
 
-                  {/* Bio Reveal with Max-Height Transition */}
-                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
-                     <div className="overflow-hidden">
-                        <p className="text-gray-100 text-sm bg-black/40 p-3 rounded-lg backdrop-blur-md leading-relaxed border border-white/10 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                          {leader.bio}
-                        </p>
-                     </div>
+                    {/* Bio Reveal - more compact */}
+                    <div className="max-h-0 group-hover:max-h-24 overflow-hidden transition-all duration-500 ease-out">
+                      <p className="text-gray-300 text-xs leading-relaxed pt-3 mt-2 border-t border-white/20">
+                        {leader.bio}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </Card>
