@@ -294,7 +294,7 @@ const CircularInfographic = () => {
             controlY2 = endY - 80;
           } else if (index === 2) {
             // Access - top right
-            labelX = 650;
+            labelX = 610;
             labelY = 5;
             endX = labelX + 130;
             endY = labelY + 140;
@@ -304,7 +304,7 @@ const CircularInfographic = () => {
             controlY2 = endY - 80;
           } else {
             // Peace - right side
-            labelX = 800;
+            labelX = 760;
             labelY = 200;
             endX = labelX + 130;
             endY = labelY + 140;
@@ -338,14 +338,6 @@ const CircularInfographic = () => {
               
               <foreignObject x={labelX} y={labelY} width="260" height="160">
                 <div className="relative text-left border-2 border-dotted border-pink-500 rounded-lg bg-white shadow-lg p-1 overflow-hidden">
-                  <div
-                    className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-30"
-                    style={{
-                      backgroundImage: `url(${segment.image})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  ></div>
                   <div className="relative z-10">
                   <span className="inline-block px-3 py-1 text-xs font-semibold rounded-md" style={{ backgroundColor: segment.color, color: "white" }}>
                   {segment.tag}
